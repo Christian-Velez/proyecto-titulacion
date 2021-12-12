@@ -8,31 +8,45 @@ import {
    VStack,
 } from '@chakra-ui/react';
 
-
-
-const LoginForm = () => {
-
-
+const ProgrammerForm = (props) => {
    const handleSubmit = (e) => {
       e.preventDefault();
-   }
+   };
 
    return (
-      <form style={{ width: '100%' }} method='POST' onSubmit={ handleSubmit }>
+      <form
+         style={{ width: '100%' }}
+         method='POST'
+         onSubmit={handleSubmit}
+      >
          <VStack
             spacing={10}
             alignItems='flex-start'
          >
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
+                  Nombre completo
+               </FormLabel>
+               <Input type='text' size='lg' />
+            </FormControl>
+
+            <FormControl isRequired>
+               <FormLabel fontSize='lg'>
                   Nombre de usuario
                </FormLabel>
-               <Input
-                  type='text'
-                  size='lg'
-               />
+               <Input type='text' size='lg' />
+            </FormControl>
 
-               
+            <FormControl isRequired>
+               <FormLabel fontSize='lg'>
+                  Edad
+               </FormLabel>
+               <Input
+                  type='number'
+                  size='lg'
+                  min={16}
+                  max={70}
+               />
             </FormControl>
 
             <FormControl isRequired>
@@ -45,7 +59,6 @@ const LoginForm = () => {
                      type='password'
                      size='lg'
                   />
-                  
                </InputGroup>
             </FormControl>
 
@@ -53,15 +66,12 @@ const LoginForm = () => {
                width='full'
                size='lg'
                type='submit'
-               
             >
-               Iniciar sesion
+               Siguiente
             </Button>
-
-          
          </VStack>
       </form>
    );
 };
 
-export default LoginForm;
+export default ProgrammerForm;

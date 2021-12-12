@@ -4,13 +4,15 @@ import {
    Heading,
    HStack,
    Image,
-   Link,
+   Link as ChakraLink,
    Stack,
    Text,
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
 import LoginForm from './LoginForm';
+
+import { Link } from 'react-router-dom'
 
 const LoginScreen = () => {
    return (
@@ -88,9 +90,12 @@ const LoginScreen = () => {
                fontWeight='medium'
             >
                <Text>¿No tienes una cuenta?</Text>
-               <Link color='purple.600'>
+               <ChakraLink color='purple.600'>
                   Regístrate
-               </Link>
+               </ChakraLink>
+
+               <Link to='/register'> IR A REGISTER PA</Link>
+
             </HStack>
          </VStack>
       </Stack>
