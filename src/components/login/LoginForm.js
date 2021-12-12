@@ -7,14 +7,24 @@ import {
    InputGroup,
    VStack,
 } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { types } from '../../types/types';
 
 
 
 const LoginForm = () => {
-
+   const dispatch = useDispatch();
 
    const handleSubmit = (e) => {
-      e.preventDefault();
+      e.preventDefault();  
+      
+      dispatch({
+         type:  types.login
+      })
+
+      localStorage.setItem('logged', true);
+
+
    }
 
    return (

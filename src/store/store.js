@@ -9,10 +9,12 @@ import thunk from 'redux-thunk';
 
 
 import { authReducer } from '../reducers/authReducer';
+import { registerReducer } from '../reducers/registerReducer';
 
 
 const allReducers = combineReducers({
-   auth: authReducer
+   auth: authReducer,
+   register: registerReducer,
 });
 
 

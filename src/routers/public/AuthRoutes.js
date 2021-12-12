@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginScreen from '../../components/login/LoginScreen';
-import BusinessRegister from '../../components/register/BusinessRegister';
+import ConditionalRegister from '../../components/register/ConditionalRegister';
 
 const AuthRoutes = () => {
    // Route: /auth/${path}
@@ -15,7 +15,7 @@ const AuthRoutes = () => {
             />
             <Route
                path='register'
-               element={<BusinessRegister />}
+               element={<ConditionalRegister />}
             />
 
             <Route

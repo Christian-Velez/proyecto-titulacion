@@ -8,15 +8,19 @@ const initialState = {
 }
 
 export const authReducer = (state = initialState, action) => {
-   switch(action.type) {
-
-   }
-
    switch (action.type) {
       case types.login:
-         
-         break;
-   
+         return {
+            ...state,
+            autenticado: true,  // esto lo cambiare a lo que me regrese el api
+         }
+
+      case types.logout:
+         return {
+            ...state,
+            autenticado: false,
+         }
+            
       default:
          return state
    }

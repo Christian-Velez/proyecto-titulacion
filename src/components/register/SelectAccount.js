@@ -6,16 +6,22 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setAccountType } from '../../actions/register';
 
 const SelectAccount = () => {
+   const dispatch = useDispatch();
+
+   const handleSetAccountType = (type) => {
+      dispatch(setAccountType(type))
+   }
+
    return (
       <VStack
          padding={{ base: 10, lg: 40 }}
          w='full'
          spacing={50}
       >
-      
-
          <Heading>
             Elige el tipo de cuenta
          </Heading>
@@ -27,11 +33,12 @@ const SelectAccount = () => {
             w='full'
             justifyContent='center'
             alignItems='center'
-            spacing='10%'
+            spacing={{ base: '40%', lg: '10%'}}
          >
             <VStack
                as='button'
                width='30em'
+               onClick={() => { handleSetAccountType('Programmer') }}
                height='30em'
                padding={10}
                borderRadius={10}
@@ -41,10 +48,11 @@ const SelectAccount = () => {
                   <Image src='/static/programmer.png' />
                </Box>
             </VStack>
-            
+
             <VStack
                as='button'
                borderRadius={10}
+               onClick={() => { handleSetAccountType('Business') }}
                width='30em'
                height='30em'
                padding={10}

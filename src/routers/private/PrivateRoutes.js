@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom'
 const PrivateRoutes = ({ children }) => {
 
    const { autenticado } = useSelector(state => state.auth)
-   console.log('private routes')
+   console.log('Private routes')
 
    return autenticado
       ? children
