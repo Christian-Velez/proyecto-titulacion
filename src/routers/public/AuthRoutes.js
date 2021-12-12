@@ -1,9 +1,11 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginScreen from '../../components/login/LoginScreen';
 import BusinessRegister from '../../components/register/BusinessRegister';
 
 const AuthRoutes = () => {
+   // Route: /auth/${path}
+
    return (
       <div>
          <Routes>
@@ -15,6 +17,11 @@ const AuthRoutes = () => {
                path='register'
                element={<BusinessRegister />}
             />
+
+            <Route
+               path='/*'
+               element={<Navigate to='login'/>}
+               />
          </Routes>
       </div>
    );

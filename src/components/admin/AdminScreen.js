@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminScreen = () => {
 
-   console.log('SSSSSSSSS')
+   console.log('admin screen')
    return (
       <div>
             SOY UN ADMIN PA

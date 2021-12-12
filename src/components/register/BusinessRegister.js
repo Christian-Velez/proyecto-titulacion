@@ -44,7 +44,7 @@ const BusinessRegister = () => {
 
             <BusinessForm />
 
-            <Link to='/login'> IR A LOGIN PA</Link>
+            <Link to='/auth/login'> IR A LOGIN PA</Link>
          </VStack>
 
 

@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom'
 
 const PublicRoutes = ({ children }) => {
    const { autenticado } = useSelector(state => state.auth)
+   console.log('public routes')
 
    return autenticado
    ? <Navigate to='/' />

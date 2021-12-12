@@ -5,8 +5,6 @@ import {
    BrowserRouter,
 } from 'react-router-dom';
 
-
-
 import DashboardRoutes from './private/DashboardRoutes';
 import PrivateRoutes from './private/PrivateRoutes';
 import AuthRoutes from './public/AuthRoutes';
@@ -27,22 +25,18 @@ const AppRouter = () => {
                      </PublicRoutes>
                   }
                />
-               
 
-
-                {/* Privado */}
-                <Route 
+               {/* Privado */}
+               <Route
                   path='/*'
                   element={
                      <PrivateRoutes>
                         <DashboardRoutes />
                      </PrivateRoutes>
                   }
-
                />
 
-
-
+              
             </Routes>
          </div>
       </BrowserRouter>

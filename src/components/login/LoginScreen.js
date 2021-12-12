@@ -94,7 +94,7 @@ const LoginScreen = () => {
                   Regístrate
                </ChakraLink>
 
-               <Link to='/register'> IR A REGISTER PA</Link>
+               <Link to='/auth/register'> IR A REGISTER PA</Link>
 
             </HStack>
          </VStack>
