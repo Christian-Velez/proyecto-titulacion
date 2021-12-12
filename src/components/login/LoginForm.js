@@ -5,12 +5,22 @@ import {
    FormLabel,
    Input,
    InputGroup,
+   Select,
+   Textarea,
    VStack,
 } from '@chakra-ui/react';
 
+
+
 const LoginForm = () => {
+
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+   }
+
    return (
-      <form style={{ width: '100%' }}>
+      <form style={{ width: '100%' }} method='POST' onSubmit={ handleSubmit }>
          <VStack
             spacing={10}
             alignItems='flex-start'
@@ -21,10 +31,10 @@ const LoginForm = () => {
                </FormLabel>
                <Input
                   type='text'
-                  focusBorderColor='purple.500'
                   size='lg'
-                  variant='filled'
                />
+
+               
             </FormControl>
 
             <FormControl isRequired>
@@ -35,21 +45,22 @@ const LoginForm = () => {
                <InputGroup>
                   <Input
                      type='password'
-                     focusBorderColor='purple.500'
                      size='lg'
-                     variant='filled'
                   />
                   
                </InputGroup>
             </FormControl>
 
             <Button
-               colorScheme='purple'
                width='full'
                size='lg'
+               type='submit'
+               
             >
                Iniciar sesion
             </Button>
+
+          
          </VStack>
       </form>
    );

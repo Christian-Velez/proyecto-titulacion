@@ -17,34 +17,56 @@ const LoginScreen = () => {
       <Stack
          direction={{ base: 'column', lg: 'row' }}
          w='full'
+         minH='100vh'
+         margin={0}
+         padding='0'
       >
          <VStack
             w='40%'
-            h='100vh'
-            bgColor='purple.200'
+            pt='10%'
+            paddingX={10}
+            bgColor='purple.500'
             display={{ base: 'none', lg: 'flex' }}
             justifyContent='flex-start'
             alignItems='flex-start'
-            boxShadow='2xl'
+            boxShadow='dark-lg'
+            spacing='30'
          >
             <Heading
-               mt={100}
-               ml={10}
-               color='purple.600'
                fontSize='5xl'
+               color='purple.100'
             >
+               Nombre
+            </Heading>
+
+            <Heading
+               pt='55'
+               color='purple.100'
+            >
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
             </Heading>
          </VStack>
 
-         <Box
-            w={{ base: '0',  lg:'60%'}}
-            pos='absolute'
-            bottom={20}
-            left={0}
-            display={{ base: 'none', lg: 'flex' }}
+         <Box w={{ base:'0', lg:'60vw'}}
+            position='absolute'
+            bottom='0'
+            left='0'
          >
             <Image src='/static/WebDevelopment.svg' />
          </Box>
+
+
+
+
+         <VStack
+            display={{ base: 'flex', lg:'none'}}
+            bgColor='purple.500'
+            style={{ marginTop: 0}}
+            padding={5}
+            color='white'
+         >
+            <Heading> Nombre </Heading>
+         </VStack>
 
          <VStack
             w={{ base: 'full', lg: '60%' }}
@@ -52,18 +74,21 @@ const LoginScreen = () => {
             alignItems='flex-start'
             spacing={10}
          >
-            <Heading>Bienvenido</Heading>
+
+            <Heading pt={20}>Bienvenido</Heading>
+
             <LoginForm />
 
-
             <Divider />
-            <HStack zIndex={1000} justifyContent='center' w='full' fontSize='lg' fontWeight='medium'>
-               <Text>
-                  ¿No tienes una cuenta?
-               </Text>
-               <Link
-                  color='purple.600'
-               >
+            <HStack
+               zIndex={1000}
+               justifyContent='center'
+               w='full'
+               fontSize='lg'
+               fontWeight='medium'
+            >
+               <Text>¿No tienes una cuenta?</Text>
+               <Link color='purple.600'>
                   Regístrate
                </Link>
             </HStack>
