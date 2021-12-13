@@ -1,10 +1,9 @@
-import { HStack } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 import React from 'react';
 import {
    Navigate,
    Route,
    Routes,
-   useLocation,
 } from 'react-router-dom';
 import AdminScreen from '../../components/admin/AdminScreen';
 import SideBar from '../../components/admin/SideBar';
@@ -12,7 +11,13 @@ import Yo from '../../components/admin/Yo';
 
 const AdminRoutes = () => {
    return (
-      <HStack w='full' alignItems='flex-start'>
+      <Stack 
+         direction={{ base: 'column', lg:'row'}}
+         w='full' 
+         alignItems='flex-start'
+
+
+      >
          <SideBar />
 
          <Routes>
@@ -20,9 +25,8 @@ const AdminRoutes = () => {
                path='/'
                element={
                   <div>
+                     
 
-                     <HStack bgColor='red.50' w='80vw' h='100vh'/>
-                     <HStack  bgColor='red.50' w='80vw' h='100vh'/>
                   </div>
                }
             />
@@ -42,7 +46,7 @@ const AdminRoutes = () => {
                element={<Navigate to='/admin' />}
             />
          </Routes>
-      </HStack>
+      </Stack>
    );
 };
 
