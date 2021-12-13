@@ -8,7 +8,7 @@ import {
    VStack,
 } from '@chakra-ui/react';
 
-const ProgrammerForm = (props) => {
+const DeveloperForm = (props) => {
    const handleSubmit = (e) => {
       e.preventDefault();
    };
@@ -74,4 +74,4 @@ const ProgrammerForm = (props) => {
    );
 };
 
-export default ProgrammerForm;
+export default DeveloperForm;

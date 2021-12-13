@@ -3,10 +3,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import BusinessRegister from './BusinessRegister';
-import ProgrammerRegister from './ProgrammerRegister';
+import DeveloperRegister from './DeveloperRegister';
 import SelectAccount from './SelectAccount'
 
-const ConditionalRegister = () => {
+const RegisterScreen = () => {
    const { accountType } = useSelector(state => state.register)
 
 
@@ -14,10 +14,10 @@ const ConditionalRegister = () => {
       accountType
       ? 
          accountType === 'Programmer'
-            ? <ProgrammerRegister/>
+            ? <DeveloperRegister/>
             : <BusinessRegister />
       : <SelectAccount />
    )
 }
 
-export default ConditionalRegister
+export default RegisterScreen

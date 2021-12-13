@@ -96,7 +96,7 @@ const LoginScreen = () => {
             >
                <Text>¿No tienes una cuenta?</Text>
 
-               <ChakraLink as={Link} to='/auth/register' color='purple.500'>
+               <ChakraLink as={Link} to='/register' color='purple.500'>
                      Regístrate
                </ChakraLink>
             </HStack>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { types } from '../../types/types';
 
 const AdminScreen = () => {
@@ -20,6 +21,8 @@ const AdminScreen = () => {
             <button onClick={handleLogout}>
                desloguear pa
             </button>
+
+            <Link to='/dos'> DOS </Link>
          </div>
       </div>
    );

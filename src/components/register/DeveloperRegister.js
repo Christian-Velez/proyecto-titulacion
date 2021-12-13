@@ -6,9 +6,9 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import ProgrammerForm from './ProgrammerForm';
+import DeveloperForm from './DeveloperForm';
 
-const ProgrammerRegister = () => {
+const DeveloperRegister = () => {
    return (
       <Stack
          direction={{ base: 'column', lg: 'row' }}
@@ -41,7 +41,7 @@ const ProgrammerRegister = () => {
          >
             <Heading>Ingresa tus datos</Heading>
 
-            <ProgrammerForm />
+            <DeveloperForm />
 
             
          </VStack>
@@ -84,4 +84,4 @@ const ProgrammerRegister = () => {
    );
 };
 
-export default ProgrammerRegister;
+export default DeveloperRegister;

@@ -33,13 +33,13 @@ const SelectAccount = () => {
             w='full'
             justifyContent='center'
             alignItems='center'
-            spacing={{ base: '40%', lg: '10%'}}
+            spacing={{ base: '25em', lg: '10%'}}
          >
             <VStack
                as='button'
-               width='30em'
+               width={{ base: '10em', lg: '30em'}}
                onClick={() => { handleSetAccountType('Programmer') }}
-               height='30em'
+               height={{ base: '10em', lg: '30em'}}
                padding={10}
                borderRadius={10}
             >
@@ -53,8 +53,8 @@ const SelectAccount = () => {
                as='button'
                borderRadius={10}
                onClick={() => { handleSetAccountType('Business') }}
-               width='30em'
-               height='30em'
+               width={{ base: '10em', lg: '30em'}}
+               height={{ base: '10em', lg: '30em'}}
                padding={10}
             >
                <Heading> Empresa </Heading>

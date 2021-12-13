@@ -1,10 +1,12 @@
+import { ROLE } from "../types/roles";
 import { types } from "../types/types";
 
 
 const initialState = {
    username: 'imbecil',
    password: 'idioto',
-   autenticado: false,
+   role: ROLE.Admin,   
+   isAuthenticated: false,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -12,13 +14,13 @@ export const authReducer = (state = initialState, action) => {
       case types.login:
          return {
             ...state,
-            autenticado: true,  // esto lo cambiare a lo que me regrese el api
+            isAuthenticated: true,  // esto lo cambiare a lo que me regrese el api
          }
 
       case types.logout:
          return {
             ...state,
-            autenticado: false,
+            isAuthenticated: false,
          }
             
       default:

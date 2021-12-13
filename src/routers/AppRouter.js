@@ -4,13 +4,21 @@ import {
    Route,
    Routes,
    BrowserRouter,
+   Navigate,
 } from 'react-router-dom';
 import { types } from '../types/types';
 
-import DashboardRoutes from './private/DashboardRoutes';
 import PrivateRoutes from './private/PrivateRoutes';
-import AuthRoutes from './public/AuthRoutes';
 import PublicRoutes from './public/PublicRoutes';
+
+import { ROLE } from '../types/roles';
+
+import LoginScreen from '../components/login/LoginScreen';
+import RegisterScreen from '../components/register/RegisterScreen';
+
+import AdminRoutes from './private/AdminRoutes';
+import DevRoutes from './private/DevRoutes';
+import BusinessRoutes from './private/BusinessRoutes';
 
 const AppRouter = () => {
    /*
@@ -27,57 +35,89 @@ const AppRouter = () => {
 
    */
 
-
-
    const dispatch = useDispatch();
-
-   console.log('AppRouter');
-
    useEffect(() => {
-      const logged = localStorage.getItem('logged');
+      const logged =
+         localStorage.getItem('logged');
 
       // Le mando el token al API....
 
       // Lo que me regrese lo meto en el usuario
-      if(logged) {
+      if (logged) {
          dispatch({
-            type: types.login
+            type: types.login,
             //payload: lo que me regrese el API
-         })
+         });
       }
-   }, [dispatch])
-
-
+   }, [dispatch]);
 
    return (
       <BrowserRouter>
-         <div>
-            <Routes>
+         <Routes>
+            {/*  Rutas publicas */}
+
+            <Route
+               path='login'
+               element={
+                  <PublicRoutes>
+                     <LoginScreen />
+                  </PublicRoutes>
+               }
+            />
+
+            <Route
+               path='register'
+               element={
+                  <PublicRoutes>
+                     <RegisterScreen />
+                  </PublicRoutes>
+               }
+            />
+
+            <Route
+               path='*'
+               element={<Navigate to='/login' />}
+            />
+
+            {/*  Rutas exclusivas para el admin */}
+            <Route
+               path='admin/*'
+               element={
+                  <PrivateRoutes
+                     requiredRoles={[ROLE.Admin]}
+                  >
+                     <AdminRoutes />
+                  </PrivateRoutes>
+               }
+            />
+
+            {/*Rutas exclusivas para desarrolladores */}
+            <Route
+               path='dev/*'
+               element={
+                  <PrivateRoutes
+                     requiredRoles={[ROLE.Developer]}
+                  >
+                     <DevRoutes />
+                  </PrivateRoutes>
+               }
+               
+            />
+
+            {/*Rutas exclusivas para empresas */}
+            <Route
+               path='bus/*'
+               element={
+                  <PrivateRoutes
+                     requiredRoles={[ROLE.Business]}
+                  >
+                     <BusinessRoutes />
+                  </PrivateRoutes>
                
                
-               {/* Publico */}
-               <Route
-                  path='/auth/*'
-                  element={
-                     <PublicRoutes>
-                        <AuthRoutes />
-                     </PublicRoutes>
-                  }
-               />
-
-               {/* Privado */}
-               <Route
-                  path='/*'
-                  element={
-                     <PrivateRoutes>
-                        <DashboardRoutes />
-                     </PrivateRoutes>
-                  }
-               />
-
-              
-            </Routes>
-         </div>
+               }
+            />
+         </Routes>
       </BrowserRouter>
    );
 };
