@@ -5,9 +5,7 @@ import {
    Route,
    Routes,
 } from 'react-router-dom';
-import AdminScreen from '../../components/admin/AdminScreen';
-import SideBar from '../../components/admin/SideBar';
-import Yo from '../../components/admin/Yo';
+import SideBar from '../../components/navbar/SideBar';
 
 const AdminRoutes = () => {
    return (
@@ -24,21 +22,18 @@ const AdminRoutes = () => {
             <Route
                path='/'
                element={
-                  <div>
-                     
-
-                  </div>
+                  <p> Inicio, bienvenido administrador </p>
                }
             />
 
             <Route
                path='tecnologias'
-               element={<AdminScreen />}
+               element={<p> Tecnologías </p>}
             />
 
             <Route
                path='soft-skills'
-               element={<Yo />}
+               element={<p> Soft skills</p>}
             />
 
             <Route
