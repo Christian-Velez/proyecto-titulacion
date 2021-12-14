@@ -13,8 +13,6 @@ const AdminRoutes = () => {
          direction={{ base: 'column', lg:'row'}}
          w='full' 
          alignItems='flex-start'
-
-
       >
          <SideBar />
 
@@ -27,7 +25,7 @@ const AdminRoutes = () => {
             />
 
             <Route
-               path='tecnologias'
+               path='technologies'
                element={<p> Tecnologías </p>}
             />
 

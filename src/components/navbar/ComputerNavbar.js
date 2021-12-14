@@ -12,10 +12,11 @@ const ComputerNavbar = ({ userLinks }) => {
       <VStack
          h='100vh'
          w='250px'
+         pl={3}
          display={{ base: 'none', lg: 'flex' }}
-         boxShadow='dark-lg'
          alignItems='flex-start'
          paddingY={6}
+         boxShadow='dark-lg'
       >
          {/*Logotipo de la pagina */}
          <HStack width='full' paddingLeft={5}>
@@ -26,10 +27,10 @@ const ComputerNavbar = ({ userLinks }) => {
 
          {/*Links que dependen del tipo de cuenta*/}
          {userLinks.map((link) => {
-            const { index, path, name } = link;
+            const { index, path, name, icon} = link;
 
             return (
-               <LinkItem key={index} path={path}>
+               <LinkItem key={index} icon={icon} path={path}>
                   {name}
                </LinkItem>
             );

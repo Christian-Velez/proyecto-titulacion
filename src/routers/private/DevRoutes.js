@@ -1,21 +1,80 @@
-import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Stack } from '@chakra-ui/react';
+import React from 'react';
+import {
+   Navigate,
+   Route,
+   Routes,
+} from 'react-router-dom';
+import SideBar from '../../components/navbar/SideBar';
 
 const DevRoutes = () => {
    return (
-      <Routes>
-         <Route
-            path='/'
-            element={<p>Bienvenido desarrollador </p>}
-         />
+      <Stack
+         direction={{ base: 'column', lg: 'row' }}
+         w='full'
+         alignItems='flex-start'
+      >
+         <SideBar />
 
-         <Route
-            path='*'
-            element={<Navigate to='/dev'/>}
+         <Routes>
+            <Route
+               path='/'
+               element={
+                  <p>Bienvenido desarrollador </p>
+               }
+            />
 
-         />
-      </Routes>
-   )
-}
+            <Route
+               path='profile'
+               element={
+                  <p>Aqui va el perfil del dev</p>
+               }
+            />
 
-export default DevRoutes
+            <Route
+               path='jobs'
+               element={
+                  <p> Aqui van los empleos </p>
+               }
+            />
+
+            <Route
+               path='technologies'
+               element={
+                  <p>Aqui van las tecnologías </p>
+               }
+            />
+
+            <Route
+               path='applications'
+               element={
+                  <p>
+                     Aqui van las postulaciones
+                  </p>
+               }
+            />
+
+            <Route
+               path='messages'
+               element={<p>Aqui va el chat </p>}
+            />
+
+            <Route
+               path='search'
+               element={
+                  <p>
+                     Aqui va el buscador de
+                     empresas
+                  </p>
+               }
+            />
+            <Route
+               path='*'
+               element={<Navigate to='/dev' />}
+            />
+         </Routes>
+      </Stack>
+   );
+};
+
+export default DevRoutes;

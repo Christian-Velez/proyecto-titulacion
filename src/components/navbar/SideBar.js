@@ -16,6 +16,9 @@ import manageLinks from './manageLinks';
 const SideBar = () => {
    const [displayMenu, setDisplayMenu] = useState('none');
 
+   // Animacion solo disponible en tamanos lg
+   const [lgAnimation, setLgAnimation ] = useState('');
+
    const typeOfUser = 'Admin';
    let userLinks;
 
@@ -23,7 +26,7 @@ const SideBar = () => {
       userLinks = manageLinks.Admin
    }
    if(typeOfUser === 'Developer') {
-      
+      userLinks = manageLinks.Developer
    }
 
 
@@ -40,6 +43,11 @@ const SideBar = () => {
          lgBreakpoint === '2xl'
       ) {
          setDisplayMenu('none');
+         setLgAnimation('animate__animated animate__fadeInLeft animate__faster');
+      }
+
+      else{
+         setLgAnimation('');
       }
    }, [lgBreakpoint]);
 
@@ -52,7 +60,9 @@ const SideBar = () => {
          left={0}
          top={0}
          zIndex={999999}
-         backgroundColor='purple.500'
+         backgroundColor='brand.500'
+         className={lgAnimation}
+         
       >
          {/*Se muestra en movil*/}
          <MobileNavBar setDisplayMenu={setDisplayMenu} />

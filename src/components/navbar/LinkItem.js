@@ -1,12 +1,14 @@
-import { CheckCircleIcon } from '@chakra-ui/icons';
-import { HStack, Text } from '@chakra-ui/react';
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { HStack, Text } from '@chakra-ui/react';
 
 const LinkItem = ({
    children,
    path,
+   icon
 }) => {
+
+
    const navigate = useNavigate();
    const location = useLocation();
 
@@ -18,8 +20,9 @@ const LinkItem = ({
 
    return (
       <HStack
-         color='purple.100'
-         bgColor={ isActive && 'purple.400'}
+         color={ 'brand.100'}
+         borderLeft={ isActive && '3px solid' }
+         bgColor={ isActive && 'brand.400'}
          width='full'
          as='button'
          paddingY={3}
@@ -29,12 +32,14 @@ const LinkItem = ({
          }}
          onClick={handleNavigate}
          _hover={{
-            bgColor: 'purple.600',
+            bgColor: 'brand.600',
          }}
          transition='background-color .3s ease'
       >
-         <CheckCircleIcon />
-         <Text fontWeight='hairline'> {children} </Text>
+
+         { icon }
+         
+         <Text fontWeight='hairline' fontSize='lg'> {children} </Text>
       </HStack>
    )
 }

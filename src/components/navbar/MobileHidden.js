@@ -17,14 +17,13 @@ const MobileHidden = ({
       <VStack
          className='animate__animated animate__fadeInRight animate__faster'
          w='100vw'
-         bgColor='purple.500'
+         bgColor='brand.500'
          zIndex={9999999}
          h='100vh'
          pos='fixed'
          p={1}
-         paddingLeft={0}
          top='0'
-         left='0'
+         right='0'
          overflowY='auto'
          display={displayMenu}
          alignItems='flex-start'
@@ -48,10 +47,10 @@ const MobileHidden = ({
 
          {/*Links que dependen del tipo de cuenta*/}
          {userLinks.map((link) => {
-            const { index, path, name } = link;
+            const { index, path, name, icon } = link;
 
             return (
-               <LinkItem key={index} path={path}>
+               <LinkItem key={index} icon={icon} path={path}>
                   {name}
                </LinkItem>
             );

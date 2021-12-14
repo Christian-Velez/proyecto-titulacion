@@ -29,13 +29,14 @@ const LoginScreen = () => {
          w='full'
          minH='100vh'
          margin={0}
+         className='animate__animated animate__fadeIn animate__faster'
          padding='0'
       >
          <VStack
             w='40%'
             pt='10%'
             paddingX={10}
-            bgColor='purple.500'
+            bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
             justifyContent='flex-start'
             alignItems='flex-start'
@@ -44,12 +45,12 @@ const LoginScreen = () => {
          >
             <Heading
                fontSize='5xl'
-               color='purple.100'
+               color='brand.100'
             >
                Nombre
             </Heading>
 
-            <Heading pt='55' color='purple.100'>
+            <Heading pt='55' color='brand.100'>
                Lorem ipsum dolor sit amet,
                consectetur adipiscing elit, sed do
                eiusmod tempor incididunt ut labore
@@ -68,7 +69,7 @@ const LoginScreen = () => {
 
          <VStack
             display={{ base: 'flex', lg: 'none' }}
-            bgColor='purple.500'
+            bgColor='brand.500'
             style={{ marginTop: 0 }}
             padding={5}
             color='white'
@@ -96,7 +97,7 @@ const LoginScreen = () => {
             >
                <Text>¿No tienes una cuenta?</Text>
 
-               <ChakraLink as={Link} to='/register' color='purple.500'>
+               <ChakraLink as={Link} to='/register' color='brand.500'>
                      Regístrate
                </ChakraLink>
             </HStack>

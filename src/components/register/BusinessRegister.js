@@ -17,6 +17,7 @@ const BusinessRegister = () => {
          minH='100vh'
          margin={0}
          padding='0'
+         className='animate__animated animate__fadeIn animate__faster'
       >
 
         
@@ -24,7 +25,7 @@ const BusinessRegister = () => {
          {/*Navbar solo disponible en movil*/}
          <VStack
             display={{ base: 'flex', lg: 'none' }}
-            bgColor='purple.500'
+            bgColor='brand.500'
             style={{ marginTop: 0 }}
             padding={5}
             color='white'
@@ -54,7 +55,7 @@ const BusinessRegister = () => {
             w='30%'
             pt='10%'
             paddingX={10}
-            bgColor='purple.500'
+            bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
 
             alignItems='center'
@@ -63,13 +64,13 @@ const BusinessRegister = () => {
          >
            <Heading
                fontSize='md'
-               color='purple.100'
+               color='brand.100'
             >
                TIPO DE CUENTA
             </Heading>
             <Heading
                fontSize='5xl'
-               color='purple.100'
+               color='brand.100'
             >
                Empresa
             </Heading>

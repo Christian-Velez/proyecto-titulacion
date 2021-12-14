@@ -21,6 +21,7 @@ const SelectAccount = () => {
          padding={{ base: 10, lg: 40 }}
          w='full'
          spacing={50}
+         className='animate__animated animate__fadeIn animate__faster'
       >
          <Heading>
             Elige el tipo de cuenta
