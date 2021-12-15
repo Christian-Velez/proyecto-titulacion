@@ -18,7 +18,7 @@ import RegisterScreen from '../components/register/RegisterScreen';
 import AdminRoutes from './private/AdminRoutes';
 import DevRoutes from './private/DevRoutes';
 import CompanyRoutes from './private/CompanyRoutes';
-import { logout, startCheckingIsTokenValid } from '../actions/login';
+import { logout, startCheckingIsTokenValid } from '../actions/auth';
 
 const AppRouter = () => {
    const dispatch = useDispatch();

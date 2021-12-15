@@ -26,7 +26,7 @@ const LinkItem = ({
          width='full'
          as='button'
          paddingY={3}
-         paddingX={5}
+         paddingX={{ base: 10, lg: 5 }}
          style={{
             margin: 0
          }}

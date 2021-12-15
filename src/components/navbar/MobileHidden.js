@@ -2,17 +2,26 @@ import { CloseIcon } from '@chakra-ui/icons';
 import {
    Divider,
    Flex,
+   Icon,
    IconButton,
+   Text,
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
 import LinkItem from './LinkItem';
+import { FiLogOut } from 'react-icons/fi'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../actions/auth';
 
 const MobileHidden = ({
    userLinks,
    displayMenu,
    setDisplayMenu,
 }) => {
+   const dispatch = useDispatch();
+   const handleLogout = () => {
+      dispatch(logout());
+   }
    return (
       <VStack
          className='animate__animated animate__fadeInRight animate__faster'
@@ -55,6 +64,27 @@ const MobileHidden = ({
                </LinkItem>
             );
          })}
+
+         <Flex
+            color={'brand.100'}
+            width='full'
+            as='button'
+            paddingY={3}
+            paddingX={10}
+            style={{
+               margin: 0,
+               marginTop: 'auto',
+               marginBottom: '30px'
+            }}
+            onClick={handleLogout}
+            _hover={{
+               bgColor: 'brand.600',
+            }}
+            transition='background-color .3s ease'
+         >
+            <Icon as={ FiLogOut } h={5} w={5}/>
+            <Text fontSize='lg'> Cerrar sesión </Text>
+         </Flex>
       </VStack>
    );
 };

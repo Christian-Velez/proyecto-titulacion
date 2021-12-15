@@ -20,7 +20,87 @@ const CompanyRoutes = () => {
             <Route
                path='/'
                element={
+                  <div
+                  > Bienvenida empresa
                   <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                  <p> Bienvenida empresa </p>
+                   </div>
                }
             />
 
@@ -76,7 +156,7 @@ const CompanyRoutes = () => {
                path='search'
                element={
                   <p>
-                     Aqui va el buscador de desarrolladores pa
+                     Aqui va el buscador de desarrolladores
                   </p>
                }
             />
