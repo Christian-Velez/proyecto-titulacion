@@ -27,9 +27,10 @@ const DeveloperRegister = () => {
             bgColor='brand.500'
             style={{ marginTop: 0 }}
             padding={5}
-            color='white'
+            color='brand.100'
          >
-            <Heading> Nombre </Heading>
+            <Heading fontSize='xs'> TIPO DE CUENTA </Heading>
+            <Heading fontSize='xl'> Programador </Heading>
          </VStack>
 
 

@@ -8,27 +8,29 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { types } from '../../types/types';
-
-
+import { useForm } from '../../hooks/useForm';
+import { startLogging } from '../../actions/login';
 
 const LoginForm = () => {
    const dispatch = useDispatch();
+   const [formValues, handleInputChange] =
+      useForm({
+         username: '',
+         password: '',
+      });
+   const { username, password } = formValues;
 
    const handleSubmit = (e) => {
-      e.preventDefault();  
-      
-      dispatch({
-         type:  types.login
-      })
-
-      localStorage.setItem('logged', true);
-
-
-   }
+      e.preventDefault();
+      dispatch(startLogging(username, password));
+   };
 
    return (
-      <form style={{ width: '100%' }} method='POST' onSubmit={ handleSubmit }>
+      <form
+         style={{ width: '100%' }}
+         method='POST'
+         onSubmit={handleSubmit}
+      >
          <VStack
             spacing={10}
             alignItems='flex-start'
@@ -40,9 +42,10 @@ const LoginForm = () => {
                <Input
                   type='text'
                   size='lg'
+                  value={username}
+                  name='username'
+                  onChange={handleInputChange}
                />
-
-               
             </FormControl>
 
             <FormControl isRequired>
@@ -54,8 +57,10 @@ const LoginForm = () => {
                   <Input
                      type='password'
                      size='lg'
+                     value={password}
+                     name='password'
+                     onChange={handleInputChange}
                   />
-                  
                </InputGroup>
             </FormControl>
 
@@ -63,12 +68,9 @@ const LoginForm = () => {
                width='full'
                size='lg'
                type='submit'
-               
             >
                Iniciar sesion
             </Button>
-
-          
          </VStack>
       </form>
    );

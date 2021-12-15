@@ -7,10 +7,17 @@ import {
    InputGroup,
    VStack,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-const BusinessForm = (props) => {
+const CompanyForm = (props) => {
+   const navigate = useNavigate();
+
    const handleSubmit = (e) => {
       e.preventDefault();
+   };
+
+   const handleCancelRegister = (e) => {
+      navigate('/login');
    };
 
    return (
@@ -41,10 +48,7 @@ const BusinessForm = (props) => {
                <FormLabel fontSize='lg'>
                   Localización
                </FormLabel>
-               <Input
-                  type='text'
-                  size='lg'
-               />
+               <Input type='text' size='lg' />
             </FormControl>
 
             <FormControl isRequired>
@@ -60,16 +64,27 @@ const BusinessForm = (props) => {
                </InputGroup>
             </FormControl>
 
-            <Button
-               width='full'
-               size='lg'
-               type='submit'
-            >
-               Siguiente
-            </Button>
+            <VStack w='full' spacing={3}>
+               <Button
+                  width='full'
+                  size='lg'
+                  type='submit'
+               >
+                  Siguiente
+               </Button>
+
+               <Button
+                  variant='outline'
+                  width='full'
+                  size='lg'
+                  onClick={handleCancelRegister}
+               >
+                  Cancelar
+               </Button>
+            </VStack>
          </VStack>
       </form>
    );
 };
 
-export default BusinessForm;
+export default CompanyForm;

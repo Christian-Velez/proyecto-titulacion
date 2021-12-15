@@ -7,10 +7,17 @@ import {
    InputGroup,
    VStack,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const DeveloperForm = (props) => {
+   const navigate = useNavigate();
+
    const handleSubmit = (e) => {
       e.preventDefault();
+   };
+
+   const handleCancelRegister = (e) => {
+      navigate('/login');
    };
 
    return (
@@ -62,13 +69,24 @@ const DeveloperForm = (props) => {
                </InputGroup>
             </FormControl>
 
-            <Button
-               width='full'
-               size='lg'
-               type='submit'
-            >
-               Siguiente
-            </Button>
+            <VStack w='full' spacing={3}>
+               <Button
+                  width='full'
+                  size='lg'
+                  type='submit'
+               >
+                  Siguiente
+               </Button>
+
+               <Button
+                  variant='outline'
+                  width='full'
+                  size='lg'
+                  onClick={handleCancelRegister}
+               >
+                  Cancelar
+               </Button>
+            </VStack>
          </VStack>
       </form>
    );

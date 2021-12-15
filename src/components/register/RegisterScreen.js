@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useSelector } from 'react-redux';
-import BusinessRegister from './BusinessRegister';
+import CompanyRegister from './CompanyRegister';
 import DeveloperRegister from './DeveloperRegister';
 import SelectAccount from './SelectAccount'
 
@@ -15,7 +15,7 @@ const RegisterScreen = () => {
       ? 
          accountType === 'Programmer'
             ? <DeveloperRegister/>
-            : <BusinessRegister />
+            : <CompanyRegister />
       : <SelectAccount />
    )
 }

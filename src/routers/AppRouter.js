@@ -6,7 +6,6 @@ import {
    BrowserRouter,
    Navigate,
 } from 'react-router-dom';
-import { types } from '../types/types';
 
 import PrivateRoutes from './private/PrivateRoutes';
 import PublicRoutes from './public/PublicRoutes';
@@ -18,37 +17,22 @@ import RegisterScreen from '../components/register/RegisterScreen';
 
 import AdminRoutes from './private/AdminRoutes';
 import DevRoutes from './private/DevRoutes';
-import BusinessRoutes from './private/BusinessRoutes';
+import CompanyRoutes from './private/CompanyRoutes';
+import { logout, startCheckingIsTokenValid } from '../actions/login';
 
 const AppRouter = () => {
-   /*
-      IDEA PARA PROTEGER RUTAS
-      
-      Cuando se cargue X componente, hacer una peticion al backend
-      donde le mando el token que saco de localStorage
-
-      Lo que me regrese la API: true o false
-      Lo guardo en algun lado (tal vez redux) y a partir de eso
-      hago la comprobacion de si puede acceder a una ruta o no
-
-
-
-   */
-
    const dispatch = useDispatch();
    useEffect(() => {
-      const logged =
-         localStorage.getItem('logged');
+      const auth = JSON.parse(localStorage.getItem('auth'));
+      const { token } = auth || {};
 
-      // Le mando el token al API....
-
-      // Lo que me regrese lo meto en el usuario
-      if (logged) {
-         dispatch({
-            type: types.login,
-            //payload: lo que me regrese el API
-         });
+      if(token) {
+         dispatch(startCheckingIsTokenValid(auth));
       }
+      else{
+         dispatch(logout());
+      }
+
    }, [dispatch]);
 
    return (
@@ -96,25 +80,26 @@ const AppRouter = () => {
                path='dev/*'
                element={
                   <PrivateRoutes
-                     requiredRoles={[ROLE.Developer]}
+                     requiredRoles={[
+                        ROLE.Developer,
+                     ]}
                   >
                      <DevRoutes />
                   </PrivateRoutes>
                }
-               
             />
 
             {/*Rutas exclusivas para empresas */}
             <Route
-               path='bus/*'
+               path='co/*'
                element={
                   <PrivateRoutes
-                     requiredRoles={[ROLE.Business]}
+                     requiredRoles={[
+                        ROLE.Company,
+                     ]}
                   >
-                     <BusinessRoutes />
+                     <CompanyRoutes />
                   </PrivateRoutes>
-               
-               
                }
             />
          </Routes>

@@ -6,10 +6,9 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import BusinessForm from './BusinessForm';
+import CompanyForm from './CompanyForm';
 
-const BusinessRegister = () => {
+const CompanyRegister = () => {
    return (
       <Stack
          direction={{ base: 'column', lg: 'row' }}
@@ -19,9 +18,6 @@ const BusinessRegister = () => {
          padding='0'
          className='animate__animated animate__fadeIn animate__faster'
       >
-
-        
-
          {/*Navbar solo disponible en movil*/}
          <VStack
             display={{ base: 'flex', lg: 'none' }}
@@ -33,7 +29,6 @@ const BusinessRegister = () => {
             <Heading> Nombre </Heading>
          </VStack>
 
-
          {/*Parte izquierda, formulario */}
          <VStack
             w={{ base: 'full', lg: '70%' }}
@@ -43,26 +38,21 @@ const BusinessRegister = () => {
          >
             <Heading>Ingresa tus datos</Heading>
 
-            <BusinessForm />
-
-            <Link to='/auth/login'> IR A LOGIN PA</Link>
+            <CompanyForm />
          </VStack>
 
-
-
-          {/*Parte derecha, imagen*/}
-          <VStack
+         {/*Parte derecha, imagen*/}
+         <VStack
             w='30%'
             pt='10%'
             paddingX={10}
             bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
-
             alignItems='center'
             boxShadow='dark-lg'
             spacing='5'
          >
-           <Heading
+            <Heading
                fontSize='md'
                color='brand.100'
             >
@@ -75,15 +65,12 @@ const BusinessRegister = () => {
                Empresa
             </Heading>
 
-          
-
             <Box boxSize='xs'>
                <Image src='/static/empresa.png' />
             </Box>
          </VStack>
-
       </Stack>
    );
 };
 
-export default BusinessRegister;
+export default CompanyRegister;

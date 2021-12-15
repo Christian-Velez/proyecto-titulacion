@@ -1,5 +1,6 @@
 import {
    Divider,
+   Flex,
    HStack,
    Text,
    VStack,
@@ -17,6 +18,8 @@ const ComputerNavbar = ({ userLinks }) => {
          alignItems='flex-start'
          paddingY={6}
          boxShadow='dark-lg'
+         overflowY='auto'
+
       >
          {/*Logotipo de la pagina */}
          <HStack width='full' paddingLeft={5}>
@@ -35,6 +38,9 @@ const ComputerNavbar = ({ userLinks }) => {
                </LinkItem>
             );
          })}
+
+         
+
       </VStack>
    );
 };

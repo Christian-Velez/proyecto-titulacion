@@ -11,6 +11,7 @@ import MobileHidden from './MobileHidden';
 import MobileNavBar from './MobileNavBar';
 import ComputerNavbar from './ComputerNavbar';
 import manageLinks from './manageLinks';
+import { useSelector } from 'react-redux';
 
 //Componente general utilizado para renderizar el menu de navegacion de la app
 const SideBar = () => {
@@ -19,14 +20,17 @@ const SideBar = () => {
    // Animacion solo disponible en tamanos lg
    const [lgAnimation, setLgAnimation ] = useState('');
 
-   const typeOfUser = 'Admin';
-   let userLinks;
+   const { role } = useSelector(state => state.auth);
 
-   if(typeOfUser === 'Admin') {
+   let userLinks;
+   if(role === 'Admin') {
       userLinks = manageLinks.Admin
    }
-   if(typeOfUser === 'Developer') {
+   if(role === 'Developer') {
       userLinks = manageLinks.Developer
+   }
+   if(role === 'Company') {
+      userLinks = manageLinks.Company
    }
 
 
@@ -62,7 +66,6 @@ const SideBar = () => {
          zIndex={999999}
          backgroundColor='brand.500'
          className={lgAnimation}
-         
       >
          {/*Se muestra en movil*/}
          <MobileNavBar setDisplayMenu={setDisplayMenu} />

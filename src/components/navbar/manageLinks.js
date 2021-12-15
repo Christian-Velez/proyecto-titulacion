@@ -20,6 +20,8 @@ import {
    FaUserAlt,
 } from 'react-icons/fa';
 
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
+
 const manageLinks = {
    Admin: [
       {
@@ -102,7 +104,76 @@ const manageLinks = {
          icon: <Icon as={BiSearch} h={5} w={5} />,
       },
    ],
-   //Business: [],
+   Company: [
+      {
+         index: 1,
+         path: '/co',
+         name: 'Inicio',
+         icon: (
+            <Icon as={AiFillHome} h={5} w={5} />
+         ),
+      },
+      {
+         index: 2,
+         path: '/co/profile',
+         name: 'Mi perfil',
+         icon: <Icon as={FaUserAlt} />,
+      },
+      {
+         index: 3,
+         path: '/co/newjob',
+         name: 'Generar oferta',
+         icon: (
+            <Icon
+               as={MdOutlineAddCircleOutline}
+               h={5}
+               w={5}
+            />
+         ),
+      },
+      {
+         index: 4,
+         path: '/co/myoffers',
+         name: 'Mis ofertas',
+         icon: (
+            <Icon
+               as={IoMdBriefcase}
+               h={5}
+               w={5}
+            />
+         ),
+      },
+      {
+         index: 5,
+         path: '/co/technologies',
+         name: 'Tecnologías',
+         icon: <Icon as={FaGitAlt} h={5} w={5} />,
+      },
+      {
+         index: 6,
+         path: '/co/developers',
+         name: 'Programadores',
+         icon: <Icon as={FaUsers} h={5} w={5} />,
+      },
+      {
+         index: 7,
+         path: '/co/messages',
+         name: 'Chat',
+         icon: (
+            <Icon
+               as={IoIosChatbubbles}
+               h={5}
+               w={5}
+            />
+         ),
+      },
+      {
+         index: 8,
+         path: '/co/search',
+         name: 'Buscador',
+         icon: <Icon as={BiSearch} h={5} w={5} />,
+      },
+   ],
 };
 
 export default manageLinks;
