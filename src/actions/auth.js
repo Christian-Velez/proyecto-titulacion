@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { types } from '../types/types';
+import { types } from 'types/types';
 
 
 export const startLogging = (
@@ -49,6 +49,7 @@ export const startLogging = (
             icon: 'error',
             title: 'Oops...',
             text: 'Nombre de usuario o contraseña incorrectos',
+            confirmButtonColor: 'var(--chakra-colors-brand-500)'
          });
       }
    };
@@ -82,18 +83,27 @@ export const startCheckingIsTokenValid = ({ token, role, redirect }) => {
          const { isValid } = data;
 
          if(isValid){
-            dispatch(setAuth(token, role, redirect))
+            dispatch(setAuth(token, role, redirect));
          }
       } catch (err) {
          dispatch(logout());
+      } finally {
+         dispatch(setIsChecking(false));
       }
    };
 };
 
 export const logout = () => {
    localStorage.removeItem('auth');
-
    return {
       type: types.logout
-   }
-}
+   };
+};
+
+
+export const setIsChecking = ( state ) => {
+   return {
+      type: types.setChecking,
+      payload: state,
+   };
+};

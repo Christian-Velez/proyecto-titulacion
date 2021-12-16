@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
    Route,
    Routes,
@@ -10,18 +10,21 @@ import {
 import PrivateRoutes from './private/PrivateRoutes';
 import PublicRoutes from './public/PublicRoutes';
 
-import { ROLE } from '../types/roles';
+import { ROLE } from 'types/roles';
 
-import LoginScreen from '../components/login/LoginScreen';
-import RegisterScreen from '../components/register/RegisterScreen';
+import LoginScreen from 'components/login/LoginScreen';
+import RegisterScreen from 'components/register/RegisterScreen';
 
 import AdminRoutes from './private/AdminRoutes';
 import DevRoutes from './private/DevRoutes';
 import CompanyRoutes from './private/CompanyRoutes';
-import { logout, startCheckingIsTokenValid } from '../actions/auth';
+import { logout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
 
 const AppRouter = () => {
    const dispatch = useDispatch();
+   const { isChecking } = useSelector(state => state.auth);
+
+   
    useEffect(() => {
       const auth = JSON.parse(localStorage.getItem('auth'));
       const { token } = auth || {};
@@ -31,14 +34,19 @@ const AppRouter = () => {
       }
       else{
          dispatch(logout());
+         dispatch(setIsChecking(false));
       }
 
    }, [dispatch]);
 
    return (
       <BrowserRouter>
+      {
+         !isChecking &&
+         
          <Routes>
             {/*  Rutas publicas */}
+
 
             <Route
                path='login'
@@ -102,7 +110,9 @@ const AppRouter = () => {
                   </PrivateRoutes>
                }
             />
+            
          </Routes>
+      }
       </BrowserRouter>
    );
 };

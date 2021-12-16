@@ -17,20 +17,18 @@ import { useSelector } from 'react-redux';
 const SideBar = () => {
    const [displayMenu, setDisplayMenu] = useState('none');
 
-   // Animacion solo disponible en tamanos lg
-   const [lgAnimation, setLgAnimation ] = useState('');
 
    const { role } = useSelector(state => state.auth);
 
    let userLinks;
    if(role === 'Admin') {
-      userLinks = manageLinks.Admin
+      userLinks = manageLinks.Admin;
    }
    if(role === 'Developer') {
-      userLinks = manageLinks.Developer
+      userLinks = manageLinks.Developer;
    }
    if(role === 'Company') {
-      userLinks = manageLinks.Company
+      userLinks = manageLinks.Company;
    }
 
 
@@ -47,11 +45,6 @@ const SideBar = () => {
          lgBreakpoint === '2xl'
       ) {
          setDisplayMenu('none');
-         setLgAnimation('animate__animated animate__fadeInLeft animate__faster');
-      }
-
-      else{
-         setLgAnimation('');
       }
    }, [lgBreakpoint]);
 
@@ -65,7 +58,6 @@ const SideBar = () => {
          top={0}
          zIndex={999999}
          backgroundColor='brand.500'
-         className={lgAnimation}
       >
          {/*Se muestra en movil*/}
          <MobileNavBar setDisplayMenu={setDisplayMenu} />

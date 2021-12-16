@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HStack, Text } from '@chakra-ui/react';
 
@@ -41,7 +42,13 @@ const LinkItem = ({
          
          <Text fontWeight='hairline' fontSize='lg'> {children} </Text>
       </HStack>
-   )
-}
+   );
+};
 
-export default LinkItem
+LinkItem.propTypes = { 
+   children: PropTypes.string.isRequired,
+   path: PropTypes.string.isRequired,
+   icon: PropTypes.element.isRequired
+};
+
+export default LinkItem;

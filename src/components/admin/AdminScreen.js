@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { types } from '../../types/types';
+import { types } from 'types/types';
 
 const AdminScreen = () => {
-   console.log('admin screen');
    const dispatch = useDispatch();
 
    const handleLogout = () => {

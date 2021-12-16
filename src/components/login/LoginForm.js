@@ -8,8 +8,8 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { useForm } from '../../hooks/useForm';
-import { startLogging } from '../../actions/auth';
+import { useForm } from 'hooks/useForm';
+import { startLogging } from 'actions/auth';
 
 const LoginForm = () => {
    const dispatch = useDispatch();

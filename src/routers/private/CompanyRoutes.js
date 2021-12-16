@@ -5,7 +5,7 @@ import {
    Route,
    Routes,
 } from 'react-router-dom';
-import SideBar from '../../components/navbar/SideBar';
+import SideBar from 'components/navbar/SideBar';
 
 const CompanyRoutes = () => {
    return (
@@ -13,6 +13,8 @@ const CompanyRoutes = () => {
          direction={{ base: 'column', lg: 'row' }}
          w='full'
          alignItems='flex-start'
+         className='animate__animated animate__fadeIn animate__faster'
+
       >
          <SideBar />
 

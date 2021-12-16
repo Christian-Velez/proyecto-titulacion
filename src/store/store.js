@@ -8,13 +8,15 @@ import thunk from 'redux-thunk';
 
 
 
-import { authReducer } from '../reducers/authReducer';
-import { registerReducer } from '../reducers/registerReducer';
+import { authReducer } from 'reducers/authReducer';
+import { registerReducer } from 'reducers/registerReducer';
+import { techReducer } from 'reducers/admin/techReducer';
 
 
 const allReducers = combineReducers({
    auth: authReducer,
    register: registerReducer,
+   tech: techReducer
 });
 
 

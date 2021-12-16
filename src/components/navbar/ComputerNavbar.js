@@ -7,16 +7,18 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../actions/auth';
+import { logout, setIsChecking } from 'actions/auth';
+import PropTypes from 'prop-types';
 
 
 const ComputerNavbar = ({ userLinks }) => {
    
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
    const handleLogout = () => {
       dispatch(logout());
+      dispatch(setIsChecking(false));
    };
 
    return (
@@ -76,5 +78,13 @@ const ComputerNavbar = ({ userLinks }) => {
       </VStack>
    );
 };
+
+
+
+
+ComputerNavbar.propTypes = {
+   userLinks: PropTypes.array
+};
+
 
 export default ComputerNavbar;

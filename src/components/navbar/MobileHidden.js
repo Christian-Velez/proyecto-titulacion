@@ -8,10 +8,12 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import LinkItem from './LinkItem';
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../actions/auth';
+import { logout, setIsChecking } from 'actions/auth';
 
 const MobileHidden = ({
    userLinks,
@@ -21,7 +23,9 @@ const MobileHidden = ({
    const dispatch = useDispatch();
    const handleLogout = () => {
       dispatch(logout());
-   }
+      dispatch(setIsChecking(false));
+
+   };
    return (
       <VStack
          className='animate__animated animate__fadeInRight animate__faster'
@@ -87,6 +91,12 @@ const MobileHidden = ({
          </Flex>
       </VStack>
    );
+};
+
+MobileHidden.propTypes = {
+   userLinks: PropTypes.array,
+   displayMenu: PropTypes.string,
+   setDisplayMenu: PropTypes.func
 };
 
 export default MobileHidden;

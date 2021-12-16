@@ -14,7 +14,7 @@ import LoginForm from './LoginForm';
 
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { cleanRegisterState } from '../../actions/register';
+import { cleanRegisterState } from 'actions/register';
 
 const LoginScreen = () => {
    const dispatch = useDispatch();

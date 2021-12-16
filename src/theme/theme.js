@@ -6,18 +6,17 @@ import {
 
 import '@fontsource/inter';
 
-
 const inputFocusBorderColor = {
    field: {
       _focus: {
-        borderColor: "brand.500",
-        boxShadow: "brand.500"
-      }
-    }
-}
+         borderColor: 'brand.500',
+         boxShadow: 'brand.500',
+      },
+   },
+};
 
-const blueBrandColor  = {
-   50:  '#EBF8FF',
+const blueBrandColor = {
+   50: '#EBF8FF',
    100: '#BEE3F8',
    200: '#90CDF4',
    300: '#63B3ED',
@@ -27,7 +26,7 @@ const blueBrandColor  = {
    700: '#2C5282',
    800: '#2A4365',
    900: '#1A365D',
-}
+};
 
 //const purpleBrandColor = {
 //   50:  '#FAF5FF',
@@ -78,7 +77,7 @@ const blueBrandColor  = {
 //   600: '#4A5568',
 //   700: '#2D3748',
 //   800: '#1A202C',
-//   900: '#171923', 
+//   900: '#171923',
 //}
 
 const theme = extendTheme(
@@ -88,13 +87,19 @@ const theme = extendTheme(
    }),
    withDefaultProps({
       defaultProps: {
-        variant: 'filled',
+         variant: 'filled',
       },
-      components: ['Input', 'NumberInput', 'PinInput', 'Select', 'Textarea'],
-    }),
+      components: [
+         'Input',
+         'NumberInput',
+         'PinInput',
+         'Select',
+         'Textarea',
+      ],
+   }),
    {
       colors: {
-         brand: blueBrandColor
+         brand: blueBrandColor,
       },
       fonts: {
          heading: 'Inter',
@@ -105,31 +110,31 @@ const theme = extendTheme(
             body: {
                color: 'gray.700',
             },
-         }
+         },
       },
       components: {
          Input: {
             variants: {
                filled: inputFocusBorderColor,
-               outline: inputFocusBorderColor
+               outline: inputFocusBorderColor,
             },
          },
          Select: {
             variants: {
                filled: inputFocusBorderColor,
-               outline: inputFocusBorderColor
+               outline: inputFocusBorderColor,
             },
          },
          Textarea: {
             variants: {
-               filled: inputFocusBorderColor.field,
-               outline: inputFocusBorderColor.field,
+               filled:
+                  inputFocusBorderColor.field,
+               outline:
+                  inputFocusBorderColor.field,
             },
-         }
-      }
-   },
-
-   
+         },
+      },
+   }
 );
 
 export default theme;

@@ -1,6 +1,7 @@
+import React from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { HStack, IconButton } from '@chakra-ui/react';
-import React from 'react'
+import PropTypes from 'prop-types';
 
 const MobileNavBar = ({ setDisplayMenu }) => {
    return (
@@ -19,7 +20,13 @@ const MobileNavBar = ({ setDisplayMenu }) => {
          }}
       />
    </HStack>
-   )
-}
+   );
+};
 
-export default MobileNavBar
+MobileNavBar.propTypes = {
+   setDisplayMenu: PropTypes.func
+};
+
+
+
+export default MobileNavBar;
