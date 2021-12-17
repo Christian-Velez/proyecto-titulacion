@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
    Button,
    FormControl,
@@ -13,6 +13,8 @@ import { startLogging } from 'actions/auth';
 
 const LoginForm = () => {
    const dispatch = useDispatch();
+   const [isLoading, setIsLoading] = useState(false);
+
    const [formValues, handleInputChange] =
       useForm({
          username: '',
@@ -22,7 +24,7 @@ const LoginForm = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(startLogging(username, password));
+      dispatch(startLogging(username, password, setIsLoading));
    };
 
    return (
@@ -68,6 +70,7 @@ const LoginForm = () => {
                width='full'
                size='lg'
                type='submit'
+               isLoading={isLoading}
             >
                Iniciar sesion
             </Button>

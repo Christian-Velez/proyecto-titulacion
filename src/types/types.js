@@ -12,6 +12,8 @@ export const types = {
    cleanRegisterState: '[Register] Clean all register fields',
 
 
-   setTechnologies: '[Admin] Set technologies in store data',
+   setTechnologies: '[Tech] Set technologies in store data',
+   addNewTech: '[Tech] Add new technology to stored data',
+
     
 };

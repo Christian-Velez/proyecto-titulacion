@@ -13,6 +13,7 @@ import AddNewTech from 'components/admin/AddNewTech';
 
 import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { useDispatch } from 'react-redux';
+import EditTech from 'components/admin/EditTech';
 
 const AdminRoutes = () => {
    const dispatch = useDispatch();
@@ -49,6 +50,12 @@ const AdminRoutes = () => {
                path='technologies/new'
                element={<AddNewTech /> }
             />
+
+            <Route
+               path='technologies/edit/:id'
+               element={<EditTech />  }
+            />
+
 
 
 

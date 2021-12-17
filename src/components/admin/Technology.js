@@ -8,19 +8,32 @@ import {
    Image,
    Flex
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Technology = ({ info }) => {
    const { 
+      id,
       name, 
       type,
+      relatedTechs,
+      categories,
       img,
    } = info;
 
-   const relatedTechss = [ 'Yo', 'tu', 'xd'];
-   const stringRelated = relatedTechss.join(', ');
 
+   const navigate = useNavigate();
+   const relatedTechsHere = relatedTechs.map(tech => {
+      const { name } = tech;
+      return name;
+   });
 
-   console.log(info);
+   const categoriesHere = categories.join(', ');
+   const stringRelated = relatedTechsHere.join(', ');
+
+   const handleEdit = () => {
+      navigate(`/admin/technologies/edit/${id}`);
+   };
+
    return (
       <HStack
          w='full'
@@ -30,6 +43,13 @@ const Technology = ({ info }) => {
          padding={{ base: 2, lg: 5 }}
          borderRadius='md'
          borderColor='gray.200'
+         _hover={{
+            cursor: 'pointer',
+            bgColor: 'gray.50',
+         }}
+         transition='background-color .3s ease'
+
+         onClick={ handleEdit }
       >
          <Flex 
             width={{ base: '20%', lg: '8%'}}
@@ -47,7 +67,7 @@ const Technology = ({ info }) => {
          >
             <Text fontWeight='bold'> {name} </Text>
             <Text fontSize={{ base: 'smaller', lg: 'md'}}> Tipo: { type } </Text>
-            <Text fontSize={{ base: 'smaller', lg: 'md'}}> Relacionadas: { stringRelated } </Text>
+            <Text fontSize={{ base: 'smaller', lg: 'md'}}> Categorías:  { categoriesHere } </Text>
             <Text fontSize={{ base: 'smaller', lg: 'md'}}> Relacionadas: { stringRelated } </Text>
          </VStack>
       </HStack>

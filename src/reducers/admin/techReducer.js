@@ -12,7 +12,15 @@ export const techReducer = (state = initialState, action) => {
             ...state,
             technologies: action.payload
          };
-      
+
+      case types.addNewTech:
+         return {
+            ...state,
+            technologies: [
+               ...state.technologies,
+               action.payload
+            ]
+         };
    
       default:
          return state;

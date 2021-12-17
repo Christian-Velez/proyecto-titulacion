@@ -5,10 +5,12 @@ import { types } from 'types/types';
 
 export const startLogging = (
    username,
-   password
+   password,
+   setIsLoading
 ) => {
    return async (dispatch) => {
       try {
+         setIsLoading(true);
          const { data } = await axios.post(
             'http://localhost:3006/api/login',
             {
@@ -36,6 +38,8 @@ export const startLogging = (
                redirect,
             })
          );
+         setIsLoading(false);
+
 
          dispatch(
             setAuth(
@@ -51,6 +55,9 @@ export const startLogging = (
             text: 'Nombre de usuario o contraseña incorrectos',
             confirmButtonColor: 'var(--chakra-colors-brand-500)'
          });
+         setIsLoading(false);
+
+         
       }
    };
 };

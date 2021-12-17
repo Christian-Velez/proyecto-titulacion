@@ -43,7 +43,11 @@ const TechnologiesScreen = () => {
             {
                technologies.map(technology => {
                   const { id, ...rest } = technology;
-                  return <Technology key={ id } info={rest} />;
+                  const info = {
+                     id,
+                     ...rest
+                  };
+                  return <Technology key={ id } info={info} />;
                })   
                
             }
