@@ -7,16 +7,22 @@ import {
 import thunk from 'redux-thunk';
 
 
-
+// General
 import { authReducer } from 'reducers/authReducer';
 import { registerReducer } from 'reducers/registerReducer';
-import { techReducer } from 'reducers/admin/techReducer';
 
+
+// Admin
+import { techReducer } from 'reducers/admin/techReducer';
+import { softSkillReducer } from 'reducers/admin/softReducer';
 
 const allReducers = combineReducers({
    auth: authReducer,
    register: registerReducer,
-   tech: techReducer
+
+   // Admin
+   tech: techReducer,
+   soft: softSkillReducer,
 });
 
 

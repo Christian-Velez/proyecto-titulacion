@@ -12,9 +12,14 @@ export const types = {
    cleanRegisterState: '[Register] Clean all register fields',
 
 
-   setTechnologies: '[Tech] Set technologies in store data',
+   setTechnologies: '[Tech] Set technologies in stored data',
    addNewTech: '[Tech] Add new technology to stored data',
    editTech: '[Tech] Edit technology fields in stored data',
+
+   setSoftSkills: '[Soft] Set soft-skills in stored data' ,
+   addNewSoft: '[Soft] Add new soft-skill to stored data',
+   editSoft: '[Soft] Edit soft-skill fields in stored data',
+
 
 
     

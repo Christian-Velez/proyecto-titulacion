@@ -5,10 +5,9 @@ import {
    HStack,
    Text,
    VStack,
-   Image,
-   Flex
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import SquareImg from 'components/SquareImg';
 
 const Technology = ({ info }) => {
    const { 
@@ -51,15 +50,7 @@ const Technology = ({ info }) => {
 
          onClick={ handleEdit }
       >
-         <Flex 
-            width={{ base: '20%', lg: '8%'}}
-            height='auto'
-         >
-            <Image
-               src={ img }
-               alt={ `${name} imagen`}
-            />
-         </Flex>
+         <SquareImg src={img} alt={name} boxSize={{ base: '90px', lg: '120px'}}/>
 
          <VStack alignItems='flex-start'
             width={{ base: '80%', lg: '92%'}}

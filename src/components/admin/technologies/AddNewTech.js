@@ -21,12 +21,7 @@ const AddNewTech = () => {
             Agregar nueva tecnología
          </Heading>
 
-         <AddNewTechForm 
-            
-
-
-         />
-
+         <AddNewTechForm />
          
       </VStack>
    );

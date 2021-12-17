@@ -1,0 +1,55 @@
+import React from 'react';
+import {
+   VStack,
+   Heading,
+   Button,
+   Divider,
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Softskill from './Softskill';
+
+
+const SoftskillsScreen = () => {
+   const navigate = useNavigate();
+   const { softskills } = useSelector(state => state.soft);
+   
+   return (
+      <VStack
+      padding={{ base: 7, lg: 20}}
+      spacing={20}
+      alignItems='flex-start'
+      w='full'
+   >
+      <Heading> Soft skills </Heading>
+      <Button
+         onClick={ () => navigate('./new') }
+      > Agregar una nueva </Button>
+
+      <Divider />
+
+
+      <VStack
+         spacing={5}
+         w='full'
+         alignItems='flex-start'
+      >
+         <Heading size='md'> Registradas </Heading>
+         {
+            softskills.map(softskill => {
+               const { id, ...rest } = softskill;
+               const info = {
+                  id,
+                  ...rest
+               };
+               return <Softskill key={ id } info={info} />;
+            })   
+            
+         }
+      </VStack>
+     
+   </VStack>
+   );
+};
+
+export default SoftskillsScreen;

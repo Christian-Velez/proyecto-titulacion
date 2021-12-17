@@ -1,25 +1,40 @@
-import { Stack } from '@chakra-ui/react';
+
+// Hooks
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+// Router
 import {
    Navigate,
    Route,
    Routes,
 } from 'react-router-dom';
-import SoftskillsScreen from 'components/admin/SoftskillsScreen';
-import TechnologiesScreen from 'components/admin/TechnologiesScreen';
-import SideBar from 'components/navbar/SideBar';
-import AddNewTech from 'components/admin/AddNewTech';
 
-
+// Actions
 import { startLoadingTechnologies } from 'actions/admin/technologies';
-import { useDispatch } from 'react-redux';
-import EditTech from 'components/admin/EditTech';
+import { startLoadingSoftSkills } from 'actions/admin/softskills';
+
+// Components
+import SideBar from 'components/navbar/SideBar';
+
+import SoftskillsScreen from 'components/admin/softskills/SoftskillsScreen';
+
+
+
+import TechnologiesScreen from 'components/admin/technologies/TechnologiesScreen';
+import AddNewTech from 'components/admin/technologies/AddNewTech';
+import EditTech from 'components/admin/technologies/EditTech';
+
+import { Stack } from '@chakra-ui/react';
+
+
 
 const AdminRoutes = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
       dispatch(startLoadingTechnologies());
+      dispatch(startLoadingSoftSkills());
    }, []);
 
 
@@ -61,6 +76,11 @@ const AdminRoutes = () => {
 
             <Route
                path='soft-skills'
+               element={<SoftskillsScreen />}
+            />
+
+            <Route
+               path='soft-skills/new'
                element={<SoftskillsScreen />}
             />
 
