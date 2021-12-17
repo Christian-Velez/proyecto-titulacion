@@ -100,9 +100,7 @@ const EditTech = () => {
                'var(--chakra-colors-brand-500)',
          });
       } else {
-         dispatch(startUpdatingTech(id, img));
-
-   
+         dispatch(startUpdatingTech(id, name, description, img, type, categories, relatedTechs, navigate));
       }
 
    };
@@ -175,6 +173,7 @@ const EditTech = () => {
                   </FormLabel>
 
                   <Select
+                     name='type'
                      value={type}
                      onChange={ handleInputChange }
                   >

@@ -3,7 +3,7 @@ import { useForm } from './useForm';
 
 export const useTechnologyForm = (initialSelectedType = '') => {
    // Selected
-   const [formValues, handleInputChange, _, setFormValues] =
+   const [formValues, handleInputChange,, setFormValues] =
       useForm({
          name: '',
          description: '',

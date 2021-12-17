@@ -21,6 +21,16 @@ export const techReducer = (state = initialState, action) => {
                action.payload
             ]
          };
+
+      case types.editTech: 
+         return {
+            ...state,
+            technologies: state.technologies.map(tech => (
+               tech.id === action.payload.id
+               ? (action.payload.data) // Sobreescribe la tecnologia que coincida
+               : tech
+            ))
+            };         
    
       default:
          return state;

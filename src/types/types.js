@@ -14,6 +14,8 @@ export const types = {
 
    setTechnologies: '[Tech] Set technologies in store data',
    addNewTech: '[Tech] Add new technology to stored data',
+   editTech: '[Tech] Edit technology fields in stored data',
+
 
     
 };
