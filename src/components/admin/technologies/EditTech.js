@@ -113,7 +113,7 @@ const EditTech = () => {
          w='full'
       >
          <Heading>
-            Editando{' '}
+            Editando
             {technology && technology.name}
          </Heading>
 

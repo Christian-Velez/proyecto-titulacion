@@ -197,7 +197,7 @@ export const startUpdatingTech = (
          Swal.fire({
             icon: 'error',
             title: 'Error...',
-            text: 'Ocurrio un error al tratar de agregar la tecnología',
+            text: 'Ocurrio un error al tratar de editar la tecnología',
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });

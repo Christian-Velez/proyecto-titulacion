@@ -18,8 +18,8 @@ import { startLoadingSoftSkills } from 'actions/admin/softskills';
 import SideBar from 'components/navbar/SideBar';
 
 import SoftskillsScreen from 'components/admin/softskills/SoftskillsScreen';
-
-
+import AddNewSoft from 'components/admin/softskills/AddNewSoft';
+import EditSoft from 'components/admin/softskills/EditSoft';
 
 import TechnologiesScreen from 'components/admin/technologies/TechnologiesScreen';
 import AddNewTech from 'components/admin/technologies/AddNewTech';
@@ -49,45 +49,18 @@ const AdminRoutes = () => {
          <SideBar />
 
          <Routes>
-            <Route
-               path='/'
-               element={
-                  <p> Inicio, bienvenido administrador </p>
-               }
-            />
+            <Route path='/' element={ <p> Inicio, bienvenido administrador </p> } />
 
-            <Route
-               path='technologies'
-               element={<TechnologiesScreen />}
-            />
+            <Route path='technologies' element={<TechnologiesScreen />} />
+            <Route path='technologies/new' element={<AddNewTech /> } />
+            <Route path='technologies/edit/:id' element={<EditTech /> } />
 
-            <Route
-               path='technologies/new'
-               element={<AddNewTech /> }
-            />
-
-            <Route
-               path='technologies/edit/:id'
-               element={<EditTech />  }
-            />
+            <Route path='soft-skills' element={<SoftskillsScreen /> } />
+            <Route path='soft-skills/new' element={<AddNewSoft /> } />
+            <Route path='soft-skills/edit/:id' element={<EditSoft /> } />
 
 
-
-
-            <Route
-               path='soft-skills'
-               element={<SoftskillsScreen />}
-            />
-
-            <Route
-               path='soft-skills/new'
-               element={<SoftskillsScreen />}
-            />
-
-            <Route
-               path='*'
-               element={<Navigate to='/admin' />}
-            />
+            <Route path='*' element={<Navigate to='/admin' /> } />
          </Routes>
       </Stack>
    );
