@@ -16,6 +16,7 @@ import { startLoadingSoftSkills } from 'actions/admin/softskills';
 
 // Components
 import SideBar from 'components/navbar/SideBar';
+import WelcomeAdmin from 'components/admin/WelcomeAdmin';
 
 import SoftskillsScreen from 'components/admin/softskills/SoftskillsScreen';
 import AddNewSoft from 'components/admin/softskills/AddNewSoft';
@@ -49,7 +50,7 @@ const AdminRoutes = () => {
          <SideBar />
 
          <Routes>
-            <Route path='/' element={ <p> Inicio, bienvenido administrador </p> } />
+            <Route path='/' element={ <WelcomeAdmin /> } />
 
             <Route path='technologies' element={<TechnologiesScreen />} />
             <Route path='technologies/new' element={<AddNewTech /> } />

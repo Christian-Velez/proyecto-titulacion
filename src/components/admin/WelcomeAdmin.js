@@ -1,0 +1,52 @@
+import {
+   Heading,
+   Image,
+   Text,
+   VStack,
+} from '@chakra-ui/react';
+import React from 'react';
+
+const WelcomeAdmin = () => {
+   return (
+      <VStack
+         padding={{ base: 7, lg: 20 }}
+         spacing={20}
+         alignItems='center'
+         w='full'
+      >
+         <Heading>
+            Bienvenido administrador
+         </Heading>
+
+         <VStack
+            width={{ base: 'full', lg: '50%' }}
+            spacing={5}
+            alignItems='center'
+            textAlign='center'
+            fontSize='lg'
+            color='gray.600'
+         >
+            <Image
+               src='/static/BigDataAnalysis.svg'
+               alt='Admin image'
+            />
+
+            <Text>
+               Desde este panel podrás agregar y
+               editar las tecnologías y soft
+               skills que estarán disponibles para
+               los usuarios de tipo programador y
+               empresa.
+            </Text>
+
+            <Text color='brand.500'>
+               Puedes cambiar entre las distintas
+               secciones utilizando el menú de
+               navegación.
+            </Text>
+         </VStack>
+      </VStack>
+   );
+};
+
+export default WelcomeAdmin;
