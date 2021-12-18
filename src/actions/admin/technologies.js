@@ -3,11 +3,14 @@ import { types } from 'types/types';
 import { imgUpload } from 'helpers/imgUpload';
 import Swal from 'sweetalert2';
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const startLoadingTechnologies = () => {
    return async (dispatch) => {
       try {
          const { data } = await axios.get(
-            'http://localhost:3006/api/technology'
+            `${API_URL}/api/technology`
          );
          dispatch(setTechnologies(data));
       } catch (err) {
@@ -78,7 +81,7 @@ export const startSubmittingTechnology = (
          };
 
          const { data } = await axios.post(
-            'http://localhost:3006/api/technology',
+            `${API_URL}/api/technology`,
             techToDB,
             config
          );
@@ -174,7 +177,7 @@ export const startUpdatingTech = (
          };
 
          const { data } = await axios.put(
-            `http://localhost:3006/api/technology/${id}`,
+            `${API_URL}/api/technology/${id}`,
             techToDB,
             config
          );

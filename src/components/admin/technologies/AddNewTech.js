@@ -16,6 +16,7 @@ const AddNewTech = () => {
          spacing={20}
          alignItems='flex-start'
          w='full'
+         className='animate__animated animate__fadeIn animate__faster'
       >
          <Heading>
             Agregar nueva tecnología

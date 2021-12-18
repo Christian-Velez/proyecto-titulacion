@@ -1,6 +1,7 @@
 import { types } from '../types/types';
 
 const initialState = {
+   id: null,
    role: null,
    isAuthenticated: false,
    token: null,
@@ -12,12 +13,13 @@ export const authReducer = (
    state = initialState,
    action
 ) => {
-   const { token, role, redirect } = action.payload || {};
+   const { id, token, role, redirect } = action.payload || {};
    
    switch (action.type) {
       case types.login:
          return {
             ...state,
+            id,
             isAuthenticated: true,
             token,
             role,

@@ -5,8 +5,12 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const WelcomeAdmin = () => {
+const WelcomeDeveloper = () => {
+   const { name } = useSelector(state => state.devInfo);
+
+
    return (
       <VStack
          padding={{ base: 7, lg: 20 }}
@@ -16,7 +20,7 @@ const WelcomeAdmin = () => {
          className='animate__animated animate__fadeIn animate__faster'         
       >
          <Heading>
-            Bienvenido administrador
+            Bienvenido { name }
          </Heading>
 
          <VStack
@@ -28,16 +32,12 @@ const WelcomeAdmin = () => {
             color='gray.600'
          >
             <Image
-               src='/static/BigDataAnalysis.svg'
-               alt='Admin image'
+               src='/static/WebDevelopment.svg'
+               alt='Web development image'
             />
 
             <Text>
-               Desde este panel podrás agregar y
-               editar las tecnologías y soft
-               skills que estarán disponibles para
-               los usuarios de tipo programador y
-               empresa.
+               La cuenta de tipo programador te permite contactar con empresas y postularte a sus ofertas para así poder obtener tu empleo soñado a través de esta plataforma.
             </Text>
 
             <Text color='brand.500'>
@@ -50,4 +50,4 @@ const WelcomeAdmin = () => {
    );
 };
 
-export default WelcomeAdmin;
+export default WelcomeDeveloper;

@@ -111,10 +111,10 @@ const EditTech = () => {
          spacing={20}
          alignItems='flex-start'
          w='full'
+         className='animate__animated animate__fadeIn animate__faster'
       >
          <Heading>
-            Editando
-            {technology && technology.name}
+            Editando {technology && technology.name}
          </Heading>
 
          <form 

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import LinkItem from './LinkItem';
 import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { logout, setIsChecking } from 'actions/auth';
+import { generalLogout, setIsChecking } from 'actions/auth';
 
 const MobileHidden = ({
    userLinks,
@@ -22,7 +22,7 @@ const MobileHidden = ({
 }) => {
    const dispatch = useDispatch();
    const handleLogout = () => {
-      dispatch(logout());
+      dispatch(generalLogout());
       dispatch(setIsChecking(false));
 
    };

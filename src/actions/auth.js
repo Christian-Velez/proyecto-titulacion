@@ -3,6 +3,9 @@ import Swal from 'sweetalert2';
 import { types } from 'types/types';
 
 
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 export const startLogging = (
    username,
    password,
@@ -12,7 +15,7 @@ export const startLogging = (
       try {
          setIsLoading(true);
          const { data } = await axios.post(
-            'http://localhost:3006/api/login',
+            `${API_URL}/api/login`,
             {
                username,
                password,
@@ -33,6 +36,7 @@ export const startLogging = (
          localStorage.setItem(
             'auth',
             JSON.stringify({
+               id: data.id,
                token: data.token,
                role: data.kind,
                redirect,
@@ -43,6 +47,7 @@ export const startLogging = (
 
          dispatch(
             setAuth(
+               data.id,
                data.token,
                data.kind,
                redirect
@@ -63,17 +68,22 @@ export const startLogging = (
 };
 
 export const setAuth = (
+   id,
    token,
    role,
    redirect
 ) => {
+
    return {
       type: types.login,
-      payload: { token, role, redirect },
+      payload: { id, token, role, redirect },
    };
 };
 
-export const startCheckingIsTokenValid = ({ token, role, redirect }) => {
+
+
+// Para guardar la sesion en el usuario
+export const startCheckingIsTokenValid = ({ id, token, role, redirect }) => {
    return async (dispatch) => {
       try {
          const config = {
@@ -83,30 +93,32 @@ export const startCheckingIsTokenValid = ({ token, role, redirect }) => {
          };
 
          const { data } = await axios.post(
-            'http://localhost:3006/api/login/verify',
+            `${API_URL}/api/login/verify`,
             {},
             config
          );
+
+
          const { isValid } = data;
 
          if(isValid){
-            dispatch(setAuth(token, role, redirect));
+            dispatch(setAuth(id, token, role, redirect));
          }
       } catch (err) {
-         dispatch(logout());
+         console.log('Error al determinar si el token era valido');
+         dispatch(generalLogout());
       } finally {
          dispatch(setIsChecking(false));
       }
    };
 };
 
-export const logout = () => {
+export const generalLogout = () => {
    localStorage.removeItem('auth');
    return {
-      type: types.logout
+      type: types.generalLogout
    };
 };
-
 
 export const setIsChecking = ( state ) => {
    return {

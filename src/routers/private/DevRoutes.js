@@ -1,13 +1,25 @@
 import { Stack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
    Navigate,
    Route,
    Routes,
 } from 'react-router-dom';
 import SideBar from 'components/navbar/SideBar';
+import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
+import { useDispatch } from 'react-redux';
+import { startSettingDevInfo } from 'actions/developer/user';
+import LoadingScreen from 'components/LoadingScreen';
 
 const DevRoutes = () => {
+   const dispatch = useDispatch();
+   const [isLoading, setIsLoading] = useState(true);
+
+   useEffect(() => {
+      dispatch(startSettingDevInfo(setIsLoading));
+   }, []);
+
+
    return (
       <Stack
          direction={{ base: 'column', lg: 'row' }}
@@ -18,63 +30,35 @@ const DevRoutes = () => {
       >
          <SideBar />
 
-         <Routes>
-            <Route
-               path='/'
-               element={
-                  <p>Bienvenido desarrollador </p>
-               }
-            />
+         {
+            isLoading
+            ? <LoadingScreen />
+            : (
+            <Routes>
+            
+               <Route path='/' element={ <WelcomeDeveloper /> } />
+            
+               <Route path='profile' element={ <p>Aqui va el perfil del dev</p> } />
 
-            <Route
-               path='profile'
-               element={
-                  <p>Aqui va el perfil del dev</p>
-               }
-            />
+               <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
 
-            <Route
-               path='jobs'
-               element={
-                  <p> Aqui van los empleos </p>
-               }
-            />
+               <Route path='technologies' element={ <p>Aqui van las tecnologías </p> } />
 
-            <Route
-               path='technologies'
-               element={
-                  <p>Aqui van las tecnologías </p>
-               }
-            />
+               <Route path='applications' element={ <p> Aqui van las postulaciones </p> } />
 
-            <Route
-               path='applications'
-               element={
-                  <p>
-                     Aqui van las postulaciones
-                  </p>
-               }
-            />
+               <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
-            <Route
-               path='messages'
-               element={<p>Aqui va el chat </p>}
-            />
+               <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
 
-            <Route
-               path='search'
-               element={
-                  <p>
-                     Aqui va el buscador de
-                     empresas
-                  </p>
-               }
-            />
-            <Route
-               path='*'
-               element={<Navigate to='/dev' />}
-            />
-         </Routes>
+               <Route path='*' element={ <Navigate to='/dev' /> }  />
+            
+            
+            
+            </Routes>
+            )
+
+         }
+
       </Stack>
    );
 };

@@ -16,6 +16,9 @@ const PrivateRoutes = ({ children, requiredRoles }) => {
       role,
       redirect,
    } = useSelector(state => state.auth);
+   
+
+
    const userHasRequiredRole = requiredRoles.includes(role);
 
 

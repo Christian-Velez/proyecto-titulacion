@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { logout, setIsChecking } from 'actions/auth';
+import { generalLogout, setIsChecking } from 'actions/auth';
 import PropTypes from 'prop-types';
 
 
@@ -17,7 +17,7 @@ const ComputerNavbar = ({ userLinks }) => {
    
    const dispatch = useDispatch();
    const handleLogout = () => {
-      dispatch(logout());
+      dispatch(generalLogout());
       dispatch(setIsChecking(false));
    };
 

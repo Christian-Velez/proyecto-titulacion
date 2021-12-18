@@ -32,7 +32,7 @@ import { Stack } from '@chakra-ui/react';
 
 const AdminRoutes = () => {
    const dispatch = useDispatch();
-
+   
    useEffect(() => {
       dispatch(startLoadingTechnologies());
       dispatch(startLoadingSoftSkills());

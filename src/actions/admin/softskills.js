@@ -3,11 +3,14 @@ import { imgUpload } from 'helpers/imgUpload';
 import Swal from 'sweetalert2';
 import { types } from 'types/types';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 export const startLoadingSoftSkills = () => {
    return async (dispatch) => {
       try {
          const { data } = await axios.get(
-            'http://localhost:3006/api/softskill'
+            `${API_URL}/api/softskill`
          );
          dispatch(setSoftSkills(data));
       } catch (err) {
@@ -57,7 +60,7 @@ export const startSubmittingSoftSkill = (
          };
 
          const { data } = await axios.post(
-            'http://localhost:3006/api/softskill',
+            `${API_URL}/api/softskill`,
             softSkillToDB,
             config
          );
@@ -132,7 +135,7 @@ export const startUpdatingSoft = (
          };
 
          const { data } = await axios.put(
-            `http://localhost:3006/api/softskill/${id}`,
+            `${API_URL}/api/softskill/${id}`,
             softToDB,
             config
          );

@@ -18,7 +18,7 @@ import RegisterScreen from 'components/register/RegisterScreen';
 import AdminRoutes from './private/AdminRoutes';
 import DevRoutes from './private/DevRoutes';
 import CompanyRoutes from './private/CompanyRoutes';
-import { logout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
+import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
 
 const AppRouter = () => {
    const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const AppRouter = () => {
          dispatch(startCheckingIsTokenValid(auth));
       }
       else{
-         dispatch(logout());
+         dispatch(generalLogout());
          dispatch(setIsChecking(false));
       }
 
