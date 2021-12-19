@@ -7,7 +7,7 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import SquareImg from 'components/SquareImg';
+import IconImg from 'components/IconImg';
 
 const Technology = ({ info }) => {
    const { 
@@ -50,7 +50,7 @@ const Technology = ({ info }) => {
 
          onClick={ handleEdit }
       >
-         <SquareImg src={img} alt={name} boxSize={{ base: '90px', lg: '120px'}}/>
+         <IconImg src={img} alt={name} boxSize={{ base: '90px', lg: '120px'}}/>
 
          <VStack alignItems='flex-start'
             width={{ base: '80%', lg: '92%'}}

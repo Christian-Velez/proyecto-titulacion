@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { HStack, VStack, Text } from '@chakra-ui/react';
-import SquareImg from 'components/SquareImg';
+import IconImg from 'components/IconImg';
 
 
 
@@ -34,7 +34,7 @@ const Softskill = ({ info }) => {
 
          onClick={ handleEdit }
       >
-         <SquareImg src={img} alt={name} boxSize={{ base: '90px', lg: '120px'}}/>
+         <IconImg src={img} alt={name} boxSize={{ base: '90px', lg: '120px'}}/>
 
          <VStack alignItems='flex-start'
             width={{ base: '80%', lg: '92%'}}

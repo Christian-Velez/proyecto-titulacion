@@ -31,7 +31,6 @@ export const startSettingDevInfo = (setIsLoading) => {
    };
 };
 
-
 export const setDevInfo = (data) => {
    return {
       type: types.setDevInfo,

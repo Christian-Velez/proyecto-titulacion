@@ -3,19 +3,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const SquareImg = ({ src, alt, boxSize }) => {
-   const { base, lg } = boxSize;
+const IconImg = ({ src, alt, isRounded = false ,boxSize, bgColor }) => {
+   const { base, lg, xl } = boxSize;
 
    return (
       <Flex
          width={{
             base,
             lg,
+            xl
          }}
          height={{
             base,
             lg,
+            xl
          }}
+         borderRadius={
+            isRounded
+            ? 'full'
+            : '0'
+         }
+         bgColor={bgColor}
          backgroundImage={`url(${src})`}
          title={`${alt} image`}
          backgroundSize='cover'
@@ -26,12 +34,14 @@ const SquareImg = ({ src, alt, boxSize }) => {
 };
 
 
-SquareImg.propTypes = {
+IconImg.propTypes = {
    src: PropTypes.string.isRequired,
    alt: PropTypes.string.isRequired,
-   boxSize: PropTypes.object
+   bgColor: PropTypes.string,
+   isRounded: PropTypes.bool,
+   boxSize: PropTypes.object.isRequired,
 };
 
 
 
-export default SquareImg;
+export default IconImg;

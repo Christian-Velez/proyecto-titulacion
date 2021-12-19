@@ -10,6 +10,7 @@ import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
 import { useDispatch } from 'react-redux';
 import { startSettingDevInfo } from 'actions/developer/user';
 import LoadingScreen from 'components/LoadingScreen';
+import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
 
 const DevRoutes = () => {
    const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const DevRoutes = () => {
             
                <Route path='/' element={ <WelcomeDeveloper /> } />
             
-               <Route path='profile' element={ <p>Aqui va el perfil del dev</p> } />
+               <Route path='profile' element={ <DeveloperProfile /> } />
 
                <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
 

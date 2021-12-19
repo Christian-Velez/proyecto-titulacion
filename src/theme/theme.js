@@ -39,7 +39,7 @@ const blueBrandColor = {
 //   700: '#553C9A',
 //   800: '#44337A',
 //   900: '#322659',
-//}
+//};
 
 //const pinkBrandColor = {
 //   50:  '#FFF5F7',

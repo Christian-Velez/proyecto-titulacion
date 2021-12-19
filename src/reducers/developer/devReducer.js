@@ -8,6 +8,7 @@ const initialDevInfo = {
    name: '',
    username: '',
    applications: [],
+   description: '',
    certifications: [],
    education: [],
    kind: '',
