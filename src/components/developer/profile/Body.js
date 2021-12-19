@@ -9,6 +9,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import TechnologyCard from './TechnologyCard';
 import EmptySection from './EmptySection';
+import ProjectCard from './ProjectCard';
+import EducationCard from './EducationCard';
+import CertificationCard from './CertificationCard';
+import SoftskillCard from './SoftskillCard';
 
 const Body = () => {
    const { 
@@ -19,15 +23,30 @@ const Body = () => {
       softskills 
    } = useSelector(state => state.devInfo);
 
-   const technologiesCards = (technologies.length === 0) ? <EmptySection /> : technologies.map(tech => {
-      const { technology, yearsOfExperience }  = tech;
-      return <TechnologyCard key={technology.id} technology={technology} yearsOfExperience={yearsOfExperience}/>;
-   });
+   const technologiesCards = (technologies.length === 0) 
+      ? <EmptySection /> : 
+      technologies.map(tech => {
+         const { technology, yearsOfExperience }  = tech;
+         return <TechnologyCard key={technology.id} technology={technology} yearsOfExperience={yearsOfExperience}/>;
+      });
 
-   const projectsCards = (projects.length === 0) && <EmptySection />;
-   const educationCards = (education.length === 0) && <EmptySection />;
-   const certificationsCards = (certifications.length === 0) && <EmptySection />;
-   const softskillsCards = (softskills.length === 0) && <EmptySection />;
+   const projectsCards = (projects.length === 0) 
+      ? <EmptySection /> 
+      : projects.map(project => <ProjectCard key={project._id} project={project} />);
+
+
+   const educationCards = (education.length === 0) 
+      ? <EmptySection />
+      : education.map(ed => <EducationCard key={ed._id} education={ed} />); 
+
+      
+   const certificationsCards = (certifications.length === 0) 
+      ? <EmptySection />
+      : certifications.map(cert => <CertificationCard key={cert._id} certification={cert}/>);
+
+   const softskillsCards = (softskills.length === 0)
+      ? <EmptySection />
+      : softskills.map((soft, i) => <SoftskillCard key={i} soft={soft} />);
 
 
 
