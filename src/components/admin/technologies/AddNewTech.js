@@ -8,8 +8,6 @@ import {
 import AddNewTechForm from './AddNewTechForm';
 
 const AddNewTech = () => {
-   
-
    return (
       <VStack
          padding={{ base: 7, lg: 20 }}

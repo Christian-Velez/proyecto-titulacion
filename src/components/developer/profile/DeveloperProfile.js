@@ -8,12 +8,15 @@ import {
    IconButton,
 } from '@chakra-ui/react';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 
 const DeveloperProfile = () => {
+   const navigate = useNavigate();
+
    
    const handleEditProfile = () => {
-      alert('Editar');
+      navigate('./edit');
    };
 
    return (

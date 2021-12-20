@@ -97,7 +97,7 @@ const EditSoft = () => {
                   <Input
                      type='file'
                      id='img'
-                     accept='image/png, image/jpeg'
+                     accept='image/png, image/jpeg, .svg'
                      onChange={(e) => {
                      setImg(
                         e.target.files[0]

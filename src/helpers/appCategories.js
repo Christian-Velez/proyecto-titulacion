@@ -4,6 +4,7 @@ export const typesOfTech = [
    'Biblioteca',
    'Base de datos',
    'Plataforma',
+   'Aplicación'
 ];
 
 export const techCategories = [
@@ -39,4 +40,12 @@ export const techCategories = [
       value: 'Desarrollo móvil',
       label: 'Desarrollo móvil',
    },
+   {
+      value: 'Aplicaciones de escritorio',
+      label: 'Aplicaciones de escritorio'
+   },
+   {
+      value: 'Diseño',
+      label: 'Diseño'
+   }
 ];

@@ -68,7 +68,7 @@ const AddNewSoftForm = () => {
                <Input
                   type='file'
                   name='img'
-                  accept='image/png, image/jpeg'
+                  accept='image/png, image/jpeg, .svg'
                   onChange={(e) => {
                      setImg(e.target.files[0]);
                   }}
