@@ -1,28 +1,53 @@
-import { Button, FormControl, FormHelperText, FormLabel, Heading, Input, Select, Stack, Text, Textarea, VStack } from '@chakra-ui/react';
-import { useForm } from 'hooks/useForm';
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'hooks/useForm';
+
 import EducationDisplay from './EducationDisplay';
 import ProjectDisplay from './ProjectDisplay';
 import TechDisplay from './TechDisplay';
-import { Select as SpecialSelect } from 'chakra-react-select';
+import CertificationDisplay from './CertificationDisplay';
+
 import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { startLoadingSoftSkills } from 'actions/admin/softskills';
 import { formatSoftskills } from 'helpers/formatSoftskills';
 
+import { Select as SpecialSelect } from 'chakra-react-select';
+import { 
+   Button, 
+   FormControl, 
+   FormHelperText, 
+   FormLabel, 
+   Heading, 
+   Input, 
+   Stack, 
+   Textarea, 
+   VStack 
+} from '@chakra-ui/react';
+
+
 const EditDeveloperProfile = () => {
    // Obtener opciones DISPONIBLES (todas)
    const dispatch = useDispatch();
+   const { softskills } = useSelector(state => state.soft);
+
+
+   
    useEffect(() => {
       dispatch(startLoadingTechnologies());
-      dispatch(startLoadingSoftSkills());
+      
+      // Hacer esto pero con las tecnologias
+      // debido a que si el usuario tiene ya las tecnologias por haber entrado
+      // a /dev/technologies, no es necesario volverlas a cargar y hacer la peticion
+      if(softskills.length === 0) {
+         dispatch(startLoadingSoftSkills());
+      }      
    }, []);
 
    const navigate = useNavigate();
    const devInfo = useSelector(state => state.devInfo);
    
-   const { softskills } = useSelector(state => state.soft);
    const [softsHere, setSoftsHere] = useState();
    useEffect(() => {
       if(softskills.length > 0){
@@ -47,16 +72,18 @@ const EditDeveloperProfile = () => {
    const [selectedSofts, setSelectedSofts ] = useState(formatSoftskills(devInfo.softskills));
    const [projects, setProjects] = useState(devInfo.projects);
    const [education, setEducation] = useState(devInfo.education);
+   const [certifications, setCertifications] = useState(devInfo.certifications);
 
    
    
    const techsDisplays = technologies.map(tech => {
       const { technology, yearsOfExperience, _id } = tech;
-      return <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id}/>;
+      return <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id} setTechnologies={setTechnologies}/>;
    });
 
-   const projectsDisplays = projects.map(pr => <ProjectDisplay key={pr._id} project={pr}/>);
-   const educationDisplays = education.map(ed => <EducationDisplay key={ed._id} education={ed}/>);
+   const projectsDisplays = projects.map(pr => <ProjectDisplay key={pr._id} project={pr} setProjects={setProjects}/>);
+   const educationDisplays = education.map(ed => <EducationDisplay key={ed._id} education={ed} setEducation={setEducation}/>);
+   const certificationDisplays = certifications.map(cer => <CertificationDisplay key={cer._id} certification={cer} setCertifications={setCertifications}/>);
 
 
 
@@ -64,6 +91,11 @@ const EditDeveloperProfile = () => {
    const handleEditDevProfile = (e) => {
       e.preventDefault();
       console.log(name, location, description);
+      console.log(technologies);
+      console.log(projects);
+      console.log(education);
+      console.log(selectedSofts);
+
    };
 
    return (
@@ -156,7 +188,7 @@ const EditDeveloperProfile = () => {
 
                <FormControl>
                   <FormLabel fontSize='lg'>Licencias y certificaciones</FormLabel>
-                  { educationDisplays }
+                  { certificationDisplays }
                   <Button
                      size='md'
                      variant='outline'

@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { startSettingDevInfo } from 'actions/developer/user';
 import LoadingScreen from 'components/LoadingScreen';
 import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
-import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfile';
+import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
 
 const DevRoutes = () => {
    const dispatch = useDispatch();

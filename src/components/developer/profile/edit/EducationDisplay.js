@@ -2,19 +2,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@chakra-ui/react';
+import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
 
-const EducationDisplay = ({ education }) => {
-   const { title, institution ,year } = education;
+const EducationDisplay = ({ education, setEducation }) => {
+   const { title, institution ,year, _id } = education;
+
+
+   const handleDelete = () => {
+      setEducation(prevEd => prevEd.filter(ed => ed._id !== _id));
+   };
+
    return (
-      <Text>
-         { title }. { institution } ({year}).
-      </Text>
+      <HStack spacing={4} my={3}>
+         <Tag >
+            <TagLabel> { title }. { institution } ({year}) </TagLabel>
+            <TagCloseButton onClick={ handleDelete }/>
+         </Tag>
+      </HStack>
    );
 };
 
 EducationDisplay.propTypes = {
-   education: PropTypes.object
+   education: PropTypes.object,
+   setEducation: PropTypes.func
 };
 
 export default EducationDisplay;
