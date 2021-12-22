@@ -31,10 +31,11 @@ const TechnologyCard = ({ technology, yearsOfExperience }) => {
          />
          <VStack
             alignItems='flex-start'
+            maxWidth='50%'
          >
             <Text fontWeight='black'> { name } </Text>
-            <Text fontSize='sm' color='gray.500'> { type } </Text>
-            <Text> { yearsOfExperience } años de experiencia</Text>
+            <Text fontSize={{ base: 'xs', lg: 'sm'}} color='gray.500'> { type } </Text>
+            <Text fontSize={{ base: 'sm', lg: 'md'}}> { yearsOfExperience } años de experiencia</Text>
          </VStack>
 
       </HStack>

@@ -26,8 +26,9 @@ const SoftskillCard = ({ soft }) => {
 
          <VStack
             alignItems='flex-start'
+            maxWidth='50%'
          >
-            <Text fontWeight='black'> { name } </Text>
+            <Text fontWeight='black'>{ name }</Text>
                
          </VStack>
 

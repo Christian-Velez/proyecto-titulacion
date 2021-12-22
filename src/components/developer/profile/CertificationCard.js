@@ -29,6 +29,7 @@ const CertificationCard = ({ certification }) => {
 
          <VStack
             alignItems='flex-start'
+            maxWidth='50%'
          >
             <Text fontWeight='black'> { title } </Text>
             <Text> { institution }, {year} </Text>
