@@ -1,15 +1,24 @@
-
+// Hooks
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 
-import CertificationDisplay from './editForm/displays/CertificationDisplay';
 
+// Info
 import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { startLoadingSoftSkills } from 'actions/admin/softskills';
 import { formatSoftskills } from 'helpers/formatSoftskills';
 
-import { Select as SpecialSelect } from 'chakra-react-select';
+
+// Componentes
+import ProfilePhoto from './editForm/ProfilePhoto';
+import BasicInput from './editForm/BasicInput';
+import Technologies from './editForm/Technologies';
+import Projects from './editForm/Projects';
+import Education from './editForm/Education';
+import Certifications from './editForm/Certifications';
+import Buttons from './editForm/Buttons';
+
 import { 
    FormControl, 
    FormLabel, 
@@ -17,14 +26,7 @@ import {
    Textarea, 
    VStack 
 } from '@chakra-ui/react';
-import Buttons from './editForm/Buttons';
-import ProfilePhoto from './editForm/ProfilePhoto';
-import BasicInput from './editForm/BasicInput';
-import Technologies from './editForm/Technologies';
-import Projects from './editForm/Projects';
-import Education from './editForm/Education';
-import Certifications from './editForm/Certifications';
-
+import { Select as SpecialSelect } from 'chakra-react-select';
 
 const EditDeveloperProfile = () => {
    // Obtener opciones DISPONIBLES (todas)
