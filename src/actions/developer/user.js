@@ -75,15 +75,15 @@ export const startUpdatingDevInfo = (allDevInfo, navigate, setIsUpdating) => {
          };
 
 
-         //// Header de autorizacion
-         //const { token } = getState().auth;
-         //const config = {
-         //   headers: {
-         //      Authorization: `Bearer ${token}`,
-         //   },
-         //};
+         // Header de autorizacion
+         const { token } = getState().auth;
+         const config = {
+            headers: {
+               Authorization: `Bearer ${token}`,
+            },
+         };
 
-         const { data } = await axios.put(`${API_URL}/api/developer/${id}`, updatedDevToDB);
+         const { data } = await axios.put(`${API_URL}/api/developer/${id}`, updatedDevToDB, config);
          dispatch(updateDevInfo(data.newUser));
          
          setIsUpdating(false);
