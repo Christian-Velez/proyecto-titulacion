@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import MainInfo from './MainInfo';
 import Body from './Body';
@@ -13,7 +13,9 @@ import { useNavigate } from 'react-router-dom';
 
 const DeveloperProfile = () => {
    const navigate = useNavigate();
-
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
    
    const handleEditProfile = () => {
       navigate('./edit');

@@ -37,3 +37,12 @@ export const setDevInfo = (data) => {
       payload: data
    };
 };
+
+
+
+export const startUpdatingDevInfo = () => {
+   return async() => {
+      console.log('xd');
+
+   };
+};

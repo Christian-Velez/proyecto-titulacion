@@ -111,6 +111,7 @@ const Body = () => {
             <Heading fontSize='lg'>
                Proyectos
             </Heading>
+            <Text fontStyle='italic' color='gray.500' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
 
             {projectsCards}
          </VStack>

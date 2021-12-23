@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HStack, Text, VStack, Link } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 const ProjectCard = ({ project }) => {
    const { img, title, linkDemo, linkGH } = project;
@@ -26,10 +27,10 @@ const ProjectCard = ({ project }) => {
          >
             <Text fontWeight='black'> { title } </Text>
             {
-               linkDemo && <Link isExternal href={linkDemo}> Demo </Link>
+               linkDemo && <Link isExternal href={linkDemo}> Demo <ExternalLinkIcon mx='2px' /> </Link>
             }
             {
-               linkGH && <Link isExternal href={linkGH}> Github </Link>
+               linkGH && <Link isExternal href={linkGH}> Github <ExternalLinkIcon mx='2px' /> </Link>
 
             }
             

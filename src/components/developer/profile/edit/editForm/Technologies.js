@@ -24,7 +24,10 @@ import { useForm } from 'hooks/useForm';
 
 const Technologies = ({ technologies, setTechnologies }) => {
    const { isOpen , onOpen , onClose } = useDisclosure();
-   const [error, setError ] = useState(false);
+   const [error, setError ] = useState({
+      error: false,
+      message: ''
+   });
 
    // Nueva tecnologia por agregar
      const [formValues, handleInputChange,,setFormValues ] = useForm({
@@ -72,7 +75,10 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    const handleAdd = () => {
       if(yearsOfExperience === ''){
-         setError(true);
+         setError({ error: true, message: 'Ingresa los años de experiencia'});
+      }
+      else if(parseInt(yearsOfExperience) > 30 || parseInt(yearsOfExperience) < 0){
+         setError({ error: true, message: 'Los años tienen que estar dentro del rango 0 - 30'});
       }
       else{
          setError(false);
@@ -137,7 +143,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
                      onChange={handleInputChange}/>
 
                   {
-                     error && <FormHelperText color='red.500'>Ingresa los años de experiencia </FormHelperText>
+                     error.error && <FormHelperText color='red.500'>{ error.message } </FormHelperText>
                   }
                </FormControl>
 
@@ -153,20 +159,9 @@ const Technologies = ({ technologies, setTechnologies }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-
-
-
       </>
-
-
-
-
    );
 };
-
-
-
 
 Technologies.propTypes = {
    technologies: PropTypes.array,
