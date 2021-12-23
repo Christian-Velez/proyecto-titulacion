@@ -19,69 +19,74 @@ const MainInfo = () => {
 
    return (
       <Stack
-      width='full'
-      justifyContent={{ xl: 'flex-start' }}
-      alignItems={{
-         base: 'center',
-         xl: 'flex-start',
-      }}
-      direction={{
-         base: 'column',
-         xl: 'row',
-      }}
-      spacing={{ base: 10, xl: 40 }}
-   >
-      <Flex w='max-content'  pt={5} >
-         <IconImg
-            src={ img }
-            alt='Profile photo'
-            boxSize={{
-               base: '200px',
-               lg: '250px',
-               xl: '300px',
-               
-            }}
-            isRounded={true}
-            bgColor='brand.50'
-         />
-      </Flex>
-
-      <VStack
-         w='full'
+         width='full'
+         justifyContent={{ xl: 'flex-start' }}
          alignItems={{
             base: 'center',
             xl: 'flex-start',
          }}
-         pt={3}
-         spacing={5}
-         textAlign={{
-            base: 'center',
-            xl: 'initial',
+         direction={{
+            base: 'column',
+            xl: 'row',
          }}
+         spacing={{ base: 10, xl: 40 }}
       >
-         <Heading> {name} </Heading>
-         <Text
-            fontSize='lg'
-            color='gray.400'
-         >
-            {location}
-         </Text>
-
-         <Text> Sobre mi </Text>
-
-         <Flex w='full' minH='80px' >
-            <Text> { description } </Text>
+         {/*  Foto de perfil */}
+         <Flex w='max-content'  pt={5} >
+            <IconImg
+               src={ img }
+               alt='Profile photo'
+               boxSize={{
+                  base: '200px',
+                  lg: '250px',
+                  xl: '300px',
+                  
+               }}
+               isRounded={true}
+               bgColor='brand.50'
+            />
          </Flex>
 
-         <Button
-            borderRadius={0}
-            leftIcon={<AiOutlineDownload />}
-            variant='outline'
+
+         {/*Info*/}
+         <VStack
+            w='full'
+            alignItems={{
+               base: 'center',
+               xl: 'flex-start',
+            }}
+            pt={3}
+            spacing={5}
+            textAlign={{
+               base: 'center',
+               xl: 'initial',
+            }}            
          >
-            Currículum
-         </Button>
-      </VStack>
-   </Stack>
+            <Heading> {name} </Heading>
+            <Text
+               fontSize='lg'
+               color='gray.400'
+            >
+               {location}
+            </Text>
+
+
+
+            <Text> Sobre mi </Text>
+
+            <Flex minH='80px'>
+               <Text> { description } </Text>
+            </Flex>
+
+            <Button
+               borderRadius={0}
+               leftIcon={<AiOutlineDownload />}
+               variant='outline'
+            >
+               Currículum
+            </Button>
+         </VStack>
+      </Stack>
 
    );
 };

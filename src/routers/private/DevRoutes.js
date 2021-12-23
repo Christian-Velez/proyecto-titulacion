@@ -28,7 +28,7 @@ const DevRoutes = () => {
          w='full'
          alignItems='flex-start'
          className='animate__animated animate__fadeIn animate__faster'
-
+         wordBreak='break-all'
       >
          <SideBar />
 

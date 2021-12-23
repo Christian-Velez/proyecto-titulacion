@@ -23,7 +23,7 @@ const ProjectCard = ({ project }) => {
          />
          <VStack
             alignItems='flex-start'
-            maxWidth='50%'
+            maxWidth='80%'
          >
             <Text fontWeight='black'> { title } </Text>
             {
