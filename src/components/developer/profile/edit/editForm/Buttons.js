@@ -1,8 +1,10 @@
 import { Button, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Buttons = () => {
+
+const Buttons = ({ isUpdating }) => {
    const navigate = useNavigate();
 
    return (
@@ -21,10 +23,12 @@ const Buttons = () => {
             onClick={() =>
                navigate('/dev/profile')
             }
+            isDisabled={isUpdating}
          >
             Cancelar
          </Button>
          <Button
+            isLoading={isUpdating}
             width='full'
             size='lg'
             type='submit'
@@ -34,5 +38,13 @@ const Buttons = () => {
       </Stack>
    );
 };
+
+
+
+
+Buttons.propTypes = {
+   isUpdating: PropTypes.bool
+};
+
 
 export default Buttons;

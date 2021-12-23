@@ -70,7 +70,7 @@ const MainInfo = () => {
          <Text> Sobre mi </Text>
 
          <Flex w='full' minH='80px' >
-         <Text> { description } </Text>
+            <Text> { description } </Text>
          </Flex>
 
          <Button

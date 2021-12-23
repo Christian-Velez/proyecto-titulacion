@@ -32,6 +32,7 @@ const Education = ({ education, setEducation }) => {
 
    const educationDisplays = education.map(ed => <EducationDisplay key={ed._id} education={ed} setEducation={setEducation}/>);
 
+
    const [ formValues, handleInputChange, resetForm] = useForm({
       title: '',
       institution: '',
@@ -73,7 +74,10 @@ const Education = ({ education, setEducation }) => {
       setEducation(prevEd => ([ ...prevEd, newEd]));
       onClose();
       resetForm();
+
    };
+
+
 
    return (
       <FormControl>

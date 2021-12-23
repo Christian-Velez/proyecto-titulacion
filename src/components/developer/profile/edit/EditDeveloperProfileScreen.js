@@ -8,7 +8,8 @@ import { useForm } from 'hooks/useForm';
 import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { startLoadingSoftSkills } from 'actions/admin/softskills';
 import { formatSoftskills } from 'helpers/formatSoftskills';
-
+import { startUpdatingDevInfo } from 'actions/developer/user';
+import { isEmpty } from 'validator';
 
 // Componentes
 import ProfilePhoto from './editForm/ProfilePhoto';
@@ -28,8 +29,14 @@ import {
    VStack 
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const EditDeveloperProfile = () => {
+   const navigate = useNavigate();
+   const [isUpdating, setIsUpdating] = useState(false);
+
+
    useEffect(() => {
       window.scrollTo(0, 0);
    }, []);
@@ -79,8 +86,18 @@ const EditDeveloperProfile = () => {
    // Actualizar perfil
    const handleEditDevProfile = (e) => {
       e.preventDefault();
+
+      if(isEmpty(name) || isEmpty(location) || isEmpty(description)){
+         return Swal.fire({
+            icon: 'warning',
+            title: 'Error...',
+            text: 'Completa todos los campos requeridos para actualizar tu perfil',
+            confirmButtonColor:
+               'var(--chakra-colors-brand-500)',
+         });
+      }
    
-      console.log({
+      dispatch(startUpdatingDevInfo({
          profilePhoto,
          name,
          location,
@@ -90,8 +107,7 @@ const EditDeveloperProfile = () => {
          education,
          certifications,
          selectedSofts
-      });
-
+      }, navigate, setIsUpdating));
    };
 
 
@@ -125,7 +141,9 @@ const EditDeveloperProfile = () => {
                
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>Descripción</FormLabel>
-                  <Textarea type='text' name='description' value = { description } onChange={ handleInputChange } maxLength={10} />
+                  <Textarea type='text' name='description' value = { description } 
+                     onChange={ handleInputChange } 
+                     maxLength={200} placeholder='Tienes 200 caracteres para contarle a las empresas más acerca de ti'/>
                </FormControl>
 
 
@@ -153,7 +171,7 @@ const EditDeveloperProfile = () => {
                      )}
                   </FormControl>  
                </FormControl>
-               <Buttons />
+               <Buttons isUpdating={isUpdating}/>
             </VStack>
          </form>
       </VStack>
