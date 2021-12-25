@@ -14,6 +14,16 @@ import IconImg from 'components/IconImg';
 const TechnologyCard = ({ technology, yearsOfExperience }) => {
 
    const { name, img, type } = technology;
+   let text = '';
+
+   if(yearsOfExperience === 1) {
+      text ='año';
+   }
+   else {
+      text = 'años';
+   }
+   
+
    return (
       <HStack 
          p={5} 
@@ -35,7 +45,12 @@ const TechnologyCard = ({ technology, yearsOfExperience }) => {
          >
             <Text fontWeight='black'> { name } </Text>
             <Text fontSize={{ base: 'xs', lg: 'sm'}} color='gray.500'> { type } </Text>
-            <Text fontSize={{ base: 'sm', lg: 'md'}}> { yearsOfExperience } años de experiencia</Text>
+            <Text fontSize={{ base: 'sm', lg: 'md'}}> 
+            {
+               yearsOfExperience === 0
+               ? 'Sin experiencia'
+               : `${ yearsOfExperience } ${ text } de experiencia`
+            } </Text>
          </VStack>
 
       </HStack>

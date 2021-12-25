@@ -59,12 +59,12 @@ const LoginScreen = () => {
          </VStack>
 
          <Box
-            w={{ base: '0', lg: '60vw' }}
+            w={{ base: '0', lg: '65vw' }}
             position='absolute'
             bottom='0'
             left='0'
          >
-            <Image src='/static/WebDevelopment.svg' />
+            <Image src='/static/Creative-Process.svg' />
          </Box>
 
          <VStack

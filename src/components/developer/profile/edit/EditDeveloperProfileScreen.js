@@ -45,12 +45,16 @@ const EditDeveloperProfile = () => {
    // Obtener opciones DISPONIBLES (todas)
    const dispatch = useDispatch();
    const { softskills } = useSelector(state => state.soft);   
+   const { technologies: allTechsAvailable } = useSelector(state => state.tech);   
+
    useEffect(() => {
-      dispatch(startLoadingTechnologies());
-      
-      // Hacer esto pero con las tecnologias
-      // debido a que si el usuario tiene ya las tecnologias por haber entrado
+      // Esto es debido a que si el usuario tiene ya las tecnologias por haber entrado
       // a /dev/technologies, no es necesario volverlas a cargar y hacer la peticion
+      if(allTechsAvailable.length === 0){
+         dispatch(startLoadingTechnologies());
+      }
+      
+      
       if(softskills.length === 0) {
          dispatch(startLoadingSoftSkills());
       }      
@@ -143,7 +147,7 @@ const EditDeveloperProfile = () => {
                   <FormLabel fontSize='lg'>Descripción</FormLabel>
                   <Textarea type='text' name='description' value = { description } 
                      onChange={ handleInputChange } 
-                     maxLength={200} placeholder='Tienes 200 caracteres para contarle a las empresas más acerca de ti'/>
+                     maxLength={280} placeholder='Tienes un "tweet" para contarle a las empresas más acerca de ti  (280 caracteres).'/>
                </FormControl>
 
 

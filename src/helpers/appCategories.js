@@ -1,4 +1,5 @@
 export const typesOfTech = [
+   'Todas',
    'Lenguajes de programación y marcado',
    'Framework',
    'Biblioteca',

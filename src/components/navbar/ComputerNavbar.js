@@ -29,12 +29,11 @@ const ComputerNavbar = ({ userLinks }) => {
          display={{ base: 'none', lg: 'flex' }}
          alignItems='flex-start'
          paddingY={6}
-         boxShadow='dark-lg'
          overflowY='auto'
       >
          {/*Logotipo de la pagina */}
-         <HStack width='full' paddingLeft={5}>
-            <Text fontSize='2xl'>NombreApp</Text>
+         <HStack width='full' paddingLeft={5} paddingY={5}>
+            <Text fontSize='2xl' color='brand.200' >Brand name </Text>
          </HStack>
 
          <Divider />

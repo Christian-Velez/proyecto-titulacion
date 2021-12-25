@@ -15,7 +15,7 @@ const EducationDisplay = ({ education, setEducation }) => {
    return (
       <HStack spacing={4} my={3}>
          <Tag >
-            <TagLabel> { title }. { institution } ({year}) </TagLabel>
+            <TagLabel> { title }. { institution } ({year}). </TagLabel>
             <TagCloseButton onClick={ handleDelete }/>
          </Tag>
       </HStack>

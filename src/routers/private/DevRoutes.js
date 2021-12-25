@@ -12,6 +12,7 @@ import { startSettingDevInfo } from 'actions/developer/user';
 import LoadingScreen from 'components/LoadingScreen';
 import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
 import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
+import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
 
 const DevRoutes = () => {
    const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const DevRoutes = () => {
 
                <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
 
-               <Route path='technologies' element={ <p>Aqui van las tecnologías </p> } />
+               <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
 
                <Route path='applications' element={ <p> Aqui van las postulaciones </p> } />
 
