@@ -44,12 +44,23 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    useEffect(() => {
       if(allTechs.length > 0 ) {
+         
+         
          // Alfabeticamente
-         let aux = allTechs.sort((a, b) => a.name.localeCompare(b.name));
+         
+         // Spread operator para que no afecte el orden de la REDUX STORE
+         let aux = [... allTechs];
+         aux.sort((a, b) => a.name.localeCompare(b.name));
+
+
 
          // Le quita las tecnologias que el usuario ya tiene en su stack
          // para que no pueda agregar dos veces la misma
          aux = aux.filter(({ name: name1 }) => !technologies.some(({ technology }) => name1 === technology.name));
+
+
+
+
          setFormatedTechs(aux);
       }
    }, [allTechs, technologies]);

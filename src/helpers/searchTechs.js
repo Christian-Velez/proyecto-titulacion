@@ -12,20 +12,30 @@ const filterTechs = (allTechs, type, name) => {
       filteredTechs =  allTechs.filter(tech => tech.name.toLowerCase().indexOf(name) >= 0 && tech.type === type);
    }
 
-   return sortByName(filteredTechs);
+   return filteredTechs;
 };
 
 
 export const sortByName = (techs) => techs.sort((a, b) => a.name.localeCompare(b.name));
-export const sortByPopularity = (techs) => techs.sort((a, b) =>  b.timesRequested - a.timesRequested);
 
-export const searchTechs = (type, name, allTechsAvailable, setTechs) => {
+
+
+export const sortByPopularity = (techs) => techs.sort((a, b) =>  b.timesRequested - a.timesRequested);
+   
+
+
+
+
+export const searchTechs = (type, name, allTechsAvailable, setFilteredTechs) => {
+
+
+   // Por defecto, tras cada búsqueda, pone los resultados ordenados por popularidad
    if(type === 'Todas' && name === ''){
-      setTechs(sortByPopularity(allTechsAvailable));
+      setFilteredTechs(sortByPopularity([...allTechsAvailable]));
    }
 
-   else if(type === 'Todas' && name !== ''){
+   else {
       const aux = filterTechs(allTechsAvailable, type, name);
-      setTechs(aux);
+      setFilteredTechs(sortByPopularity([...aux]));
    }
 };

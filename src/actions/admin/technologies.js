@@ -12,7 +12,14 @@ export const startLoadingTechnologies = () => {
          const { data } = await axios.get(
             `${API_URL}/api/technology`
          );
+
+         
+
+
          dispatch(setTechnologies(data));
+
+
+
       } catch (err) {
          console.log(err);
       }

@@ -1,9 +1,12 @@
 // Hooks
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useForm } from 'hooks/useForm';
+import { useSearchParams } from 'react-router-dom';
 
 // Info
 import { typesOfTech } from 'helpers/appCategories';
+import { searchTechs, sortByName, sortByPopularity } from 'helpers/searchTechs';
 
 // Componentes
 import { Search2Icon } from '@chakra-ui/icons';
@@ -16,25 +19,24 @@ import {
    InputGroup,
    InputLeftElement,
    Select,
+   Text,
+   VStack,
 } from '@chakra-ui/react';
-import { useForm } from 'hooks/useForm';
-import { useSearchParams } from 'react-router-dom';
-import { searchTechs } from 'helpers/searchTechs';
+import TechItem from './TechItem';
 
 const Search = ({ allTechsAvailable }) => {
+   // Busqueda
    const [searchParams, setSearchParams] = useSearchParams({});
+   const [filteredTechs, setFilteredTechs] = useState([]);
 
-   
+
+   // Formulario de busqueda
    const [formValues, handleInputChange,, setFormValues] = useForm({
       name: '',
-      type: typesOfTech[0]
+      type: typesOfTech[0],
+      sortBy: 'Popularity'
    });
-   const { name, type } = formValues;
-
-      
-   const [filteredTechs, setFilteredTechs] = useState([]);
-   const [orderBy, setOrderBy] = useState('Name');
-
+   const { sortBy, name, type } = formValues;
 
    // Si se recarga la pagina con url con query, recupera los resultados
    const [ queryExists, setQueryExists ] = useState(false);
@@ -46,9 +48,15 @@ const Search = ({ allTechsAvailable }) => {
       const typeIndex = typesOfTech.indexOf(auxType);
       const notFound = -1;
 
+      // Si NO hay query
       if(typeIndex === notFound){
          setSearchParams({});
+
+         // Le mando una copia del Array con spread operator para que no afecte el REDUX STORE   
+         setFilteredTechs(sortByPopularity([...allTechsAvailable]));
       }
+
+      // Si hay query
       else{
          setFormValues({
             name: auxName,
@@ -60,11 +68,29 @@ const Search = ({ allTechsAvailable }) => {
 
    useEffect(()=>{
       // Realiza la busqueda al recargar la pagina
-      // Espera a que useSelector recupere las tecnologias disponibles
-      if(queryExists && allTechsAvailable.length > 0){
+
+      if(queryExists){
          searchTechs(type, name , allTechsAvailable, setFilteredTechs);
       }
-   }, [allTechsAvailable, queryExists]);
+   }, [queryExists]);
+
+
+
+
+   useEffect(()=> {
+
+      if(sortBy === 'Popularity' && filteredTechs.length > 0) {
+         setFilteredTechs(sortByPopularity([...filteredTechs]));
+      }
+      
+      if(sortBy === 'Name' && filteredTechs.length > 0){
+         setFilteredTechs(sortByName([...filteredTechs]));
+      }
+   }, [sortBy]);
+
+
+
+
 
 
    // Hacer click en buscar
@@ -78,10 +104,14 @@ const Search = ({ allTechsAvailable }) => {
 
 
    return (
+      <VStack w='full' spacing={20} alignItems='flex-start' paddingBottom={50} minH='500px'>
+
+         
       <form style={{ width: '100%' }} onSubmit={ handleSubmit }>
          <HStack
             w='full'
             alignItems='flex-end'
+            justifyContent='space-between'
          >
             <FormControl w='40%'>
                <FormLabel>Nombre</FormLabel>
@@ -91,13 +121,9 @@ const Search = ({ allTechsAvailable }) => {
                   </InputLeftElement>
 
                   <Input
-                     placeholder='Java...'
                      name='name'
                      value={name}
-                     onChange={(e) => {
-                        handleInputChange(e);
-                        //handleSubmit();
-                     }}
+                     onChange={ handleInputChange }
                   />
                </InputGroup>
             </FormControl>
@@ -108,14 +134,11 @@ const Search = ({ allTechsAvailable }) => {
                   color='gray.500'
                   name='type'
                   value={type}
-                  onChange={(e) => {
-                     handleInputChange(e);
-                     //handleSubmit();
-                  }}
+                  onChange={ handleInputChange }
                >
                   {typesOfTech.map((type, i) => (
                      <option key={i}>
-                        {type}{' '}
+                        {type}
                      </option>
                   ))}
                </Select>
@@ -125,15 +148,34 @@ const Search = ({ allTechsAvailable }) => {
                w='20%'
                type='submit'
             >
-               Buscar
+               Filtrar
             </Button>
          </HStack>
       </form>
+
+      <VStack spacing={5} w='full' alignItems='flex-start'>
+         <Text> {filteredTechs.length} resultados </Text> 
+         <Text>Ordenar por</Text> 
+         <Select w='20%' name='sortBy' value={ sortBy } onChange={ handleInputChange }>
+            <option value='Popularity'>Popularidad</option>
+            <option value='Name'>Nombre</option>
+         </Select>
+      
+         {
+            filteredTechs.map(tech => <TechItem key={tech.id} technology={tech} />)
+         }
+      </VStack>
+
+
+
+      </VStack>
+
    );
 };
 
 Search.propTypes = {
-   allTechsAvailable: PropTypes.array
+   allTechsAvailable: PropTypes.array,
+   setFilteredTechs: PropTypes.func
 };
 
 export default Search;

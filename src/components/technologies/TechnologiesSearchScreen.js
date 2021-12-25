@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // Info
 import { startLoadingTechnologies } from 'actions/admin/technologies';
 
-
 // Componentes
 import {
    Heading,
@@ -15,13 +14,13 @@ import {
 } from '@chakra-ui/react';
 import Search from './Search';
 import TopTechnologies from './TopTechnologies';
+import LoadingScreen from 'components/LoadingScreen';
 
 
 
 
 const TechnologiesSearchScreen = () => {
    const dispatch = useDispatch();
-   
 
    // Recupera las tecnologias si es que el usuario no las ha cargado
    const { technologies: allTechsAvailable } = useSelector(state => state.tech);   
@@ -29,9 +28,7 @@ const TechnologiesSearchScreen = () => {
       if(allTechsAvailable.length === 0){
          dispatch(startLoadingTechnologies());
       }
-   });
-
-
+   }, []);
 
    return (
       <VStack
@@ -41,24 +38,29 @@ const TechnologiesSearchScreen = () => {
          w='full'
          className='animate__animated animate__fadeIn animate__faster'
       >
-         <VStack alignItems='flex-start' spacing={20} w='full'>
+         {
+            allTechsAvailable.length === 0 
+            ? <LoadingScreen />
+            :
+            <VStack alignItems='flex-start' spacing={20} w='full'>
+               <Heading> Tecnologías </Heading>
+         
+               {/* Top */}
+               <TopTechnologies allTechsAvailable={allTechsAvailable} />
 
-            <Heading> Tecnologías </Heading>
-      
-            {/* Top */}
-            <TopTechnologies allTechsAvailable={allTechsAvailable} />
 
 
-
-            {/*Buscador */}
-            <VStack w='full' alignItems='flex-start' spacing={10}>
-               <Divider />
-               <Text> Consulta las tecnologías disponibles en el sitio.</Text>
-               <Search allTechsAvailable={allTechsAvailable}/>
-
+               {/*Buscador  y resultados*/}
+               <VStack w='full' alignItems='flex-start' spacing={10}>
+                  <Divider id='results'/>
+                  <Text> Consulta las tecnologías disponibles en el sitio.</Text>
+                  <Search allTechsAvailable={allTechsAvailable}/>
+               </VStack>
             </VStack>
 
-         </VStack>
+         }
+
+         
       </VStack>
    );
 };

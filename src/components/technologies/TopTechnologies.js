@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
    Heading,
    HStack,
-   Text,
    VStack,
 } from '@chakra-ui/react';
 import { sortByPopularity } from 'helpers/searchTechs';
@@ -14,12 +13,11 @@ const TopTechnologies = ({ allTechsAvailable }) => {
    const [orderedTechs, setOrderedTechs] = useState([]);
 
    useEffect(() => {
-      if(allTechsAvailable.length > 0) {         
-         setOrderedTechs(sortByPopularity(allTechsAvailable));
-      }
-   }, [allTechsAvailable]);
+      // Le mando una copia del Array con spread operator para que no afecte el REDUX STORE
+      setOrderedTechs(sortByPopularity([...allTechsAvailable]));
+   }, []);
 
-
+ 
    return (
       <VStack
          w='full'
