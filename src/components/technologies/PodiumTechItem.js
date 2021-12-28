@@ -16,14 +16,17 @@ const PodiumTechItem = ({
    return (
       <VStack
          borderRadius={10}
-         boxShadow='xl'
+         boxShadow='lg'
          w={{ base: '150px', xl: '300px' }}
          h={{ base: '150px', xl: '300px' }}
          padding={{ base: 1, xl: 5 }}
          alignSelf={alignSelf}
          _hover={{
             cursor: 'pointer',
+            boxShadow: 'xl'
          }}
+         transition='box-shadow .7s ease'
+
       >
 
       

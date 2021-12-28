@@ -26,6 +26,9 @@ const MobileHidden = ({
       dispatch(setIsChecking(false));
 
    };
+
+
+   
    return (
       <VStack
          className='animate__animated animate__fadeInRight animate__faster'
@@ -63,7 +66,7 @@ const MobileHidden = ({
             const { index, path, name, icon } = link;
 
             return (
-               <LinkItem key={index} icon={icon} path={path}>
+               <LinkItem key={index} icon={icon} path={path} setDisplayMenu={setDisplayMenu} isMobile={true}>
                   {name}
                </LinkItem>
             );

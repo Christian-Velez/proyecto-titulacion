@@ -17,7 +17,6 @@ import {
 import {
    FaGitAlt,
    FaUsers,
-   FaUserAlt,
 } from 'react-icons/fa';
 
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
@@ -55,12 +54,7 @@ const manageLinks = {
             <Icon as={AiFillHome} h={5} w={5} />
          ),
       },
-      {
-         index: 2,
-         path: '/dev/profile',
-         name: 'Mi perfil',
-         icon: <Icon as={FaUserAlt} />,
-      },
+   
       {
          index: 3,
          path: '/dev/jobs',
@@ -112,12 +106,6 @@ const manageLinks = {
          icon: (
             <Icon as={AiFillHome} h={5} w={5} />
          ),
-      },
-      {
-         index: 2,
-         path: '/co/profile',
-         name: 'Mi perfil',
-         icon: <Icon as={FaUserAlt} />,
       },
       {
          index: 3,

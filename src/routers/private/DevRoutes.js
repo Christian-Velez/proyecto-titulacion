@@ -13,6 +13,9 @@ import LoadingScreen from 'components/LoadingScreen';
 import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
 import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
 import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
+import { startLoadingTechnologies } from 'actions/admin/technologies';
+import { startLoadingSoftSkills } from 'actions/admin/softskills';
+import TechnologyScreen from 'components/technologies/TechnologyScreen';
 
 const DevRoutes = () => {
    const dispatch = useDispatch();
@@ -20,6 +23,8 @@ const DevRoutes = () => {
 
    useEffect(() => {
       dispatch(startSettingDevInfo(setIsLoading));
+      dispatch(startLoadingTechnologies());
+      dispatch(startLoadingSoftSkills());
    }, []);
 
 
@@ -33,35 +38,40 @@ const DevRoutes = () => {
          
          wordBreak='break-word'
       >
-         <SideBar />
 
          {
             isLoading
             ? <LoadingScreen />
             : (
-            <Routes>
-            
-               <Route path='/' element={ <WelcomeDeveloper /> } />
-            
-               <Route path='profile' element={ <DeveloperProfile /> } />
-               <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
+
+            <>
+               <SideBar />
+               
+               <Routes>
+               
+                  <Route path='/' element={ <WelcomeDeveloper /> } />
+               
+                  <Route path='profile' element={ <DeveloperProfile /> } />
+                  <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
 
 
-               <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
+                  <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
 
-               <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
+                  <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
+                  <Route path='technologies/:name' element={ <TechnologyScreen/>} />
 
-               <Route path='applications' element={ <p> Aqui van las postulaciones </p> } />
+                  <Route path='applications' element={ <p> Aqui van las postulaciones </p> } />
 
-               <Route path='messages' element={ <p>Aqui va el chat </p> } />
+                  <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
-               <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
+                  <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
 
-               <Route path='*' element={ <Navigate to='/dev' /> }  />
-            
-            
-            
-            </Routes>
+                  <Route path='*' element={ <Navigate to='/dev' /> }  />
+               
+               
+               
+               </Routes>
+            </>
             )
 
          }

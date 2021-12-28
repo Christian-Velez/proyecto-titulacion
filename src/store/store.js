@@ -18,6 +18,7 @@ import { softSkillReducer } from 'reducers/admin/softReducer';
 
 // Developer
 import { devReducer } from 'reducers/developer/devReducer';
+import { companyReducer } from 'reducers/company/companyReducer';
 
 
 // Company
@@ -35,6 +36,9 @@ const appReducers = combineReducers({
 
    // Developer
    devInfo: devReducer,
+
+   // Company
+   companyInfo: companyReducer,
 });
 
 

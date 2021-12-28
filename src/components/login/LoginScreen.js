@@ -15,6 +15,7 @@ import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { cleanRegisterState } from 'actions/register';
+import IconImg from 'components/IconImg';
 
 const LoginScreen = () => {
    const dispatch = useDispatch();
@@ -35,27 +36,63 @@ const LoginScreen = () => {
          <VStack
             w='40%'
             pt='10%'
-            paddingX={10}
+            paddingX={20}
             bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
             justifyContent='flex-start'
             alignItems='flex-start'
-            boxShadow='dark-lg'
             spacing='30'
          >
-            <Heading
-               fontSize='5xl'
-               color='brand.100'
-            >
-               Nombre
-            </Heading>
+            <HStack>
+               <IconImg
+                  alt='Logo'
+                  src='/static/logo.png'
+                  boxSize={{ base: '60px'}}
 
-            <Heading pt='55' color='brand.100'>
-               Lorem ipsum dolor sit amet,
-               consectetur adipiscing elit, sed do
-               eiusmod tempor incididunt ut labore
-               et dolore magna aliqua.
-            </Heading>
+               />
+               <Heading
+                  fontSize='5xl'
+                  color='white'
+               >
+                  devconnect
+               </Heading>
+
+            </HStack>
+
+
+            <VStack spacing={10} pt={55} alignItems='flex-start' w='full'>
+               <Heading color='brand.100' alignSelf='flex-start'>
+                  Publica{' '}
+                  <span
+                     style={{
+                        color: 'var(--chakra-colors-green-300)',
+                     }}
+                  >
+                     ofertas.
+                  </span>
+               </Heading>
+               <Heading color='brand.100' alignSelf='center'>
+                  Contacta {' '}
+                  <span
+                     style={{
+                        color: 'var(--chakra-colors-green-300)',
+                     }}
+                  >
+                     empresas.
+                  </span>
+               </Heading>
+               <Heading color='brand.100' alignSelf='flex-end' w={{md: 'full', xl:'60%'}}>
+                  Establece tu primera{' '}
+                  <span
+                     style={{
+                        color: 'var(--chakra-colors-green-300)',
+                     }}
+                  >
+                     relación laboral.
+                  </span>
+               </Heading>
+            </VStack>
+
          </VStack>
 
          <Box
@@ -67,15 +104,25 @@ const LoginScreen = () => {
             <Image src='/static/Creative-Process.svg' />
          </Box>
 
-         <VStack
+
+         {/*Disponible en movil*/}
+         <HStack
             display={{ base: 'flex', lg: 'none' }}
             bgColor='brand.500'
             style={{ marginTop: 0 }}
-            padding={5}
+            padding={3}
             color='white'
+            justifyContent='center'
          >
-            <Heading> Nombre </Heading>
-         </VStack>
+               <IconImg
+                  alt='Logo'
+                  src='/static/logo.png'
+                  boxSize={{ base: '30px'}}
+
+               />
+  
+               <Heading> devconnect </Heading>
+         </HStack>
 
          <VStack
             w={{ base: 'full', lg: '60%' }}
@@ -97,8 +144,12 @@ const LoginScreen = () => {
             >
                <Text>¿No tienes una cuenta?</Text>
 
-               <ChakraLink as={Link} to='/register' color='brand.500'>
-                     Regístrate
+               <ChakraLink
+                  as={Link}
+                  to='/register'
+                  color='brand.500'
+               >
+                  Regístrate
                </ChakraLink>
             </HStack>
          </VStack>

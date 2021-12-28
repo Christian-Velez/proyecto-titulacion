@@ -9,6 +9,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const TechItem = ({ technology }) => {
    const {
@@ -19,13 +20,25 @@ const TechItem = ({ technology }) => {
       timesRequested,
    } = technology;
 
+
+      
+
+
    return (
+      <Link to={`/dev/technologies/${name}`} style={{ width: '100%'}}>
       <HStack
          w='full'
          spacing={5}
          border='1px solid'
          borderColor='gray.100'
          padding={5}
+         borderRadius='lg'
+         _hover={{
+            cursor: 'pointer',
+            boxShadow: 'md',
+
+         }}     
+         transition='box-shadow .5s ease'
       >
          <IconImg
             src={img}
@@ -38,7 +51,8 @@ const TechItem = ({ technology }) => {
 
          <VStack
             alignItems='flex-start'
-            maxW='80%'
+            maxW='70%'
+            fontSize={{ base: 'sm', lg: 'md'}}
          >
             <Heading fontSize='lg'>{name}</Heading>
             <Text>Tipo: {type}</Text>
@@ -50,6 +64,7 @@ const TechItem = ({ technology }) => {
             </Text>
          </VStack>
       </HStack>
+      </Link>
    );
 };
 

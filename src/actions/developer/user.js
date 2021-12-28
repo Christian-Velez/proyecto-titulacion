@@ -40,7 +40,6 @@ export const setDevInfo = (data) => {
 };
 
 
-/* eslint-disable */
 
 export const startUpdatingDevInfo = (allDevInfo, navigate, setIsUpdating) => {
    return async (dispatch, getState) => {

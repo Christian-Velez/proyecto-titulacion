@@ -6,7 +6,9 @@ import { HStack, Text } from '@chakra-ui/react';
 const LinkItem = ({
    children,
    path,
-   icon
+   icon,
+   setDisplayMenu,
+   isMobile = false
 }) => {
 
 
@@ -15,6 +17,12 @@ const LinkItem = ({
 
    const handleNavigate = () => {
       navigate(path);
+
+      // Cierra el menu lateral si es que esta en movil
+      // Totalmente estetico, se puede quitar
+      if(isMobile) {
+         setDisplayMenu('none');
+      }
    };
 
    const isActive = location.pathname === path;
@@ -36,6 +44,9 @@ const LinkItem = ({
             bgColor: 'brand.600',
          }}
          transition='background-color .3s ease'
+         
+
+
       >
 
          { icon }
@@ -48,7 +59,9 @@ const LinkItem = ({
 LinkItem.propTypes = { 
    children: PropTypes.string.isRequired,
    path: PropTypes.string.isRequired,
-   icon: PropTypes.element.isRequired
+   icon: PropTypes.element.isRequired,
+   setDisplayMenu: PropTypes.func,
+   isMobile: PropTypes.bool
 };
 
 export default LinkItem;

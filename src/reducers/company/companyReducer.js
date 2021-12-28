@@ -1,17 +1,15 @@
 import { types } from 'types/types';
 
 
-
-
-const initialDevInfo = {
+const initialCompanyInfo = {
    id: '',
-   name: '',
+   name: 'Microsoft',
    username: '',
    applications: [],
    description: '',
    certifications: [],
    education: [],
-   kind: '',
+   kind: 'Company',
    location: '',
    projects: [],
    qualifications: [],
@@ -20,19 +18,17 @@ const initialDevInfo = {
    img: ''
 };
 
-
-
-export const devReducer = (state = initialDevInfo, action) => {
+export const companyReducer = (state = initialCompanyInfo, action) => {
 
    switch (action.type) {
-      case types.setDevInfo:
+      case types.setCompanyInfo:
          return {
             ...state,
             ...action.payload
          };
-         
-   
+
       default:
          return state;
    }
+   
 };

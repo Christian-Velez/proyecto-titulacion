@@ -5,8 +5,6 @@ import { useForm } from 'hooks/useForm';
 
 
 // Info
-import { startLoadingTechnologies } from 'actions/admin/technologies';
-import { startLoadingSoftSkills } from 'actions/admin/softskills';
 import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startUpdatingDevInfo } from 'actions/developer/user';
 import { isEmpty } from 'validator';
@@ -45,20 +43,7 @@ const EditDeveloperProfile = () => {
    // Obtener opciones DISPONIBLES (todas)
    const dispatch = useDispatch();
    const { softskills } = useSelector(state => state.soft);   
-   const { technologies: allTechsAvailable } = useSelector(state => state.tech);   
 
-   useEffect(() => {
-      // Esto es debido a que si el usuario tiene ya las tecnologias por haber entrado
-      // a /dev/technologies, no es necesario volverlas a cargar y hacer la peticion
-      if(allTechsAvailable.length === 0){
-         dispatch(startLoadingTechnologies());
-      }
-      
-      
-      if(softskills.length === 0) {
-         dispatch(startLoadingSoftSkills());
-      }      
-   }, []);
 
    const devInfo = useSelector(state => state.devInfo);
    const [softsHere, setSoftsHere] = useState();

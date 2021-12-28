@@ -78,7 +78,6 @@ const Search = ({ allTechsAvailable }) => {
 
 
    useEffect(()=> {
-
       if(sortBy === 'Popularity' && filteredTechs.length > 0) {
          setFilteredTechs(sortByPopularity([...filteredTechs]));
       }
@@ -97,7 +96,7 @@ const Search = ({ allTechsAvailable }) => {
    const handleSubmit = (e) => {
       e.preventDefault();
       setSearchParams({ type, name });
-      searchTechs(type, name, allTechsAvailable, setFilteredTechs);
+      searchTechs(type, name, allTechsAvailable, setFilteredTechs, sortBy);
    };
 
 
@@ -156,7 +155,7 @@ const Search = ({ allTechsAvailable }) => {
       <VStack spacing={5} w='full' alignItems='flex-start'>
          <Text> {filteredTechs.length} resultados </Text> 
          <Text>Ordenar por</Text> 
-         <Select w='20%' name='sortBy' value={ sortBy } onChange={ handleInputChange }>
+         <Select w={{ base: '50%', lg:'20%'}} name='sortBy' value={ sortBy } onChange={ handleInputChange }>
             <option value='Popularity'>Popularidad</option>
             <option value='Name'>Nombre</option>
          </Select>

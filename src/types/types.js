@@ -25,7 +25,11 @@ export const types = {
 
 
    // Developer
-   setDevInfo: '[Dev] Set developer user info: name, id, etc.'
+   setDevInfo: '[Dev] Set developer user info: name, id, etc.',
+
+
+   // Company
+   setCompanyInfo: '[Company] Set company info: name, id, etc.'
 
 
 

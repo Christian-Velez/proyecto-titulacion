@@ -1,32 +1,52 @@
 import React from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { HStack, IconButton } from '@chakra-ui/react';
+import {
+   Flex,
+   Heading,
+   IconButton,
+   VStack,
+} from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+import IconImg from 'components/IconImg';
 
 const MobileNavBar = ({ setDisplayMenu }) => {
    return (
-      <HStack
-      w='100%'
-      display={{ base: 'flex', lg: 'none' }}
-      justify='flex-end'
-      p={1}
-   >
-      <IconButton
-         aria-label='Open Menu'
-         icon={<HamburgerIcon />}
-         size='lg'
-         onClick={() => {
-            setDisplayMenu('flex');
-         }}
-      />
-   </HStack>
+      <VStack
+         w='100%'
+         display={{ base: 'flex', lg: 'none' }}
+         justify='flex-end'
+         alignItems='center'
+         padding={1}
+         h='55px'
+      >
+         <Flex marginBottom={2}>
+            <IconImg
+               alt='Logo'
+               src='/static/logo.png'
+               boxSize={{ base: '30px' }}
+            />
+            <Heading color='white' fontSize='2xl'  marginLeft={1}>
+               {' '}
+               devconnect{' '}
+            </Heading>
+         </Flex>
+
+         <IconButton
+            aria-label='Open Menu'
+            icon={<HamburgerIcon />}
+            size='lg'
+            position='absolute'
+            alignSelf='flex-end'
+            onClick={() => {
+               setDisplayMenu('flex');
+            }}
+         />
+      </VStack>
    );
 };
 
 MobileNavBar.propTypes = {
-   setDisplayMenu: PropTypes.func
+   setDisplayMenu: PropTypes.func,
 };
-
-
 
 export default MobileNavBar;

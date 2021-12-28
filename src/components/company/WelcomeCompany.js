@@ -10,9 +10,8 @@ import {
 } from '@chakra-ui/react';
 
 
-const WelcomeDeveloper = () => {
-   const { name } = useSelector(state => state.devInfo);
-
+const WelcomeCompany = () => {
+   const { name } = useSelector(state => state.companyInfo);
 
    return (
       <VStack
@@ -35,12 +34,13 @@ const WelcomeDeveloper = () => {
             color='gray.600'
          >
             <Image
-               src='/static/WebDevelopment.svg'
-               alt='Web development image'
+               src='/static/Company.svg'
+               alt='Company image'
             />
 
             <Text>
-               La cuenta de tipo programador te permite contactar con empresas y postularte a sus ofertas para así poder obtener tu empleo soñado a través de esta plataforma.
+               La cuenta de tipo empresa te permite publicar tus vacantes para contactar con los programadores adecuados
+               que ayuden a desarrollar tu proyecto.
             </Text>
 
             <Text color='brand.500'>
@@ -53,4 +53,4 @@ const WelcomeDeveloper = () => {
    );
 };
 
-export default WelcomeDeveloper;
+export default WelcomeCompany;

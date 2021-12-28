@@ -26,16 +26,27 @@ export const sortByPopularity = (techs) => techs.sort((a, b) =>  b.timesRequeste
 
 
 
-export const searchTechs = (type, name, allTechsAvailable, setFilteredTechs) => {
-
+export const searchTechs = (type, name, allTechsAvailable, setFilteredTechs, sortBy = 'Popularity') => {
 
    // Por defecto, tras cada búsqueda, pone los resultados ordenados por popularidad
    if(type === 'Todas' && name === ''){
-      setFilteredTechs(sortByPopularity([...allTechsAvailable]));
+      if(sortBy === 'Name') {
+         setFilteredTechs(sortByName([...allTechsAvailable]));
+      } else {
+         setFilteredTechs(sortByPopularity([...allTechsAvailable]));
+
+      }
    }
 
    else {
       const aux = filterTechs(allTechsAvailable, type, name);
-      setFilteredTechs(sortByPopularity([...aux]));
+
+
+      if(sortBy === 'Name') {
+         setFilteredTechs(sortByName([...aux]));
+      } else {
+         setFilteredTechs(sortByPopularity([...aux]));
+      
+      }
    }
 };

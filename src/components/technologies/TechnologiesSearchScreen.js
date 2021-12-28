@@ -1,9 +1,7 @@
 // Hooks
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-// Info
-import { startLoadingTechnologies } from 'actions/admin/technologies';
 
 // Componentes
 import {
@@ -20,15 +18,10 @@ import LoadingScreen from 'components/LoadingScreen';
 
 
 const TechnologiesSearchScreen = () => {
-   const dispatch = useDispatch();
 
-   // Recupera las tecnologias si es que el usuario no las ha cargado
+   // Recupera las tecnologias 
    const { technologies: allTechsAvailable } = useSelector(state => state.tech);   
-   useEffect(() => {
-      if(allTechsAvailable.length === 0){
-         dispatch(startLoadingTechnologies());
-      }
-   }, []);
+
 
    return (
       <VStack
@@ -43,7 +36,7 @@ const TechnologiesSearchScreen = () => {
             ? <LoadingScreen />
             :
             <VStack alignItems='flex-start' spacing={20} w='full'>
-               <Heading> Tecnologías </Heading>
+               <Heading fontSize={{ base: '2xl', lg: '3xl'}}> Tecnologías </Heading>
          
                {/* Top */}
                <TopTechnologies allTechsAvailable={allTechsAvailable} />
