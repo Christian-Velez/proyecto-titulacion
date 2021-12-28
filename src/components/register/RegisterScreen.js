@@ -13,7 +13,7 @@ const RegisterScreen = () => {
    return (
       accountType
       ? 
-         accountType === 'Programmer'
+         accountType === 'Developer'
             ? <DeveloperRegister/>
             : <CompanyRegister />
       : <SelectAccount />

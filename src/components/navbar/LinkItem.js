@@ -22,6 +22,9 @@ const LinkItem = ({
       // Totalmente estetico, se puede quitar
       if(isMobile) {
          setDisplayMenu('none');
+
+         // Regresa el scrollbar
+         document.body.style.overflow = 'auto';
       }
    };
 
@@ -29,7 +32,6 @@ const LinkItem = ({
 
    return (
       <HStack
-         color={ 'brand.100'}
          borderLeft={ isActive && '3px solid' }
          bgColor={ isActive && 'brand.400'}
          width='full'
@@ -37,16 +39,16 @@ const LinkItem = ({
          paddingY={3}
          paddingX={{ base: 10, lg: 5 }}
          style={{
-            margin: 0
+            margin: 0,
+            
          }}
          onClick={handleNavigate}
          _hover={{
             bgColor: 'brand.600',
          }}
          transition='background-color .3s ease'
-         
-
-
+         color='brand.100'
+         alignSelf='flex-end'
       >
 
          { icon }

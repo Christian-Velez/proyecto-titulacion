@@ -49,6 +49,32 @@ const SideBar = () => {
    }, [lgBreakpoint]);
 
 
+   // Componente que muestra la imagen y el nombre 
+   const [userInfo, setUserInfo] = useState({});
+   const devInfo = useSelector(state => state.devInfo);
+   const companyInfo = useSelector(state => state.companyInfo);
+
+
+   useEffect(() => {
+      if(devInfo.name && devInfo.img && devInfo.kind) {
+         const { name, img, kind } = devInfo;
+         setUserInfo({
+            name,
+            img,
+            kind
+         });
+      }
+      else if(companyInfo.name && companyInfo.img && companyInfo.kind) {
+         const { name, img, kind } = companyInfo;
+         setUserInfo({
+            name,
+            img,
+            kind
+         });
+      }
+   }, [companyInfo, devInfo]);
+
+
 
    return (
       <Flex
@@ -60,13 +86,23 @@ const SideBar = () => {
          backgroundColor='brand.500'
       >
          {/*Se muestra en movil*/}
-         <MobileNavBar setDisplayMenu={setDisplayMenu} />
+         <MobileNavBar
+            setDisplayMenu={setDisplayMenu}
+         />
 
          {/*Menu oculto, disponible en movil*/}
-         <MobileHidden  userLinks={userLinks} displayMenu={displayMenu} setDisplayMenu={setDisplayMenu}/>
+         <MobileHidden
+            userLinks={userLinks}
+            userInfo={userInfo}
+            displayMenu={displayMenu}
+            setDisplayMenu={setDisplayMenu}
+         />
 
          {/*Se muestra en pc*/}
-         <ComputerNavbar userLinks={userLinks}/>
+         <ComputerNavbar
+            userLinks={userLinks}
+            userInfo={userInfo}
+         />
       </Flex>
    );
 };

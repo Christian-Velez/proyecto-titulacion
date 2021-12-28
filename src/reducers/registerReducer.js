@@ -2,7 +2,12 @@ import { types } from 'types/types';
 
 
 const initialState = {
-   accountType: null,
+   accountType: '',
+   name: '',
+   username: '',
+   password: '',
+   age: 0,
+   location: ''
 };
 
 export const registerReducer = (state = initialState, action) => {

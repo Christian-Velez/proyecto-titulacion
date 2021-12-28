@@ -14,9 +14,11 @@ import LinkItem from './LinkItem';
 import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { generalLogout, setIsChecking } from 'actions/auth';
+import NavigateProfile from './NavigateProfile';
 
 const MobileHidden = ({
    userLinks,
+   userInfo,
    displayMenu,
    setDisplayMenu,
 }) => {
@@ -24,6 +26,9 @@ const MobileHidden = ({
    const handleLogout = () => {
       dispatch(generalLogout());
       dispatch(setIsChecking(false));
+
+      // Regresa el scrollbar
+      document.body.style.overflow = 'auto';
 
    };
 
@@ -44,6 +49,7 @@ const MobileHidden = ({
          display={displayMenu}
          alignItems='flex-start'
          color='white'
+         
       >
          <Flex
             width='full'
@@ -55,6 +61,9 @@ const MobileHidden = ({
                icon={<CloseIcon />}
                onClick={() => {
                   setDisplayMenu('none');
+
+                  // Regresa el scrollbar
+                  document.body.style.overflow = 'auto';
                }}
             />
          </Flex>
@@ -63,35 +72,51 @@ const MobileHidden = ({
 
          {/*Links que dependen del tipo de cuenta*/}
          {userLinks.map((link) => {
-            const { index, path, name, icon } = link;
+            const { index, path, name, icon } =
+               link;
 
             return (
-               <LinkItem key={index} icon={icon} path={path} setDisplayMenu={setDisplayMenu} isMobile={true}>
+               <LinkItem
+                  key={index}
+                  icon={icon}
+                  path={path}
+                  setDisplayMenu={setDisplayMenu}
+                  isMobile={true}
+               >
                   {name}
                </LinkItem>
             );
          })}
 
-         <Flex
-            color={'brand.100'}
-            width='full'
-            as='button'
-            paddingY={3}
-            paddingX={10}
+         <VStack
+            w='full'
             style={{
                margin: 0,
                marginTop: 'auto',
-               marginBottom: '30px'
+               marginBottom: '30px',
             }}
-            onClick={handleLogout}
-            _hover={{
-               bgColor: 'brand.600',
-            }}
-            transition='background-color .3s ease'
          >
-            <Icon as={ FiLogOut } h={5} w={5}/>
-            <Text fontSize='lg'> Cerrar sesión </Text>
-         </Flex>
+            <NavigateProfile userInfo={userInfo} isMobile={true} setDisplayMenu={setDisplayMenu}/>
+
+         
+            <Flex
+               color={'brand.100'}
+               width='full'
+               as='button'
+               paddingY={3}
+               paddingX={10}
+               onClick={handleLogout}
+               _hover={{
+                  bgColor: 'brand.600',
+               }}
+               transition='background-color .3s ease'
+            >
+               <Icon as={FiLogOut} h={5} w={5} />
+               <Text fontSize='lg'>
+                  Cerrar sesión
+               </Text>
+            </Flex>
+         </VStack>
       </VStack>
    );
 };
@@ -99,7 +124,8 @@ const MobileHidden = ({
 MobileHidden.propTypes = {
    userLinks: PropTypes.array,
    displayMenu: PropTypes.string,
-   setDisplayMenu: PropTypes.func
+   setDisplayMenu: PropTypes.func,
+   userInfo: PropTypes.object
 };
 
 export default MobileHidden;

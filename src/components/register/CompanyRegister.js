@@ -1,10 +1,12 @@
 import {
    Box,
    Heading,
+   HStack,
    Image,
    Stack,
    VStack,
 } from '@chakra-ui/react';
+import IconImg from 'components/IconImg';
 import React from 'react';
 import CompanyForm from './CompanyForm';
 
@@ -26,7 +28,15 @@ const CompanyRegister = () => {
             padding={5}
             color='white'
          >
-            <Heading> Nombre </Heading>
+            <Heading fontSize='xs'> TIPO DE CUENTA </Heading>
+            <HStack>
+               <IconImg
+                  src='/static/logo.png'
+                  alt='logo'
+                  boxSize={{ base: 5}}
+               />
+               <Heading fontSize='xl'> Empresa </Heading>
+            </HStack>
          </VStack>
 
          {/*Parte izquierda, formulario */}
@@ -49,15 +59,22 @@ const CompanyRegister = () => {
             bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
             alignItems='center'
-            boxShadow='dark-lg'
             spacing='5'
          >
-            <Heading
-               fontSize='md'
-               color='brand.100'
-            >
-               TIPO DE CUENTA
-            </Heading>
+            <HStack>
+               <IconImg
+                  src='/static/logo.png'
+                  alt='logo'
+                  boxSize={{ base: 7}}
+               />
+               <Heading
+                  fontSize='lg'
+                  color='brand.100'
+               >
+                  TIPO DE CUENTA
+               </Heading>
+
+            </HStack>
             <Heading
                fontSize='5xl'
                color='brand.100'

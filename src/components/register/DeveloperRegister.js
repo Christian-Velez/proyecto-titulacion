@@ -1,10 +1,12 @@
 import {
    Box,
    Heading,
+   HStack,
    Image,
    Stack,
    VStack,
 } from '@chakra-ui/react';
+import IconImg from 'components/IconImg';
 import React from 'react';
 import DeveloperForm from './DeveloperForm';
 
@@ -27,10 +29,20 @@ const DeveloperRegister = () => {
             bgColor='brand.500'
             style={{ marginTop: 0 }}
             padding={5}
-            color='brand.100'
+            color='white'
          >
             <Heading fontSize='xs'> TIPO DE CUENTA </Heading>
-            <Heading fontSize='xl'> Programador </Heading>
+            <HStack>
+               <IconImg
+                  src='/static/logo.png'
+                  alt='logo'
+                  boxSize={{ base: 5}}
+            
+
+
+               />
+               <Heading fontSize='xl'> Programador </Heading>
+            </HStack>
          </VStack>
 
 
@@ -44,8 +56,6 @@ const DeveloperRegister = () => {
             <Heading>Ingresa tus datos</Heading>
 
             <DeveloperForm />
-
-            
          </VStack>
 
 
@@ -57,17 +67,22 @@ const DeveloperRegister = () => {
             paddingX={10}
             bgColor='brand.500'
             display={{ base: 'none', lg: 'flex' }}
-
             alignItems='center'
-            boxShadow='dark-lg'
             spacing='5'
          >
-           <Heading
-               fontSize='md'
-               color='brand.100'
-            >
-               TIPO DE CUENTA
-            </Heading>
+            <HStack>
+               <IconImg
+                  src='/static/logo.png'
+                  alt='logo'
+                  boxSize={{ base: 7}}
+               />
+               <Heading
+                  fontSize='lg'
+                  color='brand.100'
+               >
+                  TIPO DE CUENTA
+               </Heading>
+            </HStack>
             <Heading
                fontSize='5xl'
                color='brand.100'

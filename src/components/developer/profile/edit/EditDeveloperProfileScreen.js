@@ -125,7 +125,7 @@ const EditDeveloperProfile = () => {
             >
                <ProfilePhoto setProfilePhoto={setProfilePhoto}/>
 
-               <BasicInput text='Nombre' name='name' value={name} onChange={ handleInputChange } />
+               <BasicInput text='Nombre' name='name' value={name} maxLength={50} onChange={ handleInputChange } />
                <BasicInput text='Localizacion' name='location' value={location} onChange={ handleInputChange } />
                
                <FormControl isRequired>

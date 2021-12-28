@@ -39,6 +39,9 @@ const MobileNavBar = ({ setDisplayMenu }) => {
             alignSelf='flex-end'
             onClick={() => {
                setDisplayMenu('flex');
+
+               // Quita el scrollbar
+               document.body.style.overflow = 'hidden';
             }}
          />
       </VStack>

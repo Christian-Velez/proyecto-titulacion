@@ -9,7 +9,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 export const startLogging = (
    username,
    password,
-   setIsLoading
+   setIsLoading = ()=>{}
 ) => {
    return async (dispatch) => {
       try {

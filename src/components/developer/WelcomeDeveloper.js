@@ -23,7 +23,7 @@ const WelcomeDeveloper = () => {
          className='animate__animated animate__fadeIn animate__faster'         
       >
          <Heading fontSize={{ base: '2xl', lg: '3xl'}}>
-            Bienvenido { name }
+            Bienvenido/a { name }
          </Heading>
 
          <VStack
@@ -39,8 +39,11 @@ const WelcomeDeveloper = () => {
                alt='Web development image'
             />
 
-            <Text>
-               La cuenta de tipo programador te permite contactar con empresas y postularte a sus ofertas para así poder obtener tu empleo soñado a través de esta plataforma.
+            <Text w={{ base:'80%', lg: '50%' }}>
+               
+               Comienza a enviar postulaciones para así encontrar
+               el trabajo de tus sueños. Contacta con las mejores empresas del rubro.
+
             </Text>
 
             <Text color='brand.500'>

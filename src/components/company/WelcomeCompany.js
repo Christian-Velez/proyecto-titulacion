@@ -38,9 +38,9 @@ const WelcomeCompany = () => {
                alt='Company image'
             />
 
-            <Text>
-               La cuenta de tipo empresa te permite publicar tus vacantes para contactar con los programadores adecuados
-               que ayuden a desarrollar tu proyecto.
+            <Text w={{ base:'80%', lg: '50%' }}>
+               Publica vacantes y contacta con programadores que faciliten
+               el desarrollo de tu proyecto.
             </Text>
 
             <Text color='brand.500'>

@@ -3,13 +3,13 @@ import { types } from 'types/types';
 
 const initialCompanyInfo = {
    id: '',
-   name: 'Microsoft',
+   name: '',
    username: '',
    applications: [],
    description: '',
    certifications: [],
    education: [],
-   kind: 'Company',
+   kind: '',
    location: '',
    projects: [],
    qualifications: [],

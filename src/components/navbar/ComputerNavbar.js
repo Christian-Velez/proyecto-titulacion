@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import LinkItem from './LinkItem';
 import {
    Divider,
@@ -16,45 +16,9 @@ import {
 } from 'actions/auth';
 import PropTypes from 'prop-types';
 import IconImg from 'components/IconImg';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import NavigateProfile from './NavigateProfile';
 
-const ComputerNavbar = ({ userLinks }) => {
-   const navigate = useNavigate();
-   const location = useLocation();
-   
-
-   const [userInfo, setUserInfo] = useState({});
-   const { name, img, kind } = userInfo;
-
-   const devInfo = useSelector(state => state.devInfo);
-   const companyInfo = useSelector(state => state.companyInfo);
-   const { redirect } = useSelector(state => state.auth);
-
-
-   useEffect(() => {
-      if(devInfo.name && devInfo.img && devInfo.kind) {
-         const { name, img, kind } = devInfo;
-         setUserInfo({
-            name,
-            img,
-            kind
-         });
-      }
-      else if(companyInfo.name && companyInfo.img && companyInfo.kind) {
-         const { name, img, kind } = companyInfo;
-         setUserInfo({
-            name,
-            img,
-            kind
-         });
-      }
-   }, []);
-  
-
-   const isProfileActive = location.pathname === `${redirect}/profile`;
-
-
+const ComputerNavbar = ({ userLinks, userInfo}) => {
    const dispatch = useDispatch();
    const handleLogout = () => {
       dispatch(generalLogout());
@@ -113,48 +77,9 @@ const ComputerNavbar = ({ userLinks }) => {
                marginBottom: '50px',
             }}
          >
-            {(img && name && kind) && 
-            (
-               <HStack
-                  padding={3}
-                  marginBottom={5}
-                  color='brand.100'
-                  alignItems='flex-start'
-                  w='full'
-                  _hover={{
-                     bgColor: 'brand.600',
-                  }}
-                  transition='background-color .3s ease'
-                  as='button'
-                  onClick={ () => {navigate(`${redirect}/profile`); }}
-
-                  borderLeft={ isProfileActive && '3px solid' }
-                  bgColor={ isProfileActive && 'brand.400'}
-               >
-                  <IconImg
-                     src={img}
-                     alt={name}
-                     boxSize={{ base: 10 }}
-                  />
-
-                  <VStack
-                     alignItems='flex-start'
-                     spacing={0}
-                  >
-                     <Text fontSize='md'>
-                        {name}
-                     </Text>
-                     <Text fontSize='xs'>
-                        {  
-                           kind === 'Developer' ? 'PROGRAMADOR' : 
-                           kind === 'Company'   ? 'EMPRESA' :
-                                    ''
-                        }
-                        
-                     </Text>
-                  </VStack>
-               </HStack>
-            )}
+            <NavigateProfile 
+               userInfo={userInfo}
+            />
 
             <HStack
                color={'brand.100'}
@@ -180,6 +105,7 @@ const ComputerNavbar = ({ userLinks }) => {
 
 ComputerNavbar.propTypes = {
    userLinks: PropTypes.array,
+   userInfo: PropTypes.object,
 };
 
 export default ComputerNavbar;
