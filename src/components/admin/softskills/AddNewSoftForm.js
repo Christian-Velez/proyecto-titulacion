@@ -1,5 +1,12 @@
+// Hooks
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+// Info
+import { startSubmittingSoftSkill } from 'actions/admin/softskills';
+
+// Componentes
 import {
    VStack,
    FormControl,
@@ -8,10 +15,7 @@ import {
    Stack,
    Button,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useDispatch } from 'react-redux';
-import { startSubmittingSoftSkill } from 'actions/admin/softskills';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();

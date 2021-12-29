@@ -1,29 +1,27 @@
-import React, { useEffect } from 'react';
 
-import MainInfo from '../../MainInfo';
+
+import {  VStack } from '@chakra-ui/react';
+import EditProfileButton from 'components/EditProfileButton';
+import MainInfo from 'components/MainInfo';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Body from './Body';
 
-import {
-   VStack,
-} from '@chakra-ui/react';
-
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import EditProfileButton from 'components/EditProfileButton';
-
-
-const DeveloperProfile = () => {
+const CompanyProfile = () => {
+   const companyInfo = useSelector(state => state.companyInfo);
    const navigate = useNavigate();
+
    useEffect(() => {
       window.scrollTo(0, 0);
    }, []);
-   
+
+  
    const handleEditProfile = () => {
       navigate('./edit');
    };
 
 
-   const devInfo = useSelector((state) => state.devInfo);
 
    return (
       <VStack
@@ -33,21 +31,19 @@ const DeveloperProfile = () => {
          w='full'
          className='animate__animated animate__fadeIn animate__faster'
       >
-         {/* Header -> Información principal del desarrollador */}
-         <MainInfo userInfo={devInfo}/>
-
+         {/*Header informacion principal*/}
+         <MainInfo userInfo={companyInfo}/>
 
 
          {/*Boton para editar el perfil */}
          <EditProfileButton handleEditProfile={handleEditProfile}/>
 
-         {/* Body -> Información extra: calificaciones, proyectos, etc*/}
-         <Body />
 
+         <Body />
 
 
       </VStack>
    );
 };
 
-export default DeveloperProfile;
+export default CompanyProfile;

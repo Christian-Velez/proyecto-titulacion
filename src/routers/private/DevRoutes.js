@@ -1,21 +1,35 @@
-import { Stack } from '@chakra-ui/react';
+// Hooks
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+// Router
 import {
    Navigate,
    Route,
    Routes,
 } from 'react-router-dom';
-import SideBar from 'components/navbar/SideBar';
-import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
-import { useDispatch } from 'react-redux';
+
+// Actions
+import { startLoadingSoftSkills } from 'actions/admin/softskills';
+import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { startSettingDevInfo } from 'actions/developer/user';
+
+
+// Components
+import SideBar from 'components/navbar/SideBar';
 import LoadingScreen from 'components/LoadingScreen';
+
+import TechnologyScreen from 'components/technologies/TechnologyScreen';
+import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
+
+import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
 import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
 import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
-import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
-import { startLoadingTechnologies } from 'actions/admin/technologies';
-import { startLoadingSoftSkills } from 'actions/admin/softskills';
-import TechnologyScreen from 'components/technologies/TechnologyScreen';
+
+import { Stack } from '@chakra-ui/react';
+
+
+
 
 const DevRoutes = () => {
    const dispatch = useDispatch();

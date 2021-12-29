@@ -97,8 +97,8 @@ const Body = () => {
             </VStack>
          </VStack>
 
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Divider />
             <Heading fontSize='lg'>
                Tecnologías
             </Heading>
@@ -106,8 +106,8 @@ const Body = () => {
             {technologiesCards}
          </VStack>
 
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Divider />
             <Heading fontSize='lg'>
                Proyectos
             </Heading>
@@ -116,24 +116,24 @@ const Body = () => {
             {projectsCards}
          </VStack>
 
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Divider />
             <Heading fontSize='lg'>
                Educación
             </Heading>
             {educationCards}
          </VStack>
 
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Divider />
             <Heading fontSize='lg'>
                Licencias y certificaciones
             </Heading>
             {certificationsCards}
          </VStack>
 
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Divider />
             <Heading fontSize='lg'>
                Mis soft skills
             </Heading>

@@ -1,13 +1,17 @@
+// Hooks
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+// Componentes
+import Softskill from './Softskill';
 import {
    VStack,
    Heading,
    Button,
    Divider,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Softskill from './Softskill';
+
 
 
 const SoftskillsScreen = () => {

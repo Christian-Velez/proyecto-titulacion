@@ -9,7 +9,7 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { FiLogOut } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
    generalLogout,
    setIsChecking,
@@ -24,6 +24,8 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
       dispatch(generalLogout());
       dispatch(setIsChecking(false));
    };
+
+   const { role } = useSelector(state => state.auth);
 
    return (
       <VStack
@@ -77,9 +79,12 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
                marginBottom: '50px',
             }}
          >
-            <NavigateProfile 
-               userInfo={userInfo}
-            />
+            {
+               role !== 'Admin' &&
+               <NavigateProfile 
+                  userInfo={userInfo}
+               />
+            }
 
             <HStack
                color={'brand.100'}

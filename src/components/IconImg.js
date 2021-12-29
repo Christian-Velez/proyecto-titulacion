@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const IconImg = ({ src, alt, isRounded = false ,boxSize, bgColor }) => {
+const IconImg = ({ src, alt, isRounded = false ,boxSize, bgColor, border = false }) => {
    const { base, lg, xl } = boxSize;
 
    return (
@@ -29,6 +29,8 @@ const IconImg = ({ src, alt, isRounded = false ,boxSize, bgColor }) => {
          backgroundSize='cover'
          backgroundRepeat='no-repeat'
          backgroundPosition='center'
+         border={ border && '1px solid'}
+         borderColor={ border && 'gray.300'}
       ></Flex>
    );
 };
@@ -40,6 +42,7 @@ IconImg.propTypes = {
    bgColor: PropTypes.string,
    isRounded: PropTypes.bool,
    boxSize: PropTypes.object.isRequired,
+   border: PropTypes.bool
 };
 
 

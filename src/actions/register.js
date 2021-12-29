@@ -47,6 +47,15 @@ export const startRegisterNewAccount = (userInfo) => {
       try {
          const { data } = await axios.post(`${API_URL}/api/register`, newUserToDB);
          dispatch(startLogging(data.username, userInfo.password));
+
+         setTimeout(() => {
+            Swal.fire({
+               icon: 'info',
+               title: 'Tip',
+               text: 'No te olvides de completar tu perfil para llegar a más personas!',
+               confirmButtonColor: 'var(--chakra-colors-brand-500)'
+            });
+         }, 1000);
       }
       catch(err){
 

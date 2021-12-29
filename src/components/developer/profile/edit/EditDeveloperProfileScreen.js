@@ -10,13 +10,14 @@ import { startUpdatingDevInfo } from 'actions/developer/user';
 import { isEmpty } from 'validator';
 
 // Componentes
-import ProfilePhoto from './editForm/ProfilePhoto';
-import BasicInput from './editForm/BasicInput';
+import ProfilePhoto from 'components/ProfilePhoto';
+import BasicInput from 'components/BasicInput';
+import Buttons from 'components/Buttons';
+
 import Technologies from './editForm/Technologies';
 import Projects from './editForm/Projects';
 import Education from './editForm/Education';
 import Certifications from './editForm/Certifications';
-import Buttons from './editForm/Buttons';
 
 import { 
    FormControl, 
@@ -126,7 +127,7 @@ const EditDeveloperProfile = () => {
                <ProfilePhoto setProfilePhoto={setProfilePhoto}/>
 
                <BasicInput text='Nombre' name='name' value={name} maxLength={50} onChange={ handleInputChange } />
-               <BasicInput text='Localizacion' name='location' value={location} onChange={ handleInputChange } />
+               <BasicInput text='Localización' name='location' value={location} onChange={ handleInputChange } />
                
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>Descripción</FormLabel>
@@ -160,7 +161,7 @@ const EditDeveloperProfile = () => {
                      )}
                   </FormControl>  
                </FormControl>
-               <Buttons isUpdating={isUpdating}/>
+               <Buttons isUpdating={isUpdating} cancelRoute='/dev/profile'/>
             </VStack>
          </form>
       </VStack>

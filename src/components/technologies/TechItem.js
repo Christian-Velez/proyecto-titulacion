@@ -10,6 +10,7 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TechItem = ({ technology }) => {
    const {
@@ -21,11 +22,13 @@ const TechItem = ({ technology }) => {
    } = technology;
 
 
+   const { redirect } = useSelector(state => state.auth);
+
       
 
 
    return (
-      <Link to={`/dev/technologies/${name}`} style={{ width: '100%'}}>
+      <Link to={`${redirect}/technologies/${name}`} style={{ width: '100%'}}>
       <HStack
          w='full'
          spacing={5}

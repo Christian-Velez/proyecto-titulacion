@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-const Buttons = ({ isUpdating }) => {
+const Buttons = ({ isUpdating, cancelRoute }) => {
    const navigate = useNavigate();
 
    return (
@@ -21,7 +21,7 @@ const Buttons = ({ isUpdating }) => {
             size='lg'
             variant='outline'
             onClick={() =>
-               navigate('/dev/profile')
+               navigate(cancelRoute)
             }
             isDisabled={isUpdating}
          >
@@ -43,7 +43,8 @@ const Buttons = ({ isUpdating }) => {
 
 
 Buttons.propTypes = {
-   isUpdating: PropTypes.bool
+   isUpdating: PropTypes.bool,
+   cancelRoute: PropTypes.string
 };
 
 

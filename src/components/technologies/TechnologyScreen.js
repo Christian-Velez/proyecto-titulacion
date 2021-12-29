@@ -29,6 +29,8 @@ const TechnologyScreen = () => {
 
    window.scrollTo(0, 0);
 
+   const { redirect } = useSelector(state => state.auth);
+
    const { technologies } = useSelector(
       (state) => state.tech
    );
@@ -42,12 +44,11 @@ const TechnologyScreen = () => {
       );
       if (!technology) {
          return (
-            <Navigate to='/dev/technologies' />
+            <Navigate to={`${redirect}/technologies`} />
          );
       }
    }
 
-   console.log(technology);
    return technologies.length === 0 
       ? <LoadingScreen />
       : 
@@ -105,7 +106,7 @@ const TechnologyScreen = () => {
                   <VStack spacing={{ base: 3}} alignItems='flex-start'>
                      {
                         technology.relatedTechs.map(tech => (
-                           <Link to={`/dev/technologies/${tech.name}`} key={tech.id}>
+                           <Link to={`${redirect}/technologies/${tech.name}`} key={tech.id}>
                               <HStack>
                                  <IconImg src={tech.img} alt={tech.name} boxSize={{ base: 5}}/>
                                  <Text> { tech.name }.</Text>

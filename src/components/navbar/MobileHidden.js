@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 import LinkItem from './LinkItem';
 import { FiLogOut } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { generalLogout, setIsChecking } from 'actions/auth';
 import NavigateProfile from './NavigateProfile';
 
@@ -31,6 +31,8 @@ const MobileHidden = ({
       document.body.style.overflow = 'auto';
 
    };
+
+   const { role } = useSelector(state => state.auth);
 
 
    
@@ -96,7 +98,10 @@ const MobileHidden = ({
                marginBottom: '30px',
             }}
          >
-            <NavigateProfile userInfo={userInfo} isMobile={true} setDisplayMenu={setDisplayMenu}/>
+            {
+               role !== 'Admin' &&
+               <NavigateProfile userInfo={userInfo} isMobile={true} setDisplayMenu={setDisplayMenu}/>
+            }
 
          
             <Flex

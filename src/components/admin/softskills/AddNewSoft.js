@@ -1,9 +1,12 @@
+// Hooks
 import React from 'react';
+
+// Componentes
+import AddNewSoftForm from './AddNewSoftForm';
 import {
    Heading,
    VStack
 } from '@chakra-ui/react';
-import AddNewSoftForm from './AddNewSoftForm';
 
 
 const AddNewSoft = () => {
@@ -21,8 +24,7 @@ const AddNewSoft = () => {
 
          <AddNewSoftForm />
 
-         
-         
+       
       </VStack>
    );
 };

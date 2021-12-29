@@ -1,14 +1,4 @@
-import {
-   Button,
-   FormControl,
-   FormHelperText,
-   FormLabel,
-   Heading,
-   Input,
-   Stack,
-   VStack,
-} from '@chakra-ui/react';
-import { startUpdatingSoft } from 'actions/admin/softskills';
+// Hooks
 import React, {
    useEffect,
    useState,
@@ -21,6 +11,23 @@ import {
    useNavigate,
    useParams,
 } from 'react-router-dom';
+
+// Info
+import { startUpdatingSoft } from 'actions/admin/softskills';
+
+// Componentes
+import {
+   Button,
+   FormControl,
+   FormHelperText,
+   FormLabel,
+   Heading,
+   Input,
+   Stack,
+   VStack,
+} from '@chakra-ui/react';
+
+
 
 const EditSoft = () => {
    const { id } = useParams();
