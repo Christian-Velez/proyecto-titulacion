@@ -24,7 +24,7 @@ import TechnologyScreen from 'components/technologies/TechnologyScreen';
 import WelcomeCompany from 'components/company/WelcomeCompany';
 import CompanyProfile from 'components/company/profile/CompanyProfile';
 import EditCompanyProfileScreen from 'components/company/profile/edit/EditCompanyProfileScreen';
-
+import NewJobOfferScreen from 'components/company/newoffer/NewJobOfferScreen';
 
 import { Stack } from '@chakra-ui/react';
 
@@ -46,7 +46,6 @@ const CompanyRoutes = () => {
          alignItems='flex-start'
          className='animate__animated animate__fadeIn animate__faster'
          wordBreak='break-word'
-
       >
          {
             isLoading
@@ -61,7 +60,7 @@ const CompanyRoutes = () => {
                      <Route path='profile/edit' element={ <EditCompanyProfileScreen /> } />
 
 
-                     <Route path='newjob' element={<p> aqui si quieres hacer una nueva pa </p> } />
+                     <Route path='newjob' element={<NewJobOfferScreen /> } />
 
                      <Route path='myoffers' element={ <p>aqui todas tus ofertas pa</p> } />
 

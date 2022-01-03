@@ -1,37 +1,36 @@
 import {
    FormControl,
+   FormHelperText,
    FormLabel,
    Input,
 } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BasicInput = ({ text, name, type = 'text', value, onChange, maxLength = undefined}) => {
+const BasicInput = ({
+   text,
+   helperText = null,
+   ...rest
+
+}) => {
    return (
       <FormControl isRequired>
          <FormLabel fontSize='lg'>
-            { text }
+            {text}
          </FormLabel>
-         <Input
-            type={type}
-            name={name}
-            value={value}
-            onChange={onChange}
-            maxLength={maxLength}
-         />
+         <Input {...rest} />
+
+         {
+            helperText &&
+            <FormHelperText> {helperText} </FormHelperText>     
+         }
       </FormControl>
    );
 };
 
 BasicInput.propTypes = {
    text: PropTypes.string,
-   name: PropTypes.string,
-   type: PropTypes.string,
-   maxLength: PropTypes.number,
-   value: PropTypes.string,
-   onChange: PropTypes.func
+   helperText: PropTypes.string,
 };
-
-
 
 export default BasicInput;

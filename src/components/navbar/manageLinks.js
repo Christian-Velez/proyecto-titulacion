@@ -110,7 +110,7 @@ const manageLinks = {
       {
          index: 3,
          path: '/co/newjob',
-         name: 'Generar oferta',
+         name: 'Publicar oferta',
          icon: (
             <Icon
                as={MdOutlineAddCircleOutline}

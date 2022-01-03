@@ -92,7 +92,7 @@ const EditCompanyProfileScreen = () => {
          </VStack>
 
          <form
-            style={{ width: '100%' }}
+            style={{ width: '100%'}}
             onSubmit={handleEditCompanyProfile}
          >
             <VStack
@@ -109,6 +109,7 @@ const EditCompanyProfileScreen = () => {
                <BasicInput
                   text='Nombre de la empresa'
                   name='name'
+                  minLength={3}
                   value={name}
                   onChange={handleInputChange}
                />
@@ -116,6 +117,7 @@ const EditCompanyProfileScreen = () => {
                <BasicInput
                   text='Giro'
                   name='line'
+                  minLength={3}
                   value={line}
                   onChange={handleInputChange}
                />
@@ -142,7 +144,7 @@ const EditCompanyProfileScreen = () => {
                </FormControl>
 
                <Buttons
-                  isUpdating={isUpdating}
+                  isLoading={isUpdating}
                   cancelRoute='/co/profile'
                />
             </VStack>

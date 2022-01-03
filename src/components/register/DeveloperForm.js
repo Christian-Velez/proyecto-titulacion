@@ -5,17 +5,15 @@ import { useForm } from 'hooks/useForm';
 import { useDispatch } from 'react-redux';
 
 // Info
-import validator from 'validator';
 import { startRegisterNewAccount } from 'actions/register';
 
-
 // Componentes
-import Swal from 'sweetalert2';
 import {
    Button,
    FormControl,
    FormHelperText,
    FormLabel,
+   HStack,
    IconButton,
    Input,
    InputGroup,
@@ -26,7 +24,8 @@ import {
    ViewIcon,
    ViewOffIcon,
 } from '@chakra-ui/icons';
-
+import BasicInput from 'components/BasicInput';
+import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
 
 const DeveloperForm = () => {
    const dispatch = useDispatch();
@@ -46,51 +45,23 @@ const DeveloperForm = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
 
-      let regExp =
-         /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
-
-      if (!regExp.test(name)) {
-         return Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Utiliza solo letras y espacios en tu nombre',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
+      if (isRegisterFormValid(formValues)) {
+         dispatch(
+            startRegisterNewAccount({
+               ...formValues,
+            })
+         );
       }
-
-      if (!validator.isAlphanumeric(username)) {
-         return Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Utiliza solo caracteres alfanumericos en tu nombre de usuario',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-      }
-
-      if (!validator.isStrongPassword(password)) {
-         return Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Proporciona una contraseña lo suficientemente segura',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-      }
-
-      dispatch(
-         startRegisterNewAccount({...formValues})
-      );
    };
 
    const handleCancelRegister = () => {
       navigate('/login');
    };
 
-
    const date = new Date();
-   const today = `${date.getFullYear() - 16}-${date.getMonth()+1}-${date.getDate()}`;
+   const today = `${date.getFullYear() - 16}-${
+      date.getMonth() + 1
+   }-${date.getDate()}`;
 
    return (
       <form
@@ -102,56 +73,43 @@ const DeveloperForm = () => {
             spacing={10}
             alignItems='flex-start'
          >
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Nombre completo
-               </FormLabel>
-               <Input
-                  type='text'
-                  size='lg'
-                  name='name'
-                  onChange={handleInputChange}
-                  minLength={6}
-                  placeholder='Daniel...'
-                  value={name}
-               />
-            </FormControl>
+            <BasicInput
+               text='Nombre completo'
+               placeholder='Daniel Hernandez...'
+               size='lg'
+               name='name'
+               value={name}
+               onChange={handleInputChange}
+            />
 
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Nombre de usuario
-               </FormLabel>
-               <Input
-                  type='text'
-                  size='lg'
-                  name='username'
-                  placeholder='example123'
-                  minLength={6}
-                  value={username}
-                  onChange={handleInputChange}
-               />
-            </FormControl>
+            <BasicInput
+               text='Nombre de usuario'
+               placeholder='example123'
+               minLength={3}
+               size='lg'
+               helperText='Lo utilizarás después para iniciar sesión en la plataforma'
+               name='username'
+               value={username}
+               onChange={handleInputChange}
+            />
 
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Edad
-               </FormLabel>
-               <Input
-                  type='date'
+            <BasicInput
+               text='Edad'
+               type='date'
+               min='1950-01-01'
+               max={today}
+               placeholder='21'
+               helperText='
+                  Necesitas mínimo 16 años
+                  cumplidos para hacer uso de la
+                  plataforma.
+               '
+               name='age'
+               value={age}
+               onChange={handleInputChange}
+            />
 
-                  min='1950-01-01' 
-                  max={today}
-                  size='lg'
-                  name='age'
-                  placeholder='21'
-                  value={age}
-                  onChange={handleInputChange}
-               />
-               <FormHelperText>
-                  Necesitas mínimo 16 años cumplidos para hacer uso de la plataforma.
-               </FormHelperText>
-            </FormControl>
-
+            {/*Contraseña*/}
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
                   Contraseña
@@ -165,6 +123,7 @@ const DeveloperForm = () => {
                      size='lg'
                      name='password'
                      placeholder='********'
+                     minLength={8}
                      value={password}
                      onChange={handleInputChange}
                   />
@@ -199,7 +158,8 @@ const DeveloperForm = () => {
                </FormHelperText>
             </FormControl>
 
-            <VStack w='full' spacing={3}>
+            {/*Botones*/}
+            <HStack w='full' spacing={3}>
                <Button
                   variant='outline'
                   width='full'
@@ -215,7 +175,7 @@ const DeveloperForm = () => {
                >
                   Siguiente
                </Button>
-            </VStack>
+            </HStack>
          </VStack>
       </form>
    );

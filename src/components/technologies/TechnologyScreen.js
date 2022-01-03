@@ -67,7 +67,7 @@ const TechnologyScreen = () => {
 
          <Flex w='full' flexWrap='wrap' justifyContent='space-between' >
             <InfoSection icon={GoTerminal}>
-                  <Heading fontSize='2xl'> Popularidad </Heading>
+                  <Heading fontSize={{ base: 'xl', lg: '2xl'}}> Popularidad </Heading>
                   <Text>
                      Solicitada { technology.timesRequested }
                      {
@@ -82,13 +82,13 @@ const TechnologyScreen = () => {
 
 
             <InfoSection icon={MdOutlineDescription}>
-                  <Heading fontSize='2xl'> Descripción </Heading>
+                  <Heading fontSize={{ base: 'xl', lg: '2xl'}}> Descripción </Heading>
                   <Text> {technology.description} </Text> 
             </InfoSection>
 
 
             <InfoSection icon={GiComputing}>
-                  <Heading fontSize='2xl'> Categorías</Heading>
+                  <Heading fontSize={{ base: 'xl', lg: '2xl'}}> Categorías</Heading>
                   <List>
                      {
                         technology.categories.map((cat, i) => (
@@ -102,7 +102,7 @@ const TechnologyScreen = () => {
             </InfoSection>
 
             <InfoSection icon={GiComputing}>
-                  <Heading fontSize='2xl'>Relacionadas</Heading>
+                  <Heading fontSize={{ base: 'xl', lg: '2xl'}}>Relacionadas</Heading>
                   <VStack spacing={{ base: 3}} alignItems='flex-start'>
                      {
                         technology.relatedTechs.map(tech => (

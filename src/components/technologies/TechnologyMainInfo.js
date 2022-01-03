@@ -50,7 +50,7 @@ const TechnologyMainInfo = ({technology}) => {
                xl: 'initial',
             }}            
          >
-            <Heading> {name} </Heading>
+            <Heading fontSize={{ base: '2xl', lg: '4xl'}}> {name} </Heading>
             <Text> { type } </Text>
          </VStack>
       </Stack>

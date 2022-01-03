@@ -48,5 +48,9 @@ export const techCategories = [
    {
       value: 'Diseño',
       label: 'Diseño'
+   },
+   {
+      value: 'Otra',
+      label: 'Otra'
    }
 ];

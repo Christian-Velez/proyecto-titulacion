@@ -4,6 +4,7 @@ import {
    Heading,
    HStack,
    VStack,
+   UnorderedList,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -36,8 +37,14 @@ const Body = () => {
 
 
    const educationCards = (education.length === 0) 
-      ? <EmptySection />
-      : education.map(ed => <EducationCard key={ed._id} education={ed} />); 
+      ?  <EmptySection />
+      :  <UnorderedList 
+            paddingLeft={10}
+            spacing={3}
+         >
+            { education.map(ed => <EducationCard key={ed._id} education={ed} />) }
+         </UnorderedList>;
+
 
       
    const certificationsCards = (certifications.length === 0) 

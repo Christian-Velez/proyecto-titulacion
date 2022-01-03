@@ -2,6 +2,8 @@ import {
    Button,
    Flex,
    Heading,
+   HStack,
+   Icon,
    Stack,
    Text,
    VStack,
@@ -10,8 +12,8 @@ import IconImg from 'components/IconImg';
 import React from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
 import { format, register } from 'timeago.js';
-
 import PropTypes from 'prop-types';
+import { HiLocationMarker} from 'react-icons/hi';
 
 const MainInfo = ({ userInfo }) => {
    const {
@@ -89,7 +91,7 @@ const MainInfo = ({ userInfo }) => {
                xl: 'flex-start',
             }}
             pt={3}
-            spacing={5}
+            spacing={10}
             textAlign={{
                base: 'center',
                xl: 'initial',
@@ -100,25 +102,24 @@ const MainInfo = ({ userInfo }) => {
                <Heading> {name} </Heading>
                {
                   line && 
-                  <Text fontSize='md' color='gray.400'>
+                  <Text color='gray.500'>
                      {line}
                   </Text>
                }
-               <Text fontSize='md' color='gray.400'>
-                  {location}
-               </Text>
+               <HStack fontSize='sm' color='gray.500'>
+                  <Icon as={HiLocationMarker} />
+                  <Text> {location} </Text>
+               </HStack>
             </VStack>
 
-
-            <Text>
-               {kind === 'Developer'
-                  ? 'Sobre mi'
-                  : 'Sobre nosotros'}
-            </Text>
-
-            <Flex minH='80px'>
+            <VStack minH='80px' alignItems={{ base: 'center', xl: 'flex-start'}}>
+               <Text>
+                  {kind === 'Developer'
+                     ? 'Sobre mi'
+                     : 'Sobre nosotros'}
+               </Text>
                <Text> {description} </Text>
-            </Flex>
+            </VStack>
 
             {kind === 'Developer' && (
                <Button
