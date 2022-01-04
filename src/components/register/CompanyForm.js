@@ -24,7 +24,8 @@ const CompanyForm = () => {
    const dispatch = useDispatch();
 
    const [show, setShow] = useState(false);
-
+   const [isLoading, setIsLoading] =
+      useState(false);
    const [formValues, handleInputChange] =
       useForm({
          name: '',
@@ -40,14 +41,15 @@ const CompanyForm = () => {
 
       if (isRegisterFormValid(formValues)) {
          dispatch(
-            startRegisterNewAccount({
-               ...formValues,
-            })
+            startRegisterNewAccount(
+               {
+                  ...formValues,
+               },
+               setIsLoading
+            )
          );
       }
-
    };
-
 
    return (
       <form
@@ -85,7 +87,6 @@ const CompanyForm = () => {
                helperText='Lo utilizarás después para iniciar sesión en la plataforma'
                name='username'
                minLength={3}
-
                value={username}
                onChange={handleInputChange}
             />
@@ -138,7 +139,11 @@ const CompanyForm = () => {
                </FormHelperText>
             </FormControl>
 
-            <Buttons isLoading={true} cancelRoute='/login'/>
+            <Buttons
+               isLoading={isLoading}
+               cancelRoute='/login'
+               actionText='Registrar'
+            />
          </VStack>
       </form>
    );

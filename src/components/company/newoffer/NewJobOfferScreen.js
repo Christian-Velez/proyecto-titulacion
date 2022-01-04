@@ -57,7 +57,7 @@ const NewJobOfferScreen = () => {
                   value={title}
                   onChange={handleInputChange}
                   maxLength={30}
-                  helperText='Asegúrate de que sea descriptivo, los postulantes podrán llegar a la oferta haciendo referencia al título.'
+                  helperText='Asegúrate de que sea descriptivo, los postulantes buscarán la oferta haciendo referencia al título.'
                />
 
                <FormControl isRequired>

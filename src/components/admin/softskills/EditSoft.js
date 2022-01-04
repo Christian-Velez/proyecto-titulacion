@@ -17,15 +17,14 @@ import { startUpdatingSoft } from 'actions/admin/softskills';
 
 // Componentes
 import {
-   Button,
    FormControl,
    FormHelperText,
    FormLabel,
    Heading,
    Input,
-   Stack,
    VStack,
 } from '@chakra-ui/react';
+import Buttons from 'components/Buttons';
 
 
 
@@ -33,6 +32,7 @@ const EditSoft = () => {
    const { id } = useParams();
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   const [isLoading, setIsLoading] = useState(false);
 
    // Controlar los valores del form
    const [name, setName] = useState('');
@@ -59,7 +59,7 @@ const EditSoft = () => {
 
    const handleEditSoft = (e) => {
       e.preventDefault();
-      dispatch(startUpdatingSoft(id, name, img, navigate));
+      dispatch(startUpdatingSoft(id, name, img, navigate, setIsLoading));
    };
 
    return (
@@ -114,34 +114,7 @@ const EditSoft = () => {
                   <FormHelperText> Si no adjuntas ninguna imagen, se quedará con la anterior </FormHelperText>
                </FormControl>
 
-               <Stack
-                  width='full'
-                  style={{ marginTop: '70px' }}
-                  direction={{
-                     base: 'column',
-                     lg: 'row',
-                  }}
-               >
-                  <Button
-                     width='full'
-                     size='lg'
-                     variant='outline'
-                     onClick={() =>
-                        navigate(
-                           '/admin/soft-skills'
-                        )
-                     }
-                  >
-                     Cancelar
-                  </Button>
-                  <Button
-                     width='full'
-                     size='lg'
-                     type='submit'
-                  >
-                     Guardar
-                  </Button>
-               </Stack>
+               <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isLoading}/>
             </VStack>
          </form>
       </VStack>

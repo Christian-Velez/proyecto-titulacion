@@ -1,10 +1,13 @@
-import { Button, HStack} from '@chakra-ui/react';
+import { Button, HStack } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-
-const Buttons = ({ isLoading, cancelRoute }) => {
+const Buttons = ({
+   isLoading = false,
+   cancelRoute,
+   actionText,
+}) => {
    const navigate = useNavigate();
 
    return (
@@ -16,9 +19,7 @@ const Buttons = ({ isLoading, cancelRoute }) => {
             width='full'
             size='lg'
             variant='outline'
-            onClick={() =>
-               navigate(cancelRoute)
-            }
+            onClick={() => navigate(cancelRoute)}
             isDisabled={isLoading}
          >
             Cancelar
@@ -29,19 +30,16 @@ const Buttons = ({ isLoading, cancelRoute }) => {
             size='lg'
             type='submit'
          >
-            Guardar
+            { actionText }
          </Button>
       </HStack>
    );
 };
 
-
-
-
 Buttons.propTypes = {
    isLoading: PropTypes.bool,
-   cancelRoute: PropTypes.string
+   cancelRoute: PropTypes.string,
+   actionText: PropTypes.string
 };
-
 
 export default Buttons;

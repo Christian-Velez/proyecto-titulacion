@@ -29,10 +29,12 @@ export const setSoftSkills = (softskills) => {
 export const startSubmittingSoftSkill = (
    name,
    img,
-   navigate
+   navigate,
+   setIsLoading
 ) => {
    return async (dispatch, getState) => {
       try {
+         setIsLoading(true);
          const imgURL = await imgUpload(img);
          if (!imgURL) {
             return Swal.fire({
@@ -64,6 +66,8 @@ export const startSubmittingSoftSkill = (
             softSkillToDB,
             config
          );
+
+         setIsLoading(false);
          dispatch(addNewSoft(data));
 
          navigate('/admin/soft-skills');
@@ -83,6 +87,9 @@ export const startSubmittingSoftSkill = (
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });
+
+         setIsLoading(false);
+
       }
    };
 };
@@ -98,10 +105,13 @@ export const startUpdatingSoft = (
    id,
    name,
    img,
-   navigate
+   navigate,
+   setIsLoading
 ) => {
    return async (dispatch, getState) => {
       try {
+         setIsLoading(true);
+
          let imgURL;
          if (typeof img === 'string') {
             imgURL = img;
@@ -140,6 +150,7 @@ export const startUpdatingSoft = (
             config
          );
 
+         setIsLoading(false);
          dispatch(editSoft(id, data));
 
          navigate('/admin/soft-skills');
@@ -162,6 +173,8 @@ export const startUpdatingSoft = (
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });
+
+         setIsLoading(false);
       }
    };
 };

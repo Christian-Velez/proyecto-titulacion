@@ -23,8 +23,9 @@ export const cleanRegisterState = () => {
 };
 
 
-export const startRegisterNewAccount = (userInfo) => {
+export const startRegisterNewAccount = (userInfo, setIsLoading) => {
    return async(dispatch, getState) => {
+      setIsLoading(true);
       const { accountType } = getState().register;
 
       const dateOfBirth = new Date(userInfo.age);
@@ -46,6 +47,9 @@ export const startRegisterNewAccount = (userInfo) => {
 
       try {
          const { data } = await axios.post(`${API_URL}/api/register`, newUserToDB);
+
+         setIsLoading(false);
+
          dispatch(startLogging(data.username, userInfo.password));
 
          setTimeout(() => {
@@ -76,6 +80,10 @@ export const startRegisterNewAccount = (userInfo) => {
                confirmButtonColor: 'var(--chakra-colors-brand-500)'
             });
          }
+
+
+         setIsLoading(false);
+
       }
    };
 };

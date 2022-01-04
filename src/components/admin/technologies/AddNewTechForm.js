@@ -25,17 +25,17 @@ import {
    FormControl,
    FormLabel,
    Input,
-   Button,
-   Stack,
    Textarea,
    Select,
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
 import Swal from 'sweetalert2';
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
+import Buttons from 'components/Buttons';
 
 
 const AddNewTechForm = () => {
+   const [isLoading, setIsLoading] = useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
    const { technologies } = useSelector(
@@ -79,7 +79,7 @@ const AddNewTechForm = () => {
          });
       } else {
          dispatch(
-            startSubmittingTechnology(name, description, img, type, categories, relatedTechs, navigate)
+            startSubmittingTechnology(name, description, img, type, categories, relatedTechs, navigate, setIsLoading)
          );
 
       
@@ -191,34 +191,11 @@ const AddNewTechForm = () => {
                )}
             </FormControl>
 
-            <Stack
-               width='full'
-               style={{ marginTop: '70px' }}
-               direction={{
-                  base: 'column',
-                  lg: 'row',
-               }}
-            >
-               <Button
-                  width='full'
-                  size='lg'
-                  variant='outline'
-                  onClick={() =>
-                     navigate(
-                        '/admin/technologies'
-                     )
-                  }
-               >
-                  Cancelar
-               </Button>
-               <Button
-                  width='full'
-                  size='lg'
-                  type='submit'
-               >
-                  Agregar
-               </Button>
-            </Stack>
+            <Buttons 
+               cancelRoute='/admin/technologies'
+               actionText='Agregar'
+               isLoading={isLoading}
+            />
          </VStack>
       </form>
    );

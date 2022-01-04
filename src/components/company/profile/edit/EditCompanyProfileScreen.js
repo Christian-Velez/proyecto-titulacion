@@ -146,6 +146,7 @@ const EditCompanyProfileScreen = () => {
                <Buttons
                   isLoading={isUpdating}
                   cancelRoute='/co/profile'
+                  actionText='Guardar'
                />
             </VStack>
          </form>

@@ -13,7 +13,7 @@ export const useTechnologyForm = (initialSelectedType = '') => {
    const [img, setImg] = useState(null);
    const [categories, setCategories] = useState();
    const [relatedTechs, setRelatedTechs] =
-      useState();
+      useState([]);
 
    return [
       formValues,

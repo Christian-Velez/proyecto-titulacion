@@ -1,6 +1,5 @@
 // Hooks
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'hooks/useForm';
 import { useDispatch } from 'react-redux';
 
@@ -9,11 +8,9 @@ import { startRegisterNewAccount } from 'actions/register';
 
 // Componentes
 import {
-   Button,
    FormControl,
    FormHelperText,
    FormLabel,
-   HStack,
    IconButton,
    Input,
    InputGroup,
@@ -26,10 +23,13 @@ import {
 } from '@chakra-ui/icons';
 import BasicInput from 'components/BasicInput';
 import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
+import Buttons from 'components/Buttons';
 
 const DeveloperForm = () => {
    const dispatch = useDispatch();
-   const navigate = useNavigate();
+   const [isLoading, setIsLoading] =
+      useState(false);
+
    const [show, setShow] = useState(false);
 
    const [formValues, handleInputChange] =
@@ -47,15 +47,14 @@ const DeveloperForm = () => {
 
       if (isRegisterFormValid(formValues)) {
          dispatch(
-            startRegisterNewAccount({
-               ...formValues,
-            })
+            startRegisterNewAccount(
+               {
+                  ...formValues,
+               },
+               setIsLoading
+            )
          );
       }
-   };
-
-   const handleCancelRegister = () => {
-      navigate('/login');
    };
 
    const date = new Date();
@@ -158,24 +157,11 @@ const DeveloperForm = () => {
                </FormHelperText>
             </FormControl>
 
-            {/*Botones*/}
-            <HStack w='full' spacing={3}>
-               <Button
-                  variant='outline'
-                  width='full'
-                  size='lg'
-                  onClick={handleCancelRegister}
-               >
-                  Cancelar
-               </Button>
-               <Button
-                  width='full'
-                  size='lg'
-                  type='submit'
-               >
-                  Siguiente
-               </Button>
-            </HStack>
+            <Buttons
+               cancelRoute='/login'
+               isLoading={isLoading}
+               actionText='Registrar'
+            />
          </VStack>
       </form>
    );

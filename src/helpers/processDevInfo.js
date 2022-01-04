@@ -1,5 +1,7 @@
 import { imgUpload } from './imgUpload';
 
+
+// Utilizado al momento de actualizar el perfil de un desarrollador
 export const processDevInfo = async (devInfo) => {
    // El try catch esta en las funciones superiores que utilizan esta func
    let {

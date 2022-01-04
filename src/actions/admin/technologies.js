@@ -40,10 +40,12 @@ export const startSubmittingTechnology = (
    type,
    categories,
    relatedTechs,
-   navigate
+   navigate,
+   setIsLoading
 ) => {
    return async (dispatch, getState) => {
       try {
+         setIsLoading(true);
          const imgURL = await imgUpload(img);
 
          if (!imgURL) {
@@ -92,6 +94,8 @@ export const startSubmittingTechnology = (
             techToDB,
             config
          );
+         setIsLoading(false);
+
          dispatch(addNewTech(data));
 
          navigate('/admin/technologies');
@@ -111,6 +115,9 @@ export const startSubmittingTechnology = (
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });
+
+         setIsLoading(false);
+
       }
    };
 };
@@ -130,10 +137,12 @@ export const startUpdatingTech = (
    type,
    categories,
    relatedTechs,
-   navigate
+   navigate,
+   setIsLoading
 ) => {
    return async (dispatch, getState) => {
       try {
+         setIsLoading(true);
          let imgURL;
          if (typeof img === 'string') {
             imgURL = img;
@@ -189,6 +198,9 @@ export const startUpdatingTech = (
             config
          );
 
+         setIsLoading(false);
+
+
          dispatch(editTech(id, data));
          
          navigate('/admin/technologies');
@@ -211,6 +223,8 @@ export const startUpdatingTech = (
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });
+         setIsLoading(false);
+
       }
    };
 };

@@ -12,14 +12,14 @@ import {
    FormControl,
    FormLabel,
    Input,
-   Stack,
-   Button,
 } from '@chakra-ui/react';
 import Swal from 'sweetalert2';
+import Buttons from 'components/Buttons';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   const [isLoading, setIsLoading] = useState(false);
 
    const [img, setImg] = useState();
    const [name, setName] = useState('');
@@ -37,7 +37,7 @@ const AddNewSoftForm = () => {
          });
       }
       else{
-         dispatch(startSubmittingSoftSkill(name, img, navigate));
+         dispatch(startSubmittingSoftSkill(name, img, navigate, setIsLoading));
       }
    };
 
@@ -79,34 +79,7 @@ const AddNewSoftForm = () => {
                />
             </FormControl>
 
-            <Stack
-               width='full'
-               style={{ marginTop: '70px' }}
-               direction={{
-                  base: 'column',
-                  lg: 'row',
-               }}
-            >
-               <Button
-                  width='full'
-                  size='lg'
-                  variant='outline'
-                  onClick={() =>
-                     navigate(
-                        '/admin/soft-skills'
-                     )
-                  }
-               >
-                  Cancelar
-               </Button>
-               <Button
-                  width='full'
-                  size='lg'
-                  type='submit'
-               >
-                  Agregar
-               </Button>
-            </Stack>
+            <Buttons cancelRoute='/admin/soft-skills' isLoading={isLoading} actionText='Agregar'/>
          </VStack>
       </form>
    );

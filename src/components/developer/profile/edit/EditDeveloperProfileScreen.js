@@ -161,7 +161,7 @@ const EditDeveloperProfile = () => {
                      )}
                   </FormControl>  
                </FormControl>
-               <Buttons isLoading={isUpdating} cancelRoute='/dev/profile'/>
+               <Buttons isLoading={isUpdating} cancelRoute='/dev/profile' actionText='Guardar'/>
             </VStack>
          </form>
       </VStack>
