@@ -7,10 +7,14 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CompanyForm from './CompanyForm';
 
 const CompanyRegister = () => {
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
    return (
       <Stack
          direction={{ base: 'column', lg: 'row' }}

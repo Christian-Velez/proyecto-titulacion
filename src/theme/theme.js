@@ -17,7 +17,6 @@ const inputFocusBorderColor = {
 
 
 const fontFamily = {
-   heading: 'Inter',
    body: 'Inter',
 };
 

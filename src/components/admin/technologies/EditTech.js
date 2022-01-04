@@ -33,7 +33,7 @@ import {
 } from 'helpers/appCategories';
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
 import { startUpdatingTech } from 'actions/admin/technologies';
-import Buttons from 'components/Buttons';
+import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
 
 const EditTech = () => {

@@ -106,7 +106,7 @@ const MainInfo = ({ userInfo }) => {
                      {line}
                   </Text>
                }
-               <HStack fontSize='sm' color='gray.500'>
+               <HStack fontSize='sm' color='gray.500' alignItems='flex-start'>
                   <Icon as={HiLocationMarker} />
                   <Text> {location} </Text>
                </HStack>

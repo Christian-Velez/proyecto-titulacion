@@ -2,41 +2,37 @@ import React from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
    Flex,
-   Heading,
+   HStack,
    IconButton,
-   VStack,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import IconImg from 'components/IconImg';
 
 const MobileNavBar = ({ setDisplayMenu }) => {
+
+
+
    return (
-      <VStack
-         w='100%'
+      <HStack
+         w='full'
          display={{ base: 'flex', lg: 'none' }}
-         justify='flex-end'
-         alignItems='center'
+         justify='space-between'
          padding={1}
-         h='55px'
+         paddingLeft={5}
       >
-         <Flex marginBottom={2}>
+         <Flex >
             <IconImg
                alt='Logo'
                src='/static/logo.png'
                boxSize={{ base: '30px' }}
             />
-            <Heading color='white' fontSize='2xl'  marginLeft={1}>
-               {' '}
-               devconnect{' '}
-            </Heading>
          </Flex>
+           
 
          <IconButton
             aria-label='Open Menu'
             icon={<HamburgerIcon />}
             size='lg'
-            position='absolute'
-            alignSelf='flex-end'
             onClick={() => {
                setDisplayMenu('flex');
 
@@ -44,7 +40,7 @@ const MobileNavBar = ({ setDisplayMenu }) => {
                document.body.style.overflow = 'hidden';
             }}
          />
-      </VStack>
+      </HStack>
    );
 };
 

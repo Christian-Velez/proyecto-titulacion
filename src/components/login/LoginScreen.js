@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import LoginForm from './LoginForm';
+import '@fontsource/montserrat';
 
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -23,6 +24,10 @@ const LoginScreen = () => {
    useEffect(() => {
       dispatch(cleanRegisterState());
    }, [dispatch]);
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
 
    return (
       <Stack
@@ -120,8 +125,8 @@ const LoginScreen = () => {
                   boxSize={{ base: '30px'}}
 
                />
-  
-               <Heading> devconnect </Heading>
+               <Heading letterSpacing={-1}>devconnect</Heading>
+
          </HStack>
 
          <VStack
@@ -129,6 +134,7 @@ const LoginScreen = () => {
             p={{ base: 10, lg: 40 }}
             alignItems='flex-start'
             spacing={10}
+            minH='100vh'
          >
             <Heading pt={20}>Bienvenido</Heading>
 

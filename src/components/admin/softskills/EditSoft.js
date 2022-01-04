@@ -24,7 +24,7 @@ import {
    Input,
    VStack,
 } from '@chakra-ui/react';
-import Buttons from 'components/Buttons';
+import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
 
 

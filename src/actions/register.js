@@ -63,7 +63,7 @@ export const startRegisterNewAccount = (userInfo, setIsLoading) => {
       }
       catch(err){
 
-         if(err.response.data.message.includes('E11000')){
+         if(err.response.data.message?.includes('E11000')){
             Swal.fire({
                icon: 'error',
                title: 'Oops...',

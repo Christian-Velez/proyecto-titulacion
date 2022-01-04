@@ -11,10 +11,10 @@ import { isEmpty } from 'validator';
 
 // Componentes
 import ProfilePhoto from 'components/ProfilePhoto';
-import BasicInput from 'components/BasicInput';
-import Buttons from 'components/Buttons';
+import BasicInput from 'components/forms/BasicInput';
+import Buttons from 'components/forms/Buttons';
 
-import Technologies from './editForm/Technologies';
+import Technologies from 'components/forms/Technologies';
 import Projects from './editForm/Projects';
 import Education from './editForm/Education';
 import Certifications from './editForm/Certifications';
@@ -44,15 +44,9 @@ const EditDeveloperProfile = () => {
    // Obtener opciones DISPONIBLES (todas)
    const dispatch = useDispatch();
    const { softskills } = useSelector(state => state.soft);   
-
-
+   const [softsHere] = useState(formatSoftskills([...softskills]));
    const devInfo = useSelector(state => state.devInfo);
-   const [softsHere, setSoftsHere] = useState();
-   useEffect(() => {
-      if(softskills.length > 0){
-         setSoftsHere(formatSoftskills(softskills));  
-      }
-   }, [softskills]);
+ 
 
 
    // Datos SELECCIONADOS

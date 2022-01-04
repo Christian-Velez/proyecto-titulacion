@@ -21,9 +21,9 @@ import {
    ViewIcon,
    ViewOffIcon,
 } from '@chakra-ui/icons';
-import BasicInput from 'components/BasicInput';
+import BasicInput from 'components/forms/BasicInput';
 import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
-import Buttons from 'components/Buttons';
+import Buttons from 'components/forms/Buttons';
 
 const DeveloperForm = () => {
    const dispatch = useDispatch();

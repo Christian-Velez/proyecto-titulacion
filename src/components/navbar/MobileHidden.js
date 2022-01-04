@@ -15,6 +15,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { generalLogout, setIsChecking } from 'actions/auth';
 import NavigateProfile from './NavigateProfile';
+import IconImg from 'components/IconImg';
 
 const MobileHidden = ({
    userLinks,
@@ -55,8 +56,18 @@ const MobileHidden = ({
       >
          <Flex
             width='full'
-            justifyContent='flex-end'
+            justifyContent='space-between'
+            paddingLeft={4}
+
+            alignItems='center'
          >
+            <Flex >
+               <IconImg
+                  alt='Logo'
+                  src='/static/logo.png'
+                  boxSize={{ base: '30px' }}
+               />
+            </Flex>
             <IconButton
                aria-label='Close Menu'
                size='lg'

@@ -19,7 +19,9 @@ const WelcomeCompany = () => {
          spacing={20}
          alignItems='center'
          w='full'
-         className='animate__animated animate__fadeIn animate__faster'         
+         className='animate__animated animate__fadeIn animate__faster'      
+         minH='100vh'  
+
       >
          <Heading fontSize={{ base: '2xl', lg: '3xl'}}>
             Bienvenido { name }

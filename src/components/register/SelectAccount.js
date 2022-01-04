@@ -1,5 +1,4 @@
 import {
-   Box,
    Heading,
    HStack,
    Image,
@@ -12,6 +11,8 @@ import { setAccountType } from 'actions/register';
 import IconImg from 'components/IconImg';
 
 const SelectAccount = () => {
+
+   
    const dispatch = useDispatch();
 
    const handleSetAccountType = (type) => {
@@ -45,35 +46,25 @@ const SelectAccount = () => {
                base: 'column',
                lg: 'row',
             }}
-            w='full'
             justifyContent='center'
             alignItems='center'
-            spacing={{ base: '20%', lg: '10%'}}
-            paddingBottom={20}
+            spacing={{ base: '100px', lg: '30%'}}
+            paddingY={20}
          >
             <VStack
                as='button'
                onClick={() => { handleSetAccountType('Developer'); }}
-               padding={10}
-               borderRadius={10}
             >
-               <Box boxSize='xs'>
-                  <Image src='/static/programmer.png' />
-               </Box>
-               <Heading> Programador </Heading>
+               <Image src='/static/programmer.png' w={{ base: '200px', lg:'300px', 'xl': '400px'}}/>
+               <Heading fontSize='2xl'> Programador </Heading>
             </VStack>
 
             <VStack
                as='button'
-               borderRadius={10}
                onClick={() => { handleSetAccountType('Company'); }}
-               padding={0}
             >
-
-               <Box boxSize='xs'>
-                  <Image src='/static/empresa.png' />
-               </Box>
-               <Heading> Empresa </Heading>
+               <Image src='/static/empresa.png' w={{ base: '200px', lg:'300px', 'xl': '400px'}}/>
+               <Heading fontSize='2xl'> Empresa </Heading>
             </VStack>
 
 

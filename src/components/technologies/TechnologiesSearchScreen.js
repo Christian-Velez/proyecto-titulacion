@@ -20,7 +20,12 @@ import LoadingScreen from 'components/LoadingScreen';
 const TechnologiesSearchScreen = () => {
 
    // Recupera las tecnologias 
-   const { technologies: allTechsAvailable } = useSelector(state => state.tech);   
+   const { technologies: allTechsAvailable } = useSelector(state => state.tech);
+
+
+
+
+   
 
 
    return (

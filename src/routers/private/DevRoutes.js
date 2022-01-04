@@ -35,10 +35,15 @@ const DevRoutes = () => {
    const dispatch = useDispatch();
    const [isLoading, setIsLoading] = useState(true);
 
+   // Carga toda la informacion inicial necesaria
    useEffect(() => {
-      dispatch(startSettingDevInfo(setIsLoading));
-      dispatch(startLoadingTechnologies());
-      dispatch(startLoadingSoftSkills());
+      Promise.all([
+         dispatch(startSettingDevInfo()),
+         dispatch(startLoadingTechnologies()),
+         dispatch(startLoadingSoftSkills()),
+      ])
+         .then(() => setIsLoading(false))
+         .catch((err) => console.log(err));
    }, []);
 
 

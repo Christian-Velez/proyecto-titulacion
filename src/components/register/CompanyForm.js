@@ -11,14 +11,14 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'hooks/useForm';
-import BasicInput from 'components/BasicInput';
+import BasicInput from 'components/forms/BasicInput';
 import {
    ViewIcon,
    ViewOffIcon,
 } from '@chakra-ui/icons';
 import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
 import { startRegisterNewAccount } from 'actions/register';
-import Buttons from 'components/Buttons';
+import Buttons from 'components/forms/Buttons';
 
 const CompanyForm = () => {
    const dispatch = useDispatch();

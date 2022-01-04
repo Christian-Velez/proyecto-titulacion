@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import TechDisplay from './displays/TechDisplay';  
+import TechDisplay from './TechDisplay';  
 import { useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 
@@ -29,6 +29,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
       message: ''
    });
 
+
    // Nueva tecnologia por agregar
      const [formValues, handleInputChange,,setFormValues ] = useForm({
       newTechnology: {},
@@ -39,33 +40,25 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    // Todas las tecnologias (usadas en el select del Modal)
    const { technologies: allTechs } = useSelector(state => state.tech);
-
-   const [formatedTechs, setFormatedTechs ] = useState([]); // Ordenadas alfabeticamente y sin las existentes
+   const [formatedTechs, setFormatedTechs ] = useState([]); // Ordenadas alfabeticamente y sin las seleccionadas
 
    useEffect(() => {
-      if(allTechs.length > 0 ) {
-         
-         
-         // Alfabeticamente
-         
-         // Spread operator para que no afecte el orden de la REDUX STORE
-         let aux = [... allTechs];
-         aux.sort((a, b) => a.name.localeCompare(b.name));
+      // Alfabeticamente
+      
+      // Spread operator para que no afecte el orden de la REDUX STORE
+      let aux = [... allTechs];
+      aux.sort((a, b) => a.name.localeCompare(b.name));
 
 
+      // Le quita las tecnologias que el usuario ya selecciono
+      // para que no pueda agregar dos veces la misma
+      aux = aux.filter(({ name: name1 }) => !technologies.some(({ technology }) => name1 === technology.name));
 
-         // Le quita las tecnologias que el usuario ya tiene en su stack
-         // para que no pueda agregar dos veces la misma
-         aux = aux.filter(({ name: name1 }) => !technologies.some(({ technology }) => name1 === technology.name));
-
-
-
-
-         setFormatedTechs(aux);
-      }
-   }, [allTechs, technologies]);
+      setFormatedTechs(aux);
+   }, []);
 
    useEffect(()=> {
+      // Selecciona a la primer tecnologia en la lista
       if(formatedTechs.length > 0 ) {
          setFormValues({
             ...formValues,
@@ -76,14 +69,15 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
 
 
-   // Info mostrada en las secciones
+   // Muestra las tecnologias seleccionadas
    const techsDisplays = technologies.map(tech => {
       const { technology, yearsOfExperience, _id } = tech;
       return <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id} setTechnologies={setTechnologies}/>;
    });
 
 
-
+   // Agregar una nueva tecnologia
+   // Incluye las validaciones
    const handleAdd = () => {
       if(yearsOfExperience === ''){
          setError({ error: true, message: 'Ingresa los años de experiencia'});

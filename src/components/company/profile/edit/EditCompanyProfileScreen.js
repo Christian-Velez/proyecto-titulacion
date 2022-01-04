@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react';
 import ProfilePhoto from 'components/ProfilePhoto';
 import { useForm } from 'hooks/useForm';
-import BasicInput from 'components/BasicInput';
-import Buttons from 'components/Buttons';
+import BasicInput from 'components/forms/BasicInput';
+import Buttons from 'components/forms/Buttons';
 import {
    useDispatch,
    useSelector,

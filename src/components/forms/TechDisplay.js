@@ -13,7 +13,6 @@ import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
 const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => {
    const { name } = technology;
    
-   
    const handleDelete = () => {
       setTechnologies(prevTech => prevTech.filter(tech => tech._id !== id));
    };

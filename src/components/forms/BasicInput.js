@@ -9,12 +9,13 @@ import PropTypes from 'prop-types';
 
 const BasicInput = ({
    text,
+   isRequired = true,
    helperText = null,
    ...rest
 
 }) => {
    return (
-      <FormControl isRequired>
+      <FormControl isRequired = {isRequired}>
          <FormLabel fontSize='lg'>
             {text}
          </FormLabel>
@@ -31,6 +32,7 @@ const BasicInput = ({
 BasicInput.propTypes = {
    text: PropTypes.string,
    helperText: PropTypes.string,
+   isRequired: PropTypes.bool
 };
 
 export default BasicInput;

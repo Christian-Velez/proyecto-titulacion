@@ -1,31 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
    FormControl,
    FormHelperText,
    FormLabel,
    Heading,
+   Input,
+   InputGroup,
+   InputLeftElement,
    Select,
    Textarea,
    VStack,
 } from '@chakra-ui/react';
-import BasicInput from 'components/BasicInput';
+import BasicInput from 'components/forms/BasicInput';
 import { useForm } from 'hooks/useForm';
+import { Select as SpecialSelect } from 'chakra-react-select';
 
 
 import { techCategories } from 'helpers/appCategories';
+import Technologies from 'components/forms/Technologies';
+import Buttons from 'components/forms/Buttons';
+import { useSelector } from 'react-redux';
+import { formatSoftskills } from 'helpers/formatSoftskills';
 
 const NewJobOfferScreen = () => {
+   // Obtener todos los datos disponibles en la BD
+   const { softskills } = useSelector(state => state.soft);   
+   const [softsHere] = useState(formatSoftskills([...softskills]));
+
+
+
+   // Datos de la nueva oferta
    const [formValues, handleInputChange] =
       useForm({
          title: '',
          description: '',
+         salary: '',
+         aditional: ''
       });
-   const { title, description } = formValues;
+   const { title, description, salary, aditional } = formValues;
+   const [selectedTechs, setSelectedTechs] = useState([]);
+   const [selectedSofts, setSelectedSofts] = useState([]);
+
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log('enviado');
+      
+
+      console.log({
+         title,
+         description,
+         salary,
+         selectedTechs,
+         selectedSofts,
+         aditional
+      });
    };
 
    return (
@@ -69,13 +98,11 @@ const NewJobOfferScreen = () => {
                      name='description'
                      value={description}
                      onChange={handleInputChange}
-                     maxLength={350}
-                  />
+                     maxLength={2000}
+                     h='200px'
 
-                  <FormHelperText>
-                     Incluye detalles adicionales
-                     acerca de la vacante.
-                  </FormHelperText>
+                  />               
+                  <FormHelperText> Detalles adicionales. </FormHelperText>
                </FormControl>
 
                <FormControl isRequired>
@@ -87,7 +114,70 @@ const NewJobOfferScreen = () => {
                         techCategories.map((cat, i) => <option key={i}> {cat.label} </option> )
                      }
                   </Select>
+                  <FormHelperText>
+                     El enfoque principal de la vacante.
+                  </FormHelperText>
                </FormControl>
+
+               <FormControl isRequired>
+                  <FormLabel fontSize='lg'>Sueldo mensual estimado (USD)</FormLabel>
+                  <InputGroup>
+                     <InputLeftElement
+                        pointerEvents='none'
+                        color='gray.300'
+                        fontSize='1.2em'
+                     >
+                        $
+                     </InputLeftElement>
+                     <Input 
+                        type='number' 
+                        min={0} name='salary'
+                        value={salary}
+                        onChange={handleInputChange}
+                     />
+                  </InputGroup>
+               </FormControl>
+
+               <Technologies technologies={selectedTechs} setTechnologies={setSelectedTechs}/>
+
+               <FormControl>
+                  <FormLabel fontSize='lg'>Soft skills</FormLabel>
+                  {softsHere && (
+                     <SpecialSelect
+                        isMulti
+                        name='mySoftskills'
+                        placeholder='Seleccione las soft skills requeridas...'
+                        closeMenuOnSelect={false}
+                        selectedOptionStyle='check'
+                        hideSelectedOptions={false}
+
+                        options={softsHere}
+                        value={selectedSofts}
+                        onChange={setSelectedSofts}
+                     />
+                  )}
+               </FormControl>  
+
+
+               <BasicInput 
+                  text='Extras' 
+                  isRequired={false}
+                  helperText='Requerimientos no indispensables para la vacante.'
+                  placeholder='Inglés conversacional'
+
+                  name='aditional'
+                  value={aditional}
+                  onChange={handleInputChange}
+
+
+               />
+
+               
+                 
+
+
+               <Buttons actionText='Publicar' cancelRoute='/co/myoffers' isLoading={false}/>
+
             </VStack>
          </form>
       </VStack>

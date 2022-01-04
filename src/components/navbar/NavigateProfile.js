@@ -76,7 +76,6 @@ const NavigateProfile = ({
                <Text
                   fontSize='md'
                   marginLeft={0}
-                  textOverflow='ellipsis'
                >
                   {name}
                </Text>

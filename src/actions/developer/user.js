@@ -8,7 +8,7 @@ import { types } from 'types/types';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const startSettingDevInfo = (setIsLoading) => {
+export const startSettingDevInfo = () => {
    return async(dispatch, getState) => {
 
       try {
@@ -17,9 +17,6 @@ export const startSettingDevInfo = (setIsLoading) => {
          const { devInfo } = data;
    
          dispatch(setDevInfo(devInfo));
-
-         setIsLoading(false);
-
       }catch(err){
          return Swal.fire({
             icon: 'error',

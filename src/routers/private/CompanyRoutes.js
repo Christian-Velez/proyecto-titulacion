@@ -32,10 +32,16 @@ const CompanyRoutes = () => {
    const dispatch = useDispatch();
    const [isLoading, setIsLoading] = useState(true);
 
+
+   // Carga toda la informacion inicial necesaria
    useEffect(() => {
-      dispatch(startSettingCompanyInfo(setIsLoading));
-      dispatch(startLoadingTechnologies());
-      dispatch(startLoadingSoftSkills());
+      Promise.all([
+         dispatch(startSettingCompanyInfo()),
+         dispatch(startLoadingTechnologies()),
+         dispatch(startLoadingSoftSkills()),
+      ])
+         .then(() => setIsLoading(false))
+         .catch((err) => console.log(err));
    }, []);
 
 

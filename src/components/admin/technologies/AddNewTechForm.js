@@ -29,7 +29,7 @@ import {
 import { Select as SpecialSelect } from 'chakra-react-select';
 import Swal from 'sweetalert2';
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
-import Buttons from 'components/Buttons';
+import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
 
 const AddNewTechForm = () => {

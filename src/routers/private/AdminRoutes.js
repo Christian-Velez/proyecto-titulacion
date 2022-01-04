@@ -32,6 +32,8 @@ import { Stack } from '@chakra-ui/react';
 const AdminRoutes = () => {
    const dispatch = useDispatch();
    
+
+   // Carga toda la informacion inicial necesaria
    useEffect(() => {
       dispatch(startLoadingTechnologies());
       dispatch(startLoadingSoftSkills());

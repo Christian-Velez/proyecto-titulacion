@@ -153,7 +153,7 @@ const Search = ({ allTechsAvailable }) => {
       </form>
 
       <VStack spacing={5} w='full' alignItems='flex-start'>
-         <Text> {filteredTechs.length} resultados </Text> 
+         <Text> {filteredTechs.length} { filteredTechs.length === 1 ? 'resultado' : 'resultados'} </Text> 
          <Text>Ordenar por</Text> 
          <Select w={{ base: '50%', lg:'20%'}} name='sortBy' value={ sortBy } onChange={ handleInputChange }>
             <option value='Popularity'>Popularidad</option>
