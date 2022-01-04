@@ -16,7 +16,6 @@ import { useTechnologyForm } from 'hooks/useTechnologyForm';
 // Estilo
 import {
    FormControl,
-   FormHelperText,
    FormLabel,
    Heading,
    Input,
@@ -35,6 +34,7 @@ import {
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
 import { startUpdatingTech } from 'actions/admin/technologies';
 import Buttons from 'components/Buttons';
+import ProfilePhoto from 'components/ProfilePhoto';
 
 const EditTech = () => {
    const { id } = useParams();
@@ -163,6 +163,15 @@ const EditTech = () => {
                width={{ base: 'full', lg: '60%' }}
                alignItems='flex-start'
             >
+               {
+                  img &&
+                  <ProfilePhoto 
+                     text='Icono'
+                     current={img}
+                     setProfilePhoto={setImg}
+                     isRounded={false}
+                  />
+               }
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>
                      Nombre
@@ -187,25 +196,6 @@ const EditTech = () => {
                   />
                </FormControl>
 
-               <FormControl>
-                  <FormLabel fontSize='lg'>
-                     Icono
-                  </FormLabel>
-                  <Input
-                     type='file'
-                     id='img'
-                     accept='image/png, image/jpeg, .svg'
-                     onChange={(e) => {
-                        setImg(e.target.files[0]);
-                     }}
-                  />
-                  <FormHelperText>
-                     {' '}
-                     Si no adjuntas ninguna
-                     imagen, se quedará con la
-                     anterior{' '}
-                  </FormHelperText>
-               </FormControl>
 
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>

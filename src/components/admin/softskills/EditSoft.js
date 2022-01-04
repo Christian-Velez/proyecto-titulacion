@@ -18,13 +18,14 @@ import { startUpdatingSoft } from 'actions/admin/softskills';
 // Componentes
 import {
    FormControl,
-   FormHelperText,
+
    FormLabel,
    Heading,
    Input,
    VStack,
 } from '@chakra-ui/react';
 import Buttons from 'components/Buttons';
+import ProfilePhoto from 'components/ProfilePhoto';
 
 
 
@@ -56,7 +57,6 @@ const EditSoft = () => {
    }, [softskill]);
 
 
-
    const handleEditSoft = (e) => {
       e.preventDefault();
       dispatch(startUpdatingSoft(id, name, img, navigate, setIsLoading));
@@ -83,6 +83,15 @@ const EditSoft = () => {
                width={{ base: 'full', lg: '60%' }}
                alignItems='flex-start'
             >
+               {
+                  img && 
+                  <ProfilePhoto 
+                     current={img}
+                     setProfilePhoto={setImg}
+                     text='Icono'
+                     isRounded={false}
+                  />
+               }
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>
                      Nombre
@@ -97,22 +106,7 @@ const EditSoft = () => {
                   />
                </FormControl>
 
-               <FormControl>
-                  <FormLabel fontSize='lg'>
-                     Icono
-                  </FormLabel>
-                  <Input
-                     type='file'
-                     id='img'
-                     accept='image/png, image/jpeg, .svg'
-                     onChange={(e) => {
-                     setImg(
-                        e.target.files[0]
-                     );
-                  }}
-                  />
-                  <FormHelperText> Si no adjuntas ninguna imagen, se quedará con la anterior </FormHelperText>
-               </FormControl>
+               
 
                <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isLoading}/>
             </VStack>

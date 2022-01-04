@@ -76,6 +76,7 @@ const EditCompanyProfileScreen = () => {
       );
    };
 
+
    return (
       <VStack
          padding={{ base: 10, lg: 30, xl: 40 }}
@@ -104,6 +105,8 @@ const EditCompanyProfileScreen = () => {
                   setProfilePhoto={
                      setProfilePhoto
                   }
+                  current={profilePhoto}
+                  text='Foto de perfil'
                />
 
                <BasicInput

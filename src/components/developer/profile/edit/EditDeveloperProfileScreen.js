@@ -86,7 +86,6 @@ const EditDeveloperProfile = () => {
                'var(--chakra-colors-brand-500)',
          });
       }
-   
       dispatch(startUpdatingDevInfo({
          profilePhoto,
          name,
@@ -124,7 +123,7 @@ const EditDeveloperProfile = () => {
                width={{ base: 'full', lg: '60%' }}
                alignItems='flex-start'
             >
-               <ProfilePhoto setProfilePhoto={setProfilePhoto}/>
+               <ProfilePhoto setProfilePhoto={setProfilePhoto} current={profilePhoto} text='Foto de perfil'/>
 
                <BasicInput text='Nombre' name='name' value={name} maxLength={50} onChange={ handleInputChange } />
                <BasicInput text='Localización' name='location' value={location} onChange={ handleInputChange } />

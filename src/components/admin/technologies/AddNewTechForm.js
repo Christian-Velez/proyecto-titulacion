@@ -10,14 +10,12 @@ import {
    useDispatch,
 } from 'react-redux';
 
-
 // Datos
 import {
    typesOfTech,
    techCategories,
 } from 'helpers/appCategories';
 import { startSubmittingTechnology } from 'actions/admin/technologies';
-
 
 // Estilos
 import {
@@ -32,10 +30,11 @@ import { Select as SpecialSelect } from 'chakra-react-select';
 import Swal from 'sweetalert2';
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
 import Buttons from 'components/Buttons';
-
+import ProfilePhoto from 'components/ProfilePhoto';
 
 const AddNewTechForm = () => {
-   const [isLoading, setIsLoading] = useState(false);
+   const [isLoading, setIsLoading] =
+      useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
    const { technologies } = useSelector(
@@ -49,7 +48,10 @@ const AddNewTechForm = () => {
    ] = useState();
 
    useEffect(() => {
-      const auxTechs = transformTechnologiesFormat(technologies);
+      const auxTechs =
+         transformTechnologiesFormat(
+            technologies
+         );
       setAllTechsAvailable(auxTechs);
    }, [technologies]);
 
@@ -69,7 +71,14 @@ const AddNewTechForm = () => {
    // Submit form
    const handleSubmitNewTech = (e) => {
       e.preventDefault();
-      if (!name || !description || !img || !type || !categories || categories.length === 0) {
+      if (
+         !name ||
+         !description ||
+         !img ||
+         !type ||
+         !categories ||
+         categories.length === 0
+      ) {
          Swal.fire({
             icon: 'error',
             title: 'Error...',
@@ -79,10 +88,17 @@ const AddNewTechForm = () => {
          });
       } else {
          dispatch(
-            startSubmittingTechnology(name, description, img, type, categories, relatedTechs, navigate, setIsLoading)
+            startSubmittingTechnology(
+               name,
+               description,
+               img,
+               type,
+               categories,
+               relatedTechs,
+               navigate,
+               setIsLoading
+            )
          );
-
-      
       }
    };
    return (
@@ -95,6 +111,15 @@ const AddNewTechForm = () => {
             width={{ base: 'full', lg: '60%' }}
             alignItems='flex-start'
          >
+            <ProfilePhoto
+               text='Icono'
+               current={img}
+               setProfilePhoto={setImg}
+               isRounded={false}
+               isRequired={true}
+            />
+           
+
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
                   Nombre
@@ -116,22 +141,6 @@ const AddNewTechForm = () => {
                   value={description}
                   onChange={handleInputChange}
                   type='text'
-               />
-            </FormControl>
-
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Icono
-               </FormLabel>
-               <Input
-                  type='file'
-                  name='img'
-                  accept='image/png, image/jpeg, .svg'
-                  onChange={(e) => {
-                     setImg(
-                        e.target.files[0]
-                     );
-                  }}
                />
             </FormControl>
 
@@ -164,7 +173,6 @@ const AddNewTechForm = () => {
                   closeMenuOnSelect={false}
                   selectedOptionStyle='check'
                   hideSelectedOptions={false}
-                  
                   options={techCategories}
                   value={categories}
                   onChange={setCategories}
@@ -183,7 +191,6 @@ const AddNewTechForm = () => {
                      closeMenuOnSelect={false}
                      selectedOptionStyle='check'
                      hideSelectedOptions={false}
-
                      options={allTechsAvailable}
                      value={relatedTechs}
                      onChange={setRelatedTechs}
@@ -191,7 +198,7 @@ const AddNewTechForm = () => {
                )}
             </FormControl>
 
-            <Buttons 
+            <Buttons
                cancelRoute='/admin/technologies'
                actionText='Agregar'
                isLoading={isLoading}

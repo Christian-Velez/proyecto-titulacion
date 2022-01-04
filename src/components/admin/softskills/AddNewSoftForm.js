@@ -15,11 +15,13 @@ import {
 } from '@chakra-ui/react';
 import Swal from 'sweetalert2';
 import Buttons from 'components/Buttons';
+import ProfilePhoto from 'components/ProfilePhoto';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isLoading, setIsLoading] = useState(false);
+   const [isLoading, setIsLoading] =
+      useState(false);
 
    const [img, setImg] = useState();
    const [name, setName] = useState('');
@@ -27,7 +29,7 @@ const AddNewSoftForm = () => {
    const handleSubmitNewSoft = (e) => {
       e.preventDefault();
 
-      if(!img || !name){
+      if (!img || !name) {
          Swal.fire({
             icon: 'error',
             title: 'Error...',
@@ -35,9 +37,15 @@ const AddNewSoftForm = () => {
             confirmButtonColor:
                'var(--chakra-colors-brand-500)',
          });
-      }
-      else{
-         dispatch(startSubmittingSoftSkill(name, img, navigate, setIsLoading));
+      } else {
+         dispatch(
+            startSubmittingSoftSkill(
+               name,
+               img,
+               navigate,
+               setIsLoading
+            )
+         );
       }
    };
 
@@ -51,6 +59,14 @@ const AddNewSoftForm = () => {
             width={{ base: 'full', lg: '60%' }}
             alignItems='flex-start'
          >
+            <ProfilePhoto
+               current={img}
+               text='Icono'
+               setProfilePhoto={setImg}
+               isRounded={false}
+               isRequired={true}
+            />
+
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
                   Nombre
@@ -65,21 +81,11 @@ const AddNewSoftForm = () => {
                />
             </FormControl>
 
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Icono
-               </FormLabel>
-               <Input
-                  type='file'
-                  name='img'
-                  accept='image/png, image/jpeg, .svg'
-                  onChange={(e) => {
-                     setImg(e.target.files[0]);
-                  }}
-               />
-            </FormControl>
-
-            <Buttons cancelRoute='/admin/soft-skills' isLoading={isLoading} actionText='Agregar'/>
+            <Buttons
+               cancelRoute='/admin/soft-skills'
+               isLoading={isLoading}
+               actionText='Agregar'
+            />
          </VStack>
       </form>
    );

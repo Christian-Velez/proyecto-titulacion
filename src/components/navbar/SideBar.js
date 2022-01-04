@@ -33,10 +33,7 @@ const SideBar = () => {
 
 
 
-   // Esta parte del codigo cierra el menu flotante si se
-   // hace un resize de la ventana (situacion posible solo en pc, pero por si a caso)
-
-   // No es necesario y se puede quitar, solo es estetico
+   // Cierra el menu flotante si esta abierto y se pasa a resolucion LG
    const lgBreakpoint = useBreakpoint();
    useEffect(() => {
       if (
@@ -44,7 +41,10 @@ const SideBar = () => {
          lgBreakpoint === 'xl' ||
          lgBreakpoint === '2xl'
       ) {
+         // Cierra el menu y regresar el scrollbar
          setDisplayMenu('none');
+         document.body.style.overflow = 'auto';
+
       }
    }, [lgBreakpoint]);
 

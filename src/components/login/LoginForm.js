@@ -89,7 +89,7 @@ const LoginForm = () => {
                type='submit'
                isLoading={isLoading}
             >
-               Iniciar sesion
+               Iniciar sesión
             </Button>
          </VStack>
       </form>
