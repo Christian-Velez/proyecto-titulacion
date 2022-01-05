@@ -15,7 +15,8 @@ const initialCompanyInfo = {
    qualifications: [],
    softskills: [],
    technologies: [],
-   img: ''
+   img: '',
+   jobs: [],
 };
 
 export const companyReducer = (state = initialCompanyInfo, action) => {
@@ -25,6 +26,16 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
          return {
             ...state,
             ...action.payload
+         };
+
+
+      case types.addNewJobOffer:
+         return {
+            ...state,
+            jobs: [
+               ...state.jobs,
+               action.payload
+            ]
          };
 
       default:

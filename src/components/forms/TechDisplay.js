@@ -20,7 +20,7 @@ const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => 
    return (
       <HStack spacing={4} my={3}>
          <Tag >
-            <TagLabel> { name }, {yearsOfExperience} años</TagLabel>
+            <TagLabel> { name }, {yearsOfExperience} { yearsOfExperience === 1 ? 'año' : 'años'}</TagLabel>
             <TagCloseButton onClick={ handleDelete }/>
          </Tag>
       </HStack>

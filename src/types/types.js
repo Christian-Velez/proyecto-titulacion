@@ -29,7 +29,8 @@ export const types = {
 
 
    // Company
-   setCompanyInfo: '[Company] Set company info: name, id, etc.'
+   setCompanyInfo: '[Company] Set company info: name, id, etc.',
+   addNewJobOffer: '[Company] Add new posted offer to stored data'
 
 
 

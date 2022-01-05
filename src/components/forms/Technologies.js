@@ -55,7 +55,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
       aux = aux.filter(({ name: name1 }) => !technologies.some(({ technology }) => name1 === technology.name));
 
       setFormatedTechs(aux);
-   }, []);
+   }, [technologies]);
 
    useEffect(()=> {
       // Selecciona a la primer tecnologia en la lista

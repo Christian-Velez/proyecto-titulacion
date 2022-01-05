@@ -73,8 +73,7 @@ const DevRoutes = () => {
                   <Route path='profile' element={ <DeveloperProfile /> } />
                   <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
 
-
-                  <Route path='jobs' element={ <p> Aqui van los empleos </p> } />
+                  <Route path='jobs' element={ <p>s</p> } />
 
                   <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
                   <Route path='technologies/:name' element={ <TechnologyScreen/>} />

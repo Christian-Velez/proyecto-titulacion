@@ -20,10 +20,16 @@ import { Select as SpecialSelect } from 'chakra-react-select';
 import { techCategories } from 'helpers/appCategories';
 import Technologies from 'components/forms/Technologies';
 import Buttons from 'components/forms/Buttons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { formatSoftskills } from 'helpers/formatSoftskills';
+import { startPostingNewJob } from 'actions/company/job';
+import { useNavigate } from 'react-router-dom';
 
 const NewJobOfferScreen = () => {
+   const [isPosting, setIsPosting] = useState(false);
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+
    // Obtener todos los datos disponibles en la BD
    const { softskills } = useSelector(state => state.soft);   
    const [softsHere] = useState(formatSoftskills([...softskills]));
@@ -36,25 +42,26 @@ const NewJobOfferScreen = () => {
          title: '',
          description: '',
          salary: '',
-         aditional: ''
+         additional: '',
+         category: techCategories[0].value
       });
-   const { title, description, salary, aditional } = formValues;
+   const { title, description, salary, additional, category } = formValues;
    const [selectedTechs, setSelectedTechs] = useState([]);
    const [selectedSofts, setSelectedSofts] = useState([]);
 
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      
-
-      console.log({
+      dispatch(startPostingNewJob({
          title,
          description,
          salary,
+         category,
          selectedTechs,
          selectedSofts,
-         aditional
-      });
+         additional
+      }, setIsPosting, navigate));
+
    };
 
    return (
@@ -109,7 +116,11 @@ const NewJobOfferScreen = () => {
                   <FormLabel fontSize='lg'>
                      Categoría
                   </FormLabel>
-                  <Select>
+                  <Select
+                     name='category'
+                     value={category}
+                     onChange={handleInputChange}
+                  >
                      {
                         techCategories.map((cat, i) => <option key={i}> {cat.label} </option> )
                      }
@@ -165,8 +176,8 @@ const NewJobOfferScreen = () => {
                   helperText='Requerimientos no indispensables para la vacante.'
                   placeholder='Inglés conversacional'
 
-                  name='aditional'
-                  value={aditional}
+                  name='additional'
+                  value={additional}
                   onChange={handleInputChange}
 
 
@@ -176,7 +187,7 @@ const NewJobOfferScreen = () => {
                  
 
 
-               <Buttons actionText='Publicar' cancelRoute='/co/myoffers' isLoading={false}/>
+               <Buttons actionText='Publicar' cancelRoute='/co/myoffers' isLoading={isPosting}/>
 
             </VStack>
          </form>

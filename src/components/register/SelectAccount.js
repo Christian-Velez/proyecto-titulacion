@@ -32,7 +32,7 @@ const SelectAccount = () => {
                boxSize={{ base: '30px'}}
 
             />
-            <Heading> devconnect </Heading>
+            <Heading letterSpacing={-1}> devconnect </Heading>
          </HStack>
 
 

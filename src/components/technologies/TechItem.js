@@ -63,7 +63,7 @@ const TechItem = ({ technology }) => {
                Categorias: {categories.join(', ')}
             </Text>
             <Text>
-               Solicitada: {timesRequested} veces
+               Solicitada: {timesRequested} { timesRequested === 1 ? 'vez' : 'veces'}
             </Text>
          </VStack>
       </HStack>
