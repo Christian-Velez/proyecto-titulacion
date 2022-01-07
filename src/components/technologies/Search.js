@@ -23,8 +23,12 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import TechItem from './TechItem';
+import { useSelector } from 'react-redux';
 
-const Search = ({ allTechsAvailable }) => {
+const Search = () => {
+  // Recupera las tecnologias 
+  const { technologies: allTechsAvailable } = useSelector(state => state.tech);
+
    // Busqueda
    const [searchParams, setSearchParams] = useSearchParams({});
    const [filteredTechs, setFilteredTechs] = useState([]);

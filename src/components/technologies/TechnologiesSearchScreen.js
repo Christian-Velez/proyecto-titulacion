@@ -12,13 +12,11 @@ import {
 } from '@chakra-ui/react';
 import Search from './Search';
 import TopTechnologies from './TopTechnologies';
-import LoadingScreen from 'components/LoadingScreen';
 
 
 
 
 const TechnologiesSearchScreen = () => {
-
    // Recupera las tecnologias 
    const { technologies: allTechsAvailable } = useSelector(state => state.tech);
 
@@ -36,10 +34,7 @@ const TechnologiesSearchScreen = () => {
          w='full'
          className='animate__animated animate__fadeIn animate__faster'
       >
-         {
-            allTechsAvailable.length === 0 
-            ? <LoadingScreen />
-            :
+            
             <VStack alignItems='flex-start' spacing={20} w='full'>
                <Heading fontSize={{ base: '2xl', lg: '3xl'}}> Tecnologías </Heading>
          
@@ -55,18 +50,12 @@ const TechnologiesSearchScreen = () => {
                   <Search allTechsAvailable={allTechsAvailable}/>
                </VStack>
             </VStack>
-
-         }
-
          
       </VStack>
    );
 };
 
 
-//TechnologiesSearchScreen.propTypes = {
-//   history: PropTypes.any
-//};
 
 
-export default TechnologiesSearchScreen;
+export default React.memo(TechnologiesSearchScreen);

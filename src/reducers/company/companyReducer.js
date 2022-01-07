@@ -3,20 +3,15 @@ import { types } from 'types/types';
 
 const initialCompanyInfo = {
    id: '',
-   name: '',
-   username: '',
-   applications: [],
-   description: '',
-   certifications: [],
-   education: [],
-   kind: '',
-   location: '',
-   projects: [],
-   qualifications: [],
-   softskills: [],
-   technologies: [],
    img: '',
+   location: '',
+   description: '',
+   qualifications: [],
+   mostReqTechnology: {},
    jobs: [],
+   toHire: [],
+   employees: [],
+
 };
 
 export const companyReducer = (state = initialCompanyInfo, action) => {
@@ -33,8 +28,8 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
          return {
             ...state,
             jobs: [
-               ...state.jobs,
-               action.payload
+               action.payload,
+               ...state.jobs
             ]
          };
 

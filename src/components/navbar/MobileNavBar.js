@@ -18,16 +18,9 @@ const MobileNavBar = ({ setDisplayMenu }) => {
          display={{ base: 'flex', lg: 'none' }}
          justify='space-between'
          padding={1}
-         paddingLeft={5}
+         paddingRight={5}
       >
-         <Flex >
-            <IconImg
-               alt='Logo'
-               src='/static/logo.png'
-               boxSize={{ base: '30px' }}
-            />
-         </Flex>
-           
+         
 
          <IconButton
             aria-label='Open Menu'
@@ -40,6 +33,16 @@ const MobileNavBar = ({ setDisplayMenu }) => {
                document.body.style.overflow = 'hidden';
             }}
          />
+
+
+         <Flex >
+            <IconImg
+               alt='Logo'
+               src='/static/logo.png'
+               boxSize={{ base: '30px' }}
+            />
+         </Flex>
+           
       </HStack>
    );
 };

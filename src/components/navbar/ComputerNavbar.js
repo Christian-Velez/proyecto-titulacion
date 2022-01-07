@@ -1,7 +1,6 @@
 import React from 'react';
 import LinkItem from './LinkItem';
 import {
-   Divider,
    Heading,
    HStack,
    Icon,
@@ -34,14 +33,14 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
          pl={3}
          display={{ base: 'none', lg: 'flex' }}
          alignItems='flex-start'
-         paddingY={6}
+         paddingY={50}
          overflowY='auto'
       >
          {/*Logotipo de la pagina */}
          <HStack
             width='full'
             paddingLeft={5}
-            paddingY={5}
+            marginBottom={10}
          >
             <IconImg
                alt='Logo'
@@ -52,8 +51,15 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
                devconnect
             </Heading>
          </HStack>
+        
 
-         <Divider />
+
+         {
+            role !== 'Admin' &&
+            <NavigateProfile 
+               userInfo={userInfo}
+            />
+         }
 
          {/*Links que dependen del tipo de cuenta*/}
          {userLinks.map((link) => {
@@ -71,21 +77,8 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
             );
          })}
 
-         <VStack
-            width='full'
-            style={{
-               margin: 0,
-               marginTop: 'auto',
-               marginBottom: '50px',
-            }}
-         >
-            {
-               role !== 'Admin' &&
-               <NavigateProfile 
-                  userInfo={userInfo}
-               />
-            }
-
+        
+            
             <HStack
                color={'brand.100'}
                w='full'
@@ -97,13 +90,18 @@ const ComputerNavbar = ({ userLinks, userInfo}) => {
                transition='background-color .3s ease'
                paddingY={3}
                paddingX={5}
+               width='full'
+               style={{
+                  margin: 0,
+                  marginTop: 'auto',
+               }}
+               borderLeftRadius='md'
             >
                <Icon as={FiLogOut} h={5} w={5} />
                <Text fontSize='lg'>
                   Cerrar sesión
                </Text>
             </HStack>
-         </VStack>
       </VStack>
    );
 };

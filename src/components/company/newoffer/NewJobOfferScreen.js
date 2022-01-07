@@ -72,6 +72,7 @@ const NewJobOfferScreen = () => {
          w='full'
          className='animate__animated animate__fadeIn animate__faster'
       >
+
          <Heading
             fontSize={{ base: '2xl', lg: '3xl' }}
          >

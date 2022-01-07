@@ -32,8 +32,8 @@ const LinkItem = ({
 
    return (
       <HStack
-         borderLeft={ isActive && '3px solid' }
          bgColor={ isActive && 'brand.400'}
+         borderLeftRadius='md'
          width='full'
          as='button'
          paddingY={3}

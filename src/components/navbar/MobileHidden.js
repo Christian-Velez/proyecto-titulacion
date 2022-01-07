@@ -1,7 +1,7 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import {
-   Divider,
    Flex,
+   HStack,
    Icon,
    IconButton,
    Text,
@@ -39,11 +39,11 @@ const MobileHidden = ({
    
    return (
       <VStack
-         className='animate__animated animate__fadeInRight animate__faster'
+         className='animate__animated animate__fadeIn animate__faster'
+         minH='100vh'
          w='100vw'
          bgColor='brand.500'
          zIndex={9999999}
-         h='100vh'
          pos='fixed'
          p={1}
          top='0'
@@ -51,23 +51,18 @@ const MobileHidden = ({
          overflowY='auto'
          display={displayMenu}
          alignItems='flex-start'
-         color='white'
+         color='white' 
          
       >
+
+         {/*Boton para cerrar y logo*/}
          <Flex
             width='full'
             justifyContent='space-between'
-            paddingLeft={4}
-
+            paddingRight={4}
             alignItems='center'
          >
-            <Flex >
-               <IconImg
-                  alt='Logo'
-                  src='/static/logo.png'
-                  boxSize={{ base: '30px' }}
-               />
-            </Flex>
+            
             <IconButton
                aria-label='Close Menu'
                size='lg'
@@ -79,9 +74,23 @@ const MobileHidden = ({
                   document.body.style.overflow = 'auto';
                }}
             />
+
+            <Flex >
+               <IconImg
+                  alt='Logo'
+                  src='/static/logo.png'
+                  boxSize={{ base: '30px' }}
+               />
+            </Flex>
          </Flex>
 
-         <Divider />
+
+
+         {
+            role !== 'Admin' &&
+            <NavigateProfile userInfo={userInfo} isMobile={true} setDisplayMenu={setDisplayMenu}/>
+         }
+
 
          {/*Links que dependen del tipo de cuenta*/}
          {userLinks.map((link) => {
@@ -101,38 +110,25 @@ const MobileHidden = ({
             );
          })}
 
-         <VStack
-            w='full'
-            style={{
-               margin: 0,
-               marginTop: 'auto',
-               marginBottom: '30px',
-            }}
-         >
-            {
-               role !== 'Admin' &&
-               <NavigateProfile userInfo={userInfo} isMobile={true} setDisplayMenu={setDisplayMenu}/>
-            }
-
          
-            <Flex
-               color={'brand.100'}
-               width='full'
-               as='button'
-               paddingY={3}
-               paddingX={10}
-               onClick={handleLogout}
-               _hover={{
-                  bgColor: 'brand.600',
-               }}
-               transition='background-color .3s ease'
-            >
-               <Icon as={FiLogOut} h={5} w={5} />
-               <Text fontSize='lg'>
-                  Cerrar sesión
-               </Text>
-            </Flex>
-         </VStack>
+         <HStack
+            color={'brand.100'}
+            width='full'
+            as='button'
+            borderLeftRadius='md'
+            paddingY={3}
+            paddingX={10}
+            onClick={handleLogout}
+            _hover={{
+               bgColor: 'brand.600',
+            }}
+            transition='background-color .3s ease'
+         >
+            <Icon as={FiLogOut} h={5} w={5} />
+            <Text fontSize='lg'>
+               Cerrar sesión
+            </Text>
+         </HStack>
       </VStack>
    );
 };

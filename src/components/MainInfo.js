@@ -113,11 +113,11 @@ const MainInfo = ({ userInfo }) => {
             </VStack>
 
             <VStack minH='80px' alignItems={{ base: 'center', xl: 'flex-start'}}>
-               <Text>
+               <Heading fontSize='md'>
                   {kind === 'Developer'
                      ? 'Sobre mi'
                      : 'Sobre nosotros'}
-               </Text>
+               </Heading>
                <Text> {description} </Text>
             </VStack>
 

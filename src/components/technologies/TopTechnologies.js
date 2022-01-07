@@ -8,14 +8,17 @@ import {
 import { sortByPopularity } from 'helpers/searchTechs';
 import PodiumTechItem from './PodiumTechItem';
 
-const TopTechnologies = ({ allTechsAvailable }) => {
+const TopTechnologies = ({ allTechsAvailable}) => {
 
    const [orderedTechs, setOrderedTechs] = useState([]);
 
+
+   
    useEffect(() => {
       // Le mando una copia del Array con spread operator para que no afecte el REDUX STORE
       setOrderedTechs(sortByPopularity([...allTechsAvailable]));
    }, []);
+
 
  
    return (
@@ -29,8 +32,7 @@ const TopTechnologies = ({ allTechsAvailable }) => {
          </Heading>
 
          {
-            orderedTechs.length > 0
-            &&
+            
             <HStack w='full' justifyContent='center' spacing={{ base: 5, lg: 20 }} h={{base:'200', xl:'400px'}}>
                <PodiumTechItem technology={orderedTechs[1]} place={2} alignSelf='center'/>
                <PodiumTechItem technology={orderedTechs[0]} place={1} alignSelf='flex-start'/>

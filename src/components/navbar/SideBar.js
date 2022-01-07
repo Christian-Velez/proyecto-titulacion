@@ -56,7 +56,7 @@ const SideBar = () => {
 
 
    useEffect(() => {
-      if(devInfo.name && devInfo.img && devInfo.kind) {
+      if(role === 'Developer') {
          const { name, img, kind } = devInfo;
          setUserInfo({
             name,
@@ -64,7 +64,7 @@ const SideBar = () => {
             kind
          });
       }
-      else if(companyInfo.name && companyInfo.img && companyInfo.kind) {
+      else if(role === 'Company') {
          const { name, img, kind } = companyInfo;
          setUserInfo({
             name,

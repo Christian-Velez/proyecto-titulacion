@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButton } from '@chakra-ui/react';
-import { MdOutlineModeEditOutline } from 'react-icons/md';
+import { EditIcon } from '@chakra-ui/icons';
 
 const EditProfileButton = ({
    handleEditProfile,
 }) => {
+
+   
+
+
+
    return (
       <IconButton
          aria-label='Edit profile'
          variant='outline'
-         fontSize='30px'
-         icon={<MdOutlineModeEditOutline />}
+         icon={<EditIcon />}
          position='absolute'
          top={3}
          right={{ base: 10, lg: 30, xl: 40 }}

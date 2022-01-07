@@ -54,9 +54,7 @@ const NavigateProfile = ({
             transition='background-color .3s ease'
             as='button'
             onClick={ handleNavigate }
-            borderLeft={
-               isProfileActive && '3px solid'
-            }
+            borderLeftRadius='md'
             bgColor={isProfileActive && 'brand.400'}
          >
             <IconImg
