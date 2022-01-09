@@ -102,20 +102,23 @@ const MainInfo = ({ userInfo }) => {
                <Heading> {name} </Heading>
                {
                   line && 
-                  <Text color='gray.500'>
+                  <Text color='gray.600' fontSize='sm'>
                      {line}
                   </Text>
                }
-               <HStack fontSize='sm' color='gray.500' alignItems='flex-start'>
+               <HStack fontSize='sm' color='gray.600' alignItems='flex-start'>
                   <Icon as={HiLocationMarker} />
                   <Text> {location} </Text>
                </HStack>
             </VStack>
 
-            <VStack minH='80px' alignItems={{ base: 'center', xl: 'flex-start'}}>
+            <VStack minH='80px' alignItems={{ base: 'center', xl: 'flex-start'}}
+            
+               maxW={{ lg: '70%'}}
+            >
                <Heading fontSize='md'>
                   {kind === 'Developer'
-                     ? 'Sobre mi'
+                     ? 'Sobre mí'
                      : 'Sobre nosotros'}
                </Heading>
                <Text> {description} </Text>

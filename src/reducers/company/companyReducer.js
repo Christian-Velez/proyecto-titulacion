@@ -33,6 +33,16 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
             ]
          };
 
+      case types.updateJob:
+         return {
+            ...state,
+               jobs: state.jobs.map(job => (
+                  job.id === action.payload.id
+                  ? (action.payload.data) // Sobreescribe el job que coincida
+                  : job
+               ))
+         };      
+
       default:
          return state;
    }

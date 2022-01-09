@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
    FormControl,
@@ -26,6 +26,11 @@ import { startPostingNewJob } from 'actions/company/job';
 import { useNavigate } from 'react-router-dom';
 
 const NewJobOfferScreen = () => {
+   useEffect(() => {
+      window.scrollTo(0,0);
+   },[]);
+
+
    const [isPosting, setIsPosting] = useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -93,7 +98,7 @@ const NewJobOfferScreen = () => {
                   name='title'
                   value={title}
                   onChange={handleInputChange}
-                  maxLength={30}
+                  maxLength={50}
                   helperText='Asegúrate de que sea descriptivo, los postulantes buscarán la oferta haciendo referencia al título.'
                />
 

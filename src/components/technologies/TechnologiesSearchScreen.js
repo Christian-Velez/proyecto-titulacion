@@ -58,4 +58,4 @@ const TechnologiesSearchScreen = () => {
 
 
 
-export default React.memo(TechnologiesSearchScreen);
+export default TechnologiesSearchScreen;

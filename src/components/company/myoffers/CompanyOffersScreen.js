@@ -33,7 +33,7 @@ const CompanyOffersScreen = () => {
          <Heading
             fontSize={{ base: '2xl', lg: '3xl' }}
          >
-            Ofertas publicadas
+            Mis ofertas
          </Heading>
 
          <VStack 
@@ -104,12 +104,14 @@ const CompanyOffersScreen = () => {
                         
                   </AccordionButton>
                   <AccordionPanel pb={4}>
-                     {
-                        jobs.filter(job => !job.active)
-                           .map(activeJob => (
-                           <CompanyJob key={activeJob.id} job={activeJob}/>
-                        ))
-                     }
+                     <VStack spacing={5}>
+                        {
+                           jobs.filter(job => !job.active)
+                              .map(activeJob => (
+                              <CompanyJob key={activeJob.id} job={activeJob}/>
+                           ))
+                        }
+                     </VStack>
                   </AccordionPanel>
                </AccordionItem>
 

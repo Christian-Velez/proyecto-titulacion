@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HStack, Text, VStack } from '@chakra-ui/react';
+import { Heading, HStack, VStack } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 
 
@@ -28,7 +28,7 @@ const SoftskillCard = ({ soft }) => {
             alignItems='flex-start'
             maxWidth='50%'
          >
-            <Text fontWeight='black'>{ name }</Text>
+            <Heading fontSize={{ base: 'md', '2xl': 'lg'}} fontWeight='semibold'>{ name }</Heading>
                
          </VStack>
 

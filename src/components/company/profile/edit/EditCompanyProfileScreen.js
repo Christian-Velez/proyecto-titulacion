@@ -88,7 +88,7 @@ const EditCompanyProfileScreen = () => {
          <VStack alignItems='flex-start'>
             <Heading>Editando tu perfil</Heading>
             <Text fontStyle='italic'>
-               No olvides guardar tus cambios
+               No olvides guardar los cambios
             </Text>
          </VStack>
 

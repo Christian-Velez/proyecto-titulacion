@@ -10,8 +10,8 @@ export const typesOfTech = [
 
 export const techCategories = [
    {
-      value: 'Desarrollo web',
-      label: 'Desarrollo web',
+      value: 'Full Stack',
+      label: 'Full Stack',
    },
    {
       value: 'Front-end',

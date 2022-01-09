@@ -105,7 +105,7 @@ const EditDeveloperProfile = () => {
       >  
          <VStack alignItems='flex-start'>
             <Heading> Editando tu perfil </Heading>
-            <Text fontStyle='italic'>No olvides guardar tus cambios</Text> 
+            <Text fontStyle='italic'>No olvides guardar los cambios</Text> 
          </VStack>
 
          <form 

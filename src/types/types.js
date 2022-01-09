@@ -26,11 +26,13 @@ export const types = {
 
    // Developer
    setDevInfo: '[Dev] Set developer user info: name, id, etc.',
+   setAllJobs: '[DevJobs] Set all jobs in stored data',
 
 
    // Company
    setCompanyInfo: '[Company] Set company info: name, id, etc.',
-   addNewJobOffer: '[Company] Add new posted offer to stored data'
+   addNewJobOffer: '[Company] Add new posted offer to stored data',
+   updateJob: '[Company] Update job in stored data'
 
 
 

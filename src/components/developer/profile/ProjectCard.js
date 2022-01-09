@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HStack, Text, VStack, Link } from '@chakra-ui/react';
+import { HStack, Heading , VStack, Link } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
@@ -25,7 +25,7 @@ const ProjectCard = ({ project }) => {
             alignItems='flex-start'
             maxWidth='80%'
          >
-            <Text fontWeight='black'> { title } </Text>
+            <Heading fontSize={{ base: 'md', '2xl': 'lg' }}> { title } </Heading>
             {
                linkDemo && <Link isExternal href={linkDemo}> Demo <ExternalLinkIcon mx='2px' /> </Link>
             }

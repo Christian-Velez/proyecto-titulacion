@@ -17,6 +17,10 @@ export const startSettingCompanyInfo = (
          const { companyInfo } = data;
 
          dispatch(setCompanyInfo(companyInfo));
+
+
+
+         
       } catch (err) {
          return Swal.fire({
             icon: 'error',

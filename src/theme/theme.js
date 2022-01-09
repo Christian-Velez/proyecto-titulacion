@@ -5,6 +5,10 @@ import {
 } from '@chakra-ui/react';
 
 import '@fontsource/inter';
+import '@fontsource/open-sans';
+import '@fontsource/roboto';
+import '@fontsource/noto-sans';
+
 
 const inputFocusBorderColor = {
    field: {
@@ -17,7 +21,7 @@ const inputFocusBorderColor = {
 
 
 const fontFamily = {
-   body: 'Inter',
+   body: 'Roboto',
 };
 
 const blueBrandColor = {
@@ -59,7 +63,7 @@ const theme = extendTheme(
       styles: {
          global: {
             body: {
-               color: 'gray.700',
+               color: 'gray.800',
             },
          },
       },

@@ -69,7 +69,7 @@ const Body = () => {
             w={{ base: 'full', xl: '50%' }}
             alignItems='flex-start'
          >
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Calificaciones
             </Heading>
 
@@ -106,7 +106,7 @@ const Body = () => {
 
          <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Tecnologías
             </Heading>
 
@@ -115,17 +115,17 @@ const Body = () => {
 
          <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Proyectos
             </Heading>
-            <Text fontStyle='italic' color='gray.500' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
+            <Text color='gray.600' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
 
             {projectsCards}
          </VStack>
 
          <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Educación
             </Heading>
             {educationCards}
@@ -133,7 +133,7 @@ const Body = () => {
 
          <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Licencias y certificaciones
             </Heading>
             {certificationsCards}
@@ -141,7 +141,7 @@ const Body = () => {
 
          <Divider />
          <VStack w='full' alignItems='flex-start'>
-            <Heading fontSize='lg'>
+            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Mis soft skills
             </Heading>
             {softskillsCards}

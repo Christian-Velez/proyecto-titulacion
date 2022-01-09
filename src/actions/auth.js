@@ -54,12 +54,22 @@ export const startLogging = (
             )
          );
       } catch (err) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Nombre de usuario o contraseña incorrectos',
-            confirmButtonColor: 'var(--chakra-colors-brand-500)'
-         });
+         if(err.message === 'Network Error') {
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: 'Revisa tu conexión a internet',
+               confirmButtonColor: 'var(--chakra-colors-brand-500)'
+            });
+         }
+         else {
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: 'Nombre de usuario o contraseña incorrectos',
+               confirmButtonColor: 'var(--chakra-colors-brand-500)'
+            });
+         }
          setIsLoading(false);
 
          
@@ -105,7 +115,6 @@ export const startCheckingIsTokenValid = ({ id, token, role, redirect }) => {
             dispatch(setAuth(id, token, role, redirect));
          }
       } catch (err) {
-         console.log('Error al determinar si el token era valido');
          dispatch(generalLogout());
       } finally {
          dispatch(setIsChecking(false));

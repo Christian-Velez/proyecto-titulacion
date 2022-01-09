@@ -58,7 +58,7 @@ const Body = () => {
          <Divider />
          <VStack w='full' alignItems='flex-start'>
             <Heading fontSize='lg'>
-               Tecnología más solicitada:
+               Tecnología más solicitada
             </Heading>
 
 
@@ -87,7 +87,7 @@ const Body = () => {
                         maxWidth='50%'
                         
                      >
-                           <Text fontWeight='black'> { auxTech.name } </Text>
+                           <Heading  fontSize='md'> { auxTech.name } </Heading>
                            <Text> usualmente requiere 5 años de experiencia</Text>
                         
                         

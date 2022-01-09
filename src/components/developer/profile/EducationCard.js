@@ -9,7 +9,7 @@ const EducationCard = ({ education }) => {
    const { title, institution, year } = education;
    
    return (
-      <ListItem> {title}. {institution} ({year}) </ListItem>
+      <ListItem> {title}. {institution} ({year}). </ListItem>
    );
 };
 

@@ -3,7 +3,7 @@ import React from 'react';
 
 
 import PropTypes from 'prop-types';
-import { HStack, Text, VStack } from '@chakra-ui/react';
+import { HStack, Text, VStack, Heading } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 
 
@@ -43,13 +43,13 @@ const TechnologyCard = ({ technology, yearsOfExperience }) => {
             alignItems='flex-start'
             maxWidth='50%'
          >
-            <Text fontWeight='black'> { name } </Text>
+            <Heading fontSize={{ base: 'md', '2xl': 'lg' }}> { name } </Heading>
             <Text fontSize={{ base: 'xs', lg: 'sm'}} color='gray.500'> { type } </Text>
             <Text fontSize={{ base: 'sm', lg: 'md'}}> 
             {
                yearsOfExperience === 0
-               ? 'Sin experiencia'
-               : `${ yearsOfExperience } ${ text } de experiencia`
+               ? 'Sin experiencia.'
+               : `${ yearsOfExperience } ${ text } de experiencia.`
             } </Text>
          </VStack>
 

@@ -3,22 +3,26 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Badge, Button, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { Badge, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 import { ArrowForwardIcon, CalendarIcon } from '@chakra-ui/icons';
+import { useDispatch } from 'react-redux';
+import { startUpdatingJob } from 'actions/company/job';
 
 const CompanyJob = ({job})=> {
-   const { id, title, date, techsRequired, active} = job;
+
+   const dispatch = useDispatch();
+   const { id, title, created_at, techsRequired, active, salary } = job;
 
 
 
-   const handleDeactivateJob = () => {
-      console.log(id);
+   const handleToggleJob = () => {
+      dispatch(startUpdatingJob({id, active: !active}));
    };
 
 
    // Formatear fecha
-   const publishedAt = new Date(date);
+   const publishedAt = new Date(created_at);
    const YY = publishedAt.getFullYear();
    const MM = ('0' + (publishedAt.getMonth() + 1)).slice(-2);
    const DD = ('0' + publishedAt.getDate()).slice(-2);
@@ -36,58 +40,75 @@ const CompanyJob = ({job})=> {
             w='full'
          
          >
-            <VStack alignItems='flex-start' spacing={0}>
-               <Heading fontSize='xl'>
-                  {title} 
+            <Heading fontSize='xl'>
+               {title} 
 
-                  <Badge 
-                     ml={3} 
-                     colorScheme={ active ? 'green' : 'red'}
-                  >
-                     { active ? 'ACTIVA' : 'ARCHIVADA' }
-                  </Badge>
-               </Heading>
+               <Badge 
+                  ml={3} 
+                  colorScheme={ active ? 'green' : 'red'}
+               >
+                  { active ? 'ACTIVA' : 'ARCHIVADA' }
+               </Badge>
+            </Heading>
+
+
+            <Flex
+               direction='row'
+               gap={5}
+               color='#B1B3BA' 
+               fontSize='sm'
+               flexWrap='wrap'
+            >
                
-               <HStack color='#B1B3BA' fontSize='sm'>
+               <HStack>
                   <CalendarIcon />
                   <Text> {`${DD}-${MM}-${YY}`}</Text>
                </HStack>
+
+               <HStack>
+                  <Text>USD { salary.toFixed(2) } mensual</Text>
+               </HStack>
             
-            </VStack>
+            </Flex>
             
          
 
-            <VStack alignItems='flex-start'>
-               <Text> Tecnologias </Text>
-               <HStack justifyContent='flex-start'>
-               {
-                  techsRequired.map(req => {
-                     const { technology: tech } = req;
+            <HStack justifyContent='flex-start' flexWrap='wrap'>
+            {
+               techsRequired.map(req => {
+                  const { technology: tech } = req;
 
-                     return (
-                        <IconImg
-                           key={ job.id + tech.id }
-                           alt={tech.name}
-                           boxSize={{ base: 5 }}
-                           src={tech.img}
-                        />
-                     );
-                  })
-               }
-               </HStack>
-            </VStack>
+                  return (
+                     <IconImg
+                        key={ job.id + tech.id }
+                        alt={tech.name}
+                        boxSize={{ base: 5 }}
+                        src={tech.img}
+                     />
+                  );
+               })
+            }
+            </HStack>
 
 
-            <HStack>
+            <HStack w='full'>
                <Button
                   variant='outline'
                   colorScheme='gray'
-                  onClick={ handleDeactivateJob }
+                  onClick={ handleToggleJob }
+                  size='md'
+                  maxW='50%'
+                  fontSize={{ base: 'sm', md: 'md'}}
                >
-                  Archivar
+                  {
+                     active ? 'Archivar' : 'Desarchivar'
+                  }
                </Button> 
                <Button
                   rightIcon={<ArrowForwardIcon />}   
+                  size='md'
+                  maxW='50%'
+                  fontSize={{ base: 'sm', md: 'md'}}
                >
                   Revisar
                </Button>
