@@ -20,12 +20,6 @@ const TechnologiesSearchScreen = () => {
    // Recupera las tecnologias 
    const { technologies: allTechsAvailable } = useSelector(state => state.tech);
 
-
-
-
-   
-
-
    return (
       <VStack
          padding={{ base: 7, lg: 20}}

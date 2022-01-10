@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
    Link,
    Navigate,
@@ -26,16 +26,16 @@ import { GoTerminal } from 'react-icons/go';
 
 
 const TechnologyScreen = () => {
-
-   window.scrollTo(0, 0);
-
    const { redirect } = useSelector(state => state.auth);
-
-   const { technologies } = useSelector(
-      (state) => state.tech
-   );
+   const { technologies } = useSelector(state => state.tech);
    const { name } = useParams();
    let technology = {};
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
+
+   
 
    if (technologies.length > 0) {
       technology = findTechnologyByName(
@@ -94,7 +94,7 @@ const TechnologyScreen = () => {
                         technology.categories.map((cat, i) => (
                            <ListItem key={i}>
                               <ListIcon as={MdCheckCircle} />
-                                 {cat }.
+                                 { cat }
                            </ListItem>
                         ))
                      }
@@ -109,7 +109,7 @@ const TechnologyScreen = () => {
                            <Link to={`${redirect}/technologies/${tech.name}`} key={tech.id}>
                               <HStack>
                                  <IconImg src={tech.img} alt={tech.name} boxSize={{ base: 5}}/>
-                                 <Text> { tech.name }.</Text>
+                                 <Text> { tech.name }</Text>
                               </HStack>
 
                            </Link>
@@ -118,13 +118,6 @@ const TechnologyScreen = () => {
                      }
                   </VStack>
             </InfoSection>
-
-
-         
-
-
-           
-
          </Flex>
 
       </VStack>;

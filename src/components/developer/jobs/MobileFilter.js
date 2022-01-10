@@ -18,9 +18,7 @@ const MobileFilter = ({ filtersModal, filters, setFilters}) => {
       <Drawer 
          isOpen={isOpen}
          onClose={onClose}
-         placement='right'
-
-         
+         placement='right'         
       >
          <DrawerOverlay />
          <DrawerContent>

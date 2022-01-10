@@ -7,7 +7,6 @@ import { types } from 'types/types';
 export const startLoadingJobs = () => {
    return async(dispatch) => {
       try {
-
          const { data } = await axios.get(`${API_URL}/api/jobs`);
          dispatch(setAllJobs(data));
       }

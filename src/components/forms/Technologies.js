@@ -14,11 +14,13 @@ import {
    Select, 
    useDisclosure 
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TechDisplay from './TechDisplay';  
 import { useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
+import { filterTechs } from 'helpers/filterTechs';
+
 
 
 
@@ -40,22 +42,9 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    // Todas las tecnologias (usadas en el select del Modal)
    const { technologies: allTechs } = useSelector(state => state.tech);
-   const [formatedTechs, setFormatedTechs ] = useState([]); // Ordenadas alfabeticamente y sin las seleccionadas
+   // Ordenadas alfabeticamente y sin las seleccionadas
+   const formatedTechs = useMemo(() => filterTechs([...allTechs], technologies), [allTechs, technologies]);
 
-   useEffect(() => {
-      // Alfabeticamente
-      
-      // Spread operator para que no afecte el orden de la REDUX STORE
-      let aux = [... allTechs];
-      aux.sort((a, b) => a.name.localeCompare(b.name));
-
-
-      // Le quita las tecnologias que el usuario ya selecciono
-      // para que no pueda agregar dos veces la misma
-      aux = aux.filter(({ name: name1 }) => !technologies.some(({ technology }) => name1 === technology.name));
-
-      setFormatedTechs(aux);
-   }, [technologies]);
 
    useEffect(()=> {
       // Selecciona a la primer tecnologia en la lista

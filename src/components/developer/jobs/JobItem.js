@@ -8,12 +8,13 @@ import { CalendarIcon } from '@chakra-ui/icons';
 import { FaDollarSign } from 'react-icons/fa';
 import { RiBuilding2Fill } from 'react-icons/ri';
 import { HiLocationMarker } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 const JobItem = ({ job })=> {
-
+   const navigate = useNavigate();
    const [isHovered, setIsHovered] = useState(false);
 
-   const { company, title, salary, created_at, techsRequired } = job;
+   const { company, title, salary, created_at, techsRequired, id } = job;
    const { img, name, location } = company;
 
    
@@ -24,6 +25,9 @@ const JobItem = ({ job })=> {
    const DD = ('0' + publishedAt.getDate()).slice(-2);
 
 
+   const handleViewJob = () => {
+      navigate(`./id/${id}`);
+   };
 
    return (
       <Stack
@@ -36,13 +40,15 @@ const JobItem = ({ job })=> {
          borderColor='gray.100'
          paddingY={10}
          paddingX={{ base: 5, lg: 10}}
-         borderRadius='md'
+         borderRadius='lg'
 
          _hover={{
-            cursor: 'pointer'
+            cursor: 'pointer',
          }}
          onMouseEnter={() => setIsHovered(true) }
          onMouseLeave={() => setIsHovered(false)}
+
+         onClick = { handleViewJob }
       >
          <IconImg
             src={img}
@@ -55,7 +61,6 @@ const JobItem = ({ job })=> {
             <Heading 
                fontSize='xl' 
                textDecor={ isHovered && 'underline'}
-
             > 
                { title } 
             
@@ -99,7 +104,7 @@ const JobItem = ({ job })=> {
 
                <HStack>
                   <FaDollarSign />
-                  <Text>USD { salary.toFixed(2) } mensual</Text>
+                  <Text>{ salary }/mensual</Text>
                </HStack>
 
             </Flex>

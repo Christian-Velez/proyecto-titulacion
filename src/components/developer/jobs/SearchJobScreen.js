@@ -87,7 +87,9 @@ const SearchJobScreen = () => {
          className='animate__animated animate__fadeIn animate__faster'
          minH='100vh'
       >
-         <Heading> Empleos </Heading>
+         <Heading
+            fontSize={{ base: '2xl', lg: '3xl' }}
+         > Empleos </Heading>
 
          <Divider />
 

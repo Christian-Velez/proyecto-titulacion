@@ -15,7 +15,6 @@ export const processDevInfo = async (devInfo) => {
       certifications,
       selectedSofts,
    } = devInfo;
-   //debugger;
 
    // Si elige una pp nueva, la sube a cloudinary
    if (typeof profilePhoto !== 'string') {

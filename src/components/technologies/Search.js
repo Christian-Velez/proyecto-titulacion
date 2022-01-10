@@ -1,12 +1,12 @@
 // Hooks
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'hooks/useForm';
 import { useSearchParams } from 'react-router-dom';
 
 // Info
 import { typesOfTech } from 'helpers/appCategories';
-import { searchTechs, sortByName, sortByPopularity } from 'helpers/searchTechs';
+import { searchTechs } from 'helpers/searchTechs';
 
 // Componentes
 import { Search2Icon } from '@chakra-ui/icons';
@@ -26,13 +26,11 @@ import TechItem from './TechItem';
 import { useSelector } from 'react-redux';
 
 const Search = () => {
-  // Recupera las tecnologias 
-  const { technologies: allTechsAvailable } = useSelector(state => state.tech);
+   // Recupera las tecnologias 
+   const { technologies: allTechs } = useSelector(state => state.tech);
 
-   // Busqueda
+   // Parametros de busqueda
    const [searchParams, setSearchParams] = useSearchParams({});
-   const [filteredTechs, setFilteredTechs] = useState([]);
-
 
    // Formulario de busqueda
    const [formValues, handleInputChange,, setFormValues] = useForm({
@@ -42,8 +40,21 @@ const Search = () => {
    });
    const { sortBy, name, type } = formValues;
 
-   // Si se recarga la pagina con url con query, recupera los resultados
-   const [ queryExists, setQueryExists ] = useState(false);
+
+   const filteredTechs = useMemo(() => {
+      // No utilizo los formValues debido a que cada
+      // que cambiara la caja de texto se haría la busqueda
+
+      // La busqueda solo se hace cuando presiona Enter
+      const auxName = searchParams.get('name');
+      const auxType = searchParams.get('type');
+
+      return searchTechs(auxType, auxName, [...allTechs], sortBy);      
+   }, [searchParams, sortBy]);
+
+
+
+   // Si se recarga la pagina, recupera el Query
    useEffect(() => {
       const auxName = searchParams.get('name');
       const auxType = searchParams.get('type');
@@ -52,59 +63,29 @@ const Search = () => {
       const typeIndex = typesOfTech.indexOf(auxType);
       const notFound = -1;
 
-      // Si NO hay query
       if(typeIndex === notFound){
          setSearchParams({});
-
-         // Le mando una copia del Array con spread operator para que no afecte el REDUX STORE   
-         setFilteredTechs(sortByPopularity([...allTechsAvailable]));
       }
-
-      // Si hay query
       else{
+         setSearchParams({
+            type: auxType,
+            name: auxName,
+         });
+
          setFormValues({
+            ...formValues,
             name: auxName,
             type: typesOfTech[typeIndex]
          });
-         setQueryExists(true);
       }
    }, []);
-
-   useEffect(()=>{
-      // Realiza la busqueda al recargar la pagina
-
-      if(queryExists){
-         searchTechs(type, name , allTechsAvailable, setFilteredTechs);
-      }
-   }, [queryExists]);
-
-
-
-
-   useEffect(()=> {
-      if(sortBy === 'Popularity' && filteredTechs.length > 0) {
-         setFilteredTechs(sortByPopularity([...filteredTechs]));
-      }
-      
-      if(sortBy === 'Name' && filteredTechs.length > 0){
-         setFilteredTechs(sortByName([...filteredTechs]));
-      }
-   }, [sortBy]);
-
-
-
-
 
 
    // Hacer click en buscar
    const handleSubmit = (e) => {
       e.preventDefault();
       setSearchParams({ type, name });
-      searchTechs(type, name, allTechsAvailable, setFilteredTechs, sortBy);
    };
-
-
-
 
    return (
       <VStack w='full' spacing={20} alignItems='flex-start' paddingBottom={50} minH='500px'>      
@@ -161,14 +142,11 @@ const Search = () => {
                <option value='Popularity'>Popularidad</option>
                <option value='Name'>Nombre</option>
             </Select>
-         
+
             {
                filteredTechs.map(tech => <TechItem key={tech.id} technology={tech} />)
             }
          </VStack>
-
-
-
       </VStack>
 
    );
