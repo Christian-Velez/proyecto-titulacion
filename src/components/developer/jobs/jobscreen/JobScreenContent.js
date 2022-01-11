@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
    VStack,
 } from '@chakra-ui/react';
 import JobMainInfo from './JobMainInfo';
 import JobBody from './JobBody';
+import { useDispatch } from 'react-redux';
+import { setIsJobSelected } from 'actions/developer/jobs';
 
 
 
 
 const JobScreenContent = ({ job }) => {
 
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(setIsJobSelected(true));
+      return () => {
+         dispatch(setIsJobSelected(false));
+      };
+   }, []);
+
+
    return (
       <VStack
-         paddingX={{ base: 7, lg: 20 }}
+         alignItems='center'
+         className='animate__animated animate__fadeIn animate__faster'
+         h='max-content'
+         paddingX={{ base: 7, lg: 7 }}
          paddingY={{ base: 20 }}
          spacing={20}
-         w={{ base: 'full', '2xl': '50%'}}
-         className='animate__animated animate__fadeIn animate__faster'
-         minH='100vh'
-         alignItems='center'
+         w='full'
       >
-         
          <JobMainInfo jobInfo={job}/>
          <JobBody jobInfo={job} />
-
       </VStack>
    );
 };

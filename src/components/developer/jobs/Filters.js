@@ -24,7 +24,6 @@ const Filters = ({ filters, setFilters, filtersModal }) => {
             alignItems='flex-start'
             spacing={10}
 
-            paddingX={10}
          >  
             <FilterContent filters={filters} setFilters={setFilters}/>
          </VStack>

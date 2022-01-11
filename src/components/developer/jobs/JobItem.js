@@ -29,6 +29,8 @@ const JobItem = ({ job })=> {
       navigate(`./id/${id}`);
    };
 
+
+
    return (
       <Stack
          w='full'
@@ -41,6 +43,7 @@ const JobItem = ({ job })=> {
          paddingY={10}
          paddingX={{ base: 5, lg: 10}}
          borderRadius='lg'
+         bgColor='white'
 
          _hover={{
             cursor: 'pointer',

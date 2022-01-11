@@ -22,7 +22,7 @@ const JobScreen = () => {
    useEffect(() => {
       if(allJobs.length === 0) {
          dispatch(startLoadingJobs());
-      }      
+      }
    }, []);
 
    // Setea el trabajo encontrado 
@@ -32,9 +32,7 @@ const JobScreen = () => {
          setJob(auxJob);
          setIsLoading(false);
       }
-   }, [allJobs]);
-
-
+   }, [allJobs, id]);
 
    return (
       isLoading

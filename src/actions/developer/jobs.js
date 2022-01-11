@@ -67,3 +67,11 @@ export const updateJob = (id, newJobInfo) => {
       }
    };
 };
+
+
+export const setIsJobSelected = (isSelected) => {
+   return {
+      type: types.setIsJobSelected,
+      payload: isSelected
+   };
+};

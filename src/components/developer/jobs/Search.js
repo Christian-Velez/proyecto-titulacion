@@ -26,8 +26,7 @@ const Search = ({ filters, setFilters, filtersModal}) => {
 
    return (
       <HStack 
-         w={{ base: 'full', '2xl': '70%' }}
-         marginLeft={{ base: 0 , '2xl': 10 }}
+         w='full'
       >
          <form
             style={{ width: '100%'}}

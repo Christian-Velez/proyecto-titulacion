@@ -28,6 +28,7 @@ export const types = {
    setDevInfo: '[Dev] Set developer user info: name, id, etc.',
    setAllJobs: '[DevJobs] Set all jobs in stored data',
    updateJobInfo: '[DevJobs] Update one job info',
+   setIsJobSelected: '[DevJobs] Set true or false job isselect',
 
 
    // Company

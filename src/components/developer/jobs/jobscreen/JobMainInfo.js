@@ -23,7 +23,7 @@ const JobMainInfo = ({jobInfo}) => {
 
    const dispatch = useDispatch();
    const { id: userId } = useSelector(state => state.auth);
-   const { id, title, company, created_at, salary, applicants } =jobInfo;
+   const { id, title, company, created_at, salary, applicants } = jobInfo;
    const { img, name, location } = company;
 
 
@@ -43,7 +43,7 @@ const JobMainInfo = ({jobInfo}) => {
          <IconImg
             src={img}
             alt={name}
-            boxSize={{ base: '100px' }}
+            boxSize={{ base: '200px'}}
             isRounded
          />
 
@@ -57,34 +57,30 @@ const JobMainInfo = ({jobInfo}) => {
             >
                {title}
             </Heading>
-
             <Text>
                <ChakraLink 
                   as={Link} 
                   to='/dev/search/co/123'
                   color='brand.500'
-                  textDecor='underline'   
                >{ name }</ChakraLink>
                
                { ` > ${location}` }
-            
-            
             </Text>
             <Text color='gray.500'>{ format(created_at, 'es_ES') } </Text> 
          </VStack>
 
          <HStack
             w='full'
-            justifyContent='space-between'
+            justifyContent='space-around'
          >
             <VStack>
-               <Text>Sueldo/m</Text>
-               <Text>{salary}</Text>
+               <Heading fontSize='md'>Sueldo/m</Heading>
+               <Text>$ {salary}</Text>
             </VStack>
 
             <VStack>
-               <Text>Sueldo/m</Text>
-               <Text>{salary}</Text>
+               <Heading fontSize='md'>Tipo</Heading>
+               <Text>Remoto</Text>
             </VStack>
          </HStack>
 

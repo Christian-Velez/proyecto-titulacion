@@ -4,14 +4,13 @@ import { types } from 'types/types';
 
 export const initialJobs = {
    recommended: [],
-   allJobs: []
+   allJobs: [],
+   isJobSelected: false
 };
 
 export const devJobsReducer = (state = initialJobs, action) => {
 
    switch (action.type) {
-
-
       case types.setAllJobs:
          return {
             ...state,
@@ -27,8 +26,13 @@ export const devJobsReducer = (state = initialJobs, action) => {
                : job
             ))
          };
+
+      case types.setIsJobSelected:
+         return {
+            ...state,
+            isJobSelected: action.payload
+         };
          
-   
       default:
          return state;
    }
