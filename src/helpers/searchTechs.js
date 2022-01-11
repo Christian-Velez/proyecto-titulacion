@@ -2,6 +2,8 @@
 
 
 const filterTechs = (allTechs, type, name) => {
+
+   console.log({allTechs, type, name});
    let filteredTechs;
    name = name.toLowerCase();
 

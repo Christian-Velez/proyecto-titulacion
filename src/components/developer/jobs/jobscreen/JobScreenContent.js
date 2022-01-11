@@ -10,7 +10,6 @@ import JobBody from './JobBody';
 
 
 const JobScreenContent = ({ job }) => {
-   console.log(job);
 
    return (
       <VStack

@@ -33,20 +33,19 @@ const EditSoft = () => {
    const { id } = useParams();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isLoading, setIsLoading] = useState(false);
+   const [isSaving, setIsSaving] = useState(false);
+
+  
+
+   // Todas las soft skills guardadas en el store
+   const { softskills } = useSelector(state => state.soft);
+   // Tecnologia actual a editar
+   const softskill = softskills.find(soft => soft.id === id);
+
 
    // Controlar los valores del form
    const [name, setName] = useState('');
    const [img, setImg] = useState(null);
-
-   // Todas las soft skills guardadas en el store
-   const { softskills } = useSelector(
-      (state) => state.soft
-   );
-   // Tecnologia actual a editar
-   const softskill = softskills.find(
-      (soft) => soft.id === id
-   );
 
    useEffect(() => {
       // Establece los valores guardados
@@ -59,7 +58,7 @@ const EditSoft = () => {
 
    const handleEditSoft = (e) => {
       e.preventDefault();
-      dispatch(startUpdatingSoft(id, name, img, navigate, setIsLoading));
+      dispatch(startUpdatingSoft(id, name, img, navigate, setIsSaving));
    };
 
    return (
@@ -108,7 +107,7 @@ const EditSoft = () => {
 
                
 
-               <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isLoading}/>
+               <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isSaving}/>
             </VStack>
          </form>
       </VStack>

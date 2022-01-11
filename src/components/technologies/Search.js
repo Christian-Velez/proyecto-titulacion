@@ -46,8 +46,8 @@ const Search = () => {
       // que cambiara la caja de texto se haría la busqueda
 
       // La busqueda solo se hace cuando presiona Enter
-      const auxName = searchParams.get('name');
-      const auxType = searchParams.get('type');
+      const auxName = searchParams.get('name') || name;
+      const auxType = searchParams.get('type') || type;
 
       return searchTechs(auxType, auxName, [...allTechs], sortBy);      
    }, [searchParams, sortBy]);

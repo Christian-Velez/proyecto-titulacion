@@ -37,33 +37,21 @@ import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
 
 const EditTech = () => {
-   const { id } = useParams();
-   const [isLoading, setIsLoading] =
-      useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   const { id } = useParams();
+   const [isSaving, setIsSaving] = useState(false);
 
    // Todas las tecnologias guardadas en el store
-   const { technologies } = useSelector(
+   const { technologies: allTechs } = useSelector(
       (state) => state.tech
    );
 
    // Tecnologia actual a editar
-   const technology = technologies.find(
-      (tech) => tech.id === id
-   );
+   const technology = allTechs.find((tech) => tech.id === id);
 
    // Todas las tecnologias con el formato requerido
-   const [techsHere, setTechsHere] = useState();
-
-   // Transforma las tecnologias al formato que se necesita en el SpecialSelect
-   useEffect(() => {
-      const auxTechs =
-         transformTechnologiesFormat(
-            technologies
-         );
-      setTechsHere(auxTechs);
-   }, [technologies]);
+   const formatedTechs = transformTechnologiesFormat(allTechs);
 
    // Valores del formulario
    const [
@@ -106,7 +94,6 @@ const EditTech = () => {
    }, [technology]);
    const { name, description, type } = formValues;
 
-   //
    const handleEditTech = (e) => {
       e.preventDefault();
 
@@ -135,7 +122,7 @@ const EditTech = () => {
                categories,
                relatedTechs,
                navigate,
-               setIsLoading
+               setIsSaving
             )
          );
       }
@@ -238,7 +225,7 @@ const EditTech = () => {
                      Tecnologías relacionadas
                   </FormLabel>
 
-                  {techsHere && (
+                  {formatedTechs && (
                      <SpecialSelect
                         isMulti
                         placeholder='Seleccione las tecnologías...'
@@ -247,7 +234,7 @@ const EditTech = () => {
                         hideSelectedOptions={
                            false
                         }
-                        options={techsHere}
+                        options={formatedTechs}
                         value={relatedTechs}
                         onChange={setRelatedTechs}
                      />
@@ -257,7 +244,7 @@ const EditTech = () => {
                <Buttons
                   cancelRoute='/admin/technologies'
                   actionText='Guardar'
-                  isLoading={isLoading}
+                  isLoading={isSaving}
                />
             </VStack>
          </form>

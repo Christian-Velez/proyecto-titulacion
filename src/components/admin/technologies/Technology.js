@@ -19,7 +19,6 @@ const Technology = ({ info }) => {
       img,
    } = info;
 
-
    const navigate = useNavigate();
    const relatedTechsHere = relatedTechs.map(tech => {
       const { name } = tech;

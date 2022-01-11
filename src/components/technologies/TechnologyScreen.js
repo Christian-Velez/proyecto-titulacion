@@ -5,7 +5,6 @@ import {
    useParams,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LoadingScreen from 'components/LoadingScreen';
 import { findTechnologyByName } from 'helpers/findTechnology';
 import {
    Flex,
@@ -29,7 +28,8 @@ const TechnologyScreen = () => {
    const { redirect } = useSelector(state => state.auth);
    const { technologies } = useSelector(state => state.tech);
    const { name } = useParams();
-   let technology = {};
+   const technology = findTechnologyByName(technologies, name);
+
 
    useEffect(() => {
       window.scrollTo(0, 0);
@@ -37,20 +37,9 @@ const TechnologyScreen = () => {
 
    
 
-   if (technologies.length > 0) {
-      technology = findTechnologyByName(
-         technologies,
-         name
-      );
-      if (!technology) {
-         return (
-            <Navigate to={`${redirect}/technologies`} />
-         );
-      }
-   }
-
-   return technologies.length === 0 
-      ? <LoadingScreen />
+   return (
+      !technology
+      ? <Navigate to={`${redirect}/technologies`} />
       : 
       <VStack
          padding={{ base: 10, lg: 30, xl: 40 }}
@@ -61,10 +50,6 @@ const TechnologyScreen = () => {
          className='animate__animated animate__fadeIn animate__faster'
       >
          <TechnologyMainInfo technology={technology} />
-
-
-
-
          <Flex w='full' flexWrap='wrap' justifyContent='space-between' >
             <InfoSection icon={GoTerminal}>
                   <Heading fontSize={{ base: 'xl', lg: '2xl'}}> Popularidad </Heading>
@@ -120,7 +105,10 @@ const TechnologyScreen = () => {
             </InfoSection>
          </Flex>
 
-      </VStack>;
+      </VStack>
+
+   );
+
 };
 
 TechnologyScreen.propTypes = {};

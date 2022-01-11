@@ -1,23 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
+
+import Technology from './Technology';
 import {
    VStack,
    Heading,
    Button,
    Divider,
 } from '@chakra-ui/react';
-import Technology from './Technology';
-import { useSelector } from 'react-redux';
-
-import { useNavigate } from 'react-router-dom';
 
 
 const TechnologiesScreen = () => {
    const navigate = useNavigate();
    const { technologies } = useSelector(state => state.tech);
-
-
-
 
    return (
       <VStack
@@ -42,13 +39,8 @@ const TechnologiesScreen = () => {
          >
             <Heading size='md'> Registradas </Heading>
             {
-               technologies.map(technology => {
-                  const { id, ...rest } = technology;
-                  const info = {
-                     id,
-                     ...rest
-                  };
-                  return <Technology key={ id } info={info} />;
+               technologies.map(tech => {
+                  return <Technology key={ tech.id } info={tech} />;
                })   
                
             }

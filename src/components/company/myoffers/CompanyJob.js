@@ -8,9 +8,10 @@ import IconImg from 'components/IconImg';
 import { ArrowForwardIcon, CalendarIcon } from '@chakra-ui/icons';
 import { useDispatch } from 'react-redux';
 import { startUpdatingJob } from 'actions/company/job';
+import { useNavigate } from 'react-router-dom';
 
 const CompanyJob = ({job})=> {
-
+   const navigate = useNavigate();
    const dispatch = useDispatch();
    const { id, title, created_at, techsRequired, active, salary } = job;
 
@@ -18,6 +19,10 @@ const CompanyJob = ({job})=> {
 
    const handleToggleJob = () => {
       dispatch(startUpdatingJob({id, active: !active}));
+   };
+
+   const handleViewJob = () => {
+      navigate(`./${id}`);
    };
 
 
@@ -104,14 +109,23 @@ const CompanyJob = ({job})=> {
                      active ? 'Archivar' : 'Desarchivar'
                   }
                </Button> 
+
+
+
+
                <Button
                   rightIcon={<ArrowForwardIcon />}   
                   size='md'
                   maxW='50%'
                   fontSize={{ base: 'sm', md: 'md'}}
+                  onClick = { handleViewJob }
                >
                   Revisar
                </Button>
+
+
+
+
             </HStack>
 
          

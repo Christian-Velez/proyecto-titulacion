@@ -26,6 +26,7 @@ import CompanyProfile from 'components/company/profile/CompanyProfile';
 import EditCompanyProfileScreen from 'components/company/profile/edit/EditCompanyProfileScreen';
 import NewJobOfferScreen from 'components/company/newoffer/NewJobOfferScreen';
 import CompanyOffersScreen from 'components/company/myoffers/CompanyOffersScreen';
+import JobOfferScreen from 'components/company/myoffers/offer/JobOfferScreen';
 
 import { Stack } from '@chakra-ui/react';
 
@@ -70,6 +71,7 @@ const CompanyRoutes = () => {
                      <Route path='newjob' element={<NewJobOfferScreen /> } />
 
                      <Route path='myoffers' element={ <CompanyOffersScreen /> } />
+                     <Route path='myoffers/:id' element={ <JobOfferScreen /> } />
 
                      <Route path='technologies' element={  <TechnologiesSearchScreen /> } />
                      <Route path='technologies/:name' element={ <TechnologyScreen />} />

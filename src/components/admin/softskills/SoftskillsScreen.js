@@ -32,8 +32,7 @@ const SoftskillsScreen = () => {
       > Agregar una nueva </Button>
 
       <Divider />
-
-
+      
       <VStack
          spacing={5}
          w='full'
@@ -42,12 +41,7 @@ const SoftskillsScreen = () => {
          <Heading size='md'> Registradas </Heading>
          {
             softskills.map(softskill => {
-               const { id, ...rest } = softskill;
-               const info = {
-                  id,
-                  ...rest
-               };
-               return <Softskill key={ id } info={info} />;
+               return <Softskill key={ softskill.id } info={softskill} />;
             })   
             
          }

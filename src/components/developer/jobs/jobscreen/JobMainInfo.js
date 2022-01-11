@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
    Button,
@@ -15,10 +15,23 @@ import { Link } from 'react-router-dom';
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
+import { useDispatch, useSelector } from 'react-redux';
+import { startApplyingProcess } from 'actions/developer/jobs';
 
 const JobMainInfo = ({jobInfo}) => {
-   const { title, company, created_at, salary } =jobInfo;
+   const [isLoading, setIsLoading] = useState(false);
+
+   const dispatch = useDispatch();
+   const { id: userId } = useSelector(state => state.auth);
+   const { id, title, company, created_at, salary, applicants } =jobInfo;
    const { img, name, location } = company;
+
+
+   const alreadyApply = applicants.includes(userId);
+
+   const handleApply = () => {
+     dispatch(startApplyingProcess(id, alreadyApply, setIsLoading));
+   };
 
    return (
       <VStack
@@ -75,8 +88,17 @@ const JobMainInfo = ({jobInfo}) => {
             </VStack>
          </HStack>
 
-         <Button w={{ base: 'full' }}>
-            Postularse
+         <Button 
+            w={{ base: 'full' }}
+            isLoading={ isLoading }
+            onClick={ handleApply }
+            variant={ alreadyApply ? 'outline' : 'solid'}
+         >
+            {
+               alreadyApply
+               ? 'Cancelar postulación'
+               : 'Postularse'
+            }
          </Button>
       </VStack>
    );

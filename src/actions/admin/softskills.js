@@ -14,7 +14,13 @@ export const startLoadingSoftSkills = () => {
          );
          dispatch(setSoftSkills(data));
       } catch (err) {
-         console.log(err);
+         Swal.fire({
+            icon: 'error',
+            title: 'Error...',
+            text: 'Ocurrio un error al cargar los datos',
+            confirmButtonColor:
+               'var(--chakra-colors-brand-500)',
+         });
       }
    };
 };

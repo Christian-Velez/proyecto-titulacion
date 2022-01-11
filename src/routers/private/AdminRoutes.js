@@ -1,5 +1,5 @@
 // Hooks
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Router
@@ -26,17 +26,22 @@ import AddNewTech from 'components/admin/technologies/AddNewTech';
 import EditTech from 'components/admin/technologies/EditTech';
 
 import { Stack } from '@chakra-ui/react';
+import LoadingScreen from 'components/LoadingScreen';
 
 
 
 const AdminRoutes = () => {
+   const [ isLoading, setIsLoading ] = useState(true);
    const dispatch = useDispatch();
    
 
    // Carga toda la informacion inicial necesaria
    useEffect(() => {
-      dispatch(startLoadingTechnologies());
-      dispatch(startLoadingSoftSkills());
+      Promise.all([
+         dispatch(startLoadingTechnologies()),
+         dispatch(startLoadingSoftSkills())
+      ]).then(() => setIsLoading(false));
+
    }, []);
 
 
@@ -48,22 +53,29 @@ const AdminRoutes = () => {
          alignItems='flex-start'
          className='animate__animated animate__fadeIn animate__faster'
       >
-         <SideBar />
+         {
+            isLoading
+            ? <LoadingScreen />
+            :
+            <>
+               <SideBar />
+               <Routes>
+                  <Route path='/' element={ <WelcomeAdmin /> } />
 
-         <Routes>
-            <Route path='/' element={ <WelcomeAdmin /> } />
+                  <Route path='technologies' element={<TechnologiesScreen />} />
+                  <Route path='technologies/new' element={<AddNewTech /> } />
+                  <Route path='technologies/edit/:id' element={<EditTech /> } />
 
-            <Route path='technologies' element={<TechnologiesScreen />} />
-            <Route path='technologies/new' element={<AddNewTech /> } />
-            <Route path='technologies/edit/:id' element={<EditTech /> } />
+                  <Route path='soft-skills' element={<SoftskillsScreen /> } />
+                  <Route path='soft-skills/new' element={<AddNewSoft /> } />
+                  <Route path='soft-skills/edit/:id' element={<EditSoft /> } />
+                  <Route path='*' element={<Navigate to='/admin' /> } />
+               </Routes>
+            </>
 
-            <Route path='soft-skills' element={<SoftskillsScreen /> } />
-            <Route path='soft-skills/new' element={<AddNewSoft /> } />
-            <Route path='soft-skills/edit/:id' element={<EditSoft /> } />
 
+         }
 
-            <Route path='*' element={<Navigate to='/admin' /> } />
-         </Routes>
       </Stack>
    );
 };

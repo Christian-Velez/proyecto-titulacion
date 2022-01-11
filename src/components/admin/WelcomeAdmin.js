@@ -1,10 +1,10 @@
+import React from 'react';
 import {
    Heading,
    Image,
    Text,
    VStack,
 } from '@chakra-ui/react';
-import React from 'react';
 
 const WelcomeAdmin = () => {
    return (

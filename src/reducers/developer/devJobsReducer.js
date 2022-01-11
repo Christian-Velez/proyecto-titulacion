@@ -17,6 +17,16 @@ export const devJobsReducer = (state = initialJobs, action) => {
             ...state,
             allJobs: action.payload
          };
+
+      case types.updateJobInfo:
+         return {
+            ...state,
+            allJobs: state.allJobs.map(job => (
+               job.id === action.payload.id
+               ? (action.payload.data) // Sobreescribe el job que coincida
+               : job
+            ))
+         };
          
    
       default:

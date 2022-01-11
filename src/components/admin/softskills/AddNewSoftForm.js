@@ -20,8 +20,7 @@ import ProfilePhoto from 'components/ProfilePhoto';
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isLoading, setIsLoading] =
-      useState(false);
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
    const [img, setImg] = useState();
    const [name, setName] = useState('');
@@ -43,7 +42,7 @@ const AddNewSoftForm = () => {
                name,
                img,
                navigate,
-               setIsLoading
+               setIsSubmitting
             )
          );
       }
@@ -83,7 +82,7 @@ const AddNewSoftForm = () => {
 
             <Buttons
                cancelRoute='/admin/soft-skills'
-               isLoading={isLoading}
+               isLoading={isSubmitting}
                actionText='Agregar'
             />
          </VStack>

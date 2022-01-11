@@ -11,6 +11,5 @@ export const transformTechnologiesFormat = (technologies) => {
          };
       }
    );
-
    return auxTechs;
 };

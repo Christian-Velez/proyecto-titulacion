@@ -1,6 +1,5 @@
 // Hooks
 import React, {
-   useEffect,
    useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -33,27 +32,13 @@ import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
 
 const AddNewTechForm = () => {
-   const [isLoading, setIsLoading] =
-      useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const { technologies } = useSelector(
-      (state) => state.tech
-   );
-
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   
    // Transforma las tecnologias al formato que se necesita en el SpecialSelect
-   const [
-      allTechsAvailable,
-      setAllTechsAvailable,
-   ] = useState();
-
-   useEffect(() => {
-      const auxTechs =
-         transformTechnologiesFormat(
-            technologies
-         );
-      setAllTechsAvailable(auxTechs);
-   }, [technologies]);
+   const { technologies } = useSelector(state => state.tech);
+   const allTechs = transformTechnologiesFormat(technologies);
 
    // Controla los campos seleccionados
    const [
@@ -96,7 +81,7 @@ const AddNewTechForm = () => {
                categories,
                relatedTechs,
                navigate,
-               setIsLoading
+               setIsSubmitting
             )
          );
       }
@@ -183,7 +168,7 @@ const AddNewTechForm = () => {
                <FormLabel fontSize='lg'>
                   Tecnologías relacionadas
                </FormLabel>
-               {allTechsAvailable && (
+               {allTechs && (
                   <SpecialSelect
                      isMulti
                      name='relatedTechs'
@@ -191,7 +176,7 @@ const AddNewTechForm = () => {
                      closeMenuOnSelect={false}
                      selectedOptionStyle='check'
                      hideSelectedOptions={false}
-                     options={allTechsAvailable}
+                     options={allTechs}
                      value={relatedTechs}
                      onChange={setRelatedTechs}
                   />
@@ -201,7 +186,7 @@ const AddNewTechForm = () => {
             <Buttons
                cancelRoute='/admin/technologies'
                actionText='Agregar'
-               isLoading={isLoading}
+               isLoading={isSubmitting}
             />
          </VStack>
       </form>

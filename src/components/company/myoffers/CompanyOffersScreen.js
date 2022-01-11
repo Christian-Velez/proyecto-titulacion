@@ -88,7 +88,6 @@ const CompanyOffersScreen = () => {
                            ))
                         }
                      
-                     
                      </VStack>
                   </AccordionPanel>
                </AccordionItem>

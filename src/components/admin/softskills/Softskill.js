@@ -12,8 +12,8 @@ import IconImg from 'components/IconImg';
 
 
 const Softskill = ({ info }) => {
-   const { id, img, name } = info;
    const navigate = useNavigate();
+   const { id, img, name } = info;
 
    const handleEdit = () => {
       navigate(`/admin/soft-skills/edit/${id}`);

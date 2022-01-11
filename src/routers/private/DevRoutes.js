@@ -25,10 +25,13 @@ import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearch
 import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
 import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
 import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
-
-import { Stack } from '@chakra-ui/react';
 import SearchJobScreen from 'components/developer/jobs/SearchJobScreen';
 import JobScreen from 'components/developer/jobs/jobscreen/JobScreen';
+import ApplicationsScreen from 'components/developer/applications/ApplicationsScreen';
+
+
+
+import { Stack } from '@chakra-ui/react';
 
 
 
@@ -55,8 +58,6 @@ const DevRoutes = () => {
          w='full'
          alignItems='flex-start'
          className='animate__animated animate__fadeIn animate__faster'
-         
-         
          wordBreak='break-word'
       >
 
@@ -81,7 +82,7 @@ const DevRoutes = () => {
                   <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
                   <Route path='technologies/:name' element={ <TechnologyScreen/>} />
 
-                  <Route path='applications' element={ <p> Aqui van las postulaciones </p> } />
+                  <Route path='applications' element={ <ApplicationsScreen /> } />
 
                   <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
