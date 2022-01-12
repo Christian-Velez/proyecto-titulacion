@@ -28,7 +28,7 @@ const JobScreenContent = ({ job }) => {
          alignItems='center'
          className='animate__animated animate__fadeIn animate__faster'
          h='max-content'
-         paddingX={{ base: 7, lg: 7 }}
+         paddingX={{ base: 7 }}
          paddingY={{ base: 20 }}
          spacing={20}
          w='full'

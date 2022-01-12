@@ -15,10 +15,14 @@ import { ROLE } from 'types/roles';
 import LoginScreen from 'components/login/LoginScreen';
 import RegisterScreen from 'components/register/RegisterScreen';
 
-import AdminRoutes from './private/AdminRoutes';
-import DevRoutes from './private/DevRoutes';
-import CompanyRoutes from './private/CompanyRoutes';
+
+const AdminRoutes = React.lazy(() => import('./private/AdminRoutes'));
+const DevRoutes = React.lazy(() => import('./private/DevRoutes'));
+const CompanyRoutes = React.lazy(() => import('./private/CompanyRoutes'));
+
+
 import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
+import LoadingScreen from 'components/LoadingScreen';
 
 const AppRouter = () => {
    const dispatch = useDispatch();
@@ -45,9 +49,8 @@ const AppRouter = () => {
          !isChecking &&
          
          <Routes>
+
             {/*  Rutas publicas */}
-
-
             <Route
                path='login'
                element={
@@ -65,52 +68,59 @@ const AppRouter = () => {
                   </PublicRoutes>
                }
             />
-
             <Route
                path='*'
                element={<Navigate to='/login' />}
             />
 
+         
             {/*  Rutas exclusivas para el admin */}
-            <Route
-               path='admin/*'
-               element={
-                  <PrivateRoutes
-                     requiredRoles={[ROLE.Admin]}
-                  >
-                     <AdminRoutes />
-                  </PrivateRoutes>
-               }
-            />
+               <Route
+                  path='admin/*'
+                  element={
+                     <PrivateRoutes
+                        requiredRoles={[ROLE.Admin]}
+                     >
+                        <React.Suspense fallback={<LoadingScreen />}>
+                           <AdminRoutes />
+                        </React.Suspense>
+                     </PrivateRoutes>
+                  }
+               />
 
-            {/*Rutas exclusivas para desarrolladores */}
-            <Route
-               path='dev/*'
-               element={
-                  <PrivateRoutes
-                     requiredRoles={[
-                        ROLE.Developer,
-                     ]}
-                  >
-                     <DevRoutes />
-                  </PrivateRoutes>
-               }
-            />
+               {/*Rutas exclusivas para desarrolladores */}
+               <Route
+                  path='dev/*'
+                  element={
+                     <PrivateRoutes
+                        requiredRoles={[
+                           ROLE.Developer,
+                        ]}
+                     >
+                        <React.Suspense fallback={<LoadingScreen />}>
+                           <DevRoutes />
+                        </React.Suspense>
 
-            {/*Rutas exclusivas para empresas */}
-            <Route
-               path='co/*'
-               element={
-                  <PrivateRoutes
-                     requiredRoles={[
-                        ROLE.Company,
-                     ]}
-                  >
-                     <CompanyRoutes />
-                  </PrivateRoutes>
-               }
-            />
-            
+                     </PrivateRoutes>
+                  }
+               />
+
+               {/*Rutas exclusivas para empresas */}
+               <Route
+                  path='co/*'
+                  element={
+                     <PrivateRoutes
+                        requiredRoles={[
+                           ROLE.Company,
+                        ]}
+                     >
+                        <React.Suspense fallback={<LoadingScreen />}>
+                           <CompanyRoutes />
+                        </React.Suspense>
+
+                     </PrivateRoutes>
+                  }
+               />
          </Routes>
       }
       </BrowserRouter>
