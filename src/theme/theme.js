@@ -4,10 +4,7 @@ import {
    withDefaultProps,
 } from '@chakra-ui/react';
 
-import '@fontsource/inter';
-import '@fontsource/open-sans';
 import '@fontsource/roboto';
-import '@fontsource/noto-sans';
 
 
 const inputFocusBorderColor = {
@@ -25,13 +22,12 @@ const fontFamily = {
 };
 
 const blue = {
-   50: '#EBF8FF',
+   50: '#EBF8FF',   
    100: '#BEE3F8',
    200: '#90CDF4',
    300: '#63B3ED',
    400: '#4299E1',
    500: '#3182CE',
-   //500: '#4299E1',
    600: '#2B6CB0',
    700: '#2C5282',
    800: '#2A4365',
@@ -48,19 +44,18 @@ const black = {
    600: '#000000',
 };
 
-//const purple = {
-
-//   50: '#FAF5FF',
-//   100: '#E9D8FD',
-//   200: '#D6BCFA',
-//   300: '#B794F4',
-//   400: '#9F7AEA',
-//   500: '#805AD5',
-//   600: '#6B46C1',
-//   700: '#553C9A',
-//   800: '#44337A',
-//   900: '#322659',
-//};
+const purple = {
+   50: '#fdeff6',
+   100: '#ed64a6',
+   200: '#cb558e',
+   300: '#b24b7d',
+   400: '#9e436f',
+   500: '#8f3c64',
+   600: '#81365a',
+   700: '#753252',
+   800: '#6b2d4b',
+   900: '#612944'
+};
 
 
 const theme = extendTheme(
@@ -85,6 +80,7 @@ const theme = extendTheme(
       colors: {
          brand: black,
          brandPrimary: blue,
+         brandPrimaryPurple: purple
       },
       shadows: {
          outline: '0 0 0 2px var(--chakra-colors-brandPrimary-200)',

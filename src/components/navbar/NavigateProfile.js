@@ -17,11 +17,14 @@ const NavigateProfile = ({
 }) => {
    const location = useLocation();
    const { redirect } = useSelector(state => state.auth);
-   const isActive = location.pathname === `${redirect}/profile`;
-
+ 
 
    const navigate = useNavigate();
    const { img, name, kind } = userInfo;
+
+
+   const isActive = location.pathname === `${redirect}/profile`;
+   const isActiveColor = 'brandPrimaryPurple.200';
 
 
 
@@ -44,7 +47,7 @@ const NavigateProfile = ({
             paddingY={5}
             paddingX={{ base: 10, lg: 5 }}
             marginBottom={5}
-            color={ isActive ? 'brandPrimary.200' : 'brand.100' }
+            color={ isActive ? isActiveColor : 'brand.100' }
             alignItems='flex-start'
             justifyContent='flex-start'
             w='full'

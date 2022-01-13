@@ -19,7 +19,7 @@ const JobItem = ({ job }) => {
    return (
       <HStack
          alignItems='flex-start'
-         w={{ base: 'full', '2xl': '30%' }}
+         w={{ base: 'full', 'xl': '45%','2xl': '30%' }}
          justifyContent='space-between'
          h='min-content'
       >

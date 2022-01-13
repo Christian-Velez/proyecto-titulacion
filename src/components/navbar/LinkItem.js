@@ -12,6 +12,7 @@ const LinkItem = ({
 }) => {
 
 
+   const isActiveColor = 'brandPrimaryPurple.200';
    const navigate = useNavigate();
    const location = useLocation();
 
@@ -46,7 +47,7 @@ const LinkItem = ({
             bgColor: 'brand.600',
          }}
          transition='background-color .5s ease'
-         color={ isActive ? 'brandPrimary.200' : 'brand.100' }
+         color={ isActive ? isActiveColor : 'brand.100' }
          alignSelf='flex-end'
       >
 
