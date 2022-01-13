@@ -62,7 +62,7 @@ const CompanyRoutes = () => {
                <>               
                   <SideBar />
                   <Routes>
-                     <Route path='/' element={<WelcomeCompany />} />
+                     <Route path='/welcome' element={<WelcomeCompany />} />
 
                      <Route path='profile' element={<CompanyProfile />}/>
                      <Route path='profile/edit' element={ <EditCompanyProfileScreen /> } />

@@ -19,13 +19,12 @@ import {
    FaUsers,
 } from 'react-icons/fa';
 
-import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 const manageLinks = {
    Admin: [
       {
          index: 1,
-         path: '/admin',
+         path: '/admin/welcome',
          name: 'Inicio',
          icon: (
             <Icon as={AiFillHome} h={5} w={5} />
@@ -48,7 +47,7 @@ const manageLinks = {
    Developer: [
       {
          index: 1,
-         path: '/dev',
+         path: '/dev/welcome',
          name: 'Inicio',
          icon: (
             <Icon as={AiFillHome} h={5} w={5} />
@@ -101,22 +100,10 @@ const manageLinks = {
    Company: [
       {
          index: 1,
-         path: '/co',
+         path: '/co/welcome',
          name: 'Inicio',
          icon: (
             <Icon as={AiFillHome} h={5} w={5} />
-         ),
-      },
-      {
-         index: 3,
-         path: '/co/newjob',
-         name: 'Publicar oferta',
-         icon: (
-            <Icon
-               as={MdOutlineAddCircleOutline}
-               h={5}
-               w={5}
-            />
          ),
       },
       {

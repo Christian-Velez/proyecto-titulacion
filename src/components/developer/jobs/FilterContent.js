@@ -52,6 +52,7 @@ const FilterContent = ({ filters, setFilters }) => {
                      <Checkbox
                         key={tech.value}
                         value={tech.value}
+                        colorScheme='brandPrimary'
                      >
                         {tech.label}
                      </Checkbox>
@@ -73,14 +74,13 @@ const FilterContent = ({ filters, setFilters }) => {
 
             <RangeSlider
                aria-label={['min', 'max']}
-               colorScheme='brand'
+               colorScheme='blue'
                defaultValue={[salary[0], salary[1]]}
                
                min={0}
                step={500}
                max={5000}
-               
-
+            
                onChangeEnd={ handleSalary}
             >
                <RangeSliderTrack>

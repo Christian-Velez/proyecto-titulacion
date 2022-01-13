@@ -24,7 +24,7 @@ const PrivateRoutes = ({ children, requiredRoles }) => {
 
    // Si no esta autenticado lo saca de una
    if(!isAuthenticated) {
-      return <Navigate to='/login'/>;
+      return <Navigate to='/'/>;
    }
 
    // Si la ruta requiere un rol

@@ -17,7 +17,7 @@ const NavigateProfile = ({
 }) => {
    const location = useLocation();
    const { redirect } = useSelector(state => state.auth);
-   const isProfileActive = location.pathname === `${redirect}/profile`;
+   const isActive = location.pathname === `${redirect}/profile`;
 
 
    const navigate = useNavigate();
@@ -44,7 +44,7 @@ const NavigateProfile = ({
             paddingY={5}
             paddingX={{ base: 10, lg: 5 }}
             marginBottom={5}
-            color='brand.100'
+            color={ isActive ? 'brandPrimary.200' : 'brand.100' }
             alignItems='flex-start'
             justifyContent='flex-start'
             w='full'
@@ -55,7 +55,7 @@ const NavigateProfile = ({
             as='button'
             onClick={ handleNavigate }
             borderLeftRadius='md'
-            bgColor={isProfileActive && 'brand.400'}
+
          >
             <IconImg
                src={img}

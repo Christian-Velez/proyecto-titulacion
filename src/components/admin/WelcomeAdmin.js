@@ -40,7 +40,7 @@ const WelcomeAdmin = () => {
                empresa.
             </Text>
 
-            <Text color='brand.500'>
+            <Text color='brandPrimary.500'>
                Puedes cambiar entre las distintas
                secciones utilizando el menú de
                navegación.

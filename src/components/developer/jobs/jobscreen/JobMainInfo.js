@@ -61,7 +61,7 @@ const JobMainInfo = ({jobInfo}) => {
                <ChakraLink 
                   as={Link} 
                   to='/dev/search/co/123'
-                  color='brand.500'
+                  color='brandPrimary.500'
                >{ name }</ChakraLink>
                
                { ` > ${location}` }

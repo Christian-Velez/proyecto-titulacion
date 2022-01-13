@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import PropTypes from 'prop-types';
 import { Flex, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
@@ -29,6 +29,7 @@ const JobItem = ({ job })=> {
       navigate(`./id/${id}`);
    };
 
+  
 
 
    return (

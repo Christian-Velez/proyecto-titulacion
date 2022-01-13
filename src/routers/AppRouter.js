@@ -23,6 +23,7 @@ const CompanyRoutes = React.lazy(() => import('./private/CompanyRoutes'));
 
 import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
 import LoadingScreen from 'components/LoadingScreen';
+import LandingPageScreen from 'components/landing/LandingPageScreen';
 
 const AppRouter = () => {
    const dispatch = useDispatch();
@@ -51,6 +52,15 @@ const AppRouter = () => {
          <Routes>
 
             {/*  Rutas publicas */}
+            <Route 
+               exact path='/'
+               element = { 
+                  <PublicRoutes>
+                     <LandingPageScreen />                  
+                  </PublicRoutes>
+               }
+            />
+
             <Route
                path='login'
                element={
@@ -59,7 +69,6 @@ const AppRouter = () => {
                   </PublicRoutes>
                }
             />
-
             <Route
                path='register'
                element={
@@ -70,7 +79,7 @@ const AppRouter = () => {
             />
             <Route
                path='*'
-               element={<Navigate to='/login' />}
+               element={<Navigate to='/' />}
             />
 
          

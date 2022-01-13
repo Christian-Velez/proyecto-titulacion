@@ -71,7 +71,7 @@ const DevRoutes = () => {
                
                <Routes>
                
-                  <Route path='/' element={ <WelcomeDeveloper /> } />
+                  <Route path='/welcome' element={ <WelcomeDeveloper /> } />
                
                   <Route path='profile' element={ <DeveloperProfile /> } />
                   <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
@@ -90,7 +90,7 @@ const DevRoutes = () => {
                   <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
                   <Route path='search/co/:id' element={ <p>AQUI va una compañia</p>} />
 
-                  <Route path='*' element={ <Navigate to='/dev' /> }  />
+                  <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
                
                
                

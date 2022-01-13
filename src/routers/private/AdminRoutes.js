@@ -60,7 +60,7 @@ const AdminRoutes = () => {
             <>
                <SideBar />
                <Routes>
-                  <Route path='/' element={ <WelcomeAdmin /> } />
+                  <Route path='/welcome' element={ <WelcomeAdmin /> } />
 
                   <Route path='technologies' element={<TechnologiesScreen />} />
                   <Route path='technologies/new' element={<AddNewTech /> } />

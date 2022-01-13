@@ -15,6 +15,7 @@ const EditProfileButton = ({
       <IconButton
          aria-label='Edit profile'
          variant='outline'
+         colorScheme='brandPrimary'
          icon={<EditIcon />}
          position='absolute'
          top={3}

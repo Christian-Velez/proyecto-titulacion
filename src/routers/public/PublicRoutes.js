@@ -10,7 +10,7 @@ const PublicRoutes = ({ children }) => {
    );
 
    if (isAuthenticated) {     
-      return <Navigate to={redirect} />;
+      return <Navigate to={`${redirect}/welcome`} />;
    }
 
    return children;

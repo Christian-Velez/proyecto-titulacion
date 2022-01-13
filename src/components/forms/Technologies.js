@@ -3,6 +3,7 @@ import {
    FormControl,
    FormHelperText, 
    FormLabel, 
+   Heading, 
    Input, 
    Modal, 
    ModalBody, 
@@ -108,7 +109,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Agregar tecnología</ModalHeader>
+          <ModalHeader> <Heading fontSize='xl'> Agregar tecnología</Heading></ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
 
@@ -147,7 +148,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
             
             <Button onClick={onClose} variant='outline'>  Cancelar </Button>
 
-            <Button colorScheme='blue' ml={3} onClick={ handleAdd }>
+            <Button ml={3} onClick={ handleAdd }>
               Agregar
             </Button>
           </ModalFooter>

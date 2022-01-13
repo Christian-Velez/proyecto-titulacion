@@ -9,9 +9,9 @@ const LoadingScreen = () => {
          alignItems='center'
          justifyContent='center'
          w='full'
-         className='animate__animated animate__fadeIn animate__faster'         
+         className='animate__animated animate__fadeIn animate__faster'      
       >
-         <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='brand.500' size='xl' />
+         <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='brandPrimary.500' size='xl' />
       </VStack>
    );
 };

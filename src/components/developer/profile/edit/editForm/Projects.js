@@ -168,7 +168,7 @@ const Projects = ({ projects, setProjects }) => {
             
             <Button onClick={onClose} variant='outline'>  Cancelar </Button>
 
-            <Button colorScheme='blue' ml={3} onClick={handleAdd}>
+            <Button ml={3} onClick={handleAdd}>
               Agregar
             </Button>
           </ModalFooter>

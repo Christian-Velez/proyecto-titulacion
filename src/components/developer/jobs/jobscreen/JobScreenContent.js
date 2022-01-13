@@ -17,14 +17,23 @@ const JobScreenContent = ({ job }) => {
 
    useEffect(() => {
       dispatch(setIsJobSelected(true));
+        
       return () => {
          dispatch(setIsJobSelected(false));
       };
    }, []);
 
+   useEffect(() => {
+      const aux = document.getElementById('aux');
+      aux.scrollIntoView();
+   }, [job]);
+
 
    return (
-      <VStack
+
+      <>
+         <div id='aux'></div>
+         <VStack
          alignItems='center'
          className='animate__animated animate__fadeIn animate__faster'
          h='max-content'
@@ -32,10 +41,13 @@ const JobScreenContent = ({ job }) => {
          paddingY={{ base: 20 }}
          spacing={20}
          w='full'
-      >
+      >  
          <JobMainInfo jobInfo={job}/>
          <JobBody jobInfo={job} />
       </VStack>
+
+      </>
+     
    );
 };
 

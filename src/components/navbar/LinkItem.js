@@ -32,7 +32,6 @@ const LinkItem = ({
 
    return (
       <HStack
-         bgColor={ isActive && 'brand.400'}
          borderLeftRadius='md'
          width='full'
          as='button'
@@ -46,8 +45,8 @@ const LinkItem = ({
          _hover={{
             bgColor: 'brand.600',
          }}
-         transition='background-color .3s ease'
-         color='brand.100'
+         transition='background-color .5s ease'
+         color={ isActive ? 'brandPrimary.200' : 'brand.100' }
          alignSelf='flex-end'
       >
 

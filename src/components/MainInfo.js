@@ -110,13 +110,14 @@ const MainInfo = ({ userInfo }) => {
                   borderRadius={0}
                   leftIcon={<AiOutlineDownload />}
                   variant='outline'
+                  colorScheme='brandPrimary'
                >
                   Currículum
                </Button>
             )}
 
 
-            <Text color='brand.400'> Última conexión: { format(lastSeen, 'es_ES') } </Text>
+            <Text color='brandPrimary.500'> Última conexión: { format(lastSeen, 'es_ES') } </Text>
          </VStack>
       </Stack>
    );
