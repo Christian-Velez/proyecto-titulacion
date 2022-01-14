@@ -9,9 +9,6 @@ import PropTypes from 'prop-types';
 import IconImg from 'components/IconImg';
 
 const MobileNavBar = ({ setDisplayMenu }) => {
-
-
-
    return (
       <HStack
          w='full'
@@ -20,11 +17,10 @@ const MobileNavBar = ({ setDisplayMenu }) => {
          padding={1}
          paddingRight={5}
       >
-         
-
          <IconButton
             aria-label='Open Menu'
             icon={<HamburgerIcon />}
+            bgColor='brand.600'
             size='lg'
             onClick={() => {
                setDisplayMenu('flex');

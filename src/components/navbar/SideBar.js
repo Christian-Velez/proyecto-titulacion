@@ -83,8 +83,8 @@ const SideBar = () => {
          left={0}
          top={0}
          zIndex={999999}
-         backgroundColor='brand.500'
-      >
+         backgroundColor='brand.600'
+      >  
          {/*Se muestra en movil*/}
          <MobileNavBar
             setDisplayMenu={setDisplayMenu}

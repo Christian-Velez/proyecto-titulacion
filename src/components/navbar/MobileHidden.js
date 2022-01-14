@@ -23,6 +23,9 @@ const MobileHidden = ({
    displayMenu,
    setDisplayMenu,
 }) => {
+
+   const bgColor = 'brand.600';
+
    const dispatch = useDispatch();
    const handleLogout = () => {
       dispatch(generalLogout());
@@ -42,7 +45,7 @@ const MobileHidden = ({
          className='animate__animated animate__fadeIn animate__faster'
          minH='100vh'
          w='100vw'
-         bgColor='brand.500'
+         bgColor={ bgColor }
          zIndex={9999999}
          pos='fixed'
          p={1}
@@ -51,8 +54,7 @@ const MobileHidden = ({
          overflowY='auto'
          display={displayMenu}
          alignItems='flex-start'
-         color='white' 
-         
+         color='white'
       >
 
          {/*Boton para cerrar y logo*/}
@@ -66,6 +68,7 @@ const MobileHidden = ({
             <IconButton
                aria-label='Close Menu'
                size='lg'
+               bgColor={ bgColor }
                icon={<CloseIcon />}
                onClick={() => {
                   setDisplayMenu('none');
