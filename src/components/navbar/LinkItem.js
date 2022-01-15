@@ -12,7 +12,7 @@ const LinkItem = ({
 }) => {
 
 
-   const isActiveColor = 'brandPrimaryPurple.200';
+   const isActiveColor = 'white';
    const navigate = useNavigate();
    const location = useLocation();
 

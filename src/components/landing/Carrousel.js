@@ -11,13 +11,15 @@ import {
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+
+
 const Carrousel = () => {
    const settings = {
       className: 'center',
       centerMode: true,
       infinite: true,
       autoplay: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 4000,
       speed: 1300,
       slidesToShow: 1,
       centerPadding: '30px',

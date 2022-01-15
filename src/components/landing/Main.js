@@ -21,6 +21,7 @@ import IconImg from 'components/IconImg';
 
 
 import Carrousel from './Carrousel';
+import AnimatedText from './AnimatedText';
 
 
 const Main = () => {
@@ -92,9 +93,7 @@ const Main = () => {
                   spacing={20}
                >
                   
-                  <Heading  fontSize='6xl'>
-                     Powerful News Explored Feed
-                  </Heading> 
+                  <AnimatedText/>
                   
                   <Text fontSize='2xl' className='text'>
                      Crea una cuenta y personaliza tu perfil,

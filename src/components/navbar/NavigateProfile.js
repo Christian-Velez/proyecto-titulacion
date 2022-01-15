@@ -24,7 +24,7 @@ const NavigateProfile = ({
 
 
    const isActive = location.pathname === `${redirect}/profile`;
-   const isActiveColor = 'brandPrimaryPurple.200';
+   const isActiveColor = 'white';
 
 
 
