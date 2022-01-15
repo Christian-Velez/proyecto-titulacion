@@ -3,16 +3,14 @@ import {
    Button,
    FormControl,
    FormLabel,
-   IconButton,
    Input,
    InputGroup,
-   InputRightElement,
    VStack,
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 import { startLogging } from 'actions/auth';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import ShowHideButton from 'components/forms/ShowHideButton';
 
 const LoginForm = () => {
    const dispatch = useDispatch();
@@ -68,18 +66,7 @@ const LoginForm = () => {
                      onChange={handleInputChange}
                   />
 
-                  <InputRightElement 
-                     width='4.5rem' 
-                     marginTop='.25rem'
-                  >
-                     <IconButton
-                        aria-label='Show/Hide'
-                        h='2rem' size='sm'
-                        icon={ show ? <ViewOffIcon /> : <ViewIcon /> }
-                        onClick={() => setShow(!show)}
-                        variant='ghost'
-                     />
-                  </InputRightElement>
+                  <ShowHideButton show={show} setShow={setShow}/>
                </InputGroup>
             </FormControl>
 

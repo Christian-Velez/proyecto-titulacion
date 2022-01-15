@@ -1,10 +1,11 @@
+
+import React from 'react';
 import {
    Heading,
    useBreakpointValue,
 } from '@chakra-ui/react';
-
 import './animatedText.css';
-import React from 'react';
+
 
 const AnimatedText = () => {
    const isAnimated = useBreakpointValue({

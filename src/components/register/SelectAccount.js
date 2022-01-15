@@ -1,18 +1,14 @@
 import {
-   Heading,
-   HStack,
-   Image,
-   Stack,
+   Button,
+   Text,
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setAccountType } from 'actions/register';
-import IconImg from 'components/IconImg';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const SelectAccount = () => {
-
-   
    const dispatch = useDispatch();
 
    const handleSetAccountType = (type) => {
@@ -22,55 +18,26 @@ const SelectAccount = () => {
    return (
       <VStack
          w='full'
-         spacing={50}
+         spacing={5}
          className='animate__animated animate__fadeIn animate__faster'
+         alignItems='flex-start'
       >
-         <HStack w='full' bgColor='brand.500' justifyContent='center' color='white' padding={3}>
-            <IconImg
-               alt='Logo'
-               src='/static/logo.png'
-               boxSize={{ base: '30px'}}
+         <Text> Soy un/a...</Text>
 
-            />
-            <Heading letterSpacing={-1}> devconnect </Heading>
-         </HStack>
-
-
-         <Heading>
-            Elige el tipo de cuenta
-         </Heading>
-
-         
-         <Stack
-            direction={{
-               base: 'column',
-               lg: 'row',
-            }}
-            justifyContent='center'
-            alignItems='center'
-            spacing={{ base: '100px', lg: '30%'}}
-            paddingY={20}
+         <Button
+            variant='outline'
+            rightIcon={<ArrowForwardIcon />}
+            onClick={ () => handleSetAccountType('Developer')}
          >
-            <VStack
-               as='button'
-               onClick={() => { handleSetAccountType('Developer'); }}
-            >
-               <Image src='/static/programmer.png' w={{ base: '200px', lg:'300px', 'xl': '400px'}}/>
-               <Heading fontSize='2xl'> Programador </Heading>
-            </VStack>
-
-            <VStack
-               as='button'
-               onClick={() => { handleSetAccountType('Company'); }}
-            >
-               <Image src='/static/empresa.png' w={{ base: '200px', lg:'300px', 'xl': '400px'}}/>
-               <Heading fontSize='2xl'> Empresa </Heading>
-            </VStack>
-
-
-         </Stack>
-
-
+            Programador
+         </Button>
+         <Button
+            variant='outline'
+            rightIcon={<ArrowForwardIcon />}
+            onClick={ () => handleSetAccountType('Company') }
+         >
+            Empresa
+         </Button>
       </VStack>
    );
 };

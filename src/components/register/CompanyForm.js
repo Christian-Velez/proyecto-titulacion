@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import {
+   Button,
    FormControl,
    FormHelperText,
    FormLabel,
-   IconButton,
+   HStack,
    Input,
    InputGroup,
-   InputRightElement,
    VStack,
 } from '@chakra-ui/react';
+
 import { useDispatch } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 import BasicInput from 'components/forms/BasicInput';
-import {
-   ViewIcon,
-   ViewOffIcon,
-} from '@chakra-ui/icons';
+
 import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
-import { startRegisterNewAccount } from 'actions/register';
-import Buttons from 'components/forms/Buttons';
+import { setAccountType, startRegisterNewAccount } from 'actions/register';
+import ShowHideButton from 'components/forms/ShowHideButton';
 
 const CompanyForm = () => {
    const dispatch = useDispatch();
@@ -51,10 +49,16 @@ const CompanyForm = () => {
       }
    };
 
+
+   const handleCancelRegister = () => {
+      dispatch(setAccountType('')); 
+   };
+
+
+
    return (
       <form
          style={{ width: '100%' }}
-         method='POST'
          onSubmit={handleSubmit}
       >
          <VStack
@@ -109,27 +113,7 @@ const CompanyForm = () => {
                      onChange={handleInputChange}
                   />
 
-                  <InputRightElement
-                     width='4.5rem'
-                     marginTop='.25rem'
-                  >
-                     <IconButton
-                        aria-label='Show/Hide'
-                        h='2rem'
-                        size='sm'
-                        icon={
-                           show ? (
-                              <ViewOffIcon />
-                           ) : (
-                              <ViewIcon />
-                           )
-                        }
-                        onClick={() =>
-                           setShow(!show)
-                        }
-                        variant='ghost'
-                     />
-                  </InputRightElement>
+                  <ShowHideButton show={show} setShow={setShow}/>
                </InputGroup>
                <FormHelperText>
                   Incluye al menos 8 caracteres, 1
@@ -139,11 +123,15 @@ const CompanyForm = () => {
                </FormHelperText>
             </FormControl>
 
-            <Buttons
-               isLoading={isLoading}
-               cancelRoute='/login'
-               actionText='Registrar'
-            />
+            <HStack>
+               <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading} >
+                  Cancelar
+               </Button>
+
+               <Button type='submit' isLoading={ isLoading }>
+                     Registrar
+               </Button>
+            </HStack>
          </VStack>
       </form>
    );

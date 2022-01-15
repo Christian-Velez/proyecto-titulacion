@@ -12,8 +12,6 @@ import PublicRoutes from './public/PublicRoutes';
 
 import { ROLE } from 'types/roles';
 
-import LoginScreen from 'components/login/LoginScreen';
-import RegisterScreen from 'components/register/RegisterScreen';
 
 
 const AdminRoutes = React.lazy(() => import('./private/AdminRoutes'));
@@ -29,7 +27,7 @@ const AppRouter = () => {
    const dispatch = useDispatch();
    const { isChecking } = useSelector(state => state.auth);
 
-   
+   // Loging automatico si el user tiene el JWT en localStorage
    useEffect(() => {
       const auth = JSON.parse(localStorage.getItem('auth'));
       const { token } = auth || {};
@@ -61,22 +59,6 @@ const AppRouter = () => {
                }
             />
 
-            <Route
-               path='login'
-               element={
-                  <PublicRoutes>
-                     <LoginScreen />
-                  </PublicRoutes>
-               }
-            />
-            <Route
-               path='register'
-               element={
-                  <PublicRoutes>
-                     <RegisterScreen />
-                  </PublicRoutes>
-               }
-            />
             <Route
                path='*'
                element={<Navigate to='/' />}

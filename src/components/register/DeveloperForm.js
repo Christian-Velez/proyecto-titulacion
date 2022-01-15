@@ -4,26 +4,23 @@ import { useForm } from 'hooks/useForm';
 import { useDispatch } from 'react-redux';
 
 // Info
-import { startRegisterNewAccount } from 'actions/register';
+import { setAccountType, startRegisterNewAccount } from 'actions/register';
+import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
 
 // Componentes
+import BasicInput from 'components/forms/BasicInput';
+import ShowHideButton from 'components/forms/ShowHideButton';
 import {
+   Button,
    FormControl,
    FormHelperText,
    FormLabel,
-   IconButton,
+   HStack,
    Input,
    InputGroup,
-   InputRightElement,
    VStack,
 } from '@chakra-ui/react';
-import {
-   ViewIcon,
-   ViewOffIcon,
-} from '@chakra-ui/icons';
-import BasicInput from 'components/forms/BasicInput';
-import { isRegisterFormValid } from 'helpers/isRegisterFormValid';
-import Buttons from 'components/forms/Buttons';
+
 
 const DeveloperForm = () => {
    const dispatch = useDispatch();
@@ -57,15 +54,20 @@ const DeveloperForm = () => {
       }
    };
 
+
+   const handleCancelRegister = () => {
+      dispatch(setAccountType('')); 
+   };
+
+
    const date = new Date();
-   const today = `${date.getFullYear() - 16}-${
+   const maxDate = `${date.getFullYear() - 16}-${
       date.getMonth() + 1
    }-${date.getDate()}`;
 
    return (
       <form
          style={{ width: '100%' }}
-         method='POST'
          onSubmit={handleSubmit}
       >
          <VStack
@@ -96,7 +98,7 @@ const DeveloperForm = () => {
                text='Edad'
                type='date'
                min='1950-01-01'
-               max={today}
+               max={maxDate}
                placeholder='21'
                helperText='
                   Necesitas mínimo 16 años
@@ -127,28 +129,9 @@ const DeveloperForm = () => {
                      onChange={handleInputChange}
                   />
 
-                  <InputRightElement
-                     width='4.5rem'
-                     marginTop='.25rem'
-                  >
-                     <IconButton
-                        aria-label='Show/Hide'
-                        h='2rem'
-                        size='sm'
-                        icon={
-                           show ? (
-                              <ViewOffIcon />
-                           ) : (
-                              <ViewIcon />
-                           )
-                        }
-                        onClick={() =>
-                           setShow(!show)
-                        }
-                        variant='ghost'
-                     />
-                  </InputRightElement>
+                  <ShowHideButton show={show} setShow={setShow}/>
                </InputGroup>
+
                <FormHelperText>
                   Incluye al menos 8 caracteres, 1
                   letra mayúsculas, 1 minúscula, 1
@@ -157,11 +140,15 @@ const DeveloperForm = () => {
                </FormHelperText>
             </FormControl>
 
-            <Buttons
-               cancelRoute='/login'
-               isLoading={isLoading}
-               actionText='Registrar'
-            />
+            <HStack>
+               <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading} >
+                  Cancelar
+               </Button>
+
+               <Button type='submit' isLoading={ isLoading }>
+                     Registrar
+               </Button>
+            </HStack>
          </VStack>
       </form>
    );

@@ -2,8 +2,8 @@
 
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import CompanyRegister from './CompanyRegister';
-import DeveloperRegister from './DeveloperRegister';
+import CompanyForm from './CompanyForm';
+import DeveloperForm from './DeveloperForm';
 import SelectAccount from './SelectAccount';
 
 const RegisterScreen = () => {
@@ -16,8 +16,8 @@ const RegisterScreen = () => {
       accountType
       ? 
          accountType === 'Developer'
-            ? <DeveloperRegister/>
-            : <CompanyRegister />
+            ? <DeveloperForm />
+            : <CompanyForm />
       : <SelectAccount />
    );
 };

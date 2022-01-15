@@ -16,12 +16,12 @@ import JobItem from './JobItem';
 import './background.css';
 import ModalForm from './ModalForm';
 import LoginForm from 'components/login/LoginForm';
-import DeveloperForm from 'components/register/DeveloperForm';
 import IconImg from 'components/IconImg';
 
 
 import Carrousel from './Carrousel';
 import AnimatedText from './AnimatedText';
+import RegisterScreen from 'components/register/RegisterScreen';
 
 
 const Main = () => {
@@ -40,13 +40,13 @@ const Main = () => {
 
    return (
       <>
-      <ModalForm title='Inicia sesión' onClose={onCloseLogin} isOpen={isOpenLogin}>
+      <ModalForm title='Inicia sesión' onClose={onCloseLogin} isOpen={isOpenLogin} scrollBehavior='outside'>
          <LoginForm />
       </ModalForm>
 
 
-      <ModalForm title='Regístrate' onClose={onCloseRegister} isOpen={isOpenRegister}>
-         <DeveloperForm />
+      <ModalForm title='Regístrate' onClose={onCloseRegister} isOpen={isOpenRegister} scrollBehavior='inside'>
+         <RegisterScreen />
       </ModalForm>
 
    
@@ -87,14 +87,13 @@ const Main = () => {
                </Grid>
 
 
+               {/*Info principal*/}
                <VStack 
                   w={{ base: 'full', 'xl': '50%', '2xl': '45%'}} 
                   alignItems='flex-start'
                   spacing={20}
-               >
-                  
+               >  
                   <AnimatedText/>
-                  
                   <Text fontSize='2xl' className='text'>
                      Crea una cuenta y personaliza tu perfil,
                      conecta con empresas/desarrolladores
@@ -115,7 +114,7 @@ const Main = () => {
 
                      <Stack
                         w='full'
-                        direction={{ base: 'column', 'xl': 'row'}}
+                        direction={{ base: 'column', 'md': 'row'}}
                         spacing={20}
                         justifyContent={{ '2xl': 'flex-start' }}
                      >
@@ -128,10 +127,7 @@ const Main = () => {
                }
             </VStack>
          </HStack>
-
-
       </>
-
    );
 };
 

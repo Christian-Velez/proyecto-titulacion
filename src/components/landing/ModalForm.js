@@ -12,17 +12,16 @@ import {
 
 const ModalForm = ({
    title,
-   isOpen,
-   onClose,
    children,
+   ...rest
 }) => {
    return (
       <Modal
-         isOpen={isOpen}
-         onClose={onClose}
          isCentered
-         scrollBehavior='inside'
          size='xl'
+         
+         
+         { ...rest }
       >
          <ModalOverlay />
          <ModalContent padding={10}>
