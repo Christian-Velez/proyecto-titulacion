@@ -24,7 +24,6 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
-import Swal from 'sweetalert2';
 
 // Datos
 import {
@@ -35,6 +34,8 @@ import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat
 import { startUpdatingTech } from 'actions/admin/technologies';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
+import { isFormValid } from 'helpers/admin/isFormValid';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const EditTech = () => {
    const navigate = useNavigate();
@@ -42,15 +43,8 @@ const EditTech = () => {
    const { id } = useParams();
    const [isSaving, setIsSaving] = useState(false);
 
-   // Todas las tecnologias guardadas en el store
-   const { technologies: allTechs } = useSelector(
-      (state) => state.tech
-   );
-
-   // Tecnologia actual a editar
+   const { technologies: allTechs } = useSelector(state => state.tech);
    const technology = allTechs.find((tech) => tech.id === id);
-
-   // Todas las tecnologias con el formato requerido
    const formatedTechs = transformTechnologiesFormat(allTechs);
 
    // Valores del formulario
@@ -92,39 +86,31 @@ const EditTech = () => {
          setImg(technology.img);
       }
    }, [technology]);
+
    const { name, description, type } = formValues;
 
    const handleEditTech = (e) => {
       e.preventDefault();
 
-      if (
-         !name ||
-         !description ||
-         !type ||
-         !categories ||
-         categories.length === 0
-      ) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Rellene todos los campos solicitados',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-      } else {
-         dispatch(
-            startUpdatingTech(
-               id,
-               name,
-               description,
-               img,
-               type,
-               categories,
-               relatedTechs,
-               navigate,
-               setIsSaving
-            )
-         );
+      const techInfo = { id, name, description, img, type, categories, relatedTechs };
+
+      if(isFormValid(techInfo)) {
+         setIsSaving(true);
+         
+         dispatch(startUpdatingTech({ techInfo, navigate, setIsSaving}))
+            .then(() => {
+               setIsSaving(false);
+               successAlert({ message: 'Tecnología editada' });
+               navigate('/admin/technologies');
+            })
+            .catch((err) => {
+               setIsSaving(false);
+               console.log(err);
+               errorAlert({ message: 'Ocurrio un error al tratar de editar la tecnología' });
+            });
+      }
+      else {
+         errorAlert({ message: 'Rellene todos los campos solicitados'});
       }
    };
 

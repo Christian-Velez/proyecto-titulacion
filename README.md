@@ -7,14 +7,11 @@
    - `yarn build`
    - `yarn eject`
 
-
-
 ## Stack
  - ⚛️ React.js
- - 🟣 Redux
- - ⚡️ Chakra UI
- - 💻 Node.js
- - 🍃 MongoDB 
+ - 💾 Redux
+ - ⚡ Chakra UI
+
 
 
 

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { types } from 'types/types';
 import { imgUpload } from 'helpers/imgUpload';
 import Swal from 'sweetalert2';
+import { formatTechnologyToDB } from 'helpers/admin/formatTechnologyToDB';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -129,60 +130,11 @@ export const addNewTech = (newTech) => {
    };
 };
 
-export const startUpdatingTech = (
-   id,
-   name,
-   description,
-   img,
-   type,
-   categories,
-   relatedTechs,
-   navigate,
-   setIsLoading
-) => {
+export const startUpdatingTech = ({ techInfo }) => {
    return async (dispatch, getState) => {
       try {
-         setIsLoading(true);
-         let imgURL;
-         if (typeof img === 'string') {
-            imgURL = img;
-         } else {
-            // Se sube la nueva imagen a cloudinary
-            imgURL = await imgUpload(img);
-
-            if (!imgURL) {
-               return Swal.fire({
-                  icon: 'error',
-                  title: 'Error...',
-                  text: 'Ocurrio un error con la subida de la imagen',
-                  confirmButtonColor:
-                     'var(--chakra-colors-brand-500)',
-               });
-            }
-         }
-
-         // Si la imagen esta correcta...
-         const categoriesToDB = categories.map(
-            (cat) => {
-               const { label } = cat;
-               return label;
-            }
-         );
-
-         const relatedTechsToDB =
-            relatedTechs.map((tech) => {
-               const { value: id } = tech;
-               return id;
-            });
-
-         const techToDB = {
-            name,
-            img: imgURL,
-            description,
-            type,
-            categories: categoriesToDB,
-            relatedTechs: relatedTechsToDB,
-         };
+         const techToDB = await formatTechnologyToDB(techInfo);
+         const { id } = techToDB;
 
          // Header de autorizacion
          const { token } = getState().auth;
@@ -192,39 +144,12 @@ export const startUpdatingTech = (
             },
          };
 
-         const { data } = await axios.put(
-            `${API_URL}/api/technology/${id}`,
-            techToDB,
-            config
-         );
 
-         setIsLoading(false);
-
-
+         const URL = `${API_URL}/api/technology/${id}`;
+         const { data } = await axios.put(URL, techToDB, config);
          dispatch(editTech(id, data));
-         
-         navigate('/admin/technologies');
-         Swal.fire({
-            icon: 'success',
-            title: 'Hecho',
-            text: 'Tecnología editada',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-
-
       } catch (err) {
-         console.log(err);
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al tratar de editar la tecnología',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-         setIsLoading(false);
-
+         throw new Error(err.message);
       }
    };
 };
