@@ -13,9 +13,9 @@ import {
    FormLabel,
    Input,
 } from '@chakra-ui/react';
-import Swal from 'sweetalert2';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
@@ -29,23 +29,21 @@ const AddNewSoftForm = () => {
       e.preventDefault();
 
       if (!img || !name) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Rellene todos los campos solicitados',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-      } else {
-         dispatch(
-            startSubmittingSoftSkill(
-               name,
-               img,
-               navigate,
-               setIsSubmitting
-            )
-         );
+         return errorAlert({ message: 'Rellene todos los campos solicitados' });
       }
+         
+      setIsSubmitting(true);
+      dispatch(startSubmittingSoftSkill({name, img }))
+         .then(() => {
+            setIsSubmitting(false);
+            navigate('/admin/soft-skills');
+            successAlert({ message: 'Soft skill añadida' });
+         })
+         .catch(err => {
+            console.log(err);
+            errorAlert({ message: 'Ocurrio un error al tratar de agregar la soft skill'});
+            setIsSubmitting(false);
+         });
    };
 
    return (

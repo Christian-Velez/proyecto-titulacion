@@ -1,31 +1,22 @@
 // Hooks
-import React, {
-   useEffect,
-   useState,
-} from 'react';
-import {
-   useDispatch,
-   useSelector,
-} from 'react-redux';
-import {
-   useNavigate,
-   useParams,
-} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Info
 import { startUpdatingSoft } from 'actions/admin/softskills';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 // Componentes
+import Buttons from 'components/forms/Buttons';
+import ProfilePhoto from 'components/ProfilePhoto';
 import {
    FormControl,
-
    FormLabel,
    Heading,
    Input,
    VStack,
 } from '@chakra-ui/react';
-import Buttons from 'components/forms/Buttons';
-import ProfilePhoto from 'components/ProfilePhoto';
 
 
 
@@ -35,15 +26,11 @@ const EditSoft = () => {
    const dispatch = useDispatch();
    const [isSaving, setIsSaving] = useState(false);
 
-  
-
    // Todas las soft skills guardadas en el store
    const { softskills } = useSelector(state => state.soft);
-   // Tecnologia actual a editar
    const softskill = softskills.find(soft => soft.id === id);
 
-
-   // Controlar los valores del form
+   // Form Values
    const [name, setName] = useState('');
    const [img, setImg] = useState(null);
 
@@ -58,7 +45,20 @@ const EditSoft = () => {
 
    const handleEditSoft = (e) => {
       e.preventDefault();
-      dispatch(startUpdatingSoft(id, name, img, navigate, setIsSaving));
+
+      setIsSaving(true);
+
+      dispatch(startUpdatingSoft({ id, name, img }))
+         .then(() => {
+            setIsSaving(false);
+            navigate('/admin/soft-skills');
+            successAlert({ message: 'Soft skill editada' });
+         })
+         .catch(err => {
+            console.log(err);
+            errorAlert({ message: 'Ocurrio un error al tratar de editar la soft skill' });
+            setIsSaving(false);
+         });
    };
 
    return (
@@ -104,8 +104,6 @@ const EditSoft = () => {
                      }}
                   />
                </FormControl>
-
-               
 
                <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isSaving}/>
             </VStack>

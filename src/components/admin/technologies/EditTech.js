@@ -94,24 +94,22 @@ const EditTech = () => {
 
       const techInfo = { id, name, description, img, type, categories, relatedTechs };
 
-      if(isTechnologyFormValid(techInfo)) {
-         setIsSaving(true);
-         
-         dispatch(startUpdatingTech({ techInfo, navigate, setIsSaving}))
-            .then(() => {
-               setIsSaving(false);
-               successAlert({ message: 'Tecnología editada' });
-               navigate('/admin/technologies');
-            })
-            .catch((err) => {
-               setIsSaving(false);
-               console.log(err);
-               errorAlert({ message: 'Ocurrio un error al tratar de editar la tecnología' });
-            });
+      if(!isTechnologyFormValid(techInfo)) {
+         return errorAlert({ message: 'Rellene todos los campos solicitados'});
       }
-      else {
-         errorAlert({ message: 'Rellene todos los campos solicitados'});
-      }
+
+      setIsSaving(true);
+      dispatch(startUpdatingTech({ techInfo, navigate, setIsSaving}))
+         .then(() => {
+            setIsSaving(false);
+            successAlert({ message: 'Tecnología editada' });
+            navigate('/admin/technologies');
+         })
+         .catch((err) => {
+            setIsSaving(false);
+            console.log(err);
+            errorAlert({ message: 'Ocurrio un error al tratar de editar la tecnología' });
+         });
    };
 
    return (

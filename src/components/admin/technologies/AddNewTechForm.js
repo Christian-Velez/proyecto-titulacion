@@ -60,23 +60,20 @@ const AddNewTechForm = () => {
 
       const techInfo = { name, description, img, type, categories, relatedTechs };
 
-      if(isTechnologyFormValid(techInfo)) {
-         setIsSubmitting(true);
-
-         dispatch(startSubmittingTechnology({ techInfo}))
-            .then(() => {
-               navigate('/admin/technologies');
-               successAlert({ message: 'Tecnología añadida'});
-            })
-            .catch(err => {
-               console.log(err);
-               errorAlert({ message: 'Ocurrio un error al tratar de agregar la tecnología'});
-            });
-
+      if(!isTechnologyFormValid(techInfo)) {
+         return errorAlert({ message: 'Rellene todos los campos solicitados '});
       }
-      else {
-         errorAlert({ message: 'Rellene todos los campos solicitados '});
-      }
+
+      setIsSubmitting(true);
+      dispatch(startSubmittingTechnology({ techInfo}))
+         .then(() => {
+            navigate('/admin/technologies');
+            successAlert({ message: 'Tecnología añadida'});
+         })
+         .catch(err => {
+            console.log(err);
+            errorAlert({ message: 'Ocurrio un error al tratar de agregar la tecnología'});
+         });
    };
    return (
       <form

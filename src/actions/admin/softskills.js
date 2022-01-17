@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
+import { errorAlert } from 'helpers/SwalAlerts';
 import Swal from 'sweetalert2';
 import { types } from 'types/types';
 
@@ -9,10 +10,10 @@ const API_URL = process.env.REACT_APP_API_URL;
 export const startLoadingSoftSkills = () => {
    return async (dispatch) => {
       try {
-         const { data } = await axios.get(
-            `${API_URL}/api/softskill`
-         );
+         const URL = `${API_URL}/api/softskill`;
+         const { data } = await axios.get(URL);
          dispatch(setSoftSkills(data));
+         
       } catch (err) {
          Swal.fire({
             icon: 'error',
@@ -32,27 +33,13 @@ export const setSoftSkills = (softskills) => {
    };
 };
 
-export const startSubmittingSoftSkill = (
-   name,
-   img,
-   navigate,
-   setIsLoading
-) => {
+export const startSubmittingSoftSkill = ({ name, img }) => {
    return async (dispatch, getState) => {
       try {
-         setIsLoading(true);
          const imgURL = await imgUpload(img);
          if (!imgURL) {
-            return Swal.fire({
-               icon: 'error',
-               title: 'Error...',
-               text: 'Ocurrio un error con la subida de la imagen',
-               confirmButtonColor:
-                  'var(--chakra-colors-brand-500)',
-            });
+            return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
          }
-
-         // Si la imagen esta correcta...
 
          const softSkillToDB = {
             name,
@@ -67,35 +54,11 @@ export const startSubmittingSoftSkill = (
             },
          };
 
-         const { data } = await axios.post(
-            `${API_URL}/api/softskill`,
-            softSkillToDB,
-            config
-         );
-
-         setIsLoading(false);
+         const URL = `${API_URL}/api/softskill`;
+         const { data } = await axios.post(URL, softSkillToDB, config);
          dispatch(addNewSoft(data));
-
-         navigate('/admin/soft-skills');
-         Swal.fire({
-            icon: 'success',
-            title: 'Hecho',
-            text: 'Soft skill añadida',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
       } catch (err) {
-         console.log(err);
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al tratar de agregar la soft skill',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-         setIsLoading(false);
-
+         throw new Error(err.message);
       }
    };
 };
@@ -107,16 +70,9 @@ export const addNewSoft = (softskill) => {
    };
 };
 
-export const startUpdatingSoft = (
-   id,
-   name,
-   img,
-   navigate,
-   setIsLoading
-) => {
+export const startUpdatingSoft = ({ id, name, img }) => {
    return async (dispatch, getState) => {
       try {
-         setIsLoading(true);
 
          let imgURL;
          if (typeof img === 'string') {
@@ -124,19 +80,11 @@ export const startUpdatingSoft = (
          } else {
             // Se sube la nueva imagen a cloudinary
             imgURL = await imgUpload(img);
-
             if (!imgURL) {
-               return Swal.fire({
-                  icon: 'error',
-                  title: 'Error...',
-                  text: 'Ocurrio un error con la subida de la imagen',
-                  confirmButtonColor:
-                     'var(--chakra-colors-brand-500)',
-               });
+               return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
             }
          }
 
-         // Si la imagen esta correcta...
          const softToDB = {
             name,
             img: imgURL
@@ -150,37 +98,12 @@ export const startUpdatingSoft = (
             },
          };
 
-         const { data } = await axios.put(
-            `${API_URL}/api/softskill/${id}`,
-            softToDB,
-            config
-         );
+         const URL = `${API_URL}/api/softskill/${id}`;
+         const { data } = await axios.put(URL, softToDB, config);
 
-         setIsLoading(false);
          dispatch(editSoft(id, data));
-
-         navigate('/admin/soft-skills');
-         Swal.fire({
-            icon: 'success',
-            title: 'Hecho',
-            text: 'Soft skill editada',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-
-
       } catch (err) {
-         console.log(err);
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al tratar de editar la soft skill',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-         setIsLoading(false);
+         throw new Error(err.message);
       }
    };
 };
