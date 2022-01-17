@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import IconImg from './IconImg';
 import { EditIcon } from '@chakra-ui/icons';
-import Swal from 'sweetalert2';
+import { errorAlert } from 'helpers/SwalAlerts';
 
 const ProfilePhoto = ({
    current,
@@ -76,12 +76,8 @@ const ProfilePhoto = ({
             visibility='hidden'
             onInvalid={(e) => {
                e.preventDefault();
-               Swal.fire({
-                  icon: 'error',
-                  title: 'Adjunta una foto',
-                  confirmButtonColor:
-                     'var(--chakra-colors-brand-500)',
-               });
+
+               errorAlert({ title: 'Adjunta una foto' });
             }}
          />
 

@@ -34,7 +34,7 @@ import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat
 import { startUpdatingTech } from 'actions/admin/technologies';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
-import { isFormValid } from 'helpers/admin/isFormValid';
+import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
 import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const EditTech = () => {
@@ -94,7 +94,7 @@ const EditTech = () => {
 
       const techInfo = { id, name, description, img, type, categories, relatedTechs };
 
-      if(isFormValid(techInfo)) {
+      if(isTechnologyFormValid(techInfo)) {
          setIsSaving(true);
          
          dispatch(startUpdatingTech({ techInfo, navigate, setIsSaving}))

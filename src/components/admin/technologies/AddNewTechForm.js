@@ -26,10 +26,11 @@ import {
    Select,
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
-import Swal from 'sweetalert2';
 import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
+import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const AddNewTechForm = () => {
    const navigate = useNavigate();
@@ -53,37 +54,28 @@ const AddNewTechForm = () => {
    ] = useTechnologyForm(typesOfTech[0]);
    const { name, description, type } = formValues;
 
-   // Submit form
+
    const handleSubmitNewTech = (e) => {
       e.preventDefault();
-      if (
-         !name ||
-         !description ||
-         !img ||
-         !type ||
-         !categories ||
-         categories.length === 0
-      ) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Rellene todos los campos solicitados',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-      } else {
-         dispatch(
-            startSubmittingTechnology(
-               name,
-               description,
-               img,
-               type,
-               categories,
-               relatedTechs,
-               navigate,
-               setIsSubmitting
-            )
-         );
+
+      const techInfo = { name, description, img, type, categories, relatedTechs };
+
+      if(isTechnologyFormValid(techInfo)) {
+         setIsSubmitting(true);
+
+         dispatch(startSubmittingTechnology({ techInfo}))
+            .then(() => {
+               navigate('/admin/technologies');
+               successAlert({ message: 'Tecnología añadida'});
+            })
+            .catch(err => {
+               console.log(err);
+               errorAlert({ message: 'Ocurrio un error al tratar de agregar la tecnología'});
+            });
+
+      }
+      else {
+         errorAlert({ message: 'Rellene todos los campos solicitados '});
       }
    };
    return (
