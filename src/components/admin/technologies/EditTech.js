@@ -1,7 +1,6 @@
 // Hooks
 import React, {
    useEffect,
-   useState,
 } from 'react';
 import {
    useDispatch,
@@ -11,85 +10,75 @@ import {
    useNavigate,
    useParams,
 } from 'react-router-dom';
-import { useTechnologyForm } from 'hooks/useTechnologyForm';
 
-// Estilo
+// Componentes
+import BasicInput from 'components/forms/BasicInput';
+import ProfilePhoto from 'components/ProfilePhoto';
+import Buttons from 'components/forms/Buttons';
+import { Select as SpecialSelect } from 'chakra-react-select';
 import {
    FormControl,
    FormLabel,
    Heading,
-   Input,
    Select,
    Textarea,
    VStack,
 } from '@chakra-ui/react';
-import { Select as SpecialSelect } from 'chakra-react-select';
 
 // Datos
 import {
    typesOfTech,
    techCategories,
 } from 'helpers/appCategories';
-import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
+import { transformTechnologiesFormat } from 'helpers/admin/transformTechnologiesFormat';
 import { startUpdatingTech } from 'actions/admin/technologies';
-import Buttons from 'components/forms/Buttons';
-import ProfilePhoto from 'components/ProfilePhoto';
 import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { errorAlert } from 'helpers/SwalAlerts';
+import { startLoading } from 'actions/ui';
+import { formatTechnologyToDB } from 'helpers/admin/formatTechnologyToDB';
+import { useState } from 'react';
+import { useForm } from 'hooks/useForm';
 
 const EditTech = () => {
+   // Herramientas
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   
+   // Seleccionar tecnologia
    const { id } = useParams();
-   const [isSaving, setIsSaving] = useState(false);
-
    const { technologies: allTechs } = useSelector(state => state.tech);
    const technology = allTechs.find((tech) => tech.id === id);
    const formatedTechs = transformTechnologiesFormat(allTechs);
 
    // Valores del formulario
-   const [
-      formValues,
-      handleInputChange,
-      img,
-      setImg,
-      categories,
-      setCategories,
-      relatedTechs,
-      setRelatedTechs,
-      setFormValues,
-   ] = useTechnologyForm();
-
-   // Actualiza los formValues con la info de la tecnología actual
-   useEffect(() => {
-      if (technology) {
-         setFormValues({
-            name: technology.name,
-            description: technology.description,
-            type: technology.type,
-         });
-
-         const relatedTechsFormated =
-            transformTechnologiesFormat(
-               technology.relatedTechs
-            );
-         const categoriesFormated =
-            technology.categories.map((cat) => {
-               return {
-                  value: cat,
-                  label: cat,
-               };
-            });
-
-         setCategories(categoriesFormated);
-         setRelatedTechs(relatedTechsFormated);
-         setImg(technology.img);
-      }
-   }, [technology]);
-
+   const [ img, setImg ] = useState(technology.img);
+   const [ categories, setCategories ] = useState([]);
+   const [ relatedTechs, setRelatedTechs ] = useState([]);
+   const [ formValues, handleInputChange ] = useForm({
+      name: technology.name,
+      description: technology.description,
+      type: technology.type
+   });
    const { name, description, type } = formValues;
 
-   const handleEditTech = (e) => {
+   // Formatear las tecnologias seleccionadas iniciales
+   useEffect(() => {
+      const relatedTechsFormated = transformTechnologiesFormat(technology.relatedTechs);
+      const categoriesFormated =
+         technology.categories.map((cat) => {
+            return {
+               value: cat,
+               label: cat,
+            };
+         });
+
+      setRelatedTechs(relatedTechsFormated);
+      setCategories(categoriesFormated);
+   }, []);
+
+   
+
+   const handleEditTech = async (e) => {
       e.preventDefault();
 
       const techInfo = { id, name, description, img, type, categories, relatedTechs };
@@ -98,18 +87,9 @@ const EditTech = () => {
          return errorAlert({ message: 'Rellene todos los campos solicitados'});
       }
 
-      setIsSaving(true);
-      dispatch(startUpdatingTech({ techInfo, navigate, setIsSaving}))
-         .then(() => {
-            setIsSaving(false);
-            successAlert({ message: 'Tecnología editada' });
-            navigate('/admin/technologies');
-         })
-         .catch((err) => {
-            setIsSaving(false);
-            console.log(err);
-            errorAlert({ message: 'Ocurrio un error al tratar de editar la tecnología' });
-         });
+      dispatch(startLoading());
+      const techToDB = await formatTechnologyToDB(techInfo);
+      dispatch(startUpdatingTech( techToDB, navigate));
    };
 
    return (
@@ -121,8 +101,7 @@ const EditTech = () => {
          className='animate__animated animate__fadeIn animate__faster'
       >
          <Heading>
-            Editando{' '}
-            {technology && technology.name}
+            Editando { technology.name }
          </Heading>
 
          <form
@@ -134,26 +113,14 @@ const EditTech = () => {
                width={{ base: 'full', lg: '60%' }}
                alignItems='flex-start'
             >
-               {
-                  img &&
-                  <ProfilePhoto 
-                     text='Icono'
-                     current={img}
-                     setProfilePhoto={setImg}
-                     isRounded={false}
-                  />
-               }
-               <FormControl isRequired>
-                  <FormLabel fontSize='lg'>
-                     Nombre
-                  </FormLabel>
-                  <Input
-                     type='text'
-                     name='name'
-                     value={name}
-                     onChange={handleInputChange}
-                  />
-               </FormControl>
+               <ProfilePhoto 
+                  text='Icono'
+                  current={img}
+                  setProfilePhoto={setImg}
+                  isRounded={false}
+               />
+
+               <BasicInput text='Nombre' name='name' value={name} onChange={handleInputChange}/>
 
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>
@@ -209,26 +176,21 @@ const EditTech = () => {
                      Tecnologías relacionadas
                   </FormLabel>
 
-                  {formatedTechs && (
-                     <SpecialSelect
-                        isMulti
-                        placeholder='Seleccione las tecnologías...'
-                        closeMenuOnSelect={false}
-                        selectedOptionStyle='check'
-                        hideSelectedOptions={
-                           false
-                        }
-                        options={formatedTechs}
-                        value={relatedTechs}
-                        onChange={setRelatedTechs}
-                     />
-                  )}
+                  <SpecialSelect
+                     isMulti
+                     placeholder='Seleccione las tecnologías...'
+                     closeMenuOnSelect={false}
+                     selectedOptionStyle='check'
+                     hideSelectedOptions={false}
+                     options={formatedTechs}
+                     value={relatedTechs}
+                     onChange={setRelatedTechs}
+                  />
                </FormControl>
 
                <Buttons
                   cancelRoute='/admin/technologies'
                   actionText='Guardar'
-                  isLoading={isSaving}
                />
             </VStack>
          </form>

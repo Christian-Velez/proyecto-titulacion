@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { useForm } from './useForm';
 
-export const useTechnologyForm = (initialSelectedType = '') => {
+export const useTechnologyForm = ({ initialType }) => {
    // Selected
    const [formValues, handleInputChange,, setFormValues] =
       useForm({
          name: '',
-         description: '',
-         type: initialSelectedType,
+         description:'',
+         type: initialType,
       });
 
    const [img, setImg] = useState(null);
-   const [categories, setCategories] = useState();
-   const [relatedTechs, setRelatedTechs] =
-      useState([]);
+   const [categories, setCategories] = useState([]);
+   const [relatedTechs, setRelatedTechs] = useState([]);
 
    return [
       formValues,

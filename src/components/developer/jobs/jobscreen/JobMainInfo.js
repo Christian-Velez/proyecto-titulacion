@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import 'helpers/timeAgoRegister';
 import { useDispatch, useSelector } from 'react-redux';
 import { startApplyingProcess } from 'actions/developer/jobs';
+import { errorAlert } from 'helpers/SwalAlerts';
 
 const JobMainInfo = ({jobInfo}) => {
    const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +30,17 @@ const JobMainInfo = ({jobInfo}) => {
 
    const alreadyApply = applicants.includes(userId);
 
-   const handleApply = () => {
-     dispatch(startApplyingProcess(id, alreadyApply, setIsLoading));
+   const handleApply = async () => {
+      setIsLoading(true);
+
+      try {
+         await dispatch(startApplyingProcess(id, alreadyApply));
+      } catch(err) {
+         console.log(err);
+         errorAlert({ message: 'Ocurrió un error al tratar de realizar la operación' });
+      } finally {
+         setIsLoading(false);
+      }
    };
 
    return (

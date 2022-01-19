@@ -18,16 +18,17 @@ import {
    HStack,
    Input,
    InputGroup,
+   Text,
    VStack,
 } from '@chakra-ui/react';
+import { successAlert } from 'helpers/SwalAlerts';
 
 
 const DeveloperForm = () => {
    const dispatch = useDispatch();
-   const [isLoading, setIsLoading] =
-      useState(false);
-
+   const [isLoading, setIsLoading] = useState(false);
    const [show, setShow] = useState(false);
+   const [error, setError] = useState('');
 
    const [formValues, handleInputChange] =
       useForm({
@@ -36,34 +37,37 @@ const DeveloperForm = () => {
          age: '',
          password: '',
       });
-   const { name, username, age, password } =
-      formValues;
+   const { name, username, age, password } = formValues;
 
-   const handleSubmit = (e) => {
+      
+   const handleSubmit =  async (e) => {
       e.preventDefault();
 
-      if (isRegisterFormValid(formValues)) {
-         dispatch(
-            startRegisterNewAccount(
-               {
-                  ...formValues,
-               },
-               setIsLoading
-            )
-         );
+      const { isValid, msg } = isRegisterFormValid(formValues);
+      if(!isValid) {
+         return setError(msg);
+      }
+
+      setIsLoading(true);
+
+      try {
+         await dispatch(startRegisterNewAccount({ ...formValues }));
+         setTimeout(() => {
+            successAlert({ message: 'No te olvides de completar tu perfil para llegar a más personas!' });
+         }, 1000);
+      }
+      catch(err) {
+         setError(err.message);
+         setIsLoading(false);
       }
    };
-
 
    const handleCancelRegister = () => {
       dispatch(setAccountType('')); 
    };
 
-
    const date = new Date();
-   const maxDate = `${date.getFullYear() - 16}-${
-      date.getMonth() + 1
-   }-${date.getDate()}`;
+   const maxDate = `${date.getFullYear() - 16}-${date.getMonth() + 1}-${date.getDate()}`;
 
    return (
       <form
@@ -139,6 +143,9 @@ const DeveloperForm = () => {
                   /).
                </FormHelperText>
             </FormControl>
+
+            <Text color='red'> { error } </Text>
+
 
             <HStack>
                <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading} >

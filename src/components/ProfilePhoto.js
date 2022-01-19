@@ -20,9 +20,10 @@ const ProfilePhoto = ({
    isRounded = true,
    isRequired = false
 }) => {
-   const [currentImg, setCurrentImg] =
-      useState(current);
+   const [currentImg, setCurrentImg] = useState(current);
    
+
+
    // Se utiliza en los formularios agregar nueva techn/soft
    if (!currentImg) {
       setCurrentImg('/static/no-img.png');

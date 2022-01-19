@@ -5,17 +5,23 @@ import {
    FormLabel,
    Input,
    InputGroup,
+   Text,
    VStack,
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 import { startLogging } from 'actions/auth';
 import ShowHideButton from 'components/forms/ShowHideButton';
 
 const LoginForm = () => {
+   const { loading } = useSelector(state => state.ui);
    const dispatch = useDispatch();
    const [show, setShow] = useState(false);
-   const [isLoading, setIsLoading] = useState(false);
+
+
+   // importante manejar los erroeres en el login
+   const [error ] = useState('');
+
 
    const [formValues, handleInputChange] =
       useForm({
@@ -26,7 +32,12 @@ const LoginForm = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(startLogging(username, password, setIsLoading));
+
+      const user = {
+         username,
+         password
+      };
+      dispatch(startLogging(user));
    };
 
    return (
@@ -39,6 +50,9 @@ const LoginForm = () => {
             spacing={10}
             alignItems='flex-start'
          >
+            <Text color='red'> { error } </Text>
+
+
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
                   Nombre de usuario
@@ -70,11 +84,12 @@ const LoginForm = () => {
                </InputGroup>
             </FormControl>
 
+
             <Button
                width='full'
                size='lg'
                type='submit'
-               isLoading={isLoading}
+               isLoading={loading}
             >
                Iniciar sesión
             </Button>

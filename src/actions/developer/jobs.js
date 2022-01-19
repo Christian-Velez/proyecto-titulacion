@@ -1,14 +1,15 @@
 
-
 import axios from 'axios';
-import Swal from 'sweetalert2';
 const API_URL = process.env.REACT_APP_API_URL;
 import { types } from 'types/types';
 
+
+// GET
 export const startLoadingJobs = () => {
    return async(dispatch) => {
       try {
-         const { data } = await axios.get(`${API_URL}/api/jobs`);
+         const URL = `${API_URL}/api/jobs`;
+         const { data } = await axios.get(URL);
          dispatch(setAllJobs(data));
       }
       catch(err) {
@@ -25,12 +26,13 @@ export const setAllJobs = (allJobs) => {
 };
 
 
-export const startApplyingProcess = (jobId, alreadyApply, setIsLoading) => {
+// UPDATE -> Aplicar
+export const startApplyingProcess = (jobId, alreadyApply) => {
    return async(dispatch, getState) => {
-      try {
 
-         setIsLoading(true);
-         const route = alreadyApply ? 'cancelapply' : 'apply';
+      const route = alreadyApply ? 'cancelapply' : 'apply';
+
+      try {
 
          // Header de autorizacion
          const { token } = getState().auth;
@@ -40,20 +42,11 @@ export const startApplyingProcess = (jobId, alreadyApply, setIsLoading) => {
             },
          };
 
-         const { data } = await axios.put(`${API_URL}/api/jobs/${route}/${jobId}`, {}, config);
-         
+         const URL = `${API_URL}/api/jobs/${route}/${jobId}`;
+         const { data } = await axios.put(URL, {}, config);
          dispatch(updateJob(data.id, data));
-
-         setIsLoading(false);
-
       } catch(err) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Ocurrió un error al tratar de realizar la operación',
-            confirmButtonColor: 'var(--chakra-colors-brand-500)'
-         });
-         setIsLoading(false);
+         throw new Error(err.message);
       }
    };
 };
@@ -69,6 +62,7 @@ export const updateJob = (id, newJobInfo) => {
 };
 
 
+// Handle JobScreen view
 export const setIsJobSelected = (isSelected) => {
    return {
       type: types.setIsJobSelected,

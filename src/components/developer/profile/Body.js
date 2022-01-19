@@ -1,63 +1,19 @@
+
+import React from 'react';
+import TechnologiesCards from './TechnologiesCards';
+import ProjectsCards from './ProjectsCards';
+import CertificationsCards from './CertificationsCards';
+import SoftskillsCards from './SoftskillsCards';
+import EducationCards from './EducationCards';
 import {
    Divider,
    Text,
    Heading,
    HStack,
    VStack,
-   UnorderedList,
 } from '@chakra-ui/react';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import TechnologyCard from './TechnologyCard';
-import EmptySection from './EmptySection';
-import ProjectCard from './ProjectCard';
-import EducationCard from './EducationCard';
-import CertificationCard from './CertificationCard';
-import SoftskillCard from './SoftskillCard';
 
 const Body = () => {
-   const { 
-      technologies, 
-      projects, 
-      education, 
-      certifications, 
-      softskills 
-   } = useSelector(state => state.devInfo);
-
-   const technologiesCards = (technologies.length === 0) 
-      ? <EmptySection /> : 
-      technologies.map(tech => {
-         const { technology, yearsOfExperience }  = tech;
-         return <TechnologyCard key={technology.id} technology={technology} yearsOfExperience={yearsOfExperience}/>;
-      });
-
-   const projectsCards = (projects.length === 0) 
-      ? <EmptySection /> 
-      : projects.map(project => <ProjectCard key={project._id} project={project} />);
-
-
-   const educationCards = (education.length === 0) 
-      ?  <EmptySection />
-      :  <UnorderedList 
-            paddingLeft={10}
-            spacing={3}
-         >
-            { education.map(ed => <EducationCard key={ed._id} education={ed} />) }
-         </UnorderedList>;
-
-
-      
-   const certificationsCards = (certifications.length === 0) 
-      ? <EmptySection />
-      : certifications.map(cert => <CertificationCard key={cert._id} certification={cert}/>);
-
-   const softskillsCards = (softskills.length === 0)
-      ? <EmptySection />
-      : softskills.map((soft, i) => <SoftskillCard key={i} soft={soft} />);
-
-
-
-
    return (
       <VStack
          w='full'
@@ -110,7 +66,7 @@ const Body = () => {
                Tecnologías
             </Heading>
 
-            {technologiesCards}
+            <TechnologiesCards/>
          </VStack>
 
          <Divider />
@@ -120,7 +76,7 @@ const Body = () => {
             </Heading>
             <Text color='gray.600' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
 
-            {projectsCards}
+            <ProjectsCards />
          </VStack>
 
          <Divider />
@@ -128,7 +84,8 @@ const Body = () => {
             <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Educación
             </Heading>
-            {educationCards}
+            
+            <EducationCards />
          </VStack>
 
          <Divider />
@@ -136,7 +93,8 @@ const Body = () => {
             <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Licencias y certificaciones
             </Heading>
-            {certificationsCards}
+            
+            <CertificationsCards />
          </VStack>
 
          <Divider />
@@ -144,7 +102,8 @@ const Body = () => {
             <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
                Mis soft skills
             </Heading>
-            {softskillsCards}
+           
+            <SoftskillsCards />
          </VStack>
       </VStack>
    );

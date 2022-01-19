@@ -24,6 +24,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startPostingNewJob } from 'actions/company/job';
 import { useNavigate } from 'react-router-dom';
+import { errorAlert } from 'helpers/SwalAlerts';
+import { formatTechnologies } from 'helpers/formatTechnologies';
 
 const NewJobOfferScreen = () => {
    useEffect(() => {
@@ -55,18 +57,29 @@ const NewJobOfferScreen = () => {
    const [selectedSofts, setSelectedSofts] = useState([]);
 
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
-      dispatch(startPostingNewJob({
+
+      setIsPosting(true);
+
+      const newJobInfo = {
          title,
          description,
-         salary,
          category,
-         selectedTechs,
-         selectedSofts,
-         additional
-      }, setIsPosting, navigate));
+         additional,
+         salary: parseInt(salary),
+         techsRequired: formatTechnologies(selectedTechs),
+         softsRequired: selectedSofts.map(soft => soft.value)
+      };
 
+      try {
+         await dispatch(startPostingNewJob(newJobInfo));
+         navigate('/co/myoffers');
+      } catch(err) {
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error inesperado al tratar de postear tu oferta' });
+         setIsPosting(false);
+      }
    };
 
    return (

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { types } from 'types/types';
 import { startLogging } from './auth';
 
@@ -23,67 +22,36 @@ export const cleanRegisterState = () => {
 };
 
 
-export const startRegisterNewAccount = (userInfo, setIsLoading) => {
+export const startRegisterNewAccount = (userInfo) => {
    return async(dispatch, getState) => {
-      setIsLoading(true);
+
       const { accountType } = getState().register;
-
       const dateOfBirth = new Date(userInfo.age);
-      //const today = new Date();
-      //const age = today.getFullYear() - dateOfBirth.getFullYear();
-
-
       delete userInfo.age;
-
-
+      const default_img = `https://avatars.dicebear.com/api/initials/${userInfo.name.replace(/\s/g, '%20')}.svg`;
 
       const newUserToDB = {
          kind: accountType,
          dateOfBirth,
-         //age,
-         img: `https://avatars.dicebear.com/api/initials/${userInfo.name.replace(/\s/g, '%20')}.svg`,
+         img: default_img,
          ...userInfo
       };
 
       try {
          const { data } = await axios.post(`${API_URL}/api/register`, newUserToDB);
+         const user = {
+            username: data.username,
+            password: userInfo.password
+         };
 
-         setIsLoading(false);
-
-         dispatch(startLogging(data.username, userInfo.password));
-
-         setTimeout(() => {
-            Swal.fire({
-               icon: 'info',
-               title: 'Tip',
-               text: 'No te olvides de completar tu perfil para llegar a más personas!',
-               confirmButtonColor: 'var(--chakra-colors-brand-500)'
-            });
-         }, 1000);
+         dispatch(startLogging(user));
       }
-      catch(err){
+      catch(err) {
+         const message = err.response.data.message?.includes('E11000')
+         ? 'Utiliza un nombre de usuario distinto'
+         : 'Ocurrio un error inesperado al tratar de crear tu cuenta';
 
-         if(err.response.data.message?.includes('E11000')){
-            Swal.fire({
-               icon: 'error',
-               title: 'Oops...',
-               text: 'Utiliza un nombre de usuario distinto',
-               confirmButtonColor: 'var(--chakra-colors-brand-500)'
-            });
-         }
-
-         else {
-            Swal.fire({
-               icon: 'error',
-               title: 'Oops...',
-               text: 'Ocurrio un error inesperado al tratar de crear tu cuenta',
-               confirmButtonColor: 'var(--chakra-colors-brand-500)'
-            });
-         }
-
-
-         setIsLoading(false);
-
+         throw new Error(message);
       }
    };
 };

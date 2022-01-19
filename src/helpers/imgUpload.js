@@ -1,4 +1,4 @@
-const { default: axios } = require('axios');
+import axios from 'axios';
 
 export const imgUpload = async (file) => {
    // El try catch esta en las funciones superiores que utilizan esta func

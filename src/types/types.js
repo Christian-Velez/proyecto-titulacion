@@ -10,6 +10,13 @@ export const types = {
    logout: '[Auth] Logout',
    setChecking: '[Auth] Update checking state',
 
+   uiSetError: '[UI] Set error',
+   uiRemoveError: '[UI] Remove errror',
+   uiStartLoading: '[UI] Set UI state to loading...',
+   uiFinishLoading: '[UI] Finish loading',
+
+
+
    setAccountType: '[Register] Set account type',
    cleanRegisterState: '[Register] Clean all register fields',
 

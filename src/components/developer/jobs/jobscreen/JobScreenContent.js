@@ -18,6 +18,7 @@ const JobScreenContent = ({ job }) => {
    useEffect(() => {
       dispatch(setIsJobSelected(true));
         
+      // Cleanup
       return () => {
          dispatch(setIsJobSelected(false));
       };

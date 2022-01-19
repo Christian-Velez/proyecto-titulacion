@@ -1,7 +1,5 @@
 // Hooks
-import React, {
-   useState,
-} from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTechnologyForm } from 'hooks/useTechnologyForm';
 import {
@@ -9,33 +7,35 @@ import {
    useDispatch,
 } from 'react-redux';
 
-// Datos
+// Datos, helpers, actions
 import {
    typesOfTech,
    techCategories,
 } from 'helpers/appCategories';
 import { startSubmittingTechnology } from 'actions/admin/technologies';
+import { startLoading } from 'actions/ui';
+import { formatTechnologyToDB } from 'helpers/admin/formatTechnologyToDB';
+import { errorAlert } from 'helpers/SwalAlerts';
+import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
 
-// Estilos
+
+// Componentes
+import ProfilePhoto from 'components/ProfilePhoto';
+import Buttons from 'components/forms/Buttons';
+import BasicInput from 'components/forms/BasicInput';
+import { transformTechnologiesFormat } from 'helpers/admin/transformTechnologiesFormat';
 import {
    VStack,
    FormControl,
    FormLabel,
-   Input,
    Textarea,
    Select,
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
-import { transformTechnologiesFormat } from 'helpers/transformTechnologiesFormat';
-import Buttons from 'components/forms/Buttons';
-import ProfilePhoto from 'components/ProfilePhoto';
-import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const AddNewTechForm = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isSubmitting, setIsSubmitting] = useState(false);
    
    // Transforma las tecnologias al formato que se necesita en el SpecialSelect
    const { technologies } = useSelector(state => state.tech);
@@ -51,11 +51,13 @@ const AddNewTechForm = () => {
       setCategories,
       relatedTechs,
       setRelatedTechs,
-   ] = useTechnologyForm(typesOfTech[0]);
+   ] = useTechnologyForm({
+      initialType: typesOfTech[0]
+   });
    const { name, description, type } = formValues;
 
 
-   const handleSubmitNewTech = (e) => {
+   const handleSubmitNewTech = async (e) => {
       e.preventDefault();
 
       const techInfo = { name, description, img, type, categories, relatedTechs };
@@ -64,17 +66,11 @@ const AddNewTechForm = () => {
          return errorAlert({ message: 'Rellene todos los campos solicitados '});
       }
 
-      setIsSubmitting(true);
-      dispatch(startSubmittingTechnology({ techInfo}))
-         .then(() => {
-            navigate('/admin/technologies');
-            successAlert({ message: 'Tecnología añadida'});
-         })
-         .catch(err => {
-            console.log(err);
-            errorAlert({ message: 'Ocurrio un error al tratar de agregar la tecnología'});
-         });
+      dispatch(startLoading());
+      const formatedTech = await formatTechnologyToDB(techInfo);
+      dispatch(startSubmittingTechnology( formatedTech, navigate ));
    };
+
    return (
       <form
          style={{ width: '100%' }}
@@ -92,19 +88,8 @@ const AddNewTechForm = () => {
                isRounded={false}
                isRequired={true}
             />
-           
 
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Nombre
-               </FormLabel>
-               <Input
-                  type='text'
-                  name='name'
-                  value={name}
-                  onChange={handleInputChange}
-               />
-            </FormControl>
+            <BasicInput text='Nombre' name='name' value={name} onChange={handleInputChange}/>
 
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
@@ -175,7 +160,6 @@ const AddNewTechForm = () => {
             <Buttons
                cancelRoute='/admin/technologies'
                actionText='Agregar'
-               isLoading={isSubmitting}
             />
          </VStack>
       </form>

@@ -1,27 +1,21 @@
+import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
-import { errorAlert } from 'helpers/SwalAlerts';
-import Swal from 'sweetalert2';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 
+// GET
 export const startLoadingSoftSkills = () => {
    return async (dispatch) => {
       try {
          const URL = `${API_URL}/api/softskill`;
          const { data } = await axios.get(URL);
          dispatch(setSoftSkills(data));
-         
       } catch (err) {
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al cargar los datos',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
+         errorAlert({ message: 'Ocurrio un error al cargar los datos' });
       }
    };
 };
@@ -33,9 +27,14 @@ export const setSoftSkills = (softskills) => {
    };
 };
 
-export const startSubmittingSoftSkill = ({ name, img }) => {
+
+// POST
+export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
    return async (dispatch, getState) => {
       try {
+
+         dispatch(startLoading());
+         
          const imgURL = await imgUpload(img);
          if (!imgURL) {
             return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
@@ -56,9 +55,16 @@ export const startSubmittingSoftSkill = ({ name, img }) => {
 
          const URL = `${API_URL}/api/softskill`;
          const { data } = await axios.post(URL, softSkillToDB, config);
+         
          dispatch(addNewSoft(data));
+         navigate('/admin/soft-skills');
+         successAlert({ message: 'Soft skill añadida' });
+
       } catch (err) {
-         throw new Error(err.message);
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error al tratar de agregar la soft skill'});
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };
@@ -70,19 +76,18 @@ export const addNewSoft = (softskill) => {
    };
 };
 
-export const startUpdatingSoft = ({ id, name, img }) => {
+
+// UPDATE
+export const startUpdatingSoft = ({ id, name, img }, navigate) => {
    return async (dispatch, getState) => {
       try {
+         dispatch(startLoading());
 
-         let imgURL;
-         if (typeof img === 'string') {
-            imgURL = img;
-         } else {
-            // Se sube la nueva imagen a cloudinary
-            imgURL = await imgUpload(img);
-            if (!imgURL) {
-               return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
-            }
+
+         const imgURL = (typeof img === 'string') ? img : await imgUpload(img);
+   
+         if (!imgURL) {
+            return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
          }
 
          const softToDB = {
@@ -102,12 +107,17 @@ export const startUpdatingSoft = ({ id, name, img }) => {
          const { data } = await axios.put(URL, softToDB, config);
 
          dispatch(editSoft(id, data));
+         navigate('/admin/soft-skills');
+         successAlert({ message: 'Soft skill editada' });
+
       } catch (err) {
-         throw new Error(err.message);
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error al tratar de editar la soft skill' });
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };
-
 
 export const editSoft = (id, data) => {
    return {

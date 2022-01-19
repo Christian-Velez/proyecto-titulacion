@@ -12,7 +12,7 @@ import {
 
 // Actions
 import { startLoadingJobs } from 'actions/developer/jobs';
-import { filterJobs } from 'helpers/filterJobs';
+import { filterJobs } from 'helpers/developer/filterJobs';
 
 // Componentes
 import LoadingScreen from 'components/LoadingScreen';

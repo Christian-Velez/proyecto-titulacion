@@ -28,13 +28,13 @@ import {
    VStack 
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { processDevInfo } from 'helpers/developer/processDevInfo';
 
 const EditDeveloperProfile = () => {
    const navigate = useNavigate();
    const [isUpdating, setIsUpdating] = useState(false);
-
 
    useEffect(() => {
       window.scrollTo(0, 0);
@@ -68,19 +68,15 @@ const EditDeveloperProfile = () => {
 
 
    // Actualizar perfil
-   const handleEditDevProfile = (e) => {
+   const handleEditDevProfile = async (e) => {
       e.preventDefault();
 
       if(isEmpty(name) || isEmpty(location) || isEmpty(description)){
-         return Swal.fire({
-            icon: 'warning',
-            title: 'Error...',
-            text: 'Completa todos los campos requeridos para actualizar tu perfil',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
+         return errorAlert({ message: 'Completa todos los campos requeridos para actualizar tu perfil' });
       }
-      dispatch(startUpdatingDevInfo({
+
+      setIsUpdating(true);
+      const devInfo = {
          profilePhoto,
          name,
          location,
@@ -90,10 +86,21 @@ const EditDeveloperProfile = () => {
          education,
          certifications,
          selectedSofts
-      }, navigate, setIsUpdating));
+      };
+
+      try {
+         const formatedDevInfo = await processDevInfo(devInfo);
+         await dispatch(startUpdatingDevInfo(formatedDevInfo));
+         setIsUpdating(false);
+         navigate('/dev/profile');
+         successAlert({ message: 'Perfil actualizado '});
+      }
+      catch(err) {
+         console.log(err);
+         setIsUpdating(false);
+         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+      }
    };
-
-
 
    return (
       <VStack

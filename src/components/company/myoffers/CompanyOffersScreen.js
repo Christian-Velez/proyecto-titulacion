@@ -18,10 +18,7 @@ import CompanyJob from './CompanyJob';
 
 const CompanyOffersScreen = () => {
    const navigate = useNavigate();
-   const { jobs } = useSelector(
-      (state) => state.companyInfo
-   );
-
+   const { jobs } = useSelector(state => state.companyInfo);
 
    return (
       <VStack

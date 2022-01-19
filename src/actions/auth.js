@@ -1,26 +1,16 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { types } from 'types/types';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 
-export const startLogging = (
-   username,
-   password,
-   setIsLoading = ()=>{}
-) => {
+export const startLogging = (user) => {
    return async (dispatch) => {
       try {
-         setIsLoading(true);
-         const { data } = await axios.post(
-            `${API_URL}/api/login`,
-            {
-               username,
-               password,
-            }
-         );
+
+         const URL = `${API_URL}/api/login`;
+         const { data } = await axios.post(URL, user);
 
          let redirect;
          if (data.kind === 'Admin') {
@@ -33,86 +23,54 @@ export const startLogging = (
             redirect = '/co';
          }
 
-         localStorage.setItem(
-            'auth',
-            JSON.stringify({
-               id: data.id,
-               token: data.token,
-               role: data.kind,
-               redirect,
-            })
-         );
-         setIsLoading(false);
+         const userToSave = {
+            id: data.id,
+            token: data.token,
+            role: data.kind,
+            redirect,
+         };
 
-
-         dispatch(
-            setAuth(
-               data.id,
-               data.token,
-               data.kind,
-               redirect
-            )
-         );
-      } catch (err) {
-         if(err.message === 'Network Error') {
-            Swal.fire({
-               icon: 'error',
-               title: 'Oops...',
-               text: 'Revisa tu conexión a internet',
-               confirmButtonColor: 'var(--chakra-colors-brand-500)'
-            });
-         }
-         else {
-            Swal.fire({
-               icon: 'error',
-               title: 'Oops...',
-               text: 'Nombre de usuario o contraseña incorrectos',
-               confirmButtonColor: 'var(--chakra-colors-brand-500)'
-            });
-         }
-         setIsLoading(false);
-
+         localStorage.setItem('auth', JSON.stringify(userToSave));
+         dispatch(setAuth(userToSave));
          
+      } catch (err) {
+         throw new Error(err.message);
       }
    };
 };
 
-export const setAuth = (
-   id,
-   token,
-   role,
-   redirect
-) => {
-
+export const setAuth = (userInfo) => {
    return {
       type: types.login,
-      payload: { id, token, role, redirect },
+      payload: userInfo,
    };
 };
 
 
 
-// Para guardar la sesion en el usuario
-export const startCheckingIsTokenValid = ({ id, token, role, redirect }) => {
+// Para guardar la sesion en el usuario -> recibe el auth guardado en localStorage
+export const startCheckingIsTokenValid = (auth) => {
    return async (dispatch) => {
       try {
+
+         const { token } = auth;
+
+
          const config = {
             headers: {
                Authorization: `Bearer ${token}`,
             },
          };
 
-         const { data } = await axios.post(
-            `${API_URL}/api/login/verify`,
-            {},
-            config
-         );
 
-
+         // cambiarlo a un get
+         const URL = `${API_URL}/api/login/verify`;
+         const { data } = await axios.post(URL, {}, config);
          const { isValid } = data;
 
+
          if(isValid){
-            dispatch(setAuth(id, token, role, redirect));
+            dispatch(setAuth(auth));
          }
       } catch (err) {
          dispatch(generalLogout());

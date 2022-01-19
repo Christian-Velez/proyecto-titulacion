@@ -15,35 +15,23 @@ import {
 } from '@chakra-ui/react';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/ProfilePhoto';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { errorAlert } from 'helpers/SwalAlerts';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isSubmitting, setIsSubmitting] = useState(false);
 
    const [img, setImg] = useState();
    const [name, setName] = useState('');
-
-   const handleSubmitNewSoft = (e) => {
+   
+   const handleSubmitNewSoft = async (e) => {
       e.preventDefault();
 
       if (!img || !name) {
          return errorAlert({ message: 'Rellene todos los campos solicitados' });
       }
-         
-      setIsSubmitting(true);
-      dispatch(startSubmittingSoftSkill({name, img }))
-         .then(() => {
-            setIsSubmitting(false);
-            navigate('/admin/soft-skills');
-            successAlert({ message: 'Soft skill añadida' });
-         })
-         .catch(err => {
-            console.log(err);
-            errorAlert({ message: 'Ocurrio un error al tratar de agregar la soft skill'});
-            setIsSubmitting(false);
-         });
+      
+      dispatch(startSubmittingSoftSkill({name, img }, navigate));
    };
 
    return (
@@ -80,7 +68,6 @@ const AddNewSoftForm = () => {
 
             <Buttons
                cancelRoute='/admin/soft-skills'
-               isLoading={isSubmitting}
                actionText='Agregar'
             />
          </VStack>

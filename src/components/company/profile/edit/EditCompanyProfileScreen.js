@@ -19,9 +19,9 @@ import {
    useSelector,
 } from 'react-redux';
 import { isEmpty } from 'validator';
-import Swal from 'sweetalert2';
 import { startUpdatingCompanyInfo } from 'actions/company/user';
 import { useNavigate } from 'react-router-dom';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 const EditCompanyProfileScreen = () => {
    const dispatch = useDispatch();
@@ -48,32 +48,31 @@ const EditCompanyProfileScreen = () => {
    const [profilePhoto, setProfilePhoto] = useState(companyInfo.img);
 
 
-   const handleEditCompanyProfile = (e) => {
+   const handleEditCompanyProfile = async (e) => {
       e.preventDefault();
     
       if (isEmpty(name) || isEmpty(location) || isEmpty(description)) {
-         return Swal.fire({
-            icon: 'warning',
-            title: 'Error...',
-            text: 'Completa todos los campos requeridos para actualizar tu perfil',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
+         return errorAlert({ message: 'Completa todos los campos requeridos para actualizar tu perfil' });
       }
 
-      dispatch(
-         startUpdatingCompanyInfo(
-            {
-               name,
-               line,
-               location,
-               description,
-               profilePhoto,
-            },
-            navigate,
-            setIsUpdating
-         )
-      );
+      setIsUpdating(true);
+      const companyInfo = {
+         name,
+         line,
+         location,
+         description,
+         profilePhoto,
+      };
+
+      try {
+         await dispatch(startUpdatingCompanyInfo(companyInfo));
+         navigate('/co/profile');
+         successAlert({ message: 'Perfil actualizado'});
+      } catch(err) {
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+         setIsUpdating(false);
+      }
    };
 
 

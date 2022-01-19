@@ -41,9 +41,7 @@ const AdminRoutes = () => {
          dispatch(startLoadingTechnologies()),
          dispatch(startLoadingSoftSkills())
       ]).then(() => setIsLoading(false));
-
    }, []);
-
 
 
    return (

@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 // Info
 import { startUpdatingSoft } from 'actions/admin/softskills';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 
 // Componentes
 import Buttons from 'components/forms/Buttons';
@@ -24,7 +23,6 @@ const EditSoft = () => {
    const { id } = useParams();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [isSaving, setIsSaving] = useState(false);
 
    // Todas las soft skills guardadas en el store
    const { softskills } = useSelector(state => state.soft);
@@ -43,22 +41,10 @@ const EditSoft = () => {
    }, [softskill]);
 
 
-   const handleEditSoft = (e) => {
+   const handleEditSoft = async (e) => {
       e.preventDefault();
 
-      setIsSaving(true);
-
-      dispatch(startUpdatingSoft({ id, name, img }))
-         .then(() => {
-            setIsSaving(false);
-            navigate('/admin/soft-skills');
-            successAlert({ message: 'Soft skill editada' });
-         })
-         .catch(err => {
-            console.log(err);
-            errorAlert({ message: 'Ocurrio un error al tratar de editar la soft skill' });
-            setIsSaving(false);
-         });
+      dispatch(startUpdatingSoft({ id, name, img }, navigate));
    };
 
    return (
@@ -105,7 +91,7 @@ const EditSoft = () => {
                   />
                </FormControl>
 
-               <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills' isLoading={isSaving}/>
+               <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills'/>
             </VStack>
          </form>
       </VStack>

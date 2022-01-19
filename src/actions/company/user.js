@@ -1,34 +1,28 @@
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
-import Swal from 'sweetalert2';
+import { errorAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+// GET
 export const startSettingCompanyInfo = (
  
 ) => {
    return async (dispatch, getState) => {
       try {
          const { id } = getState().auth;
-         const { data } = await axios.get(
-            `${API_URL}/api/company/${id}`
-         );
+         const URL = `${API_URL}/api/company/${id}`;
+
+         const { data } = await axios.get(URL);
          const { companyInfo } = data;
 
          dispatch(setCompanyInfo(companyInfo));
 
-
-
-         
       } catch (err) {
-         return Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al tratar de cargar tu información :(',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
+         return errorAlert({ 
+            message: 'Ocurrio un error al tratar de cargar tu información :('
+         });  
       }
    };
 };
@@ -40,27 +34,22 @@ export const setCompanyInfo = (data) => {
    };
 };
 
-export const startUpdatingCompanyInfo = (
-   allCompanyInfo,
-   navigate,
-   setIsUpdating
-) => {
+
+// UPDATE
+export const startUpdatingCompanyInfo = (allCompanyInfo) => {
    return async (dispatch, getState) => {
       try {
-         setIsUpdating(true);
+
          const { id } = getState().auth;
 
 
          // Si elige una pp nueva, la sube a cloudinary
          const { profilePhoto } = allCompanyInfo;
-         let imgUrl = '';
-         if (typeof profilePhoto === 'string') {
-            imgUrl = profilePhoto;
-         }
-         else {
-            imgUrl = await imgUpload(profilePhoto);
-         }
+         const imgUrl = typeof profilePhoto === 'string'
+            ? profilePhoto
+            : await imgUpload(profilePhoto);
 
+    
          // Header de autorizacion
          const { token } = getState().auth;
          const config = {
@@ -69,43 +58,20 @@ export const startUpdatingCompanyInfo = (
             },
          };
 
-
          const updatedCompanyToDB = {
             ...allCompanyInfo,
             img: imgUrl
          };
 
-
-         const { data } = await axios.put(`${API_URL}/api/company/${id}`, updatedCompanyToDB, config);
+         const URL = `${API_URL}/api/company/${id}`;
+         const { data } = await axios.put(URL, updatedCompanyToDB, config);
          dispatch(updateCompanyInfo(data.newUser));
-
-         setIsUpdating(false);
-         navigate('/co/profile');
-
-         Swal.fire({
-            icon: 'success',
-            title: 'Hecho',
-            text: 'Perfil actualizado',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-
+         
       } catch (err) {
-         console.log(err);
-         Swal.fire({
-            icon: 'error',
-            title: 'Error...',
-            text: 'Ocurrio un error al tratar de actualizar tu perfil',
-            confirmButtonColor:
-               'var(--chakra-colors-brand-500)',
-         });
-
-         setIsUpdating(false);
+         throw new Error(err.message);
       }
    };
 };
-
 
 export const updateCompanyInfo = (data) => {
    return {

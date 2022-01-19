@@ -2,9 +2,6 @@
 
 
 // Utilizado en el buscador de trabajos para desarrolladores
-
-
-
 export const filterJobs = (allJobs, filters) => {
 
    let { salary, categories, title } = filters;

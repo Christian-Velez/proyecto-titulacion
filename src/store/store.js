@@ -11,6 +11,7 @@ import { types } from 'types/types';
 // General
 import { authReducer } from 'reducers/authReducer';
 import { registerReducer } from 'reducers/registerReducer';
+import { uiReducer } from 'reducers/uiReducer';
 
 // Admin
 import { techReducer } from 'reducers/admin/techReducer';
@@ -29,6 +30,7 @@ import { companyReducer } from 'reducers/company/companyReducer';
 const appReducers = combineReducers({
    auth: authReducer,
    register: registerReducer,
+   ui: uiReducer,
 
    // Admin
    tech: techReducer,
@@ -40,9 +42,6 @@ const appReducers = combineReducers({
 
    // Company
    companyInfo: companyReducer,
-
-
-   
 });
 
 
