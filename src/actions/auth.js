@@ -34,7 +34,8 @@ export const startLogging = (user) => {
          dispatch(setAuth(userToSave));
          
       } catch (err) {
-         throw new Error(err.message);
+         console.log(err);
+         
       }
    };
 };

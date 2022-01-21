@@ -13,9 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const CompanyJob = ({job})=> {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const { id, title, created_at, techsRequired, active, salary } = job;
-
-
+   const { id, title, created_at, techsRequired, active, salary, applicants } = job;
 
    const handleToggleJob = () => {
       dispatch(startUpdatingJob({id, active: !active}));
@@ -64,7 +62,7 @@ const CompanyJob = ({job})=> {
                fontSize='sm'
                flexWrap='wrap'
             >
-               
+               <Text> { applicants.length } { applicants.length === 1 ? 'candidato' : 'candidatos'} </Text> 
                <HStack>
                   <CalendarIcon />
                   <Text> {`${DD}-${MM}-${YY}`}</Text>
