@@ -1,7 +1,9 @@
+import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
-import { errorAlert } from 'helpers/SwalAlerts';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -36,9 +38,11 @@ export const setCompanyInfo = (data) => {
 
 
 // UPDATE
-export const startUpdatingCompanyInfo = (allCompanyInfo) => {
+export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
    return async (dispatch, getState) => {
       try {
+
+         dispatch(startLoading());
 
          const { id } = getState().auth;
 
@@ -48,27 +52,30 @@ export const startUpdatingCompanyInfo = (allCompanyInfo) => {
          const imgUrl = typeof profilePhoto === 'string'
             ? profilePhoto
             : await imgUpload(profilePhoto);
-
-    
-         // Header de autorizacion
-         const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
-
+            
          const updatedCompanyToDB = {
             ...allCompanyInfo,
             img: imgUrl
          };
+    
+         // Header de autorizacion
+         const { token } = getState().auth;
+         const config = getAxiosConfig(token);
+
+         
 
          const URL = `${API_URL}/api/company/${id}`;
+         
          const { data } = await axios.put(URL, updatedCompanyToDB, config);
          dispatch(updateCompanyInfo(data.newUser));
-         
+         navigate('/co/profile');
+         successAlert({ message: 'Perfil actualizado'});
+
       } catch (err) {
-         throw new Error(err.message);
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };

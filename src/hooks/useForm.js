@@ -4,8 +4,7 @@ import { useState } from 'react';
 export const useForm = (initialState = {}) => {
    //initialState: objeto con los campos del form; id, desc, etc.
 
-   const [formValues, setFormValues] =
-      useState(initialState);
+   const [formValues, setFormValues] = useState(initialState);
 
    const resetForm = () => {
       setFormValues(initialState);

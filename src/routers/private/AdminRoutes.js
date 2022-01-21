@@ -34,7 +34,6 @@ const AdminRoutes = () => {
    const [ isLoading, setIsLoading ] = useState(true);
    const dispatch = useDispatch();
    
-
    // Carga toda la informacion inicial necesaria
    useEffect(() => {
       Promise.all([

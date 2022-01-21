@@ -21,22 +21,18 @@ import {
 import { isEmpty } from 'validator';
 import { startUpdatingCompanyInfo } from 'actions/company/user';
 import { useNavigate } from 'react-router-dom';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { errorAlert } from 'helpers/SwalAlerts';
 
 const EditCompanyProfileScreen = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
-   const [isUpdating, setIsUpdating] =
-      useState(false);
    useEffect(() => {
       window.scrollTo(0, 0);
    }, []);
 
-   // Informacion previa
-   const companyInfo = useSelector(
-      (state) => state.companyInfo
-   );
+   // Informacion de la empresa
+   const companyInfo = useSelector((state) => state.companyInfo);
    const [formValues, handleInputChange] =
       useForm({
          name: companyInfo.name,
@@ -45,7 +41,7 @@ const EditCompanyProfileScreen = () => {
          description: companyInfo.description,
       });
    const { name, line, location, description } = formValues;
-   const [profilePhoto, setProfilePhoto] = useState(companyInfo.img);
+   const [ profilePhoto, setProfilePhoto ] = useState(companyInfo.img);
 
 
    const handleEditCompanyProfile = async (e) => {
@@ -55,24 +51,12 @@ const EditCompanyProfileScreen = () => {
          return errorAlert({ message: 'Completa todos los campos requeridos para actualizar tu perfil' });
       }
 
-      setIsUpdating(true);
       const companyInfo = {
-         name,
-         line,
-         location,
-         description,
+         ...formValues,
          profilePhoto,
       };
 
-      try {
-         await dispatch(startUpdatingCompanyInfo(companyInfo));
-         navigate('/co/profile');
-         successAlert({ message: 'Perfil actualizado'});
-      } catch(err) {
-         console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
-         setIsUpdating(false);
-      }
+      dispatch(startUpdatingCompanyInfo(companyInfo, navigate));
    };
 
 
@@ -146,7 +130,6 @@ const EditCompanyProfileScreen = () => {
                </FormControl>
 
                <Buttons
-                  isLoading={isUpdating}
                   cancelRoute='/co/profile'
                   actionText='Guardar'
                />

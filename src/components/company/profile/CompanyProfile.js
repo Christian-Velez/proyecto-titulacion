@@ -21,8 +21,6 @@ const CompanyProfile = () => {
       navigate('./edit');
    };
 
-
-
    return (
       <VStack
          padding={{ base: 10, lg: 30, xl: 40 }}

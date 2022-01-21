@@ -24,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startPostingNewJob } from 'actions/company/job';
 import { useNavigate } from 'react-router-dom';
-import { errorAlert } from 'helpers/SwalAlerts';
 import { formatTechnologies } from 'helpers/formatTechnologies';
 
 const NewJobOfferScreen = () => {
@@ -33,7 +32,6 @@ const NewJobOfferScreen = () => {
    },[]);
 
 
-   const [isPosting, setIsPosting] = useState(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -60,8 +58,6 @@ const NewJobOfferScreen = () => {
    const handleSubmit = async (e) => {
       e.preventDefault();
 
-      setIsPosting(true);
-
       const newJobInfo = {
          title,
          description,
@@ -72,14 +68,7 @@ const NewJobOfferScreen = () => {
          softsRequired: selectedSofts.map(soft => soft.value)
       };
 
-      try {
-         await dispatch(startPostingNewJob(newJobInfo));
-         navigate('/co/myoffers');
-      } catch(err) {
-         console.log(err);
-         errorAlert({ message: 'Ocurrio un error inesperado al tratar de postear tu oferta' });
-         setIsPosting(false);
-      }
+      dispatch(startPostingNewJob(newJobInfo, navigate));
    };
 
    return (
@@ -206,7 +195,7 @@ const NewJobOfferScreen = () => {
                  
 
 
-               <Buttons actionText='Publicar' cancelRoute='/co/myoffers' isLoading={isPosting}/>
+               <Buttons actionText='Publicar' cancelRoute='/co/myoffers'/>
 
             </VStack>
          </form>

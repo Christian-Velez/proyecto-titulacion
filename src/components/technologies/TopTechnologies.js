@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
    Heading,
    HStack,
@@ -7,8 +6,11 @@ import {
 } from '@chakra-ui/react';
 import { sortByPopularity } from 'helpers/searchTechs';
 import PodiumTechItem from './PodiumTechItem';
+import { useSelector } from 'react-redux';
 
-const TopTechnologies = ({ allTechsAvailable}) => {
+const TopTechnologies = () => {
+   // Recupera las tecnologias 
+   const { technologies: allTechsAvailable } = useSelector(state => state.tech);
    const orderedTechs = sortByPopularity([...allTechsAvailable]);
 
    return (
@@ -30,8 +32,5 @@ const TopTechnologies = ({ allTechsAvailable}) => {
    );
 };
 
-TopTechnologies.propTypes = {
-   allTechsAvailable: PropTypes.array,
-};
 
 export default TopTechnologies;

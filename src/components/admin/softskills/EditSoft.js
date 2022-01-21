@@ -43,7 +43,6 @@ const EditSoft = () => {
 
    const handleEditSoft = async (e) => {
       e.preventDefault();
-
       dispatch(startUpdatingSoft({ id, name, img }, navigate));
    };
 

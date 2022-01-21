@@ -1,8 +1,17 @@
 import axios from 'axios';
 import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
+
+
+const REDIRECTS = {
+   Admin: '/admin',
+   Developer: '/dev',
+   Company: '/co'
+};
+
 
 
 export const startLogging = (user) => {
@@ -12,16 +21,7 @@ export const startLogging = (user) => {
          const URL = `${API_URL}/api/login`;
          const { data } = await axios.post(URL, user);
 
-         let redirect;
-         if (data.kind === 'Admin') {
-            redirect = '/admin';
-         }
-         if (data.kind === 'Developer') {
-            redirect = '/dev';
-         }
-         if (data.kind === 'Company') {
-            redirect = '/co';
-         }
+         const redirect = REDIRECTS[data?.kind];
 
          const userToSave = {
             id: data.id,
@@ -54,14 +54,7 @@ export const startCheckingIsTokenValid = (auth) => {
       try {
 
          const { token } = auth;
-
-
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
-
+         const config = getAxiosConfig(token);
 
          // cambiarlo a un get
          const URL = `${API_URL}/api/login/verify`;

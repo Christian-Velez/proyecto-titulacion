@@ -29,12 +29,12 @@ import {
 } from '@chakra-ui/react';
 import { Select as SpecialSelect } from 'chakra-react-select';
 import { useNavigate } from 'react-router-dom';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { errorAlert } from 'helpers/SwalAlerts';
 import { processDevInfo } from 'helpers/developer/processDevInfo';
+import { startLoading } from 'actions/ui';
 
 const EditDeveloperProfile = () => {
    const navigate = useNavigate();
-   const [isUpdating, setIsUpdating] = useState(false);
 
    useEffect(() => {
       window.scrollTo(0, 0);
@@ -47,7 +47,6 @@ const EditDeveloperProfile = () => {
    const [softsHere] = useState(formatSoftskills([...softskills]));
    const devInfo = useSelector(state => state.devInfo);
  
-
 
    // Datos SELECCIONADOS
    const [
@@ -75,7 +74,7 @@ const EditDeveloperProfile = () => {
          return errorAlert({ message: 'Completa todos los campos requeridos para actualizar tu perfil' });
       }
 
-      setIsUpdating(true);
+      dispatch(startLoading());
       const devInfo = {
          profilePhoto,
          name,
@@ -88,18 +87,8 @@ const EditDeveloperProfile = () => {
          selectedSofts
       };
 
-      try {
-         const formatedDevInfo = await processDevInfo(devInfo);
-         await dispatch(startUpdatingDevInfo(formatedDevInfo));
-         setIsUpdating(false);
-         navigate('/dev/profile');
-         successAlert({ message: 'Perfil actualizado '});
-      }
-      catch(err) {
-         console.log(err);
-         setIsUpdating(false);
-         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
-      }
+      const formatedDevInfo = await processDevInfo(devInfo);
+      dispatch(startUpdatingDevInfo(formatedDevInfo, navigate));
    };
 
    return (
@@ -161,7 +150,7 @@ const EditDeveloperProfile = () => {
                      )}
                   </FormControl>  
                </FormControl>
-               <Buttons isLoading={isUpdating} cancelRoute='/dev/profile' actionText='Guardar'/>
+               <Buttons cancelRoute='/dev/profile' actionText='Guardar'/>
             </VStack>
          </form>
       </VStack>

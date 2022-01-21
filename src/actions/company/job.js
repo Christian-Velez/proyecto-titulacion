@@ -1,30 +1,35 @@
 import axios from 'axios';
 import { types } from 'types/types';
+import { finishLoading, startLoading } from 'actions/ui';
+import { errorAlert } from 'helpers/SwalAlerts';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 
 
 // POST
-export const startPostingNewJob = (jobInfo) => {
+export const startPostingNewJob = (jobInfo, navigate) => {
    return async(dispatch, getState) => {
       try {
-         
+         dispatch(startLoading());
+
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig(token);
 
          const URL = `${API_URL}/api/jobs`;
          const { data } = await axios.post(URL, jobInfo, config);
          dispatch(addNewJobOffer(data));
+         navigate('/co/myoffers');
 
       } catch(err) {
-         throw new Error(err.message);
-      }      
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error inesperado al tratar de postear tu oferta' });
+      
+      } finally {
+         dispatch(finishLoading());
+      }
    };
 
 };
@@ -52,11 +57,8 @@ export const startUpdatingJob = (newJobInfo) => {
 
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig(token);
+
 
          const URL = `${API_URL}/api/jobs/${id}`;
          const { data } = await axios.put(URL, jobToDB, config);

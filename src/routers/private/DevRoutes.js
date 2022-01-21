@@ -34,8 +34,6 @@ import ApplicationsScreen from 'components/developer/applications/ApplicationsSc
 import { Stack } from '@chakra-ui/react';
 
 
-
-
 const DevRoutes = () => {
    const dispatch = useDispatch();
    const [isLoading, setIsLoading] = useState(true);
@@ -65,10 +63,8 @@ const DevRoutes = () => {
             isLoading
             ? <LoadingScreen />
             : (
-
             <>
                <SideBar />
-               
                <Routes>
                
                   <Route path='/welcome' element={ <WelcomeDeveloper /> } />

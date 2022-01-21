@@ -1,6 +1,5 @@
 // Hooks
 import React, { useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useForm } from 'hooks/useForm';
 import { useSearchParams } from 'react-router-dom';
 
@@ -42,7 +41,7 @@ const Search = () => {
 
 
    const filteredTechs = useMemo(() => {
-      // No utilizo los formValues debido a que cada
+      // No utilizo los formValues debido a que cada vez
       // que cambiara la caja de texto se haría la busqueda
 
       // La busqueda solo se hace cuando presiona Enter
@@ -150,11 +149,6 @@ const Search = () => {
       </VStack>
 
    );
-};
-
-Search.propTypes = {
-   allTechsAvailable: PropTypes.array,
-   setFilteredTechs: PropTypes.func
 };
 
 export default Search;

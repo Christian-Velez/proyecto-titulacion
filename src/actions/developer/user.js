@@ -1,7 +1,8 @@
 
 
+import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
-import { errorAlert } from 'helpers/SwalAlerts';
+import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
 
 
@@ -37,9 +38,11 @@ export const setDevInfo = (data) => {
 
 
 // UPDATE
-export const startUpdatingDevInfo = ( newDevInfo ) => {
+export const startUpdatingDevInfo = ( newDevInfo, navigate ) => {
    return async (dispatch, getState) => {
       try {
+         dispatch(startLoading());
+
 
          const { id } = getState().auth;
          
@@ -53,10 +56,18 @@ export const startUpdatingDevInfo = ( newDevInfo ) => {
 
          const URL = `${API_URL}/api/developer/${id}`;
          const { data } = await axios.put(URL, newDevInfo, config);
+
+
          dispatch(updateDevInfo(data.newUser));
+         navigate('/dev/profile');
+         successAlert({ message: 'Perfil actualizado '});
       }
       catch(err){
-         throw new Error(err.message);
+         console.log(err);
+         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { types } from 'types/types';
 import { finishLoading, startLoading } from 'actions/ui';
 import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -31,11 +32,7 @@ export const startSubmittingTechnology = (techToDB, navigate) => {
 
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig(token);
 
          const URL = `${API_URL}/api/technology`;
          const { data } = await axios.post(URL, techToDB, config);
@@ -69,11 +66,7 @@ export const startUpdatingTech = ( techInfo, navigate) => {
 
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig(token);
 
          const { id } = techInfo;
          const URL = `${API_URL}/api/technology/${id}`;

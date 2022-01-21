@@ -33,17 +33,17 @@ import { Outlet } from 'react-router-dom';
 
 
 const SearchJobScreen = () => {
-   const { isJobSelected } = useSelector(state => state.devJobs);
+   const dispatch = useDispatch();
+   const [isLoading, setIsLoading] = useState(true);
+
+   // Todos los trabajos disponibles
+   const { allJobs, isJobSelected } = useSelector(state => state.devJobs);
 
    // Utilizado para abrir los filtros en dispositivos pequeños
    // Lo controla un boton dentro del componente Search
    const filtersModal = useDisclosure();
 
-   const dispatch = useDispatch();
-   const [isLoading, setIsLoading] = useState(true);
 
-   // Todos los trabajos disponibles
-   const { allJobs } = useSelector(state => state.devJobs);
 
    // Trabajos con los filtros aplicados
    const [filters, setFilters] = useState({

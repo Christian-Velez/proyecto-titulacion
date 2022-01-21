@@ -3,6 +3,7 @@ import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
 import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -47,11 +48,7 @@ export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
 
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig(token);
 
          const URL = `${API_URL}/api/softskill`;
          const { data } = await axios.post(URL, softSkillToDB, config);
@@ -97,12 +94,8 @@ export const startUpdatingSoft = ({ id, name, img }, navigate) => {
 
          // Header de autorizacion
          const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
-
+         const config = getAxiosConfig(token);
+         
          const URL = `${API_URL}/api/softskill/${id}`;
          const { data } = await axios.put(URL, softToDB, config);
 

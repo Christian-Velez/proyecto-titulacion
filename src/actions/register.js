@@ -25,9 +25,12 @@ export const cleanRegisterState = () => {
 export const startRegisterNewAccount = (userInfo) => {
    return async(dispatch, getState) => {
 
+
       const { accountType } = getState().register;
+      
       const dateOfBirth = new Date(userInfo.age);
       delete userInfo.age;
+
       const default_img = `https://avatars.dicebear.com/api/initials/${userInfo.name.replace(/\s/g, '%20')}.svg`;
 
       const newUserToDB = {

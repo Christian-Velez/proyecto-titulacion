@@ -1,25 +1,17 @@
 // Hooks
 import React from 'react';
-import { useSelector } from 'react-redux';
-
 
 // Componentes
+import Search from './Search';
+import TopTechnologies from './TopTechnologies';
 import {
    Heading,
    Text,
    VStack,
    Divider,
 } from '@chakra-ui/react';
-import Search from './Search';
-import TopTechnologies from './TopTechnologies';
-
-
-
 
 const TechnologiesSearchScreen = () => {
-   // Recupera las tecnologias 
-   const { technologies: allTechsAvailable } = useSelector(state => state.tech);
-
    return (
       <VStack
          padding={{ base: 7, lg: 20}}
@@ -33,15 +25,17 @@ const TechnologiesSearchScreen = () => {
                <Heading fontSize={{ base: '2xl', lg: '3xl'}}> Tecnologías </Heading>
          
                {/* Top */}
-               <TopTechnologies allTechsAvailable={allTechsAvailable} />
+               <TopTechnologies />
 
 
 
                {/*Buscador  y resultados*/}
                <VStack w='full' alignItems='flex-start' spacing={10}>
                   <Divider id='results'/>
+
                   <Text> Consulta las tecnologías disponibles en el sitio.</Text>
-                  <Search allTechsAvailable={allTechsAvailable}/>
+                  <Search/>
+               
                </VStack>
             </VStack>
          
