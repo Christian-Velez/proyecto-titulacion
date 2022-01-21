@@ -59,8 +59,7 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
          };
     
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
 
          
 

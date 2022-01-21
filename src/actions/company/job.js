@@ -10,13 +10,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 // POST
 export const startPostingNewJob = (jobInfo, navigate) => {
-   return async(dispatch, getState) => {
+   return async(dispatch) => {
       try {
          dispatch(startLoading());
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
 
          const URL = `${API_URL}/api/jobs`;
          const { data } = await axios.post(URL, jobInfo, config);
@@ -44,7 +43,7 @@ export const addNewJobOffer = (newJob) => {
 
 // UPDATE -> archivar
 export const startUpdatingJob = (newJobInfo) => {
-   return async (dispatch, getState) => {
+   return async (dispatch) => {
       try {
 
          const { id, ...rest } = newJobInfo;
@@ -56,8 +55,7 @@ export const startUpdatingJob = (newJobInfo) => {
 
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
 
 
          const URL = `${API_URL}/api/jobs/${id}`;

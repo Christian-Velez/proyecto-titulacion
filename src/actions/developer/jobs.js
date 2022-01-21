@@ -2,6 +2,7 @@
 import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 
 // GET
@@ -28,23 +29,20 @@ export const setAllJobs = (allJobs) => {
 
 // UPDATE -> Aplicar
 export const startApplyingProcess = (jobId, alreadyApply) => {
-   return async(dispatch, getState) => {
+   return async(dispatch) => {
 
       const route = alreadyApply ? 'cancelapply' : 'apply';
 
       try {
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig();
+         
 
          const URL = `${API_URL}/api/jobs/${route}/${jobId}`;
          const { data } = await axios.put(URL, {}, config);
          dispatch(updateJob(data.id, data));
+         
       } catch(err) {
          throw new Error(err.message);
       }

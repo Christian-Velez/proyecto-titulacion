@@ -15,6 +15,7 @@ export const startLoadingSoftSkills = () => {
          const URL = `${API_URL}/api/softskill`;
          const { data } = await axios.get(URL);
          dispatch(setSoftSkills(data));
+
       } catch (err) {
          errorAlert({ message: 'Ocurrio un error al cargar los datos' });
       }
@@ -31,7 +32,7 @@ export const setSoftSkills = (softskills) => {
 
 // POST
 export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
-   return async (dispatch, getState) => {
+   return async (dispatch) => {
       try {
 
          dispatch(startLoading());
@@ -47,8 +48,7 @@ export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
          };
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
 
          const URL = `${API_URL}/api/softskill`;
          const { data } = await axios.post(URL, softSkillToDB, config);
@@ -76,7 +76,7 @@ export const addNewSoft = (softskill) => {
 
 // UPDATE
 export const startUpdatingSoft = ({ id, name, img }, navigate) => {
-   return async (dispatch, getState) => {
+   return async (dispatch) => {
       try {
          dispatch(startLoading());
 
@@ -93,8 +93,7 @@ export const startUpdatingSoft = ({ id, name, img }, navigate) => {
          };
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
          
          const URL = `${API_URL}/api/softskill/${id}`;
          const { data } = await axios.put(URL, softToDB, config);

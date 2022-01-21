@@ -59,14 +59,13 @@ export const addNewTech = (newTech) => {
 };
 
 export const startUpdatingTech = ( techInfo, navigate) => {
-   return async (dispatch, getState) => {
+   return async (dispatch) => {
       try {
          dispatch(startLoading());
 
 
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = getAxiosConfig(token);
+         const config = getAxiosConfig();
 
          const { id } = techInfo;
          const URL = `${API_URL}/api/technology/${id}`;

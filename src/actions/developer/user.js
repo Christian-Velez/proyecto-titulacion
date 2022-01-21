@@ -4,6 +4,7 @@ import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -47,12 +48,7 @@ export const startUpdatingDevInfo = ( newDevInfo, navigate ) => {
          const { id } = getState().auth;
          
          // Header de autorizacion
-         const { token } = getState().auth;
-         const config = {
-            headers: {
-               Authorization: `Bearer ${token}`,
-            },
-         };
+         const config = getAxiosConfig();
 
          const URL = `${API_URL}/api/developer/${id}`;
          const { data } = await axios.put(URL, newDevInfo, config);
