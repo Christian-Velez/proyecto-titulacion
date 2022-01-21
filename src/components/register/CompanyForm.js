@@ -133,7 +133,7 @@ const CompanyForm = () => {
             <Text color='red'> { error } </Text>
 
             <HStack>
-               <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading} >
+               <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading }>
                   Cancelar
                </Button>
 

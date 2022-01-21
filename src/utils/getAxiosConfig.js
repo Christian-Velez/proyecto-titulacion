@@ -1,7 +1,7 @@
 
 
-//Aux token lo utilizo en startCheckingIsTokenValid
-//cuando todavia no seteo la autenticacion en localStorage
+// Aux token lo utilizo en startCheckingIsTokenValid
+// cuando todavia no seteo la autenticacion en localStorage
 
 
 export const getAxiosConfig = (auxToken = null) => {
@@ -15,10 +15,6 @@ export const getAxiosConfig = (auxToken = null) => {
    } else {
       bearerToken = auxToken;
    }
-
-
-   console.log(bearerToken);
-
 
    return {
       headers: {
