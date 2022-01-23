@@ -4,6 +4,7 @@ import {
    Heading,
    VStack,
 } from '@chakra-ui/react';
+import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';
 import { findJobById } from 'helpers/findJobById';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -18,16 +19,30 @@ const JobOfferScreen = () => {
    const { id } = useParams();
    const job = findJobById(allJobs, id);
 
-   const { title, active, applicants } = job;
 
+   if(!job) {
+      return <Navigate to='/co/myoffers' />;
+   }
+
+
+   const { title, active, applicants, techsRequired } = job;
+
+   // Ordena a los postulados por el porcentaje de requerimientos cumplidos
+   const applicantsWithReqsMet = applicants.map(app => {
+      const percentage = getDevReqPercentage(techsRequired, app.technologies);
+      return {
+         ...app,
+         percentage
+      };
+   });
+   applicantsWithReqsMet.sort((a, b) => a.percentage < b.percentage ? 1 : -1);
 
    useEffect(() => {
       window.scrollTo(0, 0);
    }, []);
 
-   return !job ? (
-      <Navigate to='/co/myoffers' />
-   ) : (
+
+   return (
       <VStack
          padding={{ base: 7, lg: 20 }}
          spacing={20}
@@ -59,12 +74,9 @@ const JobOfferScreen = () => {
             justifyContent={{ base: 'center', 'md': 'flex-start'}}
          >
             {
-               applicants.map(app => 
-                  <ApplicantItem key={app.id} applicant={app}/>
-               )
+               applicantsWithReqsMet.map(app =>  <ApplicantItem key={app.id} applicant={app} /> )
             }
          </Flex>
-
       </VStack>
    );
 };

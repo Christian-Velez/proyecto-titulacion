@@ -7,3 +7,4 @@ export const getLastJobs = async () => {
    const { data } = await axios.get(`${API_URL}/api/jobs/last`);
    return data;
 };
+

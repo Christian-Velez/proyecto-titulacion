@@ -20,16 +20,9 @@ import { Link } from 'react-router-dom';
 
 
 
-function getRandomArbitrary(min, max) {
-   return Math.random() * (max - min) + min;
- }
-
 const ApplicantItem = ({ applicant }) => {
-   const { img, name, location } = applicant;
+   const { img, name, location, percentage } = applicant;
 
-   console.log(applicant);
-
-   const percentage = Math.floor(getRandomArbitrary(0, 100));
    const colorScheme =
       percentage >= 70 ?   'teal'  : 
       percentage >= 50 ?   'cyan'   :
