@@ -1,11 +1,10 @@
 import {
    Badge,
+   Flex,
    Heading,
-   HStack,
-   Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';
 import { findJobById } from 'helpers/findJobById';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,22 +12,37 @@ import {
    Navigate,
    useParams,
 } from 'react-router-dom';
+import ApplicantItem from './ApplicantItem';
 
 const JobOfferScreen = () => {
    const { jobs: allJobs } = useSelector(state => state.companyInfo);
    const { id } = useParams();
    const job = findJobById(allJobs, id);
 
-   const { title, active, applicants } = job;
 
+   if(!job) {
+      return <Navigate to='/co/myoffers' />;
+   }
+
+
+   const { title, active, applicants, techsRequired } = job;
+
+   // Ordena a los postulados por el porcentaje de requerimientos cumplidos
+   const applicantsWithReqsMet = applicants.map(app => {
+      const percentage = getDevReqPercentage(techsRequired, app.technologies);
+      return {
+         ...app,
+         percentage
+      };
+   });
+   applicantsWithReqsMet.sort((a, b) => a.percentage < b.percentage ? 1 : -1);
 
    useEffect(() => {
       window.scrollTo(0, 0);
    }, []);
 
-   return !job ? (
-      <Navigate to='/co/myoffers' />
-   ) : (
+
+   return (
       <VStack
          padding={{ base: 7, lg: 20 }}
          spacing={20}
@@ -50,27 +64,19 @@ const JobOfferScreen = () => {
             </Badge>
          </Heading>
 
+         <Heading  fontSize={{ base: 'xl', lg: '2xl' }}> Postulados </Heading>
 
-         {
-            applicants.map(app => {
-               const { img, name, location, id } = app;
 
-               return (
-
-                  <HStack key={id}>
-                     <IconImg
-                        src={img}
-                        alt={name}
-                        boxSize={{ base: '80px'}}
-                     />
-
-                     <Text> {name} </Text>
-                     <Text> {location} </Text> 
-                  </HStack>
-
-               );
-            })
-         }
+         <Flex 
+            w='full'
+            flexWrap='wrap'
+            gap={10}
+            justifyContent={{ base: 'center', 'md': 'flex-start'}}
+         >
+            {
+               applicantsWithReqsMet.map(app =>  <ApplicantItem key={app.id} applicant={app} /> )
+            }
+         </Flex>
       </VStack>
    );
 };
