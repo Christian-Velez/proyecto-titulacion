@@ -36,7 +36,6 @@ const JobItem = ({ job })=> {
       <Stack
          w='full'
          direction={{ base: 'column', lg: 'row'}}
-         justifyContent={{}}
          alignItems={{ base: 'center', lg: 'flex-start'}}
          spacing={10}
          border='1px solid'
@@ -44,14 +43,11 @@ const JobItem = ({ job })=> {
          paddingY={10}
          paddingX={{ base: 5, lg: 10}}
          borderRadius='lg'
-         bgColor='white'
-
          _hover={{
             cursor: 'pointer',
          }}
          onMouseEnter={() => setIsHovered(true) }
          onMouseLeave={() => setIsHovered(false)}
-
          onClick = { handleViewJob }
       >
          <IconImg
@@ -75,7 +71,7 @@ const JobItem = ({ job })=> {
             <Flex
                direction='row'
                gap={5}
-               color='#B1B3BA' 
+               color='brandGray' 
                fontSize='sm'
                flexWrap='wrap'
             >
@@ -96,7 +92,7 @@ const JobItem = ({ job })=> {
             <Flex
                direction='row'
                gap={5}
-               color='#B1B3BA' 
+               color='brandGray' 
                fontSize='sm'
                flexWrap='wrap'
             >
@@ -130,9 +126,6 @@ const JobItem = ({ job })=> {
                }
             </HStack>
          </VStack>
-
-
-         
       </Stack>
    );
 };
