@@ -1,5 +1,7 @@
 
+import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
+import { errorAlert } from 'helpers/SwalAlerts';
 const API_URL = process.env.REACT_APP_API_URL;
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
@@ -34,6 +36,7 @@ export const startApplyingProcess = (jobId, alreadyApply) => {
       const route = alreadyApply ? 'cancelapply' : 'apply';
 
       try {
+         dispatch(startLoading());
 
          // Header de autorizacion
          const config = getAxiosConfig();
@@ -42,9 +45,12 @@ export const startApplyingProcess = (jobId, alreadyApply) => {
          const URL = `${API_URL}/api/jobs/${route}/${jobId}`;
          const { data } = await axios.put(URL, {}, config);
          dispatch(updateJob(data.id, data));
-         
+
       } catch(err) {
-         throw new Error(err.message);
+         console.log(err);
+         errorAlert({ message: 'Ocurrió un error al tratar de realizar la operación' });
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };
