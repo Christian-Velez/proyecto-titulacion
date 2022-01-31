@@ -3,12 +3,17 @@
 import { HStack, Text, VStack, Link } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import EmptySection from './EmptySection';
 
-const CertificationsCards = () => {
-   const { certifications } = useSelector(state => state.devInfo);
 
+import PropTypes from 'prop-types';
+
+
+
+
+
+const CertificationsCards = ({ devInfo }) => {
+   const { certifications } = devInfo;
 
    return (
       certifications.length === 0 
@@ -55,5 +60,8 @@ const CertificationsCards = () => {
 
 
 
+CertificationsCards.propTypes = {
+   devInfo: PropTypes.object
+};
 
 export default CertificationsCards;

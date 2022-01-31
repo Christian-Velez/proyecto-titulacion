@@ -11,7 +11,6 @@ const initialCompanyInfo = {
    jobs: [],
    toHire: [],
    employees: [],
-
 };
 
 export const companyReducer = (state = initialCompanyInfo, action) => {

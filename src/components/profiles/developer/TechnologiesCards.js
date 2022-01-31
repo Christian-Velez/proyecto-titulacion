@@ -5,10 +5,11 @@ import React from 'react';
 import { HStack, Text, VStack, Heading } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 import EmptySection from './EmptySection';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const TechnologiesCards = () => {
-   const { technologies } = useSelector(state => state.devInfo);
+const TechnologiesCards = ({ devInfo }) => {
+   const { technologies } = devInfo;
+
 
    return (
       technologies.length === 0
@@ -51,6 +52,15 @@ const TechnologiesCards = () => {
          );
       })
    );
+};
+
+
+
+
+
+
+TechnologiesCards.propTypes = {
+   devInfo: PropTypes.object
 };
 
 

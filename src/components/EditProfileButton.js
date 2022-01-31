@@ -7,10 +7,6 @@ const EditProfileButton = ({
    handleEditProfile,
 }) => {
 
-   
-
-
-
    return (
       <IconButton
          aria-label='Edit profile'

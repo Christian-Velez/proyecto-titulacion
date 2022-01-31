@@ -2,11 +2,17 @@
 
 import React from 'react';
 import { ListItem, UnorderedList } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
 import EmptySection from './EmptySection';
 
-const EducationCards = () => {
-   const { education: educationArr } = useSelector(state => state.devInfo);
+
+import PropTypes from 'prop-types';
+
+
+
+
+const EducationCards = ({ devInfo}) => {
+   const { education: educationArr } = devInfo;
+   
    return (
       educationArr.length === 0
       ? <EmptySection />
@@ -25,6 +31,11 @@ const EducationCards = () => {
 
       )
    );
+};
+
+
+EducationCards.propTypes = {
+   devInfo: PropTypes.object
 };
 
 export default EducationCards;
