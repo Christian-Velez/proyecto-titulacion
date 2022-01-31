@@ -1,19 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+
+// Components
+import IconImg from 'components/IconImg';
+import { AiFillClockCircle } from 'react-icons/ai';
+import { RiBuilding2Fill } from 'react-icons/ri';
 import {
    Button,
    Heading,
    HStack,
+   Stack,
    Text,
    VStack,
+   Link as ChakraLink,
+   Icon
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+
+
+import { startApplyingProcess } from 'actions/developer/jobs';
 
 // Cambiar el idioma de timeAgo a español
-import 'helpers/timeAgoRegister';
 import { format } from 'timeago.js';
-import { useDispatch } from 'react-redux';
-import { startApplyingProcess } from 'actions/developer/jobs';
+import 'helpers/timeAgoRegister';
 
 const JobItem = ({ job }) => {
    const { title, company, description, id } = job;
@@ -28,45 +38,69 @@ const JobItem = ({ job }) => {
    };
 
    return (
-      <HStack
+      <Stack
          w='full'
          direction={{ base: 'column', lg: 'row'}}
-         alignItems='flex-start'
-         paddingY={10}
-         paddingX={{ base: 5, lg: 10}}
+         alignItems={{ base: 'center', lg: 'flex-start' }}
          border='1px solid'
          borderColor='gray.100'
          borderRadius='lg'
          spacing={10}
+         paddingY={10}
+         paddingX={{ base: 5, lg: 10}}
+
+         textAlign={{ base:'center', lg: 'initial'}}
       >
          <IconImg 
             alt={name}
             src={img}
-            boxSize={{ base: '100px'}}
+            boxSize={{ base: '130px'}}
             isRounded
          />
 
-         <VStack maxW='80%' alignItems='flex-start' spacing={5}>
-
-            <VStack alignItems='flex-start'>
-               <Heading
-                  fontSize={{ base: 'xl', lg: '2xl' }}
+         <VStack 
+            w={{ base: 'full', lg:'80%'}} 
+            alignItems={{ base: 'center', lg: 'flex-start'}}
+            spacing={{ base: 10, lg: 5}}
+         >
+            <Heading
+                  fontSize='2xl'
                >
                   {title}
-               </Heading>
+            </Heading>
 
-               <Text> { name } </Text>
-               <Text color='brandGray'>  última conexión: { format(lastSeen, 'es_ES') } </Text>
-            </VStack>
+            <Stack
+               justifyContent='center'
+               color='brandGray'
+               spacing={{ base: 3, lg: 5}}
+               direction={{ base: 'column', lg: 'row'}}
+            >
+               
+               <ChakraLink 
+                  href='https://chakra-ui.com' 
+                  isExternal 
+               >
+                  <Icon as={RiBuilding2Fill} /> { name }  
+               </ChakraLink>
+               
+               <HStack>
+                  <AiFillClockCircle />
+                  <Text>activo { format(lastSeen, 'es_ES') } </Text>
+               </HStack>
+            </Stack>
            
-            <VStack alignItems='flex-start'>
-               <Text fontWeight='bold'> Descripción </Text>]
+            <VStack
+               alignItems={{ base: 'center', lg: 'flex-start'}}
+               maxW={{ lg: '80%'}}
+            >
+               <Heading fontSize='md'>Descripción</Heading>
                <Text> { description } </Text>
             </VStack>
 
             <Button variant='outline' onClick={ handleCancelApply }>Cancelar postulación</Button>
          </VStack>
-      </HStack>
+
+      </Stack>
    );
 };
 

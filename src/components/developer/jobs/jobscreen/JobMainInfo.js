@@ -11,7 +11,6 @@ import {
 import IconImg from 'components/IconImg';
 import { format } from 'timeago.js';
 
-import { Link } from 'react-router-dom';
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
@@ -59,8 +58,8 @@ const JobMainInfo = ({jobInfo}) => {
             </Heading>
             <Text>
                <ChakraLink 
-                  as={Link} 
-                  to='/dev/search/co/123'
+                  href='/dev/search/co/123'
+                  isExternal
                   color='brandPrimary.500'
                >{ name }</ChakraLink>
                

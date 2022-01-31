@@ -34,7 +34,7 @@ const ApplicationsScreen = () => {
    return (
       <VStack
          padding={{ base: 7, lg: 20}}
-
+         minH='100vh'
          spacing={20}
          alignItems='flex-start'
          w='full'

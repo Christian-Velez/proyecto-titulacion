@@ -43,7 +43,7 @@ const MobileHidden = ({
    return (
       <VStack
          className='animate__animated animate__fadeIn animate__faster'
-         minH='100vh'
+         minH='150vh'
          w='100vw'
          bgColor={ bgColor }
          zIndex={9999999}
@@ -51,10 +51,8 @@ const MobileHidden = ({
          p={1}
          top='0'
          right='0'
-         overflowY='auto'
          display={displayMenu}
          alignItems='flex-start'
-         color='white'
       >
 
          {/*Boton para cerrar y logo*/}
