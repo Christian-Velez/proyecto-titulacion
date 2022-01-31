@@ -53,7 +53,7 @@ const DeveloperForm = () => {
       try {
          await dispatch(startRegisterNewAccount({ ...formValues }));
          setTimeout(() => {
-            successAlert({ message: 'No te olvides de completar tu perfil para llegar a más personas!' });
+            successAlert({ title:'Registrado!', message: 'No te olvides de completar tu perfil para llegar a más personas!' });
          }, 1000);
       }
       catch(err) {
