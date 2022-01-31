@@ -12,7 +12,6 @@ import { setIsJobSelected } from 'actions/developer/jobs';
 
 
 const JobScreenContent = ({ job }) => {
-
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -27,28 +26,27 @@ const JobScreenContent = ({ job }) => {
    useEffect(() => {
       const aux = document.getElementById('aux');
       aux.scrollIntoView();
+
+      window.scrollTo(0,0);
    }, [job]);
 
 
    return (
-
       <>
          <div id='aux'></div>
          <VStack
-         alignItems='center'
-         className='animate__animated animate__fadeIn animate__faster'
-         h='max-content'
-         paddingX={{ base: 7 }}
-         paddingY={{ base: 20 }}
-         spacing={20}
-         w='full'
-      >  
-         <JobMainInfo jobInfo={job}/>
-         <JobBody jobInfo={job} />
-      </VStack>
-
+            alignItems='center'
+            className='animate__animated animate__fadeIn animate__faster'
+            h='max-content'
+            paddingX={{ base: 7 }}
+            paddingY={{ base: 20 }}
+            spacing={20}
+            w='full'
+         >  
+            <JobMainInfo jobInfo={job}/>
+            <JobBody jobInfo={job} />
+         </VStack>
       </>
-     
    );
 };
 

@@ -2,17 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Heading, HStack, VStack } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
-import { useSelector } from 'react-redux';
 import EmptySection from './EmptySection';
 
 
 
-const SoftskillsCards = () => {
-   const { 
-      softskills 
-   } = useSelector(state => state.devInfo);
-
-   
+const SoftskillsCards = ({ devInfo }) => {
+   const { softskills } = devInfo;
+  
    return (
       softskills.legth === 0
       ? <EmptySection />
@@ -51,7 +47,8 @@ const SoftskillsCards = () => {
 };
 
 SoftskillsCards.propTypes = {
-   soft: PropTypes.object
+   devInfo: PropTypes.object
+
 };
 
 

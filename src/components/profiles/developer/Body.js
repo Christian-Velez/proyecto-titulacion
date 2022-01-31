@@ -13,7 +13,11 @@ import {
    VStack,
 } from '@chakra-ui/react';
 
-const Body = () => {
+import PropTypes from 'prop-types';
+
+
+
+const Body = ({ devInfo }) => {
    return (
       <VStack
          w='full'
@@ -66,7 +70,7 @@ const Body = () => {
                Tecnologías
             </Heading>
 
-            <TechnologiesCards/>
+            <TechnologiesCards devInfo={devInfo}/>
          </VStack>
 
          <Divider />
@@ -76,7 +80,7 @@ const Body = () => {
             </Heading>
             <Text color='gray.600' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
 
-            <ProjectsCards />
+            <ProjectsCards devInfo={devInfo}/>
          </VStack>
 
          <Divider />
@@ -85,7 +89,7 @@ const Body = () => {
                Educación
             </Heading>
             
-            <EducationCards />
+            <EducationCards devInfo={devInfo}/>
          </VStack>
 
          <Divider />
@@ -94,7 +98,7 @@ const Body = () => {
                Licencias y certificaciones
             </Heading>
             
-            <CertificationsCards />
+            <CertificationsCards devInfo={devInfo}/>
          </VStack>
 
          <Divider />
@@ -103,10 +107,15 @@ const Body = () => {
                Mis soft skills
             </Heading>
            
-            <SoftskillsCards />
+            <SoftskillsCards devInfo={devInfo}/>
          </VStack>
       </VStack>
    );
+};
+
+
+Body.propTypes = {
+   devInfo: PropTypes.object
 };
 
 export default Body;

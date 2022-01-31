@@ -21,6 +21,7 @@ const fontFamily = {
    body: 'Roboto',
 };
 
+
 const blue = {
    50: '#EBF8FF',   
    100: '#BEE3F8',
@@ -82,7 +83,8 @@ const theme = extendTheme(
       colors: {
          brand: black,
          brandPrimary: blue,
-         brandPrimaryPurple: purple
+         brandPrimaryPurple: purple,
+         brandGray: '#B1B3BA'
       },
       shadows: {
          outline: '0 0 0 2px var(--chakra-colors-brandPrimary-200)',

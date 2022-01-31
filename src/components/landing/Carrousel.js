@@ -6,12 +6,8 @@ import {
    Image,
 } from '@chakra-ui/react';
 
-
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-
 
 const Carrousel = () => {
    const settings = {

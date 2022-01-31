@@ -2,11 +2,16 @@ import React from 'react';
 import { HStack, Heading , VStack, Link } from '@chakra-ui/react';
 import IconImg from 'components/IconImg';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { useSelector } from 'react-redux';
 import EmptySection from './EmptySection';
 
-const ProjectsCards = () => {
-   const { projects } = useSelector(state => state.devInfo);
+
+import PropTypes from 'prop-types';
+
+
+
+
+const ProjectsCards = ({ devInfo }) => {
+   const { projects } = devInfo;
 
    return (
       projects.length === 0
@@ -47,6 +52,10 @@ const ProjectsCards = () => {
       })
       
    );
+};
+
+ProjectsCards.propTypes = {
+   devInfo: PropTypes.object
 };
 
 export default ProjectsCards;

@@ -23,7 +23,7 @@ import TechnologyScreen from 'components/technologies/TechnologyScreen';
 import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
 
 import WelcomeDeveloper from 'components/developer/WelcomeDeveloper';
-import DeveloperProfile from 'components/developer/profile/DeveloperProfile';
+import DeveloperProfileScreen from 'components/developer/profile/DeveloperProfileScreen';
 import EditDeveloperProfile from 'components/developer/profile/edit/EditDeveloperProfileScreen';
 import SearchJobScreen from 'components/developer/jobs/SearchJobScreen';
 import JobScreen from 'components/developer/jobs/jobscreen/JobScreen';
@@ -69,7 +69,7 @@ const DevRoutes = () => {
                
                   <Route path='/welcome' element={ <WelcomeDeveloper /> } />
                
-                  <Route path='profile' element={ <DeveloperProfile /> } />
+                  <Route path='profile' element={ <DeveloperProfileScreen /> } />
                   <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
 
                   <Route path='jobs/' element={ <SearchJobScreen /> }>
@@ -84,7 +84,7 @@ const DevRoutes = () => {
                   <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
                   <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
-                  <Route path='search/co/:id' element={ <p>AQUI va una compañia</p>} />
+                  <Route path='search/:id' element={ <p>AQUI va una compañia</p>} />
 
                   <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
                

@@ -2,7 +2,7 @@
 
 import {  VStack } from '@chakra-ui/react';
 import EditProfileButton from 'components/EditProfileButton';
-import MainInfo from 'components/MainInfo';
+import MainInfo from 'components/profiles/MainInfo';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

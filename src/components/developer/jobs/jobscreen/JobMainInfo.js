@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
    Button,
@@ -11,16 +11,14 @@ import {
 import IconImg from 'components/IconImg';
 import { format } from 'timeago.js';
 
-import { Link } from 'react-router-dom';
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
 import { useDispatch, useSelector } from 'react-redux';
 import { startApplyingProcess } from 'actions/developer/jobs';
-import { errorAlert } from 'helpers/SwalAlerts';
 
 const JobMainInfo = ({jobInfo}) => {
-   const [isLoading, setIsLoading] = useState(false);
+   const { loading } = useSelector(state => state.ui);
 
    const dispatch = useDispatch();
    const { id: userId } = useSelector(state => state.auth);
@@ -31,16 +29,7 @@ const JobMainInfo = ({jobInfo}) => {
    const alreadyApply = applicants.includes(userId);
 
    const handleApply = async () => {
-      setIsLoading(true);
-
-      try {
-         await dispatch(startApplyingProcess(id, alreadyApply));
-      } catch(err) {
-         console.log(err);
-         errorAlert({ message: 'Ocurrió un error al tratar de realizar la operación' });
-      } finally {
-         setIsLoading(false);
-      }
+      dispatch(startApplyingProcess(id, alreadyApply));
    };
 
    return (
@@ -69,8 +58,8 @@ const JobMainInfo = ({jobInfo}) => {
             </Heading>
             <Text>
                <ChakraLink 
-                  as={Link} 
-                  to='/dev/search/co/123'
+                  href='/dev/search/co/123'
+                  isExternal
                   color='brandPrimary.500'
                >{ name }</ChakraLink>
                
@@ -96,7 +85,7 @@ const JobMainInfo = ({jobInfo}) => {
 
          <Button 
             w={{ base: 'full' }}
-            isLoading={ isLoading }
+            isLoading={ loading }
             onClick={ handleApply }
             variant={ alreadyApply ? 'outline' : 'solid'}
          >

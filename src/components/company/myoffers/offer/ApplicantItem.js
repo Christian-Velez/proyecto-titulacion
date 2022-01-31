@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 
 
 const ApplicantItem = ({ applicant }) => {
-   const { img, name, location, percentage } = applicant;
+   const { img, name, location, percentage, id } = applicant;
 
    const colorScheme =
       percentage >= 70 ?   'teal'  : 
@@ -46,7 +46,7 @@ const ApplicantItem = ({ applicant }) => {
          />
 
          <VStack>
-            <ChakraLink as={Link} to='/co/search'> 
+            <ChakraLink as={Link} to={`/co/search/${id}`}> 
                <Heading fontSize='lg'> {name} </Heading> 
             </ChakraLink>
 
