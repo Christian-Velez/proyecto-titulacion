@@ -79,3 +79,58 @@ export const updateJob = (id, data) => {
       }
    };
 };
+
+
+
+
+// ACEPTAR 
+
+export const startAcceptingApplicant = (jobId, devId) => {
+   return async(dispatch) => {
+      console.log(jobId, devId);
+
+   };
+
+};
+
+
+
+
+// RECHAZAR
+export const startDiscartingApplicant = (jobId, devId) => {
+   return async(dispatch) => {
+
+      try {
+         dispatch(startLoading());
+
+
+         // Header de autorizacion
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/jobs/discarddev`;
+
+
+         const infoToDb ={
+            jobId,
+            devId
+         };
+
+         await axios.put(URL, infoToDb, config);
+         dispatch(discardApplicant(jobId, devId));
+
+      } catch(err) {
+         console.log(err);
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const discardApplicant = (jobId, devId) => {
+   return {
+      type: types.removeApplicantFromJob,
+      payload: {
+         jobId,
+         devId
+      }
+   };
+};

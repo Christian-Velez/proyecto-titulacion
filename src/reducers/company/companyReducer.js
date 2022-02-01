@@ -40,7 +40,24 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
                   ? (action.payload.data) // Sobreescribe el job que coincida
                   : job
                ))
-         };      
+         };
+         
+         
+      case types.removeApplicantFromJob:
+         return {
+            ...state,
+            jobs: state.jobs.map(job => (
+               job.id === action.payload.jobId
+               ? ({
+                  ...job,
+                  applicants: job.applicants.filter(applicant => applicant.id !== action.payload.devId)
+               })
+               : job
+            ))
+         };
+
+         
+
 
       default:
          return state;

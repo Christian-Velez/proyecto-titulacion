@@ -16,18 +16,35 @@ import {
 
 } from '@chakra-ui/react';
 import { HiLocationMarker } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { startAcceptingApplicant, startDiscartingApplicant } from 'actions/company/job';
 
 
 
 const ApplicantItem = ({ applicant }) => {
-   const { img, name, location, percentage, id } = applicant;
+   const dispatch = useDispatch();
+   const { id: jobId } = useParams();
 
+
+
+   const { img, name, location, percentage, id: devId } = applicant;
    const colorScheme =
       percentage >= 70 ?   'teal'  : 
       percentage >= 50 ?   'cyan'   :
       percentage >= 25 ?   'purple' :
                            'red';
+
+
+
+   const handleDiscard = () => {
+      dispatch(startDiscartingApplicant(jobId, devId));
+   };
+
+   const handleAccept = () => {
+      dispatch(startAcceptingApplicant(jobId, devId));
+   };
+
 
    return (
       <VStack
@@ -46,7 +63,7 @@ const ApplicantItem = ({ applicant }) => {
          />
 
          <VStack>
-            <ChakraLink as={Link} to={`/co/search/${id}`}> 
+            <ChakraLink as={Link} to={`/co/search/${jobId}`}> 
                <Heading fontSize='lg'> {name} </Heading> 
             </ChakraLink>
 
@@ -65,8 +82,8 @@ const ApplicantItem = ({ applicant }) => {
          
 
          <HStack>
-            <Button variant='outline'>Descartar</Button>
-            <Button colorScheme='brandPrimaryPurple'>Aceptar</Button>
+            <Button variant='outline' onClick={ handleDiscard }>Descartar</Button>
+            <Button colorScheme='brandPrimaryPurple' onClick={ handleAccept }>Aceptar</Button>
          </HStack>
       </VStack>
    );
