@@ -87,14 +87,38 @@ export const updateJob = (id, data) => {
 
 export const startAcceptingApplicant = (jobId, devId) => {
    return async(dispatch) => {
-      console.log(jobId, devId);
+      try {
+         dispatch(startLoading());
 
+         // Header de autorizacion
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/jobs/acceptdev`;
+   
+         const infoToDb ={
+            jobId,
+            devId
+         };
+         const { data } = await axios.put(URL, infoToDb, config);
+
+         dispatch(removeApplicantFromJob(jobId, devId));
+         dispatch(updateCompanyToHire(data.toHire));
+
+      } catch(err) {
+         console.log(err);
+      } finally {
+         dispatch(finishLoading());
+      }
    };
-
 };
 
-
-
+export const updateCompanyToHire = (toHire) => {
+   return {
+      type: types.setCompanyInfo,
+      payload: {
+         toHire
+      }
+   };
+};
 
 // RECHAZAR
 export const startDiscartingApplicant = (jobId, devId) => {
@@ -102,7 +126,6 @@ export const startDiscartingApplicant = (jobId, devId) => {
 
       try {
          dispatch(startLoading());
-
 
          // Header de autorizacion
          const config = getAxiosConfig();
@@ -115,7 +138,7 @@ export const startDiscartingApplicant = (jobId, devId) => {
          };
 
          await axios.put(URL, infoToDb, config);
-         dispatch(discardApplicant(jobId, devId));
+         dispatch(removeApplicantFromJob(jobId, devId));
 
       } catch(err) {
          console.log(err);
@@ -125,7 +148,7 @@ export const startDiscartingApplicant = (jobId, devId) => {
    };
 };
 
-export const discardApplicant = (jobId, devId) => {
+export const removeApplicantFromJob = (jobId, devId) => {
    return {
       type: types.removeApplicantFromJob,
       payload: {

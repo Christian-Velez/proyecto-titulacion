@@ -8,24 +8,33 @@ import { useParams } from 'react-router-dom';
 
 const SearchDeveloperProfileScreen = () => {
    const [devInfo, setDevInfo] = useState({});
+
+
    const [isLoading, setIsLoading] = useState(true);
+
+
    const [error, setError] = useState(false);
 
 
    const { id } = useParams();
    
 
-
    useEffect(() => {
+
       startLoadingDevInfo(id)
          .then((devInf) => {
+            if(devInf === null) {
+               throw Error;
+            }
+
             setDevInfo(devInf);
          })
          .catch(() => {
             setError(true);
          })
-         .finally(() => setIsLoading(false));
-     
+         .finally(() => {
+            setIsLoading(false);
+         });
    }, []);
    
 
@@ -35,7 +44,7 @@ const SearchDeveloperProfileScreen = () => {
       ? <LoadingScreen /> :
       
       error 
-      ? <h1>Ocurrio un error </h1> 
+      ? <h1>Ocurrio un error, probablemente el developer no existe </h1> 
       : <DeveloperProfileContent devInfo={devInfo}/> 
    
    );

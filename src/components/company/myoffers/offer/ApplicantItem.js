@@ -63,7 +63,7 @@ const ApplicantItem = ({ applicant }) => {
          />
 
          <VStack>
-            <ChakraLink as={Link} to={`/co/search/${jobId}`}> 
+            <ChakraLink as={Link} to={`/co/search/${devId}`}> 
                <Heading fontSize='lg'> {name} </Heading> 
             </ChakraLink>
 

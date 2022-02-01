@@ -52,6 +52,8 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
                   ...job,
                   applicants: job.applicants.filter(applicant => applicant.id !== action.payload.devId)
                })
+
+               
                : job
             ))
          };
