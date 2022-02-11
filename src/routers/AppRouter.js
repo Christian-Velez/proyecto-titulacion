@@ -9,6 +9,9 @@ import {
 
 import PrivateRoutes from './private/PrivateRoutes';
 import PublicRoutes from './public/PublicRoutes';
+import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
+import LoadingScreen from 'components/LoadingScreen';
+import LandingPageScreen from 'components/landing/LandingPageScreen';
 
 import { ROLE } from 'types/roles';
 
@@ -19,9 +22,6 @@ const DevRoutes = React.lazy(() => import('./private/DevRoutes'));
 const CompanyRoutes = React.lazy(() => import('./private/CompanyRoutes'));
 
 
-import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
-import LoadingScreen from 'components/LoadingScreen';
-import LandingPageScreen from 'components/landing/LandingPageScreen';
 
 const AppRouter = () => {
    const dispatch = useDispatch();
@@ -41,6 +41,7 @@ const AppRouter = () => {
       }
 
    }, [dispatch]);
+
 
    return (
       <BrowserRouter>
@@ -100,7 +101,7 @@ const AppRouter = () => {
                <Route
                   path='co/*'
                   element={
-                     <PrivateRoutes
+                         <PrivateRoutes
                         requiredRoles={[
                            ROLE.Company,
                         ]}

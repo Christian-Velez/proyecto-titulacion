@@ -55,7 +55,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
             newTechnology: JSON.stringify(formatedTechs[0])
          });
       }
-   }, [formatedTechs, technologies]);
+   }, [formatedTechs, technologies, formValues, setFormValues ]);
 
 
 

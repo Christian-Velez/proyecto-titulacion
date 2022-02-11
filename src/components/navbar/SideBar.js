@@ -20,18 +20,7 @@ const SideBar = () => {
 
    const { role } = useSelector(state => state.auth);
 
-   let userLinks;
-   if(role === 'Admin') {
-      userLinks = manageLinks.Admin;
-   }
-   if(role === 'Developer') {
-      userLinks = manageLinks.Developer;
-   }
-   if(role === 'Company') {
-      userLinks = manageLinks.Company;
-   }
-
-
+   const userLinks = manageLinks[role];
 
    // Cierra el menu flotante si esta abierto y se pasa a resolucion LG
    const lgBreakpoint = useBreakpoint();
@@ -72,9 +61,7 @@ const SideBar = () => {
             kind
          });
       }
-   }, [companyInfo, devInfo]);
-
-
+   }, [companyInfo, devInfo, role]);
 
    return (
       <Flex

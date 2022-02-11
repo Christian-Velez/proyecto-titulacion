@@ -1,10 +1,10 @@
 
+import { types } from 'types/types';
+import { getAxiosConfig } from 'utils/getAxiosConfig';
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { errorAlert } from 'helpers/SwalAlerts';
 const API_URL = process.env.REACT_APP_API_URL;
-import { types } from 'types/types';
-import { getAxiosConfig } from 'utils/getAxiosConfig';
 
 
 // GET

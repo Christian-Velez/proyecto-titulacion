@@ -73,7 +73,6 @@ const FilterContent = ({ filters, setFilters }) => {
             </Heading>
 
             <RangeSlider
-               aria-label={['min', 'max']}
                colorScheme='brandPrimary'
                defaultValue={[salary[0], salary[1]]}
                

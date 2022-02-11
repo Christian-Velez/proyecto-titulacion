@@ -62,6 +62,7 @@ const SearchJobScreen = () => {
    // Solo cuando recarga la aplicacion se vuelven a pedir todos los trabajos
    useEffect(() => {
       if (allJobs.length === 0) {
+         console.log('cargando porque soy puta')
          Promise.all([
             dispatch(startLoadingJobs()),
          ]).then(() => {
@@ -70,7 +71,7 @@ const SearchJobScreen = () => {
       } else {
          setIsLoading(false);
       }
-   }, []);
+   }, [dispatch, allJobs]);
 
 
    return (

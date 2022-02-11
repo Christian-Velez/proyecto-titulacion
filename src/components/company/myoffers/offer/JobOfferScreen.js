@@ -19,6 +19,10 @@ const JobOfferScreen = () => {
    const { id } = useParams();
    const job = findJobById(allJobs, id);
 
+   
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
 
    if(!job) {
       return <Navigate to='/co/myoffers' />;
@@ -37,9 +41,6 @@ const JobOfferScreen = () => {
    });
    applicantsWithReqsMet.sort((a, b) => a.percentage < b.percentage ? 1 : -1);
 
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
 
 
    return (

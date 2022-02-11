@@ -45,7 +45,7 @@ const CompanyRoutes = () => {
       ])
          .then(() => setIsLoading(false))
          .catch((err) => console.log(err));
-   }, []);
+   }, [dispatch]);
 
 
    return (
