@@ -21,7 +21,7 @@ const JobScreenContent = ({ job }) => {
       return () => {
          dispatch(setIsJobSelected(false));
       };
-   }, []);
+   }, [dispatch]);
 
    useEffect(() => {
       const aux = document.getElementById('aux');

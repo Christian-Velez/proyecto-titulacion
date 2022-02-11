@@ -72,7 +72,7 @@ const SideBar = () => {
             kind
          });
       }
-   }, [companyInfo, devInfo]);
+   }, [companyInfo, devInfo, role]);
 
 
 

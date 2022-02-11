@@ -61,6 +61,9 @@ const EditTech = () => {
    });
    const { name, description, type } = formValues;
 
+
+
+   
    // Formatear las tecnologias seleccionadas iniciales
    useEffect(() => {
       const relatedTechsFormated = transformTechnologiesFormat(technology.relatedTechs);
@@ -74,7 +77,7 @@ const EditTech = () => {
 
       setRelatedTechs(relatedTechsFormated);
       setCategories(categoriesFormated);
-   }, []);
+   }, [ technology ]);
 
    
 

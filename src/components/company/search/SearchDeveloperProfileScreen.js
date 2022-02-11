@@ -35,7 +35,7 @@ const SearchDeveloperProfileScreen = () => {
          .finally(() => {
             setIsLoading(false);
          });
-   }, []);
+   }, [id]);
    
 
 

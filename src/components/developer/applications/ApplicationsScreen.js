@@ -14,7 +14,7 @@ const ApplicationsScreen = () => {
    const { id } = useSelector(state => state.auth);
    const filteredJobs = useMemo(
       () => allJobs.filter(job => job.applicants.includes(id)),
-      [allJobs]
+      [allJobs, id]
    );
 
    // Solo cuando recarga la aplicacion se vuelven a pedir todos los trabajos
@@ -29,7 +29,7 @@ const ApplicationsScreen = () => {
       } else {
          setIsLoading(false);
       }
-   }, []);
+   }, [ allJobs, dispatch ]);
 
    return (
       <VStack

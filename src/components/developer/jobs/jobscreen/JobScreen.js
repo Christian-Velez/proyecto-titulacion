@@ -23,7 +23,7 @@ const JobScreen = () => {
       if(allJobs.length === 0) {
          dispatch(startLoadingJobs());
       }
-   }, []);
+   }, [ dispatch, allJobs ]);
 
    // Setea el trabajo encontrado 
    useEffect(() => {

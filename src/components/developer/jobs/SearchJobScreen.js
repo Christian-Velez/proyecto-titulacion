@@ -70,7 +70,7 @@ const SearchJobScreen = () => {
       } else {
          setIsLoading(false);
       }
-   }, []);
+   }, [dispatch, allJobs]);
 
 
    return (
