@@ -101,7 +101,7 @@ const AppRouter = () => {
                <Route
                   path='co/*'
                   element={
-                     <PrivateRoutes
+                         <PrivateRoutes
                         requiredRoles={[
                            ROLE.Company,
                         ]}

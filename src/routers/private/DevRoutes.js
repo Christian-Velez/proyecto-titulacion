@@ -47,7 +47,7 @@ const DevRoutes = () => {
       ])
          .then(() => setIsLoading(false))
          .catch((err) => console.log(err));
-   }, [dispatch]);
+   }, [ dispatch ]);
 
 
    return (
