@@ -10,22 +10,20 @@ import JobScreenContent from './JobScreenContent';
 
 const JobScreen = () => {
    const dispatch = useDispatch();
-   
    const { allJobs } = useSelector(state => state.devJobs);
+
+   // Carga todos los trabajos solo al recargar la app
+   if(allJobs.length === 0) {
+      dispatch(startLoadingJobs());
+   }
    const { id } = useParams();
-   
    const [isLoading, setIsLoading] = useState(true);
    const [job, setJob] = useState({});
 
 
-   // Si no tiene los trabajos en el store
-   useEffect(() => {
-      if(allJobs.length === 0) {
-         dispatch(startLoadingJobs());
-      }
-   }, [ dispatch, allJobs ]);
-
-   // Setea el trabajo encontrado 
+ 
+   // Setea el trabajo encontrado
+   // usando el id de los params
    useEffect(() => {
       if(allJobs.length > 0) {
          const auxJob = findJobById(allJobs, id);

@@ -61,11 +61,10 @@ const EditTech = () => {
    });
    const { name, description, type } = formValues;
 
-
-
-   
    // Formatear las tecnologias seleccionadas iniciales
    useEffect(() => {
+      console.log('formatio pa')
+
       const relatedTechsFormated = transformTechnologiesFormat(technology.relatedTechs);
       const categoriesFormated =
          technology.categories.map((cat) => {
@@ -80,7 +79,6 @@ const EditTech = () => {
    }, [ technology ]);
 
    
-
    const handleEditTech = async (e) => {
       e.preventDefault();
 
