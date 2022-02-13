@@ -32,6 +32,7 @@ import SearchCompanyProfileScreen from 'components/developer/search/SearchCompan
 
 
 import { Stack } from '@chakra-ui/react';
+import SearchCompanyScreen from 'components/developer/search/SearchCompanyScreen';
 
 
 const DevRoutes = () => {
@@ -83,7 +84,7 @@ const DevRoutes = () => {
 
                         <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
-                        <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
+                        <Route path='search' element={ <SearchCompanyScreen /> } />
                         <Route path='search/:id' element={ <SearchCompanyProfileScreen />} />
 
                         <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />

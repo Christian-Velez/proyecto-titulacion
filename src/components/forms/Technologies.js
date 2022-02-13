@@ -34,7 +34,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
 
    // Nueva tecnologia por agregar
-     const [formValues, handleInputChange,,setFormValues ] = useForm({
+   const [formValues, handleInputChange,,setFormValues ] = useForm({
       newTechnology: {},
       yearsOfExperience: ''
    });
@@ -97,64 +97,64 @@ const Technologies = ({ technologies, setTechnologies }) => {
    return (
       <>
 
-      <FormControl>
-         <FormLabel fontSize='lg'>Tecnologías</FormLabel>
-         { techsDisplays }
-         <Button size='md' variant='outline' onClick={onOpen}
-         > Agregar </Button>
-      </FormControl>
+         <FormControl>
+            <FormLabel fontSize='lg'>Tecnologías</FormLabel>
+            { techsDisplays }
+            <Button size='md' variant='outline' onClick={onOpen}
+            > Agregar </Button>
+         </FormControl>
 
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader> <Heading fontSize='xl'> Agregar tecnología</Heading></ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
+         <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+         >
+            <ModalOverlay />
+            <ModalContent>
+               <ModalHeader> <Heading fontSize='xl'> Agregar tecnología</Heading></ModalHeader>
+               <ModalCloseButton />
+               <ModalBody pb={6}>
 
 
-            <FormControl>
-              <FormLabel> Tecnología </FormLabel>
+                  <FormControl>
+                     <FormLabel> Tecnología </FormLabel>
 
-              <Select
-                  name='newTechnology'   
-                  value={newTechnology}
-                  onChange={handleInputChange}
-              >
-               { formatedTechs.map(tech => <option key={tech.id} value={JSON.stringify(tech)}> { tech.name }</option>)}
-              </Select>
+                     <Select
+                        name='newTechnology'   
+                        value={newTechnology}
+                        onChange={handleInputChange}
+                     >
+                        { formatedTechs.map(tech => <option key={tech.id} value={JSON.stringify(tech)}> { tech.name }</option>)}
+                     </Select>
 
-            </FormControl>
+                  </FormControl>
 
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Años de experiencia </FormLabel>
-                  <Input 
-                     type='number' 
-                     placeholder='(0 - 30)' 
-                     min='0' max='30' 
-                     name='yearsOfExperience' 
-                     value={yearsOfExperience} 
-                     onChange={handleInputChange}/>
+                  <FormControl mt={4} isRequired>
+                     <FormLabel>Años de experiencia </FormLabel>
+                     <Input 
+                        type='number' 
+                        placeholder='(0 - 30)' 
+                        min='0' max='30' 
+                        name='yearsOfExperience' 
+                        value={yearsOfExperience} 
+                        onChange={handleInputChange}/>
 
-                  {
-                     error.error && <FormHelperText color='red.500'>{ error.message } </FormHelperText>
-                  }
-               </FormControl>
+                     {
+                        error.error && <FormHelperText color='red.500'>{ error.message } </FormHelperText>
+                     }
+                  </FormControl>
 
-          </ModalBody>
+               </ModalBody>
 
-          <ModalFooter>
+               <ModalFooter>
             
-            <Button onClick={onClose} variant='outline'>  Cancelar </Button>
+                  <Button onClick={onClose} variant='outline'>  Cancelar </Button>
 
-            <Button ml={3} onClick={ handleAdd }>
+                  <Button ml={3} onClick={ handleAdd }>
               Agregar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+                  </Button>
+               </ModalFooter>
+            </ModalContent>
+         </Modal>
       </>
    );
 };

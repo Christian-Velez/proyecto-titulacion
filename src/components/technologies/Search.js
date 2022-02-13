@@ -42,43 +42,43 @@ const Search = () => {
 
    return (
       <VStack w='full' spacing={20} alignItems='flex-start' paddingBottom={50} minH='500px'>      
-            <HStack
-               w='full'
-               alignItems='flex-end'
-               justifyContent='flex-start'
-               spacing={10}
-            >
-               <FormControl w='40%'>
-                  <FormLabel>Nombre</FormLabel>
-                  <InputGroup>
-                     <InputLeftElement>
-                        <Search2Icon color='gray.500' />
-                     </InputLeftElement>
+         <HStack
+            w='full'
+            alignItems='flex-end'
+            justifyContent='flex-start'
+            spacing={10}
+         >
+            <FormControl w='40%'>
+               <FormLabel>Nombre</FormLabel>
+               <InputGroup>
+                  <InputLeftElement>
+                     <Search2Icon color='gray.500' />
+                  </InputLeftElement>
 
-                     <Input
-                        name='name'
-                        value={name}
-                        onChange={ handleInputChange }
-                     />
-                  </InputGroup>
-               </FormControl>
-
-               <FormControl w='30%'>
-                  <FormLabel>Tipo</FormLabel>
-                  <Select
-                     color='gray.500'
-                     name='type'
-                     value={type}
+                  <Input
+                     name='name'
+                     value={name}
                      onChange={ handleInputChange }
-                  >
-                     {typesOfTech.map((type, i) => (
-                        <option key={i}>
-                           {type}
-                        </option>
-                     ))}
-                  </Select>
-               </FormControl>
-            </HStack>
+                  />
+               </InputGroup>
+            </FormControl>
+
+            <FormControl w='30%'>
+               <FormLabel>Tipo</FormLabel>
+               <Select
+                  color='gray.500'
+                  name='type'
+                  value={type}
+                  onChange={ handleInputChange }
+               >
+                  {typesOfTech.map((type, i) => (
+                     <option key={i}>
+                        {type}
+                     </option>
+                  ))}
+               </Select>
+            </FormControl>
+         </HStack>
 
          <VStack spacing={5} w='full' alignItems='flex-start'>
             <Text> {filteredTechs.length} { filteredTechs.length === 1 ? 'resultado' : 'resultados'} </Text> 

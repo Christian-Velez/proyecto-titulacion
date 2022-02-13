@@ -2,8 +2,8 @@
 import { startLoadingCoInfo } from 'helpers/company/startLoadingUserInfo';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import LoadingScreen from 'components/layout/LoadingScreen';
 import CompanyProfileContent from 'components/profiles/company/CompanyProfileContent';
+import Layout from 'components/layout';
 
 
 const SearchCompanyProfileScreen = () => {
@@ -34,10 +34,11 @@ const SearchCompanyProfileScreen = () => {
    
    return (
       isLoading
-         ? <LoadingScreen /> :
+         ? null :
       
          error 
-            ? <h1>Ocurrio un error, probablemente el perfil no existe </h1> 
+            ? <Layout title='Ocurrio un error, probablemente el perfil no existe' />
+               
             : <CompanyProfileContent companyInfo={ companyInfo }/> 
    );
 };

@@ -1,4 +1,4 @@
-import LoadingScreen from 'components/layout/LoadingScreen';
+import Layout from 'components/layout';
 import DeveloperProfileContent from 'components/profiles/developer/DeveloperProfileContent';
 import { startLoadingDevInfo } from 'helpers/company/startLoadingUserInfo';
 import React from 'react';
@@ -31,10 +31,10 @@ const SearchDeveloperProfileScreen = () => {
 
    return (
       isLoading
-         ? <LoadingScreen /> :
+         ? null :
       
          error 
-            ? <h1>Ocurrio un error, probablemente el perfil no existe </h1> 
+            ? <Layout title='Ocurrio un error, probablemente el perfil no existe' />
             : <DeveloperProfileContent devInfo={devInfo}/> 
    
    );

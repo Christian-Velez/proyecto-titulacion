@@ -15,8 +15,6 @@ export const types = {
    uiStartLoading: '[UI] Set UI state to loading...',
    uiFinishLoading: '[UI] Finish loading',
 
-
-
    setAccountType: '[Register] Set account type',
    cleanRegisterState: '[Register] Clean all register fields',
 

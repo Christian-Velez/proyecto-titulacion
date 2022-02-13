@@ -78,9 +78,10 @@ const SearchJobScreen = () => {
          minH='100vh'
          w='full' 
          spacing={0}
-         alignItems='flex-start' style={{
-         margin: 0
-      }}>
+         alignItems='flex-start' 
+         style={{
+            margin: 0
+         }}>
 
          {/* Buscador, parte izq en dispositivos de escritorio */}
          <VStack
