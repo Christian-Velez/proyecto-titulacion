@@ -19,5 +19,14 @@ export const startLoadingDevInfo = async(id) => {
 
 
 export const startLoadingCoInfo = async(id) => {
-   console.log(id)
-}
+   // Auxiliar
+   // Cambiar a una nueva ruta para que las personas que buscan 
+   // una empresa no reciban toda su informacion,
+   // ejem: contratados y por contratar
+
+   const URL = `${API_URL}/api/company/${id}`;
+   const { data } = await axios.get(URL);
+   const { companyInfo } = data;
+
+   return companyInfo;
+};

@@ -2,7 +2,6 @@ import {
    Badge,
    Flex,
    Heading,
-   VStack,
 } from '@chakra-ui/react';
 import Layout from 'components/layout';
 import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';

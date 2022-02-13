@@ -2,8 +2,13 @@ import React from 'react';
 import { Divider, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import IconImg from 'components/layout/IconImg';
+import PropTypes from 'prop-types';
 
-const Body = () => {
+
+
+const Body = ({ companyInfo }) => {
+
+
 
    const { technologies } = useSelector(state => state.tech);
    const auxTech = technologies[0];
@@ -21,7 +26,7 @@ const Body = () => {
             alignItems='flex-start'
          >
             <Heading fontSize='lg'>
-               Calificaciones
+               Calificaciones de { companyInfo.name }
             </Heading>
 
             <VStack w='full' p={5}>
@@ -87,8 +92,8 @@ const Body = () => {
                         maxWidth='50%'
                         
                      >
-                           <Heading  fontSize='md'> { auxTech.name } </Heading>
-                           <Text> usualmente requiere 5 años de experiencia</Text>
+                        <Heading  fontSize='md'> { auxTech.name } </Heading>
+                        <Text> usualmente requiere 5 años de experiencia</Text>
                         
                         
                      </VStack>
@@ -106,7 +111,10 @@ const Body = () => {
 };
 
 Body.propTypes = {
-
+   companyInfo: PropTypes.object
 };
+
+
+
 
 export default Body;

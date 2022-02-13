@@ -61,36 +61,36 @@ const DevRoutes = () => {
 
          {
             isLoading
-            ? <LoadingScreen />
-            : (
-            <>
-               <SideBar />
-               <Routes>
+               ? <LoadingScreen />
+               : (
+                  <>
+                     <SideBar />
+                     <Routes>
                
-                  <Route path='/welcome' element={ <WelcomeDeveloper /> } />
+                        <Route path='/welcome' element={ <WelcomeDeveloper /> } />
                
-                  <Route path='profile' element={ <DeveloperProfileScreen /> } />
-                  <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
+                        <Route path='profile' element={ <DeveloperProfileScreen /> } />
+                        <Route path='profile/edit' element={ <EditDeveloperProfile /> } />
 
-                  <Route path='jobs/' element={ <SearchJobScreen /> }>
-                     <Route path='id/:id' element={<JobScreen />} />
-                  </Route>
+                        <Route path='jobs/' element={ <SearchJobScreen /> }>
+                           <Route path='id/:id' element={<JobScreen />} />
+                        </Route>
 
-                  <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
-                  <Route path='technologies/:name' element={ <TechnologyScreen/>} />
+                        <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
+                        <Route path='technologies/:name' element={ <TechnologyScreen/>} />
 
-                  <Route path='applications' element={ <ApplicationsScreen /> } />
+                        <Route path='applications' element={ <ApplicationsScreen /> } />
 
-                  <Route path='messages' element={ <p>Aqui va el chat </p> } />
+                        <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
-                  <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
-                  <Route path='search/:id' element={ <SearchCompanyProfileScreen />} />
+                        <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
+                        <Route path='search/:id' element={ <SearchCompanyProfileScreen />} />
 
-                  <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
+                        <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
                
-               </Routes>
-            </>
-            )
+                     </Routes>
+                  </>
+               )
 
          }
 

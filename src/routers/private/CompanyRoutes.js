@@ -58,38 +58,38 @@ const CompanyRoutes = () => {
       >
          {
             isLoading
-            ? <LoadingScreen />
-            : (
-               <>               
-                  <SideBar />
-                  <Routes>
-                     <Route path='/welcome' element={<WelcomeCompany />} />
+               ? <LoadingScreen />
+               : (
+                  <>               
+                     <SideBar />
+                     <Routes>
+                        <Route path='/welcome' element={<WelcomeCompany />} />
 
-                     <Route path='profile' element={<CompanyProfile />}/>
-                     <Route path='profile/edit' element={ <EditCompanyProfileScreen /> } />
-
-
-                     <Route path='myoffers' element={ <CompanyOffersScreen /> } />
-                     <Route path='newjob' element={<NewJobOfferScreen /> } />
-
-                     <Route path='myoffers/:id' element={ <JobOfferScreen /> } />
-
-                     <Route path='technologies' element={  <TechnologiesSearchScreen /> } />
-                     <Route path='technologies/:name' element={ <TechnologyScreen />} />
+                        <Route path='profile' element={<CompanyProfile />}/>
+                        <Route path='profile/edit' element={ <EditCompanyProfileScreen /> } />
 
 
-                     <Route  path='developers' element={<p>aqui van los contratados y por contratar </p> }/>
+                        <Route path='myoffers' element={ <CompanyOffersScreen /> } />
+                        <Route path='newjob' element={<NewJobOfferScreen /> } />
 
-                     <Route path='messages' element={<p> aqui van los mensages </p> } />
+                        <Route path='myoffers/:id' element={ <JobOfferScreen /> } />
 
-                     <Route path='search' element={ <p> Aqui va el buscador de desarrolladores </p>  } />
-                     <Route path='search/:id' element={ <SearchDeveloperProfileScreen /> }/>
+                        <Route path='technologies' element={  <TechnologiesSearchScreen /> } />
+                        <Route path='technologies/:name' element={ <TechnologyScreen />} />
 
-                     <Route path='*' element={<Navigate to='/co' />} />
-                  </Routes>
 
-               </>
-            )
+                        <Route  path='developers' element={<p>aqui van los contratados y por contratar </p> }/>
+
+                        <Route path='messages' element={<p> aqui van los mensages </p> } />
+
+                        <Route path='search' element={ <p> Aqui va el buscador de desarrolladores </p>  } />
+                        <Route path='search/:id' element={ <SearchDeveloperProfileScreen /> }/>
+
+                        <Route path='*' element={<Navigate to='/co' />} />
+                     </Routes>
+
+                  </>
+               )
          }
       </Stack>
    );

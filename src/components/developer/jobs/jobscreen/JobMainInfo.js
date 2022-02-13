@@ -23,7 +23,8 @@ const JobMainInfo = ({jobInfo}) => {
    const dispatch = useDispatch();
    const { id: userId } = useSelector(state => state.auth);
    const { id, title, company, created_at, salary, applicants } = jobInfo;
-   const { img, name, location } = company;
+   const { img, name, location, id: companyId } = company;
+
 
 
    const alreadyApply = applicants.includes(userId);
@@ -58,7 +59,7 @@ const JobMainInfo = ({jobInfo}) => {
             </Heading>
             <Text>
                <ChakraLink 
-                  href='/dev/search/123'
+                  href={ `/dev/search/${companyId}` }
                   isExternal
                   color='brandPrimary.500'
                >{ name }</ChakraLink>
@@ -91,8 +92,8 @@ const JobMainInfo = ({jobInfo}) => {
          >
             {
                alreadyApply
-               ? 'Cancelar postulación'
-               : 'Postularse'
+                  ? 'Cancelar postulación'
+                  : 'Postularse'
             }
          </Button>
       </VStack>

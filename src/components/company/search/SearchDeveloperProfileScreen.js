@@ -31,11 +31,11 @@ const SearchDeveloperProfileScreen = () => {
 
    return (
       isLoading
-      ? <LoadingScreen /> :
+         ? <LoadingScreen /> :
       
-      error 
-      ? <h1>Ocurrio un error, probablemente el perfil no existe </h1> 
-      : <DeveloperProfileContent devInfo={devInfo}/> 
+         error 
+            ? <h1>Ocurrio un error, probablemente el perfil no existe </h1> 
+            : <DeveloperProfileContent devInfo={devInfo}/> 
    
    );
 };
