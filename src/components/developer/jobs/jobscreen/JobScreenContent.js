@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-   VStack,
-} from '@chakra-ui/react';
+
 import JobMainInfo from './JobMainInfo';
 import JobBody from './JobBody';
 import { useDispatch } from 'react-redux';

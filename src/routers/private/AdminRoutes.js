@@ -52,27 +52,24 @@ const AdminRoutes = () => {
       >
          {
             isLoading
-            ? <LoadingScreen />
-            :
-            <>
-               <SideBar />
-               <Routes>
-                  <Route path='/welcome' element={ <WelcomeAdmin /> } />
+               ? <LoadingScreen />
+               :
+               <>
+                  <SideBar />
+                  <Routes>
+                     <Route path='/welcome' element={ <WelcomeAdmin /> } />
 
-                  <Route path='technologies' element={<TechnologiesScreen />} />
-                  <Route path='technologies/new' element={<AddNewTech /> } />
-                  <Route path='technologies/edit/:id' element={<EditTech /> } />
+                     <Route path='technologies' element={<TechnologiesScreen />} />
+                     <Route path='technologies/new' element={<AddNewTech /> } />
+                     <Route path='technologies/edit/:id' element={<EditTech /> } />
 
-                  <Route path='soft-skills' element={<SoftskillsScreen /> } />
-                  <Route path='soft-skills/new' element={<AddNewSoft /> } />
-                  <Route path='soft-skills/edit/:id' element={<EditSoft /> } />
-                  <Route path='*' element={<Navigate to='/admin' /> } />
-               </Routes>
-            </>
-
-
+                     <Route path='soft-skills' element={<SoftskillsScreen /> } />
+                     <Route path='soft-skills/new' element={<AddNewSoft /> } />
+                     <Route path='soft-skills/edit/:id' element={<EditSoft /> } />
+                     <Route path='*' element={<Navigate to='/admin' /> } />
+                  </Routes>
+               </>
          }
-
       </Stack>
    );
 };
