@@ -29,14 +29,15 @@ const CompanyProfileContent = ({
       <Layout
          padding={{ base: 10, lg: 30, xl: 40 }}
       >
-         {/*Header informacion principal*/}
-         <MainInfo userInfo={companyInfo}/>
-         {
-            isMyProfile && <EditProfileButton handleEditProfile={handleEditProfile} />
-         }
+         <>
+            {/*Header informacion principal*/}
+            <MainInfo userInfo={companyInfo}/>
+            {
+               isMyProfile && <EditProfileButton handleEditProfile={handleEditProfile} />
+            }
          
-
-         <Body companyInfo={ companyInfo }/>
+            <Body companyInfo={ companyInfo }/>
+         </>
 
       </Layout>
    );

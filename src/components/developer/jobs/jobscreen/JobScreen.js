@@ -34,11 +34,11 @@ const JobScreen = () => {
 
    return (
       isLoading
-      ? <LoadingScreen />
-      : 
+         ? <LoadingScreen />
+         : 
          !job
-         ? <Navigate to='/dev/jobs' />
-         : <JobScreenContent job={job}/>
+            ? <Navigate to='/dev/jobs' />
+            : <JobScreenContent job={job}/>
       
    );
 };
