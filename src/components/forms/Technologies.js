@@ -47,15 +47,16 @@ const Technologies = ({ technologies, setTechnologies }) => {
    const formatedTechs = useMemo(() => filterTechs([...allTechs], technologies), [allTechs, technologies]);
 
 
+   // Selecciona a la primer tecnologia en la lista
    useEffect(()=> {
-      // Selecciona a la primer tecnologia en la lista
       if(formatedTechs.length > 0 ) {
-         setFormValues({
-            ...formValues,
+         setFormValues(prevForm => ({
+            ...prevForm,
             newTechnology: JSON.stringify(formatedTechs[0])
-         });
+
+         }));
       }
-   }, [formatedTechs, technologies, formValues, setFormValues ]);
+   }, [ formatedTechs, setFormValues ]);
 
 
 

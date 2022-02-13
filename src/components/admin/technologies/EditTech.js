@@ -61,6 +61,7 @@ const EditTech = () => {
    });
    const { name, description, type } = formValues;
 
+ 
    // Formatear las tecnologias seleccionadas iniciales
    useEffect(() => {
       console.log('formatio pa')

@@ -54,7 +54,8 @@ const AnimatedText = () => {
       </section>
    ) : (
       <Heading fontSize='6xl'>
-         Powerful News Explored Feed
+         Powerful News <br />
+         Explored Feed
       </Heading>
    );
 };

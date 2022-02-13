@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import {
    Button,
+   Flex,
    Grid,
    Heading,
    HStack,
@@ -59,10 +60,12 @@ const Main = () => {
             {/*Parte derecha */}
             <VStack
                w={{ base:'full', 'xl': '66%' }}
+               justifyContent='space-between'
                alignItems='flex-start'
                minH={`calc(100vh - ${pPixels})`}
-               padding={{ base: 0, 'xl': 10 , '2xl': 20}}
-               spacing={{ base: 50, 'xl': 100, '2xl': 150}}  
+               padding={{ base: 0, 'xl': 10 , '2xl': '4rem'}}
+
+               spacing={{ base: 20, 'xl': 'unset'}}
             >
                {/* Navbar */}
                <Grid
@@ -89,16 +92,20 @@ const Main = () => {
 
                {/*Info principal*/}
                <VStack 
-                  w={{ base: 'full', 'xl': '50%', '2xl': '45%'}} 
+                  w='full'
                   alignItems='flex-start'
-                  spacing={20}
+                  spacing={10}
                >  
                   <AnimatedText/>
-                  <Text fontSize='2xl' className='text'>
-                     Crea una cuenta y personaliza tu perfil,
-                     conecta con empresas/desarrolladores
-                     y establece tu primera relación laboral.
-                  </Text>
+
+                     <Flex maxW={{ '2xl': '50%'}}>
+                        <Text fontSize='2xl' className='text'>
+                           Crea una cuenta y personaliza tu perfil, conecta
+                           con empresas/desarrolladores y establece tu
+                           primera relación laboral.
+                        </Text>
+                     </Flex>
+
                </VStack>
 
 
@@ -108,7 +115,6 @@ const Main = () => {
                      spacing={10} 
                      alignItems='flex-start' 
                      w='full'
-                     paddingBottom={{ base: 20, 'xl': 0 }}   
                   >
                      <Heading fontSize='2xl'> Últimos </Heading>
 

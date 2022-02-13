@@ -10,7 +10,7 @@ const SoftskillsCards = ({ devInfo }) => {
    const { softskills } = devInfo;
   
    return (
-      softskills.legth === 0
+      softskills.length === 0
       ? <EmptySection />
       : (
          softskills.map(soft => {

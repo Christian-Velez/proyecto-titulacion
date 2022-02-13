@@ -12,6 +12,13 @@
  - 💾 Redux
  - ⚡ Chakra UI
 
+ 
+ ## Instalation
+ - Clone repository
+ - Run yarn install
+ - Create .env file and add REACT_APP_API_URL and specify api url
+ - Run yarn start
+
 
 
 
