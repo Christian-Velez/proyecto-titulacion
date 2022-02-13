@@ -7,7 +7,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const JobBody = ({ jobInfo }) => {
    const {
@@ -57,7 +57,6 @@ const JobBody = ({ jobInfo }) => {
          </HStack>
       );
    };
-
 
    const SoftItem = (soft) => {
       const { name, img, id } = soft;
@@ -114,7 +113,8 @@ const JobBody = ({ jobInfo }) => {
             >
                Descripción
             </Heading>
-            <Text> {description} </Text>
+            {/* El pre-wrap formatea los \n insertados al postular la oferta */}
+            <Text whiteSpace='pre-wrap'> {description} </Text>
          </VStack>
 
          <VStack w='full' alignItems='flex-start'>

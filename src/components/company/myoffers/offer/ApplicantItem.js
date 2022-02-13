@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 // Components
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { 
    Button, 
    Heading, 
@@ -19,6 +19,7 @@ import { HiLocationMarker } from 'react-icons/hi';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { startAcceptingApplicant, startDiscartingApplicant } from 'actions/company/job';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 
 
@@ -35,7 +36,7 @@ const ApplicantItem = ({ applicant }) => {
       percentage >= 25 ?   'purple' :
                            'red';
 
-
+                           
 
    const handleDiscard = () => {
       dispatch(startDiscartingApplicant(jobId, devId));
@@ -63,10 +64,11 @@ const ApplicantItem = ({ applicant }) => {
          />
 
          <VStack>
-            <ChakraLink as={Link} to={`/co/search/${devId}`}> 
-               <Heading fontSize='lg'> {name} </Heading> 
+            <Heading fontSize='lg'> {name} </Heading> 
+            <ChakraLink as={Link} to={`/co/search/${devId}`}>
+               Revisar perfil <ExternalLinkIcon mx='2px' />
             </ChakraLink>
-
+            
             <HStack fontSize='sm' color='gray.600' alignItems='flex-start' justifyContent='center' w='full'>
                <Icon as={HiLocationMarker} />
                <Text> {location || 'Sin especificar'} </Text>

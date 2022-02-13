@@ -67,7 +67,6 @@ const NewJobOfferScreen = () => {
          techsRequired: formatTechnologies(selectedTechs),
          softsRequired: selectedSofts.map(soft => soft.value)
       };
-
       dispatch(startPostingNewJob(newJobInfo, navigate));
    };
 

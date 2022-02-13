@@ -32,16 +32,21 @@ const JobOfferScreen = () => {
    const { title, active, applicants, techsRequired } = job;
 
    // Ordena a los postulados por el porcentaje de requerimientos cumplidos
-   const applicantsWithReqsMet = applicants.map(app => {
-      const percentage = getDevReqPercentage(techsRequired, app.technologies);
-      return {
-         ...app,
-         percentage
-      };
-   });
-   applicantsWithReqsMet.sort((a, b) => a.percentage < b.percentage ? 1 : -1);
+   let orderedApplicants;
 
+   if(techsRequired.length > 0) {
+      orderedApplicants = applicants.map(app => {
+         const percentage = getDevReqPercentage(techsRequired, app.technologies);
+         return {
+            ...app,
+            percentage
+         };
+      });
 
+      orderedApplicants.sort((a, b) => a.percentage < b.percentage ? 1 : -1);
+   } else {
+      orderedApplicants = [ ...applicants ]
+   }
 
    return (
       <VStack
@@ -75,7 +80,7 @@ const JobOfferScreen = () => {
             justifyContent={{ base: 'center', 'md': 'flex-start'}}
          >
             {
-               applicantsWithReqsMet.map(app =>  <ApplicantItem key={app.id} applicant={app} /> )
+               orderedApplicants.map(app =>  <ApplicantItem key={app.id} applicant={app} /> )
             }
          </Flex>
       </VStack>

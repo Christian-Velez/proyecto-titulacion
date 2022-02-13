@@ -8,7 +8,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import React from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
 import { format } from 'timeago.js';
@@ -89,7 +89,7 @@ const MainInfo = ({ userInfo }) => {
                }
                <HStack fontSize='sm' color='gray.600' alignItems='flex-start'>
                   <Icon as={HiLocationMarker} />
-                  <Text> {location} </Text>
+                  <Text> {location || 'Sin especificar'} </Text>
                </HStack>
             </VStack>
 

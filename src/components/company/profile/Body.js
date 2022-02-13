@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const Body = () => {
 

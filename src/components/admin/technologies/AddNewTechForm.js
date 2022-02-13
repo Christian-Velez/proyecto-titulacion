@@ -20,7 +20,7 @@ import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
 
 
 // Componentes
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import Buttons from 'components/forms/Buttons';
 import BasicInput from 'components/forms/BasicInput';
 import { transformTechnologiesFormat } from 'helpers/admin/transformTechnologiesFormat';

@@ -12,15 +12,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 import { startLogging } from 'actions/auth';
 import ShowHideButton from 'components/forms/ShowHideButton';
+import BasicInput from 'components/forms/BasicInput';
 
 const LoginForm = () => {
    const { loading } = useSelector(state => state.ui);
    const dispatch = useDispatch();
    const [show, setShow] = useState(false);
 
-
-   // importante manejar los erroeres en el login
-   const [error ] = useState('');
+   const [error, setError ] = useState('');
 
 
    const [formValues, handleInputChange] =
@@ -30,14 +29,19 @@ const LoginForm = () => {
       });
    const { username, password } = formValues;
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
 
       const user = {
          username,
          password
       };
-      dispatch(startLogging(user));
+
+      try {
+         await dispatch(startLogging(user));
+      } catch(err) {
+         setError('Nombre de usuario o contraseña incorrectos.');
+      }
    };
 
    return (
@@ -50,21 +54,14 @@ const LoginForm = () => {
             spacing={10}
             alignItems='flex-start'
          >
-            <Text color='red'> { error } </Text>
-
-
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Nombre de usuario
-               </FormLabel>
-               <Input
-                  type='text'
-                  size='lg'
-                  value={username}
-                  name='username'
-                  onChange={handleInputChange}
-               />
-            </FormControl>
+            <BasicInput
+               text='Nombre de usuario'
+               minLength={3}
+               size='lg'
+               name='username'
+               value={username}
+               onChange={handleInputChange}
+            />
 
             <FormControl isRequired>
                <FormLabel fontSize='lg'>
@@ -77,6 +74,7 @@ const LoginForm = () => {
                      size='lg'
                      value={password}
                      name='password'
+                     minLength={8}
                      onChange={handleInputChange}
                   />
 
@@ -84,6 +82,7 @@ const LoginForm = () => {
                </InputGroup>
             </FormControl>
 
+            <Text color='red'> { error } </Text>
 
             <Button
                width='full'

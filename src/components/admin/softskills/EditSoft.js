@@ -8,7 +8,7 @@ import { startUpdatingSoft } from 'actions/admin/softskills';
 
 // Componentes
 import Buttons from 'components/forms/Buttons';
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import {
    FormControl,
    FormLabel,

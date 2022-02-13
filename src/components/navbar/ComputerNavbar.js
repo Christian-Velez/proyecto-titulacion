@@ -14,7 +14,7 @@ import {
    setIsChecking,
 } from 'actions/auth';
 import PropTypes from 'prop-types';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import NavigateProfile from './NavigateProfile';
 
 const ComputerNavbar = ({ userLinks, userInfo}) => {

@@ -14,7 +14,7 @@ import {
    Input,
 } from '@chakra-ui/react';
 import Buttons from 'components/forms/Buttons';
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import { errorAlert } from 'helpers/SwalAlerts';
 
 const AddNewSoftForm = () => {

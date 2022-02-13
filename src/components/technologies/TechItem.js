@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 
 import {

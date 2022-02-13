@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { ArrowForwardIcon, CalendarIcon } from '@chakra-ui/icons';
 import { useDispatch } from 'react-redux';
 import { startUpdatingJob } from 'actions/company/job';

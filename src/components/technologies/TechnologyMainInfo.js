@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Flex, Heading, Stack, Text, VStack } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const TechnologyMainInfo = ({technology}) => {
    const { img, name, type } = technology;

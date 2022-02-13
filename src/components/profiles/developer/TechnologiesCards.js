@@ -3,7 +3,7 @@ import React from 'react';
 
 
 import { HStack, Text, VStack, Heading } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import EmptySection from './EmptySection';
 import PropTypes from 'prop-types';
 

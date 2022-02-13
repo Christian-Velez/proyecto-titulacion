@@ -13,7 +13,7 @@ import {
 
 // Componentes
 import BasicInput from 'components/forms/BasicInput';
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import Buttons from 'components/forms/Buttons';
 import { Select as SpecialSelect } from 'chakra-react-select';
 import {

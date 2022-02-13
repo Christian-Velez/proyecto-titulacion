@@ -17,7 +17,7 @@ import JobItem from './JobItem';
 import './background.css';
 import ModalForm from './ModalForm';
 import LoginForm from 'components/login/LoginForm';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 
 import Carrousel from './Carrousel';

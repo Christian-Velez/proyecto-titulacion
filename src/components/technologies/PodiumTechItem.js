@@ -8,7 +8,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const PodiumTechItem = ({
    alignSelf,

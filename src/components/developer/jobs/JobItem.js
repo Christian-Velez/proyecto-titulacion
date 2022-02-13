@@ -3,7 +3,7 @@
 import React, {  useState } from 'react';
 import PropTypes from 'prop-types';
 import { Flex, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { CalendarIcon } from '@chakra-ui/icons';
 import { FaDollarSign } from 'react-icons/fa';
 import { RiBuilding2Fill } from 'react-icons/ri';

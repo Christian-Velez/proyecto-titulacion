@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 
 // Components
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { AiFillClockCircle } from 'react-icons/ai';
 import { RiBuilding2Fill } from 'react-icons/ri';
 import {

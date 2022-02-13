@@ -5,7 +5,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingScreen from 'components/LoadingScreen';
 import { useSelector } from 'react-redux';

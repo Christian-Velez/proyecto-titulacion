@@ -7,7 +7,7 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const Technology = ({ info }) => {
    const { 

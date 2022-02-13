@@ -8,7 +8,7 @@ import {
    VStack,
    Link as ChakraLink
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { format } from 'timeago.js';
 
 
@@ -58,7 +58,7 @@ const JobMainInfo = ({jobInfo}) => {
             </Heading>
             <Text>
                <ChakraLink 
-                  href='/dev/search/co/123'
+                  href='/dev/search/123'
                   isExternal
                   color='brandPrimary.500'
                >{ name }</ChakraLink>

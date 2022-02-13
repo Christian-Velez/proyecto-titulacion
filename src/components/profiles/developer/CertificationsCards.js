@@ -1,7 +1,7 @@
 
 
 import { HStack, Text, VStack, Link } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import React from 'react';
 import EmptySection from './EmptySection';
 

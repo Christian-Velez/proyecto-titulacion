@@ -10,7 +10,7 @@ import { startUpdatingDevInfo } from 'actions/developer/user';
 import { isEmpty } from 'validator';
 
 // Componentes
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import BasicInput from 'components/forms/BasicInput';
 import Buttons from 'components/forms/Buttons';
 

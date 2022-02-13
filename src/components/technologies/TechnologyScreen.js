@@ -16,7 +16,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 import { MdCheckCircle, MdOutlineDescription } from 'react-icons/md';
 import TechnologyMainInfo from './TechnologyMainInfo';
 import InfoSection from './InfoSection';

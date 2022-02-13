@@ -10,7 +10,7 @@ import {
    Textarea,
    VStack,
 } from '@chakra-ui/react';
-import ProfilePhoto from 'components/ProfilePhoto';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
 import { useForm } from 'hooks/useForm';
 import BasicInput from 'components/forms/BasicInput';
 import Buttons from 'components/forms/Buttons';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Componentes
 import { HStack, VStack, Text } from '@chakra-ui/react';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 
 

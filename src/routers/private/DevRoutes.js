@@ -28,7 +28,7 @@ import EditDeveloperProfile from 'components/developer/profile/edit/EditDevelope
 import SearchJobScreen from 'components/developer/jobs/SearchJobScreen';
 import JobScreen from 'components/developer/jobs/jobscreen/JobScreen';
 import ApplicationsScreen from 'components/developer/applications/ApplicationsScreen';
-
+import SearchCompanyProfileScreen from 'components/developer/search/SearchCompanyProfileScreen';
 
 
 import { Stack } from '@chakra-ui/react';
@@ -84,11 +84,9 @@ const DevRoutes = () => {
                   <Route path='messages' element={ <p>Aqui va el chat </p> } />
 
                   <Route path='search' element={ <p> Aqui va el buscador de empresas </p> } />
-                  <Route path='search/:id' element={ <p>AQUI va una compañia</p>} />
+                  <Route path='search/:id' element={ <SearchCompanyProfileScreen />} />
 
                   <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
-               
-               
                
                </Routes>
             </>

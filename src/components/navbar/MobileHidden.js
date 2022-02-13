@@ -15,7 +15,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { generalLogout, setIsChecking } from 'actions/auth';
 import NavigateProfile from './NavigateProfile';
-import IconImg from 'components/IconImg';
+import IconImg from 'components/layout/IconImg';
 
 const MobileHidden = ({
    userLinks,

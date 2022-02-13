@@ -2,10 +2,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import JobItem from './JobItem';
-import { Heading, Text, VStack } from '@chakra-ui/react';
+import { Text, VStack } from '@chakra-ui/react';
 import { startLoadingJobs } from 'actions/developer/jobs';
 import LoadingScreen from 'components/LoadingScreen';
 import { useDispatch, useSelector } from 'react-redux';
+import Layout from 'components/layout';
 
 const ApplicationsScreen = () => {
    const dispatch = useDispatch();
@@ -34,16 +35,10 @@ const ApplicationsScreen = () => {
    }, [ allJobs, dispatch ]);
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20}}
+      <Layout 
+         title='Mis postulaciones'
          minH='100vh'
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
       >
-         <Heading fontSize={{ base: '2xl', lg: '3xl'}}> Mis postulaciones </Heading>
-         
          <Text> 
             Consulta las ofertas a las que has enviado solicitud. 
             Algunas ofertas podrían no aparecer debido a que la empresa las ha desactivado
@@ -63,7 +58,7 @@ const ApplicationsScreen = () => {
                }
             </VStack>
          }
-      </VStack>
+      </Layout>
    );
 };
 
