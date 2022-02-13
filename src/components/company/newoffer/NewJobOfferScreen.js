@@ -53,7 +53,7 @@ const NewJobOfferScreen = () => {
    const { title, description, salary, additional, category } = formValues;
    const [selectedTechs, setSelectedTechs] = useState([]);
    const [selectedSofts, setSelectedSofts] = useState([]);
-
+ 
 
    const handleSubmit = async (e) => {
       e.preventDefault();
