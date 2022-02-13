@@ -5,15 +5,13 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 
 const WelcomeAdmin = () => {
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
+      <Layout
          alignItems='center'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'         
+         minH='100vh'
       >
          <Heading>
             Bienvenido administrador
@@ -46,7 +44,7 @@ const WelcomeAdmin = () => {
                navegación.
             </Text>
          </VStack>
-      </VStack>
+      </Layout>
    );
 };
 

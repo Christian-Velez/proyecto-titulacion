@@ -1,4 +1,4 @@
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import DeveloperProfileContent from 'components/profiles/developer/DeveloperProfileContent';
 import { startLoadingDevInfo } from 'helpers/company/startLoadingUserInfo';
 import React from 'react';

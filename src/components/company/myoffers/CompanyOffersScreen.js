@@ -10,6 +10,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 import React from 'react';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { useSelector } from 'react-redux';
@@ -21,22 +22,10 @@ const CompanyOffersScreen = () => {
    const { jobs } = useSelector(state => state.companyInfo);
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
+      <Layout
+         title='Mis ofertas'
          minH='100vh'
       >
-
-
-         <Heading
-            fontSize={{ base: '2xl', lg: '3xl' }}
-         >
-            Mis ofertas
-         </Heading>
-
          <VStack 
             paddingLeft={10}
             alignItems='flex-start'
@@ -125,9 +114,7 @@ const CompanyOffersScreen = () => {
                </AccordionItem>
 
          </Accordion>
-
-         
-      </VStack>
+      </Layout>
    );
 };
 

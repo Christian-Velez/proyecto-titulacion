@@ -4,6 +4,7 @@ import {
    Heading,
    VStack,
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';
 import { findJobById } from 'helpers/findJobById';
 import React, { useEffect } from 'react';
@@ -49,12 +50,7 @@ const JobOfferScreen = () => {
    }
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
+      <Layout
          minH='100vh'
       >
          <Heading
@@ -83,7 +79,7 @@ const JobOfferScreen = () => {
                orderedApplicants.map(app =>  <ApplicantItem key={app.id} applicant={app} /> )
             }
          </Flex>
-      </VStack>
+      </Layout>
    );
 };
 

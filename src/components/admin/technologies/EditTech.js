@@ -38,6 +38,7 @@ import { startLoading } from 'actions/ui';
 import { formatTechnologyToDB } from 'helpers/admin/formatTechnologyToDB';
 import { useState } from 'react';
 import { useForm } from 'hooks/useForm';
+import Layout from 'components/layout';
 
 const EditTech = () => {
    // Herramientas
@@ -64,8 +65,6 @@ const EditTech = () => {
  
    // Formatear las tecnologias seleccionadas iniciales
    useEffect(() => {
-      console.log('formatio pa')
-
       const relatedTechsFormated = transformTechnologiesFormat(technology.relatedTechs);
       const categoriesFormated =
          technology.categories.map((cat) => {
@@ -78,6 +77,11 @@ const EditTech = () => {
       setRelatedTechs(relatedTechsFormated);
       setCategories(categoriesFormated);
    }, [ technology ]);
+
+
+   useEffect(() => {
+      window.scrollTo(0,0);
+   }, [])
 
    
    const handleEditTech = async (e) => {
@@ -95,13 +99,8 @@ const EditTech = () => {
    };
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
-      >
+      <Layout>
+
          <Heading>
             Editando { technology.name }
          </Heading>
@@ -196,7 +195,7 @@ const EditTech = () => {
                />
             </VStack>
          </form>
-      </VStack>
+      </Layout>
    );
 };
 

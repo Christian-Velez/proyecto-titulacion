@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLoadingJobs } from 'actions/developer/jobs';
 import { findJobById } from 'helpers/findJobById';

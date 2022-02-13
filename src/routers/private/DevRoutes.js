@@ -17,7 +17,7 @@ import { startSettingDevInfo } from 'actions/developer/user';
 
 // Components
 import SideBar from 'components/navbar/SideBar';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 
 import TechnologyScreen from 'components/technologies/TechnologyScreen';
 import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';

@@ -7,6 +7,7 @@ import JobMainInfo from './JobMainInfo';
 import JobBody from './JobBody';
 import { useDispatch } from 'react-redux';
 import { setIsJobSelected } from 'actions/developer/jobs';
+import Layout from 'components/layout';
 
 
 
@@ -31,21 +32,22 @@ const JobScreenContent = ({ job }) => {
    }, [job]);
 
 
+   // Arreglar los estilos en distintos dispositivos
+   // el screen se ve como en dispositivos moviles en
+   // algunas laptops
    return (
       <>
          <div id='aux'></div>
-         <VStack
+         <Layout
             alignItems='center'
-            className='animate__animated animate__fadeIn animate__faster'
             h='max-content'
+            padding={{}}
             paddingX={{ base: 7 }}
             paddingY={{ base: 20 }}
-            spacing={20}
-            w='full'
          >  
             <JobMainInfo jobInfo={job}/>
             <JobBody jobInfo={job} />
-         </VStack>
+         </Layout>
       </>
    );
 };

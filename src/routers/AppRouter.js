@@ -10,7 +10,7 @@ import {
 import PrivateRoutes from './private/PrivateRoutes';
 import PublicRoutes from './public/PublicRoutes';
 import { generalLogout, setIsChecking, startCheckingIsTokenValid } from 'actions/auth';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import LandingPageScreen from 'components/landing/LandingPageScreen';
 
 import { ROLE } from 'types/roles';

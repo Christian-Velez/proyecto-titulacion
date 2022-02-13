@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import JobItem from './JobItem';
 import { Text, VStack } from '@chakra-ui/react';
 import { startLoadingJobs } from 'actions/developer/jobs';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from 'components/layout';
 

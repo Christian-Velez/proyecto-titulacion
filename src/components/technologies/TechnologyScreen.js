@@ -22,6 +22,7 @@ import TechnologyMainInfo from './TechnologyMainInfo';
 import InfoSection from './InfoSection';
 import { GiComputing } from 'react-icons/gi';
 import { GoTerminal } from 'react-icons/go';
+import Layout from 'components/layout';
 
 
 const TechnologyScreen = () => {
@@ -40,13 +41,9 @@ const TechnologyScreen = () => {
       !technology
       ? <Navigate to={`${redirect}/technologies`} />
       : 
-      <VStack
+      <Layout
          padding={{ base: 10, lg: 30, xl: 40 }}
          paddingX={{ xl: 60 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
       >
          <TechnologyMainInfo technology={technology} />
          <Flex w='full' flexWrap='wrap' justifyContent='space-between' >
@@ -104,7 +101,7 @@ const TechnologyScreen = () => {
             </InfoSection>
          </Flex>
 
-      </VStack>
+      </Layout>
 
    );
 

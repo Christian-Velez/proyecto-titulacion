@@ -5,27 +5,20 @@ import React from 'react';
 import AddNewSoftForm from './AddNewSoftForm';
 import {
    Heading,
-   VStack
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 
 
 const AddNewSoft = () => {
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
-      >
+      <Layout>
          <Heading>
             Agregar nueva soft skill
          </Heading>
 
          <AddNewSoftForm />
 
-       
-      </VStack>
+      </Layout>
    );
 };
 

@@ -11,43 +11,43 @@ import {
    Button,
    Divider,
 } from '@chakra-ui/react';
-
-
+import Layout from 'components/layout';
 
 const SoftskillsScreen = () => {
    const navigate = useNavigate();
-   const { softskills } = useSelector(state => state.soft);
-   
-   return (
-      <VStack
-      padding={{ base: 7, lg: 20}}
-      spacing={20}
-      alignItems='flex-start'
-      w='full'
-      className='animate__animated animate__fadeIn animate__faster'
-   >
-      <Heading> Soft skills </Heading>
-      <Button
-         onClick={ () => navigate('./new') }
-      > Agregar una nueva </Button>
+   const { softskills } = useSelector(
+      (state) => state.soft
+   );
 
-      <Divider />
-      
-      <VStack
-         spacing={5}
-         w='full'
-         alignItems='flex-start'
-      >
-         <Heading size='md'> Registradas </Heading>
-         {
-            softskills.map(softskill => {
-               return <Softskill key={ softskill.id } info={softskill} />;
-            })   
-            
-         }
-      </VStack>
-     
-   </VStack>
+   return (
+      <Layout>
+         <Heading> Soft skills </Heading>
+         <Button
+            onClick={() => navigate('./new')}
+         >
+            Agregar una nueva
+         </Button>
+
+         <Divider />
+
+         <VStack
+            spacing={5}
+            w='full'
+            alignItems='flex-start'
+         >
+            <Heading size='md'>
+               Registradas
+            </Heading>
+            {softskills.map((softskill) => {
+               return (
+                  <Softskill
+                     key={softskill.id}
+                     info={softskill}
+                  />
+               );
+            })}
+         </VStack>
+      </Layout>
    );
 };
 

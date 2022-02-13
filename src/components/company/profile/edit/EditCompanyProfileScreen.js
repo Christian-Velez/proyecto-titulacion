@@ -22,6 +22,7 @@ import { isEmpty } from 'validator';
 import { startUpdatingCompanyInfo } from 'actions/company/user';
 import { useNavigate } from 'react-router-dom';
 import { errorAlert } from 'helpers/SwalAlerts';
+import Layout from 'components/layout';
 
 const EditCompanyProfileScreen = () => {
    const dispatch = useDispatch();
@@ -61,12 +62,8 @@ const EditCompanyProfileScreen = () => {
 
 
    return (
-      <VStack
+      <Layout
          padding={{ base: 10, lg: 30, xl: 40 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
       >
          <VStack alignItems='flex-start'>
             <Heading>Editando tu perfil</Heading>
@@ -135,7 +132,7 @@ const EditCompanyProfileScreen = () => {
                />
             </VStack>
          </form>
-      </VStack>
+      </Layout>
    );
 };
 

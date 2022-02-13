@@ -15,7 +15,7 @@ import { startLoadingJobs } from 'actions/developer/jobs';
 import { filterJobs } from 'helpers/developer/filterJobs';
 
 // Componentes
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import JobItem from './JobItem';
 import Filters from './Filters';
 import Search from './Search';
@@ -83,8 +83,6 @@ const SearchJobScreen = () => {
       }}>
 
          {/* Buscador, parte izq en dispositivos de escritorio */}
-
-
          <VStack
             alignItems='flex-start'
             className='animate__animated animate__fadeIn animate__faster'

@@ -16,6 +16,7 @@ import {
    Input,
    VStack,
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 
 
 
@@ -47,13 +48,8 @@ const EditSoft = () => {
    };
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
-      >
+      <Layout>
+      
          <Heading>
             Editando {softskill && softskill.name}
          </Heading>
@@ -93,7 +89,7 @@ const EditSoft = () => {
                <Buttons actionText='Guardar' cancelRoute='/admin/soft-skills'/>
             </VStack>
          </form>
-      </VStack>
+      </Layout>
    );
 };
 

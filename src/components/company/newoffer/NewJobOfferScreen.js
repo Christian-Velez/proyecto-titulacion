@@ -4,7 +4,6 @@ import {
    FormControl,
    FormHelperText,
    FormLabel,
-   Heading,
    Input,
    InputGroup,
    InputLeftElement,
@@ -25,6 +24,7 @@ import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startPostingNewJob } from 'actions/company/job';
 import { useNavigate } from 'react-router-dom';
 import { formatTechnologies } from 'helpers/formatTechnologies';
+import Layout from 'components/layout';
 
 const NewJobOfferScreen = () => {
    useEffect(() => {
@@ -71,20 +71,10 @@ const NewJobOfferScreen = () => {
    };
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
-         alignItems='flex-start'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'
+      <Layout
+         title='Publicar oferta'
+         padding={{ base: 10, lg: 30, xl: 40 }}
       >
-
-         <Heading
-            fontSize={{ base: '2xl', lg: '3xl' }}
-         >
-            Publicar oferta
-         </Heading>
-
          <form
             onSubmit={handleSubmit}
             style={{ width: '100%' }}
@@ -190,15 +180,12 @@ const NewJobOfferScreen = () => {
 
                />
 
-               
-                 
-
 
                <Buttons actionText='Publicar' cancelRoute='/co/myoffers'/>
 
             </VStack>
          </form>
-      </VStack>
+      </Layout>
    );
 };
 

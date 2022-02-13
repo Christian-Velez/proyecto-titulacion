@@ -8,25 +8,18 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
+import Layout from 'components/layout';
 
 
 const WelcomeCompany = () => {
    const { name } = useSelector(state => state.companyInfo);
 
    return (
-      <VStack
-         padding={{ base: 7, lg: 20 }}
-         spacing={20}
+      <Layout
          alignItems='center'
-         w='full'
-         className='animate__animated animate__fadeIn animate__faster'      
-         minH='100vh'  
-
+         minH='100vh'
       >
-         <Heading fontSize={{ base: '2xl', lg: '3xl'}}>
-            Bienvenido { name }
-         </Heading>
-
+         <Heading> Bienvenido { name } </Heading> 
          <VStack
             width={{ base: 'full', lg: '50%' }}
             spacing={5}
@@ -51,7 +44,7 @@ const WelcomeCompany = () => {
                navegación.
             </Text>
          </VStack>
-      </VStack>
+      </Layout>
    );
 };
 

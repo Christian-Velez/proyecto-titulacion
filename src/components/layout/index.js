@@ -41,7 +41,10 @@ const Layout = ({
 
 Layout.propTypes = {
    title: PropTypes.string,
-   children: PropTypes.arrayOf(PropTypes.element),
+   children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element
+   ]),
    padding: PropTypes.object,
    spacing: PropTypes.number,
    alignItems: PropTypes.string,

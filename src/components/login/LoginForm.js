@@ -74,7 +74,10 @@ const LoginForm = () => {
                      size='lg'
                      value={password}
                      name='password'
-                     minLength={8}
+
+                     //minLength={8}
+                     
+                     
                      onChange={handleInputChange}
                   />
 

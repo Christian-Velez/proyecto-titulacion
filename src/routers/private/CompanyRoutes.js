@@ -15,7 +15,7 @@ import { startLoadingTechnologies } from 'actions/admin/technologies';
 import { startSettingCompanyInfo } from 'actions/company/user';
 
 // Componentes
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import SideBar from 'components/navbar/SideBar';
 
 import TechnologiesSearchScreen from 'components/technologies/TechnologiesSearchScreen';
@@ -69,9 +69,9 @@ const CompanyRoutes = () => {
                      <Route path='profile/edit' element={ <EditCompanyProfileScreen /> } />
 
 
+                     <Route path='myoffers' element={ <CompanyOffersScreen /> } />
                      <Route path='newjob' element={<NewJobOfferScreen /> } />
 
-                     <Route path='myoffers' element={ <CompanyOffersScreen /> } />
                      <Route path='myoffers/:id' element={ <JobOfferScreen /> } />
 
                      <Route path='technologies' element={  <TechnologiesSearchScreen /> } />

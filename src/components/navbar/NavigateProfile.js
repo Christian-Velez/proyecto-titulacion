@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import IconImg from 'components/layout/IconImg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 import { useSelector } from 'react-redux';
 
 const NavigateProfile = ({

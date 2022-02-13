@@ -20,7 +20,7 @@ const WelcomeDeveloper = () => {
          alignItems='center'
          minH='100vh'  
       >
-         <Heading fontSize={{ base: '2xl', lg: '3xl'}}>
+         <Heading>
             Bienvenido/a { name }
          </Heading>
 

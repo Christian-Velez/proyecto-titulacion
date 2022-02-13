@@ -26,7 +26,7 @@ import AddNewTech from 'components/admin/technologies/AddNewTech';
 import EditTech from 'components/admin/technologies/EditTech';
 
 import { Stack } from '@chakra-ui/react';
-import LoadingScreen from 'components/LoadingScreen';
+import LoadingScreen from 'components/layout/LoadingScreen';
 
 
 
