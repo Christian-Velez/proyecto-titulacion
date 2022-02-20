@@ -88,92 +88,92 @@ const Certifications = ({ certifications, setCertifications }) => {
    return (
       
       <FormControl>
-      <FormLabel fontSize='lg'>Licencias y certificaciones</FormLabel>
-      { certificationDisplays }
-      <Button
-         size='md'
-         variant='outline'
-         onClick={ onOpen }
-      > Agregar </Button>
+         <FormLabel fontSize='lg'>Licencias y certificaciones</FormLabel>
+         { certificationDisplays }
+         <Button
+            size='md'
+            variant='outline'
+            onClick={ onOpen }
+         > Agregar </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-         <ModalOverlay />
-         <ModalContent>
-            <ModalHeader>
+         <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+               <ModalHeader>
             Agregar licencia / certificación
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-               <FormControl isRequired>
-                  <FormLabel> Imagen </FormLabel>
-                  <Input
-                     type='file'
-                     id='img'
-                     accept='image/png, image/jpeg, .svg'
-                     onChange={(e) => {
-                        setCertImg(
-                           e.target.files[0]
-                        );
-                     }}
-                  />
-                  { imgError && <FormHelperText color='red.500'> {imgError} </FormHelperText> }
-               </FormControl>
+               </ModalHeader>
+               <ModalCloseButton />
+               <ModalBody pb={6}>
+                  <FormControl isRequired>
+                     <FormLabel> Imagen </FormLabel>
+                     <Input
+                        type='file'
+                        id='img'
+                        accept='image/png, image/jpeg, .svg'
+                        onChange={(e) => {
+                           setCertImg(
+                              e.target.files[0]
+                           );
+                        }}
+                     />
+                     { imgError && <FormHelperText color='red.500'> {imgError} </FormHelperText> }
+                  </FormControl>
 
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Título</FormLabel>
-                  <Input
-                     type='text'
-                     name='title'
-                     value={ title }
-                     onChange={ handleInputChange }
-                     placeholder='Curso React Native'
-                  />
-                  { titleError && <FormHelperText color='red.500'> {titleError} </FormHelperText> }
-               </FormControl>
+                  <FormControl mt={4} isRequired>
+                     <FormLabel>Título</FormLabel>
+                     <Input
+                        type='text'
+                        name='title'
+                        value={ title }
+                        onChange={ handleInputChange }
+                        placeholder='Curso React Native'
+                     />
+                     { titleError && <FormHelperText color='red.500'> {titleError} </FormHelperText> }
+                  </FormControl>
 
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Institución</FormLabel>
-                  <Input
-                     type='text'
-                     name='institution'
-                     value={ institution }
-                     onChange={ handleInputChange }
-                     placeholder='Udemy'
-                  />
-                  { instError && <FormHelperText color='red.500'> {instError} </FormHelperText> }
-               </FormControl>
+                  <FormControl mt={4} isRequired>
+                     <FormLabel>Institución</FormLabel>
+                     <Input
+                        type='text'
+                        name='institution'
+                        value={ institution }
+                        onChange={ handleInputChange }
+                        placeholder='Udemy'
+                     />
+                     { instError && <FormHelperText color='red.500'> {instError} </FormHelperText> }
+                  </FormControl>
 
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Año de emisión</FormLabel>
-                  <Input
-                     type='number'
-                     name='year'
-                     value={ year }
-                     onChange={ handleInputChange } 
-                     placeholder='2021'
-                     min={1950}
-                     max={2022}
-                  />
-                  { yearError && <FormHelperText color='red.500'> {yearError} </FormHelperText> }
-               </FormControl>
-            </ModalBody>
+                  <FormControl mt={4} isRequired>
+                     <FormLabel>Año de emisión</FormLabel>
+                     <Input
+                        type='number'
+                        name='year'
+                        value={ year }
+                        onChange={ handleInputChange } 
+                        placeholder='2021'
+                        min={1950}
+                        max={2022}
+                     />
+                     { yearError && <FormHelperText color='red.500'> {yearError} </FormHelperText> }
+                  </FormControl>
+               </ModalBody>
 
-            <ModalFooter>
-               <Button
-                  onClick={onClose}
-                  variant='outline'
-               >
+               <ModalFooter>
+                  <Button
+                     onClick={onClose}
+                     variant='outline'
+                  >
                   Cancelar
-               </Button>
-               <Button ml={3} onClick = { handleSave }>Guardar</Button>
-            </ModalFooter>
+                  </Button>
+                  <Button ml={3} onClick = { handleSave }>Guardar</Button>
+               </ModalFooter>
 
-         </ModalContent>
-      </Modal>
+            </ModalContent>
+         </Modal>
 
 
 
-   </FormControl>
+      </FormControl>
    );
 };
 

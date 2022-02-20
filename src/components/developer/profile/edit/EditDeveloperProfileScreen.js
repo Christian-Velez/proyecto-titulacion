@@ -27,22 +27,17 @@ import {
    Textarea, 
    VStack 
 } from '@chakra-ui/react';
-import { Select as SpecialSelect } from 'chakra-react-select';
 import { useNavigate } from 'react-router-dom';
 import { errorAlert } from 'helpers/SwalAlerts';
 import { processDevInfo } from 'helpers/developer/processDevInfo';
 import { startLoading } from 'actions/ui';
 import Layout from 'components/layout';
+import Softskills from './editForm/Softskills';
 
 const EditDeveloperProfile = () => {
    useScrollToTop();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   
-
-   // Obtener opciones DISPONIBLES (todas)
-   const { softskills } = useSelector(state => state.soft);   
-   const [softsHere] = useState(formatSoftskills([...softskills]));
    const devInfo = useSelector(state => state.devInfo);
  
 
@@ -64,7 +59,6 @@ const EditDeveloperProfile = () => {
    const [profilePhoto, setProfilePhoto] = useState(devInfo.img);
 
 
-   // Actualizar perfil
    const handleEditDevProfile = async (e) => {
       e.preventDefault();
 
@@ -124,26 +118,7 @@ const EditDeveloperProfile = () => {
                <Projects projects={projects} setProjects={setProjects} />
                <Education education={education} setEducation={setEducation}/>
                <Certifications certifications={certifications} setCertifications={setCertifications}/>
-
-               <FormControl>
-                  <FormControl>
-                     <FormLabel fontSize='lg'>Mis soft skills</FormLabel>
-                     {softsHere && (
-                        <SpecialSelect
-                           isMulti
-                           name='mySoftskills'
-                           placeholder='Seleccione las soft skills...'
-                           closeMenuOnSelect={false}
-                           selectedOptionStyle='check'
-                           hideSelectedOptions={false}
-
-                           options={softsHere}
-                           value={selectedSofts}
-                           onChange={setSelectedSofts}
-                        />
-                     )}
-                  </FormControl>  
-               </FormControl>
+               <Softskills selectedSofts={selectedSofts} setSelectedSofts={setSelectedSofts}/>
                <Buttons cancelRoute='/dev/profile' actionText='Guardar'/>
             </VStack>
          </form>

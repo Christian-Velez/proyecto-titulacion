@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
+import TagDisplay from 'components/forms/TagDisplay';
 
 const EducationDisplay = ({ education, setEducation }) => {
    const { title, institution ,year, _id } = education;
@@ -12,13 +12,9 @@ const EducationDisplay = ({ education, setEducation }) => {
       setEducation(prevEd => prevEd.filter(ed => ed._id !== _id));
    };
 
+   const educationLabel = `${ title }. ${ institution } (${year}).`;
    return (
-      <HStack spacing={4} my={3}>
-         <Tag >
-            <TagLabel> { title }. { institution } ({year}). </TagLabel>
-            <TagCloseButton onClick={ handleDelete }/>
-         </Tag>
-      </HStack>
+      <TagDisplay label={educationLabel} handleDelete={handleDelete}/> 
    );
 };
 

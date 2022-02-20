@@ -27,10 +27,7 @@ import { filterTechs } from 'helpers/filterTechs';
 
 const Technologies = ({ technologies, setTechnologies }) => {
    const { isOpen , onOpen , onClose } = useDisclosure();
-   const [error, setError ] = useState({
-      error: false,
-      message: ''
-   });
+   const [error, setError ] = useState('');
 
    const [formValues, handleInputChange,,setFormValues ] = useForm({
       newTechnology: {},
@@ -64,13 +61,13 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    const handleAddNewTech = () => {
       if(yearsOfExperience === ''){
-         setError({ error: true, message: 'Ingresa los años de experiencia'});
+         setError('Ingresa los años de experiencia');
       }
       else if(parseInt(yearsOfExperience) > 30 || parseInt(yearsOfExperience) < 0){
-         setError({ error: true, message: 'Los años tienen que estar dentro del rango 0 - 30'});
+         setError('Los años tienen que estar dentro del rango 0 - 30');
       }
       else{
-         setError(false);
+         setError('');
          const objNewTech = JSON.parse(newTechnology);
          const techToAdd = {
             technology: objNewTech,
@@ -129,10 +126,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
                         name='yearsOfExperience' 
                         value={yearsOfExperience} 
                         onChange={handleInputChange}/>
-
-                     {
-                        error.error && <FormHelperText color='red.500'>{ error.message } </FormHelperText>
-                     }
+                     <FormHelperText color='red.500'>{ error} </FormHelperText>
                   </FormControl>
 
                </ModalBody>
@@ -142,7 +136,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
                   <Button onClick={onClose} variant='outline'>  Cancelar </Button>
 
                   <Button ml={3} onClick={ handleAddNewTech }>
-              Agregar
+                     Agregar
                   </Button>
                </ModalFooter>
             </ModalContent>

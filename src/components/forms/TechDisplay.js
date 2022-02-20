@@ -1,14 +1,6 @@
-
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
-
-
-
-
-
+import TagDisplay from 'components/forms/TagDisplay';
 
 const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => {
    const { name } = technology;
@@ -17,13 +9,9 @@ const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => 
       setTechnologies(prevTech => prevTech.filter(tech => tech._id !== id));
    };
 
+   const techLabel = `${ name }, ${yearsOfExperience} ${ yearsOfExperience === 1 ? 'año' : 'años'}`;
    return (
-      <HStack spacing={4} my={3}>
-         <Tag >
-            <TagLabel> { name }, {yearsOfExperience} { yearsOfExperience === 1 ? 'año' : 'años'}</TagLabel>
-            <TagCloseButton onClick={ handleDelete }/>
-         </Tag>
-      </HStack>
+      <TagDisplay label={techLabel} handleDelete={handleDelete} />
    );
 };
 
