@@ -113,68 +113,65 @@ const JobBody = ({ jobInfo }) => {
             >
                Descripción
             </Heading>
-            {/* El pre-wrap formatea los \n insertados al postular la oferta */}
             <Text whiteSpace='pre-wrap'> {description} </Text>
          </VStack>
 
-         <VStack w='full' alignItems='flex-start'>
-            <Heading
-               fontSize={{
-                  base: 'lg',
-                  '2xl': 'xl',
-               }}
-            >
-               Tecnologías
-            </Heading>
-            <VStack
-               w='full'
-               alignItems='flex-start'
-               spacing={5}
-            >
-               {techsRequired.map((tech) => TechItem(tech) )}
+         {
+            techsRequired.length > 0 && 
+            <VStack w='full' alignItems='flex-start'>
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
+                  Tecnologías
+               </Heading>
+               <VStack
+                  w='full'
+                  alignItems='flex-start'
+                  spacing={5}
+               >
+                  {techsRequired.map((tech) => TechItem(tech) )}
+               </VStack>
             </VStack>
+         }
 
-
-            
-         </VStack>
-
-
-
-
-         <VStack w='full' alignItems='flex-start'>
-            <Heading
-               fontSize={{
-                  base: 'lg',
-                  '2xl': 'xl',
-               }}
-            >
-               Soft skills
-            </Heading>
-            <VStack
-               w='full'
-               alignItems='flex-start'
-               spacing={5}
-            >
-               {softsRequired.map((soft) => SoftItem(soft))}
+         {
+            softsRequired.length > 0 &&
+            <VStack w='full' alignItems='flex-start'>
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
+                  Soft skills
+               </Heading>
+               <VStack
+                  w='full'
+                  alignItems='flex-start'
+                  spacing={5}
+               >
+                  {softsRequired.map((soft) => SoftItem(soft))}
+               </VStack>
             </VStack>
+         }
 
-
-            
-         </VStack>
-
-         <VStack w='full' alignItems='flex-start'>
-            <Heading
-               fontSize={{
-                  base: 'lg',
-                  '2xl': 'xl',
-               }}
-            >
-               Extras
-            </Heading>
-            <Text> {additional} </Text>
-         </VStack>
-
-         
+         {
+            additional &&
+            <VStack w='full' alignItems='flex-start'>
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
+                  Extras
+               </Heading>
+               <Text> {additional} </Text>
+            </VStack>
+         }
       </VStack>
    );
 };

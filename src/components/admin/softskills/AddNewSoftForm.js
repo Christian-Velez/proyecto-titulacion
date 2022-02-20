@@ -9,13 +9,11 @@ import { startSubmittingSoftSkill } from 'actions/admin/softskills';
 // Componentes
 import {
    VStack,
-   FormControl,
-   FormLabel,
-   Input,
 } from '@chakra-ui/react';
 import Buttons from 'components/forms/Buttons';
 import ProfilePhoto from 'components/layout/ProfilePhoto';
 import { errorAlert } from 'helpers/SwalAlerts';
+import BasicInput from 'components/forms/BasicInput';
 
 const AddNewSoftForm = () => {
    const navigate = useNavigate();
@@ -23,15 +21,23 @@ const AddNewSoftForm = () => {
 
    const [img, setImg] = useState();
    const [name, setName] = useState('');
-   
+
    const handleSubmitNewSoft = async (e) => {
       e.preventDefault();
 
       if (!img || !name) {
-         return errorAlert({ message: 'Rellene todos los campos solicitados' });
+         return errorAlert({
+            message:
+               'Rellene todos los campos solicitados',
+         });
       }
-      
-      dispatch(startSubmittingSoftSkill({name, img }, navigate));
+
+      dispatch(
+         startSubmittingSoftSkill(
+            { name, img },
+            navigate
+         )
+      );
    };
 
    return (
@@ -52,19 +58,14 @@ const AddNewSoftForm = () => {
                isRequired={true}
             />
 
-            <FormControl isRequired>
-               <FormLabel fontSize='lg'>
-                  Nombre
-               </FormLabel>
-               <Input
-                  type='text'
-                  name='name'
-                  value={name}
-                  onChange={(e) => {
-                     setName(e.target.value);
-                  }}
-               />
-            </FormControl>
+            <BasicInput
+               text='Nombre'
+               name='name'
+               value={name}
+               onChange={(e) => {
+                  setName(e.target.value);
+               }}
+            />
 
             <Buttons
                cancelRoute='/admin/soft-skills'

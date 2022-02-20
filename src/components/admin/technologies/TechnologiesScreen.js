@@ -10,12 +10,15 @@ import {
    Divider,
 } from '@chakra-ui/react';
 import Layout from 'components/layout';
+import useScrollToTop from 'hooks/useScrollToTop';
 
 const TechnologiesScreen = () => {
+   useScrollToTop();
    const navigate = useNavigate();
    const { technologies } = useSelector(
       (state) => state.tech
    );
+
 
    return (
       <Layout>
