@@ -1,19 +1,16 @@
 import { 
    Button, 
    FormControl,
-   FormHelperText, 
    FormLabel, 
    Heading, 
-   Input, 
-   Modal, 
    ModalBody, 
    ModalCloseButton, 
-   ModalContent, 
    ModalFooter, 
    ModalHeader, 
-   ModalOverlay, 
    Select, 
-   useDisclosure 
+   Text, 
+   useDisclosure, 
+   VStack
 } from '@chakra-ui/react';
 import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
@@ -21,6 +18,8 @@ import TechDisplay from './TechDisplay';
 import { useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
 import { filterTechs } from 'helpers/filterTechs';
+import FormModal from './FormModal';
+import BasicInput from './BasicInput';
 
 
 
@@ -38,7 +37,6 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    const { technologies: allTechs } = useSelector(state => state.tech);
    const formatedTechs = useMemo(() => filterTechs([...allTechs], technologies), [allTechs, technologies]);
-
 
    // Selecciona a la primer tecnologia en la lista
    useEffect(()=> {
@@ -86,27 +84,13 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    return (
       <>
-         <FormControl>
-            <FormLabel fontSize='lg'>Tecnologías</FormLabel>
-            { techsDisplays }
-            <Button size='md' variant='outline' onClick={onOpen}
-            > Agregar </Button>
-         </FormControl>
-
-         <Modal
-            isOpen={isOpen}
-            onClose={onClose}
-         >
-            <ModalOverlay />
-            <ModalContent>
-               <ModalHeader> <Heading fontSize='xl'> Agregar tecnología</Heading></ModalHeader>
-               <ModalCloseButton />
-               <ModalBody pb={6}>
-
-
-                  <FormControl>
+         <FormModal label='Tecnologías' onOpen={onOpen} onClose={onClose} isOpen={isOpen} selectedOptions={techsDisplays}>
+            <ModalHeader> <Heading fontSize='xl'> Agregar tecnología</Heading></ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+               <VStack spacing={4}>
+                  <FormControl isRequired>
                      <FormLabel> Tecnología </FormLabel>
-
                      <Select
                         name='newTechnology'   
                         value={newTechnology}
@@ -114,33 +98,28 @@ const Technologies = ({ technologies, setTechnologies }) => {
                      >
                         { formatedTechs.map(tech => <option key={tech.id} value={JSON.stringify(tech)}> { tech.name }</option>)}
                      </Select>
-
                   </FormControl>
+                  <BasicInput 
+                     text='Años de experiencia' 
+                     type='number'  
+                     placeholder='(0 - 30)' 
+                     min='0' max='30' 
+                     name='yearsOfExperience' 
+                     value={yearsOfExperience} 
+                     onChange={handleInputChange}
 
-                  <FormControl mt={4} isRequired>
-                     <FormLabel>Años de experiencia </FormLabel>
-                     <Input 
-                        type='number' 
-                        placeholder='(0 - 30)' 
-                        min='0' max='30' 
-                        name='yearsOfExperience' 
-                        value={yearsOfExperience} 
-                        onChange={handleInputChange}/>
-                     <FormHelperText color='red.500'>{ error} </FormHelperText>
-                  </FormControl>
+                  />
+                  <Text color='red.500'>{ error } </Text>
+               </VStack>
+            </ModalBody>
 
-               </ModalBody>
-
-               <ModalFooter>
-            
-                  <Button onClick={onClose} variant='outline'>  Cancelar </Button>
-
-                  <Button ml={3} onClick={ handleAddNewTech }>
-                     Agregar
-                  </Button>
-               </ModalFooter>
-            </ModalContent>
-         </Modal>
+            <ModalFooter>
+               <Button onClick={onClose} variant='outline'>  Cancelar </Button>
+               <Button ml={3} onClick={ handleAddNewTech }>
+                  Agregar
+               </Button>
+            </ModalFooter>
+         </FormModal>
       </>
    );
 };
