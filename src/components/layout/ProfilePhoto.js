@@ -41,8 +41,13 @@ const ProfilePhoto = ({
       }
    }, [current]);
 
-   const handleEditProfilePhoto = () => {
+   const handleOpenFileExplorer = () => {
       document.getElementById('img').click();
+   };
+
+   const onInvalid = (e) => {
+      e.preventDefault();
+      errorAlert({ title: 'Adjunta una foto' });
    };
 
    return (
@@ -75,11 +80,7 @@ const ProfilePhoto = ({
                setProfilePhoto(e.target.files[0]);
             }}
             visibility='hidden'
-            onInvalid={(e) => {
-               e.preventDefault();
-
-               errorAlert({ title: 'Adjunta una foto' });
-            }}
+            onInvalid={onInvalid}
          />
 
          <IconButton
@@ -88,7 +89,7 @@ const ProfilePhoto = ({
             variant='outline'
             w='30px'
             alignSelf='flex-end'
-            onClick={handleEditProfilePhoto}
+            onClick={handleOpenFileExplorer}
          />
       </FormControl>
    );

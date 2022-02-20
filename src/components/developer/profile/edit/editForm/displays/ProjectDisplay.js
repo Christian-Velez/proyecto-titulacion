@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
+import TagDisplay from 'components/forms/TagDisplay';
 
 const ProjectDisplay = ({ project, setProjects }) => {
    const { title, _id } = project;
@@ -10,12 +10,7 @@ const ProjectDisplay = ({ project, setProjects }) => {
    };
 
    return (
-      <HStack spacing={4} my={3}>
-         <Tag >
-            <TagLabel> { title } </TagLabel>
-            <TagCloseButton onClick={ handleDelete }/>
-         </Tag>
-      </HStack>
+      <TagDisplay label={title} handleDelete={handleDelete} />
    );
 };
 

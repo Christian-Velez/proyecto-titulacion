@@ -2,36 +2,31 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'hooks/useForm';
-import { isURL, isEmpty } from 'validator';
 
 
 // Componentes
 import {
    Button,
-   FormControl,
-   FormHelperText,
-   FormLabel,
-   Input,
-   Modal,
    ModalBody,
    ModalCloseButton,
-   ModalContent,
    ModalFooter,
    ModalHeader,
-   ModalOverlay,
+   Text,
    useDisclosure,
+   VStack,
 } from '@chakra-ui/react';
 import ProjectDisplay from './displays/ProjectDisplay';
+import { isProjectValid } from './validations';
+import BasicInput from 'components/forms/BasicInput';
+import FormModal from 'components/forms/FormModal';
 
 
 const Projects = ({ projects, setProjects }) => {
    const { isOpen , onOpen , onClose } = useDisclosure();
-   const [imgError, setImgError ] = useState('');
-   const [nameError, setNameError] = useState('');
-   const [ghError, setGhError] = useState('');
-   const [demoError, setDemoError] = useState('');
+   const [error, setError] = useState('');
    
    const projectsDisplays = projects.map(pr => <ProjectDisplay key={pr._id} project={pr} setProjects={setProjects}/>);
+   
    const [projectImg, setProjectImg] = useState(null);
    const [formValues, handleInputChange,resetForm] = useForm({
       name: '',
@@ -41,40 +36,16 @@ const Projects = ({ projects, setProjects }) => {
    const { name, demoLink, ghLink } = formValues;
 
 
-   const handleAdd = () => {     
-      if(!projectImg) {
-         return setImgError('Adjunta una imagen');
-      }
-      else{
-         setImgError('');
-      }
-      if(isEmpty(name)) {
-         return setNameError('Ingresa un nombre');
-      }
-      else {
-         setNameError('');
-      }
-   
-      if(isEmpty(ghLink)){
-         return setGhError('Ingresa el link del repositorio');
-      }
-      else if(!isURL(ghLink)){
-         return setGhError('El texto ingresado no es un link');
-      }
-      else {
-         setGhError('');
-      }
-      
-      if(!isEmpty(demoLink)) {
-         if(!isURL(demoLink)){
-            return setDemoError('El texto ingresado no es un link');
-         }
-         else {
-            setDemoError('');
-         }
-      }
+   const handleAdd = () => {
+      const result = isProjectValid({
+         ...formValues,
+         projectImg
+      });
 
-      // Si pasa todos los filtros
+      if(!result.isValid) {
+         return setError(result.message);
+      }
+     
       const newProject = {
          title: name,
          img: projectImg,
@@ -84,97 +55,40 @@ const Projects = ({ projects, setProjects }) => {
       };
 
       setProjects(prevProjects => ([ ...prevProjects, newProject]));
-      onClose();
       resetForm();
       setProjectImg(null);  
+      onClose();
    };
-
 
    return (
       <>
-      <FormControl>
-         <FormLabel fontSize='lg'>Proyectos</FormLabel>
-         { projectsDisplays }
-         <Button
-            size='md'
-            variant='outline'
-            onClick={ onOpen }
-         > Agregar </Button>
-      </FormControl>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-         <ModalOverlay />
-         <ModalContent>
+         <FormModal label='Proyectos' selectedOptions={projectsDisplays} onClose={onClose} onOpen={onOpen} isOpen={isOpen}>
             <ModalHeader>Agregar proyecto</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
-               <FormControl isRequired>
-               <FormLabel> Imagen </FormLabel>
-               <Input
-                     type='file'
-                     id='img'
-                     accept='image/png, image/jpeg, .svg'
+               <VStack spacing={4}>
+                  <BasicInput text='Imagen' type='file' id='img' accept='image/png, image/jpeg, .svg' 
                      onChange={(e) => {
-                        setProjectImg(
-                           e.target.files[0]
-                        );
-                     }}
+                           setProjectImg(
+                              e.target.files[0]
+                           );
+                        }} 
                   />
-                  { imgError && <FormHelperText color='red.500'> {imgError} </FormHelperText> }
-               </FormControl>
 
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Nombre</FormLabel>
-                  <Input
-                     type='text'
-                     name='name'
-                     value={ name }
-                     placeholder='Mi proyecto'
-                     onChange={ handleInputChange }
-                  />
-                  { nameError && <FormHelperText color='red.500'> {nameError} </FormHelperText> }
-               </FormControl>
-
-               <FormControl mt={4} isRequired>
-                  <FormLabel>Repositorio de Github</FormLabel>
-                  <Input
-                     type='url'
-                     name='ghLink'
-                     value={ ghLink }
-                     onChange={ handleInputChange }
-                     placeholder='https://github.com/...'
-                  />
-                  { ghError && <FormHelperText color='red.500'> {ghError} </FormHelperText> }
-
-               </FormControl>
-
-               <FormControl mt={4}>
-                  <FormLabel>Demo</FormLabel>
-                  <Input
-                     type='url'
-                     name='demoLink'
-                     value={ demoLink }
-                     onChange={ handleInputChange }
-                     placeholder='https://mywebsite.com/...'
-                  />
-                  { demoError && <FormHelperText color='red.500'> {demoError} </FormHelperText> }
-
-               </FormControl>
+                  <BasicInput text='Nombre' name='name' value={name} placeholder='Mi proyecto' onChange={ handleInputChange }/>
+                  <BasicInput text='Repositorio' type='url' name='ghLink' value={ghLink} placeholder='https://github.com/...' onChange={ handleInputChange }/>
+                  <BasicInput text='Demo' type='url' name='demoLink' value={demoLink} placeholder='https://mywebsite.com/...' onChange={ handleInputChange }/>
+                  <Text color='red.500'> {error} </Text>
+               </VStack>
             </ModalBody>
 
-          <ModalFooter>
-            
-            <Button onClick={onClose} variant='outline'>  Cancelar </Button>
-
-            <Button ml={3} onClick={handleAdd}>
-              Agregar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
+            <ModalFooter>
+               <Button onClick={onClose} variant='outline'>  Cancelar </Button>
+               <Button ml={3} onClick={handleAdd}>
+                  Agregar
+               </Button>
+            </ModalFooter>
+         </FormModal>
       </>
    );
 };

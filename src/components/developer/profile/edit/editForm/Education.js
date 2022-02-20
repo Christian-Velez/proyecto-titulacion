@@ -6,28 +6,23 @@ import { isEmpty } from 'validator';
 // Componentes
 import {
    Button,
-   FormControl,
-   FormHelperText,
-   FormLabel,
-   Input,
-   Modal,
    ModalBody,
    ModalCloseButton,
-   ModalContent,
    ModalFooter,
    ModalHeader,
-   ModalOverlay,
+   Text,
    useDisclosure,
+   VStack,
 } from '@chakra-ui/react';
 import EducationDisplay from './displays/EducationDisplay';
 import { useForm } from 'hooks/useForm';
+import FormModal from 'components/forms/FormModal';
+import BasicInput from 'components/forms/BasicInput';
 
 
 const Education = ({ education, setEducation }) => {
    const { isOpen, onOpen, onClose } = useDisclosure();
-   const [titleError, setTitleError ] = useState('');
-   const [instError, setInstError ] = useState('');
-   const [yearError, setYearError ] = useState('');
+   const [error, setError] = useState('');
 
 
    const educationDisplays = education.map(ed => <EducationDisplay key={ed._id} education={ed} setEducation={setEducation}/>);
@@ -42,29 +37,17 @@ const Education = ({ education, setEducation }) => {
 
 
    const handleSave = () => {
-      
       if(isEmpty(title) || title.length < 5){
-         return setTitleError('Ingresa un título válido');
+         return setError('Ingresa un título válido');
       }
-      else{
-         setTitleError('');
-      }
-
       if(isEmpty(institution)){
-         return setInstError('Ingresa una institución válida');
+         return setError('Ingresa una institución válida');
       }
-      else{
-         setInstError('');
-      }
-
       if(isEmpty(year) || parseInt(year) < 1950 || parseInt(year) > 2022) {
-         return setYearError('Ingresa un año de emisión válido (1950 - 2022)');
+         return setError('Ingresa un año de emisión válido (1950 - 2022)');
       }
-      else {
-         setYearError('');
-      }
+      setError('');
       
-      // Si pasa los filtros
       const newEd = {
          institution,
          title,
@@ -74,86 +57,33 @@ const Education = ({ education, setEducation }) => {
       setEducation(prevEd => ([ ...prevEd, newEd]));
       onClose();
       resetForm();
-
    };
 
-
-
    return (
-      <FormControl>
-         <FormLabel fontSize='lg'>Educación</FormLabel>
-         { educationDisplays }
-         <Button
-            size='md'
-            variant='outline'
-            onClick={ onOpen }
-         > Agregar </Button>
+      <FormModal label='Educación' selectedOptions={educationDisplays} onOpen={onOpen} onClose={onClose} isOpen={isOpen}>
+         <ModalHeader>
+         Agregar título académico
+         </ModalHeader>
+         <ModalCloseButton />
+         <ModalBody pb={6}>
+            <VStack spacing={4}>
+               <BasicInput text='Título' name='title' value={title} onChange={handleInputChange} placeholder='Ingeniero en...'/>
+               <BasicInput text='Institución' name='institution' value={institution} onChange={handleInputChange} placeholder='Universidad de...'/>
+               <BasicInput text='Año de emisión' type='number' name='year' value={year} onChange={handleInputChange} placeholder='2021'/>
+               <Text mt={4} color='red.500'> {error} </Text>
+            </VStack>
+         </ModalBody>
 
-
-         <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-               <ModalHeader>
-               Agregar título académico
-               </ModalHeader>
-               <ModalCloseButton />
-               <ModalBody pb={6}>
-                  <FormControl mt={4} isRequired>
-                     <FormLabel>Título</FormLabel>
-                     <Input
-                        type='text'
-                        name='title'
-                        value={ title }
-                        onChange={ handleInputChange }
-                        placeholder='Ingeniero en...'
-                     />
-                     { titleError && <FormHelperText color='red.500'> {titleError} </FormHelperText> }
-
-
-                  </FormControl>
-
-                  <FormControl mt={4} isRequired>
-                     <FormLabel>Institución</FormLabel>
-                     <Input
-                        type='text'
-                        name='institution'
-                        value={ institution }
-                        onChange={ handleInputChange} 
-                        placeholder='Universidad de...'
-                     />
-                     { instError && <FormHelperText color='red.500'> {instError} </FormHelperText> }
-
-                  </FormControl>
-
-                  <FormControl mt={4} isRequired>
-                     <FormLabel>Año de emisión</FormLabel>
-                     <Input
-                        type='number'
-                        name='year'
-                        value={ year }
-                        onChange={ handleInputChange }
-                        placeholder='2021'
-                        min={1950}
-                        max={2022}
-                     />
-                     { yearError && <FormHelperText color='red.500'> {yearError} </FormHelperText> }
-
-                  </FormControl>
-               </ModalBody>
-
-               <ModalFooter>
-                  <Button
-                     onClick={onClose}
-                     variant='outline'
-                  >
-                     Cancelar
-                  </Button>
-                  <Button ml={3} onClick = { handleSave }>Guardar</Button>
-               </ModalFooter>
-
-            </ModalContent>
-         </Modal>
-      </FormControl>
+         <ModalFooter>
+            <Button
+               onClick={onClose}
+               variant='outline'
+            >
+               Cancelar
+            </Button>
+            <Button ml={3} onClick = { handleSave }>Guardar</Button>
+         </ModalFooter>
+      </FormModal>
    );
 };
 
