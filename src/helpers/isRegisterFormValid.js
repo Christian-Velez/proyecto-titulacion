@@ -8,6 +8,7 @@ export const isRegisterFormValid = ({
    name,
    username,
    password,
+   confirmPassword,
    location = null,
 }) => {
    let regExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
@@ -31,6 +32,13 @@ export const isRegisterFormValid = ({
          isValid: false,
          msg: 'Proporciona una contraseña lo suficientemente segura'
       };
+   }
+
+   if(password !== confirmPassword) {
+      return {
+         isValid: false,
+         msg: 'Las contraseñas no coinciden'
+      }
    }
 
    if (location && validator.isEmpty(location)) {

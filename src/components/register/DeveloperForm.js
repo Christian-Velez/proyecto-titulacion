@@ -27,7 +27,9 @@ import { successAlert } from 'helpers/SwalAlerts';
 const DeveloperForm = () => {
    const dispatch = useDispatch();
    const [isLoading, setIsLoading] = useState(false);
-   const [show, setShow] = useState(false);
+   const [showPass1, setShowPass1] = useState(false);
+   const [showPass2, setShowPass2] = useState(false);
+
    const [error, setError] = useState('');
 
    const [formValues, handleInputChange] =
@@ -36,8 +38,9 @@ const DeveloperForm = () => {
          username: '',
          age: '',
          password: '',
+         confirmPassword: '',
       });
-   const { name, username, age, password } = formValues;
+   const { name, username, age, password, confirmPassword } = formValues;
 
       
    const handleSubmit =  async (e) => {
@@ -123,7 +126,7 @@ const DeveloperForm = () => {
                <InputGroup>
                   <Input
                      type={
-                        show ? 'text' : 'password'
+                        showPass1 ? 'text' : 'password'
                      }
                      size='lg'
                      name='password'
@@ -133,7 +136,7 @@ const DeveloperForm = () => {
                      onChange={handleInputChange}
                   />
 
-                  <ShowHideButton show={show} setShow={setShow}/>
+                  <ShowHideButton show={showPass1} setShow={setShowPass1}/>
                </InputGroup>
 
                <FormHelperText>
@@ -144,8 +147,29 @@ const DeveloperForm = () => {
                </FormHelperText>
             </FormControl>
 
-            <Text color='red'> { error } </Text>
 
+            <FormControl isRequired>
+               <FormLabel fontSize='lg'>
+                  Confirma tu contraseña
+               </FormLabel>
+
+               <InputGroup>
+                  <Input
+                     type={
+                        showPass1 ? 'text' : 'password'
+                     }
+                     size='lg'
+                     name='confirmPassword'
+                     placeholder='********'
+                     minLength={8}
+                     value={confirmPassword}
+                     onChange={handleInputChange}
+                  />
+                  <ShowHideButton show={showPass2} setShow={setShowPass2}/>
+               </InputGroup>
+            </FormControl>
+
+            <Text color='red'> { error } </Text>
 
             <HStack>
                <Button variant='outline' onClick = { handleCancelRegister } isDisabled={ isLoading} >

@@ -12,7 +12,7 @@ export const filterJobs = (allJobs, filters) => {
 
    const filteredJobs = allJobs.filter(job => {
 
-      const includesTech = 
+      const jobIncludesTech = 
          job.techsRequired.some(i => i.technology.name.toLowerCase().includes(title));
 
 
@@ -32,12 +32,11 @@ export const filterJobs = (allJobs, filters) => {
          // Titulo del buscador
          // Compara con titulo,
          // descripción o tecnologias
-
          && 
          (
             job.title.toLowerCase().indexOf(title) >= 0 ||
             job.description.toLowerCase().indexOf(title) >= 0 ||
-            includesTech
+            jobIncludesTech
          )
       ); 
    });

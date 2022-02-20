@@ -58,7 +58,6 @@ const SearchJobScreen = () => {
    );
    
 
-
    // Solo cuando recarga la aplicacion se vuelven a pedir todos los trabajos
    useEffect(() => {
       if (allJobs.length === 0) {
