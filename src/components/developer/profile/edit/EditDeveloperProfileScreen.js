@@ -2,23 +2,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
-import useScrollToTop from 'hooks/useScrollToTop';
-
-// Info
 import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startUpdatingDevInfo } from 'actions/developer/user';
 import { isEmpty } from 'validator';
-
-// Componentes
-import ProfilePhoto from 'components/layout/ProfilePhoto';
-import BasicInput from 'components/forms/BasicInput';
-import Buttons from 'components/forms/Buttons';
-
-import Technologies from 'components/forms/Technologies';
-import Projects from './editForm/Projects';
-import Education from './editForm/Education';
-import Certifications from './editForm/Certifications';
-
 import { 
    FormControl, 
    FormLabel, 
@@ -31,6 +17,14 @@ import { useNavigate } from 'react-router-dom';
 import { errorAlert } from 'helpers/SwalAlerts';
 import { processDevInfo } from 'helpers/developer/processDevInfo';
 import { startLoading } from 'actions/ui';
+import useScrollToTop from 'hooks/useScrollToTop';
+import ProfilePhoto from 'components/layout/ProfilePhoto';
+import BasicInput from 'components/forms/BasicInput';
+import Buttons from 'components/forms/Buttons';
+import Technologies from 'components/forms/Technologies';
+import Projects from './editForm/Projects';
+import Education from './editForm/Education';
+import Certifications from './editForm/Certifications';
 import Layout from 'components/layout';
 import Softskills from './editForm/Softskills';
 
@@ -40,7 +34,6 @@ const EditDeveloperProfile = () => {
    const dispatch = useDispatch();
    const devInfo = useSelector(state => state.devInfo);
  
-
    // Datos SELECCIONADOS
    const [
       formValues,
@@ -57,7 +50,6 @@ const EditDeveloperProfile = () => {
    const [education, setEducation] = useState(devInfo.education);
    const [certifications, setCertifications] = useState(devInfo.certifications);
    const [profilePhoto, setProfilePhoto] = useState(devInfo.img);
-
 
    const handleEditDevProfile = async (e) => {
       e.preventDefault();
@@ -78,7 +70,6 @@ const EditDeveloperProfile = () => {
          certifications,
          selectedSofts
       };
-
       const formatedDevInfo = await processDevInfo(devInfo);
       dispatch(startUpdatingDevInfo(formatedDevInfo, navigate));
    };
@@ -91,7 +82,6 @@ const EditDeveloperProfile = () => {
             <Heading> Editando tu perfil </Heading>
             <Text fontStyle='italic'>No olvides guardar los cambios</Text> 
          </VStack>
-
          <form 
             style={{ width: '100%' }}
             onSubmit={ handleEditDevProfile }   
@@ -102,18 +92,15 @@ const EditDeveloperProfile = () => {
                alignItems='flex-start'
             >
                <ProfilePhoto setProfilePhoto={setProfilePhoto} current={profilePhoto} text='Foto de perfil'/>
-
                <BasicInput text='Nombre' name='name' value={name} maxLength={50} onChange={ handleInputChange } />
                <BasicInput text='Localización' name='location' value={location} onChange={ handleInputChange } />
-               
                <FormControl isRequired>
                   <FormLabel fontSize='lg'>Descripción</FormLabel>
                   <Textarea type='text' name='description' value = { description } 
                      onChange={ handleInputChange } 
-                     maxLength={280} placeholder='Tienes un "tweet" para contarle a las empresas más acerca de ti  (280 caracteres).'/>
+                     maxLength={280} placeholder='Tienes un "tweet" para contarle a las empresas más acerca de ti  (280 caracteres).'
+                  />
                </FormControl>
-
-
                <Technologies technologies={technologies} setTechnologies={setTechnologies}/>
                <Projects projects={projects} setProjects={setProjects} />
                <Education education={education} setEducation={setEducation}/>
