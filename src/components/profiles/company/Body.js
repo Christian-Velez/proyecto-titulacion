@@ -7,9 +7,6 @@ import PropTypes from 'prop-types';
 
 
 const Body = ({ companyInfo }) => {
-
-
-
    const { technologies } = useSelector(state => state.tech);
    const auxTech = technologies[0];
 

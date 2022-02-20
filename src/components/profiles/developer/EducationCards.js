@@ -1,14 +1,7 @@
-
-
 import React from 'react';
 import { ListItem, UnorderedList } from '@chakra-ui/react';
 import EmptySection from './EmptySection';
-
-
 import PropTypes from 'prop-types';
-
-
-
 
 const EducationCards = ({ devInfo}) => {
    const { education: educationArr } = devInfo;
@@ -28,7 +21,6 @@ const EducationCards = ({ devInfo}) => {
                })
             }
          </UnorderedList>
-
       )
    );
 };

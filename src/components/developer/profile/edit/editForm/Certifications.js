@@ -22,9 +22,6 @@ import {
 import CertificationDisplay from './displays/CertificationDisplay';
 import { useForm } from 'hooks/useForm';
 
-
-
-
 const Certifications = ({ certifications, setCertifications }) => {
    const { isOpen, onOpen, onClose } = useDisclosure();
 

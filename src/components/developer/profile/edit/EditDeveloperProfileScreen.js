@@ -1,8 +1,8 @@
 // Hooks
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'hooks/useForm';
-
+import useScrollToTop from 'hooks/useScrollToTop';
 
 // Info
 import { formatSoftskills } from 'helpers/formatSoftskills';
@@ -35,15 +35,12 @@ import { startLoading } from 'actions/ui';
 import Layout from 'components/layout';
 
 const EditDeveloperProfile = () => {
+   useScrollToTop();
    const navigate = useNavigate();
-
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
-
+   const dispatch = useDispatch();
+   
 
    // Obtener opciones DISPONIBLES (todas)
-   const dispatch = useDispatch();
    const { softskills } = useSelector(state => state.soft);   
    const [softsHere] = useState(formatSoftskills([...softskills]));
    const devInfo = useSelector(state => state.devInfo);

@@ -22,14 +22,12 @@ const SearchForm = () => {
    const { technologies } = useSelector(state => state.tech);
    const formatedTechs = sortByName([...technologies]);
 
-
    const [ formValues, handleInputChange,,setFormValues] = useForm({
       name: '',
       technology: 'all',
       min: '0',
       max: '30'
    });
-
    const { name, technology, min, max } = formValues;
 
    const handleSearchCompany = (e) => {

@@ -1,14 +1,6 @@
-
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HStack, Tag, TagCloseButton, TagLabel } from '@chakra-ui/react';
-
-
-
-
-
 
 const ProjectDisplay = ({ project, setProjects }) => {
    const { title, _id } = project;

@@ -30,10 +30,6 @@ const MainInfo = ({ userInfo }) => {
       lastSeen,
    } = userInfo;
 
-
- 
-
-
    return (
       <Stack
          width='full'

@@ -32,8 +32,6 @@ const Technologies = ({ technologies, setTechnologies }) => {
       message: ''
    });
 
-
-   // Nueva tecnologia por agregar
    const [formValues, handleInputChange,,setFormValues ] = useForm({
       newTechnology: {},
       yearsOfExperience: ''
@@ -41,9 +39,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
    const { newTechnology, yearsOfExperience } = formValues;
 
 
-   // Todas las tecnologias (usadas en el select del Modal)
    const { technologies: allTechs } = useSelector(state => state.tech);
-   // Ordenadas alfabeticamente y sin las seleccionadas
    const formatedTechs = useMemo(() => filterTechs([...allTechs], technologies), [allTechs, technologies]);
 
 
@@ -66,10 +62,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
       return <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id} setTechnologies={setTechnologies}/>;
    });
 
-
-   // Agregar una nueva tecnologia
-   // Incluye las validaciones
-   const handleAdd = () => {
+   const handleAddNewTech = () => {
       if(yearsOfExperience === ''){
          setError({ error: true, message: 'Ingresa los años de experiencia'});
       }
@@ -96,7 +89,6 @@ const Technologies = ({ technologies, setTechnologies }) => {
 
    return (
       <>
-
          <FormControl>
             <FormLabel fontSize='lg'>Tecnologías</FormLabel>
             { techsDisplays }
@@ -149,7 +141,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
             
                   <Button onClick={onClose} variant='outline'>  Cancelar </Button>
 
-                  <Button ml={3} onClick={ handleAdd }>
+                  <Button ml={3} onClick={ handleAddNewTech }>
               Agregar
                   </Button>
                </ModalFooter>

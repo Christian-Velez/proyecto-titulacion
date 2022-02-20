@@ -16,7 +16,6 @@ const JobScreenContent = ({ job }) => {
    useEffect(() => {
       dispatch(setIsJobSelected(true));
         
-      // Cleanup
       return () => {
          dispatch(setIsJobSelected(false));
       };
@@ -25,7 +24,6 @@ const JobScreenContent = ({ job }) => {
    useEffect(() => {
       const aux = document.getElementById('aux');
       aux.scrollIntoView();
-
       window.scrollTo(0,0);
    }, [job]);
 

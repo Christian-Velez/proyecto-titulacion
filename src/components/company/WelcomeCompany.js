@@ -17,6 +17,7 @@ const WelcomeCompany = () => {
    return (
       <Layout
          alignItems='center'
+         textAlign='center'
          minH='100vh'
       >
          <Heading> Bienvenido { name } </Heading> 

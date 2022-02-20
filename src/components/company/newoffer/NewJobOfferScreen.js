@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useScrollToTop from 'hooks/useScrollToTop';
 
 import {
    FormControl,
@@ -27,10 +28,7 @@ import { formatTechnologies } from 'helpers/formatTechnologies';
 import Layout from 'components/layout';
 
 const NewJobOfferScreen = () => {
-   useEffect(() => {
-      window.scrollTo(0,0);
-   },[]);
-
+   useScrollToTop();
 
    const navigate = useNavigate();
    const dispatch = useDispatch();

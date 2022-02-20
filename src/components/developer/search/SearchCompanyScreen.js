@@ -4,8 +4,6 @@ import React from 'react';
 import SearchForm from './SearchForm';
 
 const SearchCompanyScreen = () => {
-
-
    const isEmpty = true;
 
    return (

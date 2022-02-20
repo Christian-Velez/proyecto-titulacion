@@ -4,12 +4,7 @@ import { Button, HStack, IconButton, Input, InputGroup, InputLeftElement } from 
 import { Search2Icon } from '@chakra-ui/icons';
 import { HiAdjustments } from 'react-icons/hi';
 const Search = ({ filters, setFilters, filtersModal}) => {
-   
-   
    const { onOpen } = filtersModal;
-
-   
-   
    const [title, setTitle] = useState(filters.title);
 
    const handleTitleChange = (e) => {

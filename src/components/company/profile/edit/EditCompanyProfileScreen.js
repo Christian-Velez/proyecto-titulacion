@@ -1,5 +1,4 @@
 import React, {
-   useEffect,
    useState,
 } from 'react';
 import {
@@ -23,14 +22,13 @@ import { startUpdatingCompanyInfo } from 'actions/company/user';
 import { useNavigate } from 'react-router-dom';
 import { errorAlert } from 'helpers/SwalAlerts';
 import Layout from 'components/layout';
+import useScrollToTop from 'hooks/useScrollToTop';
 
 const EditCompanyProfileScreen = () => {
+   useScrollToTop();
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
 
    // Informacion de la empresa
    const companyInfo = useSelector((state) => state.companyInfo);

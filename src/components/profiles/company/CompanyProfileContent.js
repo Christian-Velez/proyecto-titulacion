@@ -1,5 +1,6 @@
 import EditProfileButton from 'components/layout/EditProfileButton';
-import React, { useEffect } from 'react';
+import React from 'react';
+import useScrollToTop from 'hooks/useScrollToTop';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,13 +11,8 @@ import Body from './Body';
 const CompanyProfileContent = ({
    companyInfo,
 }) => {
-
-   
+   useScrollToTop();
    const navigate = useNavigate();
-
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
 
    const handleEditProfile = () => {
       navigate('./edit');

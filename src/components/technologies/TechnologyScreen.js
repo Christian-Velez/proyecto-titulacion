@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import useScrollToTop from 'hooks/useScrollToTop';
 import {
    Link,
    Navigate,
@@ -26,16 +27,11 @@ import Layout from 'components/layout';
 
 
 const TechnologyScreen = () => {
+   useScrollToTop();
    const { redirect } = useSelector(state => state.auth);
    const { technologies } = useSelector(state => state.tech);
    const { name } = useParams();
    const technology = findTechnologyByName(technologies, name);
-
-
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
-
 
    return (
       !technology

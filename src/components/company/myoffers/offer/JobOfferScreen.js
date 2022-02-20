@@ -1,3 +1,5 @@
+import React from 'react';
+import useScrollToTop from 'hooks/useScrollToTop';
 import {
    Badge,
    Flex,
@@ -6,7 +8,6 @@ import {
 import Layout from 'components/layout';
 import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';
 import { findJobById } from 'helpers/findJobById';
-import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
    Navigate,
@@ -15,14 +16,11 @@ import {
 import ApplicantItem from './ApplicantItem';
 
 const JobOfferScreen = () => {
+   useScrollToTop();
    const { jobs: allJobs } = useSelector(state => state.companyInfo);
    const { id } = useParams();
    const job = findJobById(allJobs, id);
 
-   
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
 
    if(!job) {
       return <Navigate to='/co/myoffers' />;
