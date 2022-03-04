@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { types } from 'types/types';
 import { finishLoading, startLoading } from 'actions/ui';
-import { errorAlert } from 'helpers/SwalAlerts';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
+import { toastError } from 'helpers/ToastAlert';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -24,7 +24,7 @@ export const startPostingNewJob = (jobInfo, navigate) => {
 
       } catch(err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error inesperado al tratar de postear tu oferta' });
+         toastError('Ocurrio un error inesperado al tratar de postear tu oferta')
       
       } finally {
          dispatch(finishLoading());

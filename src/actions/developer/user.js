@@ -1,11 +1,8 @@
-
-
-import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { finishLoading, startLoading } from 'actions/ui';
+import { toastSuccess, toastError } from 'helpers/ToastAlert';
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
-
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -22,10 +19,7 @@ export const startSettingDevInfo = () => {
    
          dispatch(setDevInfo(devInfo));
       }catch(err){
-         return errorAlert({
-            message: 'Ocurrio un error al tratar de cargar tu información :('
-         });
-        
+         return toastError('Ocurrio un error al tratar de cargar tu información :(');
       }
    };
 };
@@ -56,11 +50,11 @@ export const startUpdatingDevInfo = ( newDevInfo, navigate ) => {
 
          dispatch(updateDevInfo(data.newUser));
          navigate('/dev/profile');
-         successAlert({ message: 'Perfil actualizado '});
+         toastSuccess('Perfil actualizado');
       }
       catch(err){
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+         toastError('Ocurrio un error al tratar de actualizar tu perfil');
 
       } finally {
          dispatch(finishLoading());
@@ -74,3 +68,44 @@ export const updateDevInfo = (data) => {
       payload: data
    };
 };
+
+
+export const startAddingNewTechToDevStack = (newTech, yearsOfExperience) => {
+   return async(dispatch, getState) => {
+      try {
+         const { id } = getState().auth;
+
+         const techToDb = {
+            id,
+            technology: newTech.id,
+            yearsOfExperience: parseInt(yearsOfExperience)
+         };
+   
+         // Header de autorizacion
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/developer/addTech`;
+         await axios.put(URL, techToDb, config);
+
+
+         const auxTech = {
+            _id: Date.now(),
+            technology: newTech,
+            yearsOfExperience: parseInt(yearsOfExperience)
+         }
+         dispatch(addNewTechToDevStack(auxTech));
+         toastSuccess("Tecnología añadida a tu stack")
+
+
+      } catch(err) {
+         console.log(err.message);
+      }
+   }
+}
+
+
+export const addNewTechToDevStack = (newTech) => {
+   return {
+      type: types.addNewTechToDevStack,
+      payload: newTech
+   }
+}

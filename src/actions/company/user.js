@@ -1,7 +1,8 @@
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { errorAlert } from 'helpers/SwalAlerts';
+import { toastError, toastSuccess } from 'helpers/ToastAlert';
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
 
@@ -68,11 +69,12 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
          const { data } = await axios.put(URL, updatedCompanyToDB, config);
          dispatch(updateCompanyInfo(data.newUser));
          navigate('/co/profile');
-         successAlert({ message: 'Perfil actualizado'});
+
+         toastSuccess('Perfil actualizado');
 
       } catch (err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de actualizar tu perfil' });
+         toastError('Ocurrio un error al tratar de actualizar tu perfil')
       } finally {
          dispatch(finishLoading());
       }

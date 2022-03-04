@@ -27,8 +27,7 @@ import 'helpers/timeAgoRegister';
 
 const JobItem = ({ job }) => {
    const { title, company, description, id } = job;
-   const { img, name, lastSeen } = company;
-
+   const { img, name, lastSeen, id: companyId } = company;
 
    const dispatch = useDispatch();
 
@@ -77,7 +76,7 @@ const JobItem = ({ job }) => {
             >
                
                <ChakraLink 
-                  href='https://chakra-ui.com' 
+                  href={`/dev/search/${companyId}`} 
                   isExternal 
                >
                   <Icon as={RiBuilding2Fill} /> { name }  

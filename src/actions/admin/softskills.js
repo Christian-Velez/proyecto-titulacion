@@ -1,7 +1,7 @@
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
 import { imgUpload } from 'helpers/imgUpload';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
+import { toastError, toastSuccess } from 'helpers/ToastAlert';
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
 
@@ -17,7 +17,7 @@ export const startLoadingSoftSkills = () => {
          dispatch(setSoftSkills(data));
 
       } catch (err) {
-         errorAlert({ message: 'Ocurrio un error al cargar los datos' });
+         toastError('Ocurrio un error al cargar los datos')
       }
    };
 };
@@ -39,7 +39,7 @@ export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
          
          const imgURL = await imgUpload(img);
          if (!imgURL) {
-            return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
+            return toastError('Ocurrio un error con la subida de la imagen');
          }
 
          const softSkillToDB = {
@@ -55,11 +55,11 @@ export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
          
          dispatch(addNewSoft(data));
          navigate('/admin/soft-skills');
-         successAlert({ message: 'Soft skill añadida' });
+         toastSuccess('Soft skill añadida');
 
       } catch (err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de agregar la soft skill'});
+         toastError('Ocurrio un error al tratar de agregar la soft skill');
       } finally {
          dispatch(finishLoading());
       }
@@ -84,7 +84,7 @@ export const startUpdatingSoft = ({ id, name, img }, navigate) => {
          const imgURL = (typeof img === 'string') ? img : await imgUpload(img);
    
          if (!imgURL) {
-            return errorAlert({ message: 'Ocurrio un error con la subida de la imagen'});
+            return toastError('Ocurrio un error con la subida de la imagen');
          }
 
          const softToDB = {
@@ -100,11 +100,11 @@ export const startUpdatingSoft = ({ id, name, img }, navigate) => {
 
          dispatch(editSoft(id, data));
          navigate('/admin/soft-skills');
-         successAlert({ message: 'Soft skill editada' });
+         toastSuccess('Soft skill editada');
 
       } catch (err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de editar la soft skill' });
+         toastError('Ocurrio un error al tratar de editar la soft skill');
       } finally {
          dispatch(finishLoading());
       }

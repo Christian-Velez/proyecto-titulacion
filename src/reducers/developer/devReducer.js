@@ -31,6 +31,14 @@ export const devReducer = (state = initialDevInfo, action) => {
             ...action.payload
          };
          
+      case types.addNewTechToDevStack:
+         return {
+            ...state,
+            technologies: [
+               ...state.technologies,
+               action.payload
+            ]
+         }
    
       default:
          return state;

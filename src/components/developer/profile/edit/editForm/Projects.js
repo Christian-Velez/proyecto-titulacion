@@ -76,8 +76,8 @@ const Projects = ({ projects, setProjects }) => {
                   />
 
                   <BasicInput text='Nombre' name='name' value={name} placeholder='Mi proyecto' onChange={ handleInputChange }/>
-                  <BasicInput text='Repositorio' type='url' name='ghLink' value={ghLink} placeholder='https://github.com/...' onChange={ handleInputChange }/>
-                  <BasicInput text='Demo' type='url' name='demoLink' value={demoLink} placeholder='https://mywebsite.com/...' onChange={ handleInputChange }/>
+                  <BasicInput text='Repositorio' isRequired={false} type='url' name='ghLink' value={ghLink} placeholder='https://github.com/...' onChange={ handleInputChange }/>
+                  <BasicInput text='Demo, descarga' type='url' isRequired={false} name='demoLink' value={demoLink} placeholder='https://mywebsite.com/...' onChange={ handleInputChange }/>
                   <Text color='red.500'> {error} </Text>
                </VStack>
             </ModalBody>

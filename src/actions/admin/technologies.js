@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { types } from 'types/types';
 import { finishLoading, startLoading } from 'actions/ui';
-import { errorAlert, successAlert } from 'helpers/SwalAlerts';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
+import { toastError, toastSuccess } from 'helpers/ToastAlert';
 
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -40,11 +40,11 @@ export const startSubmittingTechnology = (techToDB, navigate) => {
 
          dispatch(addNewTech(data));
          navigate('/admin/technologies');
-         successAlert({ message: 'Tecnología agregada'});
+         toastSuccess('Tecnología agregada');
 
       } catch (err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrio un error al tratar de agregar la tecnología'});
+         toastError('Ocurrio un error al tratar de agregar la tecnología')
       } finally {
          dispatch(finishLoading());
       }
@@ -73,9 +73,9 @@ export const startUpdatingTech = ( techInfo, navigate) => {
 
          dispatch(editTech(id, data));
          navigate('/admin/technologies');
-         successAlert({ message: 'Tecnología editada' });
+         toastSuccess('Tecnología editada');
       } catch (err) {
-         errorAlert({ message: 'Ocurrio un error al tratar de editar la tecnología' });
+         toastError('Ocurrio un error al tratar de editar la tecnología');
       } finally {
          dispatch(finishLoading());
       }

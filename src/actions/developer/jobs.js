@@ -3,7 +3,7 @@ import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
-import { errorAlert } from 'helpers/SwalAlerts';
+import { toastError } from 'helpers/ToastAlert';
 const API_URL = process.env.REACT_APP_API_URL;
 
 
@@ -48,7 +48,8 @@ export const startApplyingProcess = (jobId, alreadyApply) => {
 
       } catch(err) {
          console.log(err);
-         errorAlert({ message: 'Ocurrió un error al tratar de realizar la operación' });
+         toastError('Ocurrió un error al tratar de realizar la operación');
+
       } finally {
          dispatch(finishLoading());
       }

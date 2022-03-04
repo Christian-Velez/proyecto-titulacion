@@ -20,20 +20,12 @@ export const isProjectValid = (projectInfo) => {
       };
    }
 
-   if(isEmpty(ghLink)){
-      return {   
-         isValid: false,
-         message: 'Ingresa el link del repositorio'
-      };
-   }
-
-   if(!isURL(ghLink)){
+   if(!isEmpty(ghLink) && !isURL(ghLink)){
       return {
          isValid: false,
          message: 'Ingresa un link de repositorio válido'
       };
    }
-
    
    if(!isEmpty(demoLink) && !isURL(demoLink)) {
       return {
