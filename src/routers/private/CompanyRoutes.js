@@ -30,6 +30,7 @@ import JobOfferScreen from 'components/company/myoffers/offer/JobOfferScreen';
 import SearchDeveloperProfileScreen from 'components/company/search/SearchDeveloperProfileScreen';
 
 import { Stack } from '@chakra-ui/react';
+import DevelopersScreen from 'components/company/developers/DevelopersScreen';
 
 const CompanyRoutes = () => {
    const dispatch = useDispatch();
@@ -78,7 +79,7 @@ const CompanyRoutes = () => {
                         <Route path='technologies/:name' element={ <TechnologyScreen />} />
 
 
-                        <Route  path='developers' element={<p>aqui van los contratados y por contratar </p> }/>
+                        <Route  path='developers' element={<DevelopersScreen /> }/>
 
                         <Route path='messages' element={<p> aqui van los mensages </p> } />
 

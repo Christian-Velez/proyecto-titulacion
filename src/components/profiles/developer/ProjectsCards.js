@@ -41,10 +41,10 @@ const ProjectsCards = ({ devInfo }) => {
                >
                   <Heading fontSize={{ base: 'md', '2xl': 'lg' }}> { title } </Heading>
                   {
-                     linkDemo && <Link isExternal href={linkDemo}> Demo <ExternalLinkIcon mx='2px' /> </Link>
+                     linkGH && <Link isExternal href={linkGH}> Repositorio <ExternalLinkIcon mx='2px' /> </Link>
                   }
                   {
-                     linkGH && <Link isExternal href={linkGH}> Github <ExternalLinkIcon mx='2px' /> </Link>
+                     linkDemo && <Link isExternal href={linkDemo}> Demo <ExternalLinkIcon mx='2px' /> </Link>
                   }
                </VStack>
              </HStack>

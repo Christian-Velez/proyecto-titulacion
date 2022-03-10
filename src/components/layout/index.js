@@ -1,6 +1,6 @@
 import { Heading, VStack } from '@chakra-ui/react';
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const defaultPadding = {
    base: 7,

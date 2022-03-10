@@ -42,5 +42,8 @@ export const types = {
    addNewJobOffer: '[Company] Add new posted offer to stored data',
    updateJob: '[Company] Update job in stored data',
    removeApplicantFromJob: '[Company] Remove developer applicant from company jobs',
+   discardDeveloper: '[Company] Discard developer from toHire list',
+   hireDeveloper: '[Company] Hire developer',
+   fireDeveloper: '[Company] Fire developer'
    
 };

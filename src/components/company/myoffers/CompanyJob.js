@@ -31,52 +31,45 @@ const CompanyJob = ({job})=> {
    const DD = ('0' + publishedAt.getDate()).slice(-2);
 
    return (
+      <VStack 
+         border='1px solid'
+         borderRadius='md'
+         borderColor='gray.100'
+         padding={10}
+         alignItems='flex-start' 
+         spacing={5} 
+         w='full'
       
-         <VStack 
-            border='1px solid'
-            borderRadius='md'
-            borderColor='gray.100'
-            padding={10}
-         
-            alignItems='flex-start' 
-            spacing={5} 
-            w='full'
-         
-         >
-            <Heading fontSize='xl'>
-               {title} 
-
-               <Badge 
-                  ml={3} 
-                  colorScheme={ active ? 'green' : 'red'}
-               >
-                  { active ? 'ACTIVA' : 'ARCHIVADA' }
-               </Badge>
-            </Heading>
-
-
-            <Flex
-               direction='row'
-               gap={5}
-               color='#B1B3BA' 
-               fontSize='sm'
-               flexWrap='wrap'
+      >
+         <Heading fontSize='xl'>
+            {title} 
+            <Badge 
+               ml={3} 
+               colorScheme={ active ? 'green' : 'red'}
             >
-               <Text> { applicants.length } { applicants.length === 1 ? 'candidato' : 'candidatos'} </Text> 
-               <HStack>
-                  <CalendarIcon />
-                  <Text> {`${DD}-${MM}-${YY}`}</Text>
-               </HStack>
+               { active ? 'ACTIVA' : 'ARCHIVADA' }
+            </Badge>
+         </Heading>
 
-               <HStack>
-                  <Text>USD { salary.toFixed(2) } mensual</Text>
-               </HStack>
-            
-            </Flex>
-            
-         
+         <Flex
+            direction='row'
+            gap={5}
+            color='#B1B3BA' 
+            fontSize='sm'
+            flexWrap='wrap'
+         >
+            <Text> { applicants.length } { applicants.length === 1 ? 'candidato' : 'candidatos'} </Text> 
+            <HStack>
+               <CalendarIcon />
+               <Text> {`${DD}-${MM}-${YY}`}</Text>
+            </HStack>
 
-            <HStack justifyContent='flex-start' flexWrap='wrap'>
+            <HStack>
+               <Text>USD { salary.toFixed(2) } mensual</Text>
+            </HStack>
+         </Flex>
+
+         <HStack justifyContent='flex-start' flexWrap='wrap'>
             {
                techsRequired.map(req => {
                   const { technology: tech } = req;
@@ -91,46 +84,33 @@ const CompanyJob = ({job})=> {
                   );
                })
             }
-            </HStack>
+         </HStack>
 
+         <HStack w='full'>
+            <Button
+               variant='outline'
+               colorScheme='gray'
+               onClick={ handleToggleJob }
+               size='md'
+               maxW='50%'
+               fontSize={{ base: 'sm', md: 'md'}}
+            >
+               {
+                  active ? 'Archivar' : 'Desarchivar'
+               }
+            </Button> 
 
-            <HStack w='full'>
-               <Button
-                  variant='outline'
-                  colorScheme='gray'
-                  onClick={ handleToggleJob }
-                  size='md'
-                  maxW='50%'
-                  fontSize={{ base: 'sm', md: 'md'}}
-               >
-                  {
-                     active ? 'Archivar' : 'Desarchivar'
-                  }
-               </Button> 
-
-
-
-
-               <Button
-                  rightIcon={<ArrowForwardIcon />}   
-                  size='md'
-                  maxW='50%'
-                  fontSize={{ base: 'sm', md: 'md'}}
-                  onClick = { handleViewJob }
-               >
-                  Revisar
-               </Button>
-
-
-
-
-            </HStack>
-
-         
-         </VStack>
-
-
-
+            <Button
+               rightIcon={<ArrowForwardIcon />}   
+               size='md'
+               maxW='50%'
+               fontSize={{ base: 'sm', md: 'md'}}
+               onClick = { handleViewJob }
+            >
+               Revisar
+            </Button>
+         </HStack>
+      </VStack>
    );
 };
 

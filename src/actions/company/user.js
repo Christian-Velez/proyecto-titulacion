@@ -74,7 +74,7 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
 
       } catch (err) {
          console.log(err);
-         toastError('Ocurrio un error al tratar de actualizar tu perfil')
+         toastError('Ocurrio un error al tratar de actualizar tu perfil');
       } finally {
          dispatch(finishLoading());
       }
@@ -85,5 +85,97 @@ export const updateCompanyInfo = (data) => {
    return {
       type: types.setCompanyInfo,
       payload: data
+   };
+};
+
+
+// Descartar a programador de "por contratar"
+export const startDiscartingApplicant = (relationId) => {
+   return async(dispatch) => {
+      try {
+         dispatch(startLoading());
+
+         const body = {
+            relationId
+         };
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/company/discardDeveloper`;
+         await axios.post(URL, body, config);
+         dispatch(discardDev(relationId));
+         toastSuccess('Programador descartado');
+      } catch(err) {
+         toastError('Ocurrio un error al tratar de realizar la operación');
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const discardDev = (relationId) => {
+   return {
+      type:types.discardDeveloper,
+      payload: relationId
+   };
+};
+
+
+// Contratar a un programador
+export const startHiringDeveloper = (relationId, devId, jobTitle) => {
+   return async(dispatch) => {
+      try {
+         dispatch(startLoading());
+   
+         const body = {
+            relationId,
+            devId,
+            jobTitle
+         };
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/company/hireDeveloper`;
+   
+         await axios.post(URL, body, config);
+         dispatch(hireDev(relationId));
+         toastSuccess('Programador contratado');
+      } catch(err) {
+         toastError('Ocurrio un error al tratar de realizar la operación');
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const hireDev = (relationId) => {
+   return {
+      type: types.hireDeveloper,
+      payload: relationId
+   };
+};
+
+// Despedir a un programador
+export const startFiringDeveloper = (relationId) => {
+   return async(dispatch) => {
+      try {
+         dispatch(startLoading());
+
+         const body = {
+            relationId
+         };
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/company/fireDeveloper`;
+         await axios.post(URL, body, config);
+         dispatch(fireDev(relationId));
+         toastSuccess('Programador despedido');
+      } catch(err) {
+         toastError('Ocurrio un error al tratar de realizar la operación');
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const fireDev = (relationId) => {
+   return {
+      type: types.fireDeveloper,
+      payload: relationId
    };
 };

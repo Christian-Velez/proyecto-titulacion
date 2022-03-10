@@ -24,7 +24,7 @@ export const startPostingNewJob = (jobInfo, navigate) => {
 
       } catch(err) {
          console.log(err);
-         toastError('Ocurrio un error inesperado al tratar de postear tu oferta')
+         toastError('Ocurrio un error inesperado al tratar de postear tu oferta');
       
       } finally {
          dispatch(finishLoading());
