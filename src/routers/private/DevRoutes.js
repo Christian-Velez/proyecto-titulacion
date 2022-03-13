@@ -33,6 +33,7 @@ import SearchCompanyProfileScreen from 'components/developer/search/SearchCompan
 
 import { Stack } from '@chakra-ui/react';
 import SearchCompanyScreen from 'components/developer/search/SearchCompanyScreen';
+import TopTenTechnologies from 'components/technologies/TopTenTechnologies';
 
 
 const DevRoutes = () => {
@@ -78,6 +79,9 @@ const DevRoutes = () => {
                         </Route>
 
                         <Route path='technologies' element={ <TechnologiesSearchScreen/> } />
+                        
+                        <Route path='technologies/top10' element={ <TopTenTechnologies /> } />
+
                         <Route path='technologies/:name' element={ <TechnologyScreen/>} />
 
                         <Route path='applications' element={ <ApplicationsScreen /> } />

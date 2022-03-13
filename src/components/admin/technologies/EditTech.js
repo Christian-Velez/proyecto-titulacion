@@ -7,6 +7,7 @@ import {
    useSelector,
 } from 'react-redux';
 import {
+   Navigate,
    useNavigate,
    useParams,
 } from 'react-router-dom';
@@ -17,12 +18,23 @@ import ProfilePhoto from 'components/layout/ProfilePhoto';
 import Buttons from 'components/forms/Buttons';
 import { Select as SpecialSelect } from 'chakra-react-select';
 import {
+   Button,
    FormControl,
    FormLabel,
    Heading,
+   HStack,
    Select,
+   Text,
    Textarea,
+   useDisclosure,
    VStack,
+   Modal,
+   ModalOverlay,
+   ModalContent,
+   ModalHeader,
+   ModalFooter,
+   ModalBody,
+   ModalCloseButton,
 } from '@chakra-ui/react';
 
 // Datos
@@ -31,7 +43,7 @@ import {
    techCategories,
 } from 'helpers/appCategories';
 import { transformTechnologiesFormat } from 'helpers/admin/transformTechnologiesFormat';
-import { startUpdatingTech } from 'actions/admin/technologies';
+import { startDeletingTechnology, startUpdatingTech } from 'actions/admin/technologies';
 import { isTechnologyFormValid } from 'helpers/admin/isFormValid';
 import { errorAlert } from 'helpers/SwalAlerts';
 import { startLoading } from 'actions/ui';
@@ -39,11 +51,14 @@ import { formatTechnologyToDB } from 'helpers/admin/formatTechnologyToDB';
 import { useState } from 'react';
 import { useForm } from 'hooks/useForm';
 import Layout from 'components/layout';
+import useScrollToTop from 'hooks/useScrollToTop';
 
 const EditTech = () => {
+   useScrollToTop();
    // Herramientas
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   const { isOpen, onOpen, onClose } = useDisclosure();
    
    // Seleccionar tecnologia
    const { id } = useParams();
@@ -52,13 +67,13 @@ const EditTech = () => {
    const formatedTechs = transformTechnologiesFormat(allTechs);
 
    // Valores del formulario
-   const [ img, setImg ] = useState(technology.img);
+   const [ img, setImg ] = useState(technology?.img);
    const [ categories, setCategories ] = useState([]);
    const [ relatedTechs, setRelatedTechs ] = useState([]);
    const [ formValues, handleInputChange ] = useForm({
-      name: technology.name,
-      description: technology.description,
-      type: technology.type
+      name: technology?.name,
+      description: technology?.description,
+      type: technology?.type
    });
    const { name, description, type } = formValues;
 
@@ -78,11 +93,6 @@ const EditTech = () => {
       setCategories(categoriesFormated);
    }, [ technology ]);
 
-
-   useEffect(() => {
-      window.scrollTo(0,0);
-   }, [])
-
    
    const handleEditTech = async (e) => {
       e.preventDefault();
@@ -98,104 +108,138 @@ const EditTech = () => {
       dispatch(startUpdatingTech( techToDB, navigate));
    };
 
+   const handleDeleteTechnology = (e) => {
+      e.preventDefault();
+      onClose();
+      dispatch(startDeletingTechnology(technology.id, navigate));
+   };
+
+   if(!technology) {
+      return <Navigate to='/admin/technologies' />;
+   }
    return (
-      <Layout>
+      <>
+         <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <ModalOverlay />
+            <ModalContent>
+               <ModalHeader>Eliminar tecnología</ModalHeader>
+               <ModalCloseButton />
+               <ModalBody>
+                  <Text>¿Estas seguro de que quieres eliminar { technology.name}?.</Text>
+                  <Text mt={3}>Ten en cuenta que algunos usuarios podrían tener la tecnología añadida en su stack.</Text>
+               </ModalBody>
 
-         <Heading>
-            Editando { technology.name }
-         </Heading>
+               <ModalFooter>
+                  <Button colorScheme='brandPrimaryPurple' onClick={onClose}>Cancelar</Button>
+                  <Button  variant='outline' ml={3} onClick={handleDeleteTechnology}>
+                     Eliminar
+                  </Button>
+               </ModalFooter>
+            </ModalContent>
+         </Modal>
 
-         <form
-            style={{ width: '100%' }}
-            onSubmit={handleEditTech}
-         >
-            <VStack
-               spacing={8}
-               width={{ base: 'full', lg: '60%' }}
-               alignItems='flex-start'
+         <Layout>
+            <HStack spacing={5}>
+               <Heading>
+                  Editando { technology.name }
+               </Heading>
+
+               <Button colorScheme='brandPrimaryPurple' onClick={onOpen}>Eliminar</Button>
+            </HStack>
+
+            <form
+               style={{ width: '100%' }}
+               onSubmit={handleEditTech}
             >
-               <ProfilePhoto 
-                  text='Icono'
-                  current={img}
-                  setProfilePhoto={setImg}
-                  isRounded={false}
-               />
-
-               <BasicInput text='Nombre' name='name' value={name} onChange={handleInputChange}/>
-
-               <FormControl isRequired>
-                  <FormLabel fontSize='lg'>
-                     Descripción
-                  </FormLabel>
-                  <Textarea
-                     name='description'
-                     type='text'
-                     value={description}
-                     onChange={handleInputChange}
+               <VStack
+                  spacing={8}
+                  width={{ base: 'full', lg: '60%' }}
+                  alignItems='flex-start'
+               >
+                  <ProfilePhoto 
+                     text='Icono'
+                     current={img}
+                     setProfilePhoto={setImg}
+                     isRounded={false}
                   />
-               </FormControl>
+
+                  <BasicInput text='Nombre' name='name' value={name} onChange={handleInputChange}/>
+
+                  <FormControl isRequired>
+                     <FormLabel fontSize='lg'>
+                        Descripción
+                     </FormLabel>
+                     <Textarea
+                        name='description'
+                        type='text'
+                        value={description}
+                        onChange={handleInputChange}
+                     />
+                  </FormControl>
 
 
-               <FormControl isRequired>
-                  <FormLabel fontSize='lg'>
-                     Tipo de tecnología
-                  </FormLabel>
+                  <FormControl isRequired>
+                     <FormLabel fontSize='lg'>
+                        Tipo de tecnología
+                     </FormLabel>
 
-                  <Select
-                     name='type'
-                     value={type}
-                     onChange={handleInputChange}
-                  >
-                     {typesOfTech.map(
-                        (type, i) => (
-                           <option key={i}>
-                              {type}
-                           </option>
-                        )
-                     )}
-                  </Select>
-               </FormControl>
+                     <Select
+                        name='type'
+                        value={type}
+                        onChange={handleInputChange}
+                     >
+                        {typesOfTech.map(
+                           (type, i) => (
+                              <option key={i}>
+                                 {type}
+                              </option>
+                           )
+                        )}
+                     </Select>
+                  </FormControl>
 
-               <FormControl isRequired>
-                  <FormLabel fontSize='lg'>
-                     Categorías
-                  </FormLabel>
-                  <SpecialSelect
-                     isMulti
-                     placeholder='Seleccione las categorías...'
-                     closeMenuOnSelect={false}
-                     selectedOptionStyle='check'
-                     hideSelectedOptions={false}
-                     options={techCategories}
-                     value={categories}
-                     onChange={setCategories}
+                  <FormControl isRequired>
+                     <FormLabel fontSize='lg'>
+                        Categorías
+                     </FormLabel>
+                     <SpecialSelect
+                        isMulti
+                        placeholder='Seleccione las categorías...'
+                        closeMenuOnSelect={false}
+                        selectedOptionStyle='check'
+                        hideSelectedOptions={false}
+                        options={techCategories}
+                        value={categories}
+                        onChange={setCategories}
+                     />
+                  </FormControl>
+
+                  <FormControl>
+                     <FormLabel fontSize='lg'>
+                        Tecnologías relacionadas
+                     </FormLabel>
+
+                     <SpecialSelect
+                        isMulti
+                        placeholder='Seleccione las tecnologías...'
+                        closeMenuOnSelect={false}
+                        selectedOptionStyle='check'
+                        hideSelectedOptions={false}
+                        options={formatedTechs}
+                        value={relatedTechs}
+                        onChange={setRelatedTechs}
+                     />
+                  </FormControl>
+
+                  <Buttons
+                     cancelRoute='/admin/technologies'
+                     actionText='Guardar'
                   />
-               </FormControl>
+               </VStack>
+            </form>
+         </Layout>
+      </>
 
-               <FormControl>
-                  <FormLabel fontSize='lg'>
-                     Tecnologías relacionadas
-                  </FormLabel>
-
-                  <SpecialSelect
-                     isMulti
-                     placeholder='Seleccione las tecnologías...'
-                     closeMenuOnSelect={false}
-                     selectedOptionStyle='check'
-                     hideSelectedOptions={false}
-                     options={formatedTechs}
-                     value={relatedTechs}
-                     onChange={setRelatedTechs}
-                  />
-               </FormControl>
-
-               <Buttons
-                  cancelRoute='/admin/technologies'
-                  actionText='Guardar'
-               />
-            </VStack>
-         </form>
-      </Layout>
    );
 };
 

@@ -36,7 +36,6 @@ const SearchCompanyScreen = () => {
          />
 
          {/*  Results */}
-
          <VStack marginBottom={isEmpty && 50} w='full' spacing={5}>
             {firstSearch ? (
                <>

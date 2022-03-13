@@ -54,7 +54,7 @@ const Technologies = ({ technologies, setTechnologies }) => {
    // Muestra las tecnologias seleccionadas
    const techsDisplays = technologies.map(tech => {
       const { technology, yearsOfExperience, _id } = tech;
-      return <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id} setTechnologies={setTechnologies}/>;
+      return technology && <TechDisplay key={_id} technology={technology} yearsOfExperience={yearsOfExperience} id={_id} setTechnologies={setTechnologies}/>;
    });
 
    const handleAddNewTech = () => {

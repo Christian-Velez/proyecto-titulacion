@@ -70,7 +70,7 @@ const TechnologyMainInfo = ({ technology }) => {
    );
    const formatedTechs = devTechs.map(
       (devTech) => {
-         const { id } = devTech.technology;
+         const { id } = devTech?.technology || {};
          return id;
       }
    );

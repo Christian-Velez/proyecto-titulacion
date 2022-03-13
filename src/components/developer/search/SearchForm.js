@@ -1,6 +1,6 @@
 
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { Search2Icon } from '@chakra-ui/icons';
 import {
    Button,
@@ -117,6 +117,7 @@ const SearchForm = ({ setCompanies, setFirstSearch }) => {
                      <Input
                         name='min'
                         value={min}
+                        type='number'
                         onChange={handleInputChange}
                         min='0'
                      />
@@ -124,6 +125,7 @@ const SearchForm = ({ setCompanies, setFirstSearch }) => {
                      <Input
                         name='max'
                         value={max}
+                        type='number'
                         max='30'
                         onChange={handleInputChange}
                      />

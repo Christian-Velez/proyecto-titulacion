@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TagDisplay from 'components/forms/TagDisplay';
 
 const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => {
-   const { name } = technology;
+   const { name } = technology || {};
    
    const handleDelete = () => {
       setTechnologies(prevTech => prevTech.filter(tech => tech._id !== id));

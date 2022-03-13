@@ -24,9 +24,10 @@ const JobBody = ({ jobInfo }) => {
          technology,
          yearsOfExperience: years,
          _id,
-      } = tech;
+      } = tech || {};
 
       return (
+         technology &&
          <HStack
             key={_id}
             spacing={5}

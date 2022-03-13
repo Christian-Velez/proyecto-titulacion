@@ -37,7 +37,7 @@ const TechnologiesScreen = () => {
             alignItems='flex-start'
          >
             <Heading size='md'>
-               Registradas
+               Registradas ({technologies?.length})
             </Heading>
             {technologies.map((tech) => {
                return (

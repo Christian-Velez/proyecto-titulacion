@@ -75,6 +75,7 @@ const CompanyJob = ({job})=> {
                   const { technology: tech } = req;
 
                   return (
+                     tech &&
                      <IconImg
                         key={ job.id + tech.id }
                         alt={tech.name}

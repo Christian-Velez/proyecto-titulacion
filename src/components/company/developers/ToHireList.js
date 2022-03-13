@@ -10,6 +10,7 @@ import {
    Link as ChakraLink,
    HStack,
    Button,
+   Badge,
 } from '@chakra-ui/react';
 import {
    useDispatch,
@@ -18,7 +19,7 @@ import {
 
 const ToHireList = () => {
    const dispatch = useDispatch();
-   const { toHire } = useSelector((state) => state.companyInfo);
+   const { toHire, employees } = useSelector((state) => state.companyInfo);
 
    const handleDiscard = (relationId) => {
       dispatch(startDiscartingApplicant(relationId));
@@ -27,6 +28,7 @@ const ToHireList = () => {
    const handleHire = (relationId, devId, jobTitle) => {
       dispatch(startHiringDeveloper(relationId, devId, jobTitle));
    };
+
 
    if (toHire.length === 0) {
       return (
@@ -54,6 +56,8 @@ const ToHireList = () => {
             const { candidate, job, _id } = item;
             const { img, name, id: devId } = candidate;
 
+            const alreadyHired = employees.some(item => item.employee.id === devId);
+
             return (
                <ItemWrapper key={_id}>
                   <IconImg
@@ -71,10 +75,15 @@ const ToHireList = () => {
                      spacing={5}
                   >
                      <ChakraLink as={Link} to={`/co/search/${devId}`}>
-                        <Heading fontSize='xl'>
+                        <Heading fontSize='xl' textAlign='center'>
                            {name}
                         </Heading>
                      </ChakraLink>
+                     {
+                        alreadyHired 
+                        && 
+                        <Badge colorScheme='purple' ml={3}>Ya contratado</Badge>
+                     }
                      <VStack
                         spacing={0}
                         alignItems={{

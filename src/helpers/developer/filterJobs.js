@@ -13,7 +13,7 @@ export const filterJobs = (allJobs, filters) => {
    const filteredJobs = allJobs.filter(job => {
 
       const jobIncludesTech = 
-         job.techsRequired.some(i => i.technology.name.toLowerCase().includes(title));
+         job?.techsRequired?.some(i => i?.technology?.name?.toLowerCase().includes(title));
 
 
 
@@ -24,9 +24,8 @@ export const filterJobs = (allJobs, filters) => {
          // Categorias
          && (
             categories.length > 0 
-            ? categories.includes(job.category) 
-            : job
-            
+               ? categories.includes(job.category) 
+               : job
          )
 
          // Titulo del buscador

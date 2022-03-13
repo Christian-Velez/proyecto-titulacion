@@ -76,7 +76,7 @@ const ApplicantItem = ({ applicant }) => {
          </VStack>
 
          <VStack w='full'>
-            <Text> Requerimientos ({percentage} %)</Text>
+            <Text> Requerimientos ({percentage || 0} %)</Text>
             <Progress value={percentage} w='80%' size='xs' colorScheme={colorScheme} />
          </VStack>
 

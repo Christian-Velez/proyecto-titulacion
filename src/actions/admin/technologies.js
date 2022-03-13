@@ -82,7 +82,6 @@ export const startUpdatingTech = ( techInfo, navigate) => {
    };
 };
 
-
 export const editTech = (id, data) => {
    return {
       type: types.editTech,
@@ -90,5 +89,37 @@ export const editTech = (id, data) => {
          id,
          data
       }
+   };
+};
+
+
+export const startDeletingTechnology = (id, navigate) => {
+   return async (dispatch) => {
+      try {
+         dispatch(startLoading());
+
+         // Header de autorizacion
+         const config = getAxiosConfig();
+     
+         const URL = `${API_URL}/api/technology/${id}`;
+         await axios.delete(URL, config);
+
+         navigate('/admin/technologies');
+         dispatch(deleteTech(id)); 
+         toastSuccess('Tecnología eliminada');
+
+      } catch (err) {
+         console.log(err);
+         toastError('Ocurrio un error al tratar de eliminar la tecnología');
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const deleteTech = (id) => {
+   return {
+      type: types.deleteTech,
+      payload: id
    };
 };

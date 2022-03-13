@@ -120,3 +120,35 @@ export const editSoft = (id, data) => {
       }
    };
 };
+
+
+export const startDeletingSoft = (id, navigate) => {
+   return async(dispatch) => {
+      try {
+         dispatch(startLoading());
+
+         // Header de autorizacion
+         const config = getAxiosConfig();
+         
+         const URL = `${API_URL}/api/softskill/${id}`;
+         await axios.delete(URL, config);
+
+         navigate('/admin/soft-skills');
+         dispatch(deleteSoft(id));
+         toastSuccess('Soft skill eliminada');
+
+      } catch (err) {
+         console.log(err);
+         toastError('Ocurrio un error al tratar de eliminar la soft skill');
+      } finally {
+         dispatch(finishLoading());
+      }
+   };
+};
+
+export const deleteSoft = (id) => {
+   return {
+      type: types.deleteSoft,
+      payload: id
+   };
+};

@@ -36,7 +36,7 @@ const SoftskillsScreen = () => {
             alignItems='flex-start'
          >
             <Heading size='md'>
-               Registradas
+               Registradas ({softskills?.length})
             </Heading>
             {softskills.map((softskill) => {
                return (

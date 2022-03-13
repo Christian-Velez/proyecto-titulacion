@@ -115,6 +115,7 @@ const JobItem = ({ job })=> {
                      const { technology: tech } = req;
 
                      return (
+                        tech &&
                         <IconImg
                            key={ job.id + tech.id + publishedAt}
                            alt={tech.name}

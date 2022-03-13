@@ -9,7 +9,7 @@ export const getDevReqPercentage = (technologies, devStack) => {
       const { technology, yearsOfExperience } = tech;
 
       return {
-         technology: technology.id,
+         technology: technology?.id,
          yearsOfExperience
       };
    });
@@ -22,7 +22,7 @@ export const getDevReqPercentage = (technologies, devStack) => {
 
       const rest = devStack.find(
          tech =>
-         (tech.technology === techsRequired[i].technology)
+            (tech.technology === techsRequired[i].technology)
       );
 
       if(rest) {
