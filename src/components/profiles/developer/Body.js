@@ -11,13 +11,19 @@ import {
    Heading,
    HStack,
    VStack,
+   Button,
 } from '@chakra-ui/react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 
 
 const Body = ({ devInfo }) => {
+   const { id: devId } = devInfo;
+   const { employees } = useSelector(state => state.companyInfo);
+   const isMyEmployee = employees.some(item => item.employee.id === devId);
+
    return (
       <VStack
          w='full'
@@ -28,10 +34,13 @@ const Body = ({ devInfo }) => {
          <VStack
             w={{ base: 'full', xl: '50%' }}
             alignItems='flex-start'
-         >
-            <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
-               Calificaciones
-            </Heading>
+         >  
+            <HStack spacing={5}>
+               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+                  Calificaciones
+               </Heading>
+               { isMyEmployee && <Button colorScheme='brandPrimaryPurple'> Calificar </Button>}
+            </HStack>
 
             <VStack w='full' p={5}>
                <HStack

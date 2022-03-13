@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { Button, Divider, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import IconImg from 'components/layout/IconImg';
 import PropTypes from 'prop-types';
@@ -9,6 +9,17 @@ import PropTypes from 'prop-types';
 const Body = ({ companyInfo }) => {
    const { technologies } = useSelector(state => state.tech);
    const auxTech = technologies[0];
+   
+   
+   
+   // Revisa si el usuario que revisa el perfil es empleado para permitirle o no calificar a la empresa
+   const { employees } = companyInfo;
+   const { id } = useSelector(state => state.devInfo);
+   const imEmployee = employees.some(item => item.employee.id === id);
+
+   const handleOpenRateModal = () => {
+      alert('Califica maricon');
+   };
 
    return (
       <VStack
@@ -22,9 +33,16 @@ const Body = ({ companyInfo }) => {
             w={{ base: 'full', xl: '50%' }}
             alignItems='flex-start'
          >
-            <Heading fontSize='lg'>
-               Calificaciones de { companyInfo.name }
-            </Heading>
+            <HStack spacing={10}>
+               <Heading fontSize='lg'>
+                  Calificaciones de { companyInfo.name }
+               </Heading>
+
+               {
+                  imEmployee && <Button colorScheme='brandPrimaryPurple' onClick={handleOpenRateModal}> Calificar </Button>
+               }
+            </HStack>
+
 
             <VStack w='full' p={5}>
                <HStack

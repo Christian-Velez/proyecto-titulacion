@@ -26,14 +26,10 @@ export const startRegisterNewAccount = (userInfo) => {
    return async(dispatch, getState) => {
       const { accountType } = getState().register;
       
-      const dateOfBirth = new Date(userInfo.age);
-      delete userInfo.age;
-
       const default_img = `https://avatars.dicebear.com/api/initials/${userInfo.name.replace(/\s/g, '%20')}.svg`;
 
       const newUserToDB = {
          kind: accountType,
-         dateOfBirth,
          img: default_img,
          ...userInfo
       };
@@ -49,8 +45,8 @@ export const startRegisterNewAccount = (userInfo) => {
       }
       catch(err) {
          const message = err.response.data.message?.includes('E11000')
-         ? 'Utiliza un nombre de usuario distinto'
-         : 'Ocurrio un error inesperado al tratar de crear tu cuenta';
+            ? 'Utiliza un nombre de usuario distinto'
+            : 'Ocurrio un error inesperado al tratar de crear tu cuenta';
 
          throw new Error(message);
       }

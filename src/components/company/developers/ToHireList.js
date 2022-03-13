@@ -70,9 +70,11 @@ const ToHireList = () => {
                      }}
                      spacing={5}
                   >
-                     <Heading fontSize='xl'>
-                        {name}
-                     </Heading>
+                     <ChakraLink as={Link} to={`/co/search/${devId}`}>
+                        <Heading fontSize='xl'>
+                           {name}
+                        </Heading>
+                     </ChakraLink>
                      <VStack
                         spacing={0}
                         alignItems={{

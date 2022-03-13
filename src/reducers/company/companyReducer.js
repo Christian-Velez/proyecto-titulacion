@@ -64,14 +64,22 @@ export const companyReducer = (state = initialCompanyInfo, action) => {
 
    case types.hireDeveloper: {
       const relation = state.toHire.find(item => item._id === action.payload);
-      const { candidate } = relation;
+      const { candidate, job } = relation;
+
+
+      const newCandidate = {
+         _id: action.payload,
+         job,
+         employee: candidate,
+         date: new Date().toString()
+      };
 
       return {
          ...state,
          toHire: state.toHire.filter(item => item._id !== action.payload),
          employees: [
             ...state.employees,
-            candidate
+            newCandidate
          ]
       };
    }

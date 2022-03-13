@@ -14,6 +14,7 @@ export const startSettingCompanyInfo = (
 ) => {
    return async (dispatch, getState) => {
       try {
+         dispatch(startLoading());
          const { id } = getState().auth;
          const URL = `${API_URL}/api/company/${id}`;
 
@@ -26,6 +27,8 @@ export const startSettingCompanyInfo = (
          return errorAlert({ 
             message: 'Ocurrio un error al tratar de cargar tu información :('
          });  
+      } finally {
+         dispatch(finishLoading());
       }
    };
 };
@@ -134,6 +137,7 @@ export const startHiringDeveloper = (relationId, devId, jobTitle) => {
          const URL = `${API_URL}/api/company/hireDeveloper`;
    
          await axios.post(URL, body, config);
+
          dispatch(hireDev(relationId));
          toastSuccess('Programador contratado');
       } catch(err) {

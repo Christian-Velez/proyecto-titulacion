@@ -1,6 +1,6 @@
 
 
-
+import PropTypes from 'prop-types'
 import { Search2Icon } from '@chakra-ui/icons';
 import {
    Button,
@@ -16,9 +16,12 @@ import {
 } from '@chakra-ui/react';
 import { sortByName } from 'helpers/searchTechs';
 import { useForm } from 'hooks/useForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchCompanies } from './search';
+import { finishLoading, startLoading } from 'actions/ui';
 
-const SearchForm = () => {
+const SearchForm = ({ setCompanies, setFirstSearch }) => {
+   const dispatch = useDispatch();
    const { technologies } = useSelector(state => state.tech);
    const formatedTechs = sortByName([...technologies]);
 
@@ -30,7 +33,7 @@ const SearchForm = () => {
    });
    const { name, technology, min, max } = formValues;
 
-   const handleSearchCompany = (e) => {
+   const handleSearchCompany = async (e) => {
       e.preventDefault();
 
       if(parseInt(min) < 0) {
@@ -47,8 +50,11 @@ const SearchForm = () => {
          });
       }
 
-      console.log('submiteao');
-
+      setFirstSearch(true);
+      dispatch(startLoading());
+      const companies = await searchCompanies(formValues);
+      setCompanies(companies);
+      dispatch(finishLoading());
    };
 
    return (
@@ -79,7 +85,7 @@ const SearchForm = () => {
                         value={name}
                         onChange={ handleInputChange }
                         name='name'
-                        placeholder='e.g: Microsoft'
+                        placeholder='Todas las empresas'
                      />
                   </InputGroup>
                </FormControl>
@@ -130,6 +136,11 @@ const SearchForm = () => {
          </form>
       </VStack>
    );
+};
+
+SearchForm.propTypes = {
+   setCompanies: PropTypes.func,
+   setFirstSearch: PropTypes.func
 };
 
 export default SearchForm;

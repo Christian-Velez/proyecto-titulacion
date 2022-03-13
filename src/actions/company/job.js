@@ -2,7 +2,7 @@ import axios from 'axios';
 import { types } from 'types/types';
 import { finishLoading, startLoading } from 'actions/ui';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
-import { toastError } from 'helpers/ToastAlert';
+import { toastError, toastSuccess } from 'helpers/ToastAlert';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -102,9 +102,11 @@ export const startAcceptingApplicant = (jobId, devId) => {
 
          dispatch(removeApplicantFromJob(jobId, devId));
          dispatch(updateCompanyToHire(data.toHire));
+         toastSuccess('Programador aceptado, revisa la sección "Programadores"');
 
       } catch(err) {
          console.log(err);
+         toastError('Ocurrió un error al tratar de realizar la operación');
       } finally {
          dispatch(finishLoading());
       }
@@ -139,9 +141,11 @@ export const startDiscartingApplicant = (jobId, devId) => {
 
          await axios.put(URL, infoToDb, config);
          dispatch(removeApplicantFromJob(jobId, devId));
+         toastSuccess('Programador rechazado');
 
       } catch(err) {
          console.log(err);
+         toastError('Ocurrió un error al tratar de realizar la operación');
       } finally {
          dispatch(finishLoading());
       }

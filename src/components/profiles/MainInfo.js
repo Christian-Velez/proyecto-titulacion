@@ -18,7 +18,6 @@ import { HiLocationMarker} from 'react-icons/hi';
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
 
-
 const MainInfo = ({ userInfo }) => {
    const {
       name,
@@ -27,7 +26,7 @@ const MainInfo = ({ userInfo }) => {
       img,
       kind,
       line,
-      lastSeen,
+      lastSeen
    } = userInfo;
 
    return (

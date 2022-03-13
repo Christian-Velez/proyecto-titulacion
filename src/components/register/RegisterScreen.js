@@ -9,11 +9,11 @@ const RegisterScreen = () => {
 
    return (
       accountType
-      ? 
+         ? 
          accountType === 'Developer'
             ? <DeveloperForm />
             : <CompanyForm />
-      : <SelectAccount />
+         : <SelectAccount />
    );
 };
 

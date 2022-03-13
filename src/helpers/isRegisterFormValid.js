@@ -9,6 +9,7 @@ export const isRegisterFormValid = ({
    username,
    password,
    confirmPassword,
+   age = null,
    location = null,
 }) => {
    let regExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
@@ -17,6 +18,13 @@ export const isRegisterFormValid = ({
       return {
          isValid: false,
          msg: 'Utiliza solo letras y espacios en tu nombre'
+      };
+   }
+
+   if(age && (parseInt(age) < 16 || parseInt(age) > 90)) {
+      return {
+         isValid: false,
+         msg: 'Ingresa una edad válida'
       };
    }
 

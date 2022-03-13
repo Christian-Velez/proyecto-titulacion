@@ -53,11 +53,11 @@ const JobItem = ({ job })=> {
          <IconImg
             src={img}
             alt={name}
-            boxSize={{ base:'80px', lg: '100px'}}
+            boxSize={{ base:'100px'}}
             isRounded
          />
 
-         <VStack w='80%' alignItems='flex-start' spacing={5}>  
+         <VStack maxW={{ lg: 'calc(100%-150px)'}} alignItems='flex-start' spacing={5}>  
             <Heading 
                fontSize='xl' 
                textDecor={ isHovered && 'underline'}

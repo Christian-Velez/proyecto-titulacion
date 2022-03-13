@@ -69,9 +69,6 @@ const DeveloperForm = () => {
       dispatch(setAccountType('')); 
    };
 
-   const date = new Date();
-   const maxDate = `${date.getFullYear() - 16}-${date.getMonth() + 1}-${date.getDate()}`;
-
    return (
       <form
          style={{ width: '100%' }}
@@ -103,9 +100,9 @@ const DeveloperForm = () => {
 
             <BasicInput
                text='Edad'
-               type='date'
-               min='1950-01-01'
-               max={maxDate}
+               type='number'
+               min='16'
+               max='90'
                placeholder='21'
                helperText='
                   Necesitas mínimo 16 años

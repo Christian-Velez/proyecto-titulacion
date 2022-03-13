@@ -50,8 +50,8 @@ const JobBody = ({ jobInfo }) => {
                   {years === 0
                      ? 'sin experiencia'
                      : years === 1
-                     ? `${years} año de experiencia`
-                     : `${years} años de experiencia`}
+                        ? `${years} año de experiencia`
+                        : `${years} años de experiencia`}
                </Text>
             </VStack>
          </HStack>

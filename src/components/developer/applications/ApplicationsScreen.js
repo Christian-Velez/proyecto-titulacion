@@ -46,17 +46,17 @@ const ApplicationsScreen = () => {
          
          {
             isLoading 
-            ? <LoadingScreen />
-            :  
-            <VStack 
-               w='full' 
-               alignItems='flex-start' 
-               spacing={5}
-            >
-               {
-                  filteredJobs.map(job => <JobItem key={job.id} job={job} />)
-               }
-            </VStack>
+               ? <LoadingScreen />
+               :  
+               <VStack 
+                  w='full' 
+                  alignItems='flex-start' 
+                  spacing={5}
+               >
+                  {
+                     filteredJobs.map(job => <JobItem key={job.id} job={job} />)
+                  }
+               </VStack>
          }
       </Layout>
    );

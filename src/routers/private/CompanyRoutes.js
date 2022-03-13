@@ -28,9 +28,10 @@ import NewJobOfferScreen from 'components/company/newoffer/NewJobOfferScreen';
 import CompanyOffersScreen from 'components/company/myoffers/CompanyOffersScreen';
 import JobOfferScreen from 'components/company/myoffers/offer/JobOfferScreen';
 import SearchDeveloperProfileScreen from 'components/company/search/SearchDeveloperProfileScreen';
+import DevelopersScreen from 'components/company/developers/DevelopersScreen';
+import SearchDeveloperScreen from 'components/company/search/SearchDeveloperScreen';
 
 import { Stack } from '@chakra-ui/react';
-import DevelopersScreen from 'components/company/developers/DevelopersScreen';
 
 const CompanyRoutes = () => {
    const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const CompanyRoutes = () => {
 
                         <Route path='messages' element={<p> aqui van los mensages </p> } />
 
-                        <Route path='search' element={ <p> Aqui va el buscador de desarrolladores </p>  } />
+                        <Route path='search' element={ <SearchDeveloperScreen />  } />
                         <Route path='search/:id' element={ <SearchDeveloperProfileScreen /> }/>
 
                         <Route path='*' element={<Navigate to='/co' />} />
