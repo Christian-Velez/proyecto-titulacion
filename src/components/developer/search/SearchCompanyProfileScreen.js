@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CompanyProfileContent from 'components/profiles/company/CompanyProfileContent';
 import Layout from 'components/layout';
+import { useSelector } from 'react-redux';
 
 
 const SearchCompanyProfileScreen = () => {
@@ -12,7 +13,7 @@ const SearchCompanyProfileScreen = () => {
    const [error, setError] = useState(false);
 
    const { id } = useParams();
-   
+   const { loading } = useSelector(state => state.ui);
 
    useEffect(() => {
       startLoadingCoInfo(id)
@@ -28,7 +29,7 @@ const SearchCompanyProfileScreen = () => {
          .finally(() => {
             setIsLoading(false);
          });
-   }, [ id ]);
+   }, [ id, loading ]);
    
 
    

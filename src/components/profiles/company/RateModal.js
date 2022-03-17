@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import {
    Modal,
    ModalOverlay,
@@ -12,45 +11,37 @@ import {
    Button,
    VStack,
    Text,
-} from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { startRatingDev } from 'actions/company/user';
-import { toastSuccess } from 'helpers/ToastAlert';
+ } from '@chakra-ui/react'
 import { Rating } from 'react-simple-star-rating';
+import { useDispatch } from 'react-redux';
+import { startRatingCompany } from 'actions/developer/user';
+import { toastSuccess } from 'helpers/ToastAlert';
 
-const RateModal = ({
-   isOpen,
-   onClose,
-   devInfo,
-}) => {
+const RateModal = ({ isOpen, onClose, companyInfo }) => {
    const dispatch = useDispatch();
+   const [salario, setSalario] =
+      useState(0);
+   const [ambiente, setAmbiente] =
+      useState(0);
+   const [prestaciones, setPrestaciones] =
+      useState(0);
+   const [proceso, setProceso] =
+      useState(0);
 
-   const [responsable, setResponsable] =
-      useState(0);
-   const [comprometido, setComprometido] =
-      useState(0);
-   const [cooperativo, setCooperativo] =
-      useState(0);
-   const [conflictos, setConflictos] =
-      useState(0);
-
-   const handleSubmit = (e) => {
-
+   const handleSubmit = () => {
       const body = {
-         responsable: responsable / 20,
-         comprometido: comprometido / 20,
-         cooperativo: cooperativo / 20,
-         conflictos: conflictos / 20
+         salario: salario / 20,
+         ambiente: ambiente / 20,
+         prestaciones: prestaciones / 20,
+         proceso: proceso / 20
       };
 
-      dispatch(
-         startRatingDev(body, devInfo.id)
-      ).then(() => {
-         toastSuccess('Calificación añadida');
-         onClose();
-      });
-   };
-
+      dispatch(startRatingCompany(body, companyInfo.id))
+         .then(() => {
+            toastSuccess('Calificación añadida');
+            onClose();
+         })
+   }
 
    const config = {
       allowHalfIcon: true,
@@ -62,51 +53,49 @@ const RateModal = ({
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
          <ModalOverlay />
          <ModalContent>
-            <ModalHeader>
-               Califica a {devInfo.name}
-            </ModalHeader>
+            <ModalHeader>Califica a {companyInfo.name}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-               <VStack
+            <VStack
                   w='full'
                   spacing={5}
                   alignItems='flex-start'
                >
                   <VStack alignItems='flex-start'>
-                     <Text> Responsable</Text>
+                     <Text>Salario competitivo</Text>
                      <Rating
                         { ...config }
                         ratingValue={
-                           responsable
+                           salario
                         }
                         onClick={(v) =>
-                           setResponsable(v)
+                           setSalario(v)
                         }
                      />
                   </VStack>
 
                   <VStack alignItems='flex-start'>
-                     <Text>Comprometido</Text>
+                     <Text>Ambiente laboral</Text>
                      <Rating
                         { ...config }
                         ratingValue={
-                           comprometido
+                           ambiente
                         }
                         onClick={(v) =>
-                           setComprometido(v)
+                           setAmbiente(v)
                         }
                      />
                   </VStack>
 
                   <VStack alignItems='flex-start'>
-                     <Text> Cooperativo</Text>
+                     <Text>Prestaciones</Text>
                      <Rating
                         { ...config }
                         ratingValue={
-                           cooperativo
+                           prestaciones
                         }
                         onClick={(v) =>
-                           setCooperativo(v)
+                           setPrestaciones(v)
                         }
                      />
                   </VStack>
@@ -114,14 +103,14 @@ const RateModal = ({
                   
 
                   <VStack alignItems='flex-start'>
-                     <Text>Manejo de conflictos</Text>
+                     <Text>Proceso de contratación</Text>
                      <Rating
                         { ...config }
                         ratingValue={
-                           conflictos
+                           proceso
                         }
                         onClick={(v) =>
-                           setConflictos(v)
+                           setProceso(v)
                         }
                      />
                   </VStack>
@@ -129,7 +118,7 @@ const RateModal = ({
             </ModalBody>
 
             <ModalFooter>
-               <Button
+            <Button
                   variant='outline'
                   mr={3}
                   onClick={onClose}
@@ -150,9 +139,8 @@ const RateModal = ({
 
 RateModal.propTypes = {
    isOpen: PropTypes.bool,
-   onOpen: PropTypes.func,
    onClose: PropTypes.func,
-   devInfo: PropTypes.object,
+   companyInfo: PropTypes.object
 };
 
 export default RateModal;

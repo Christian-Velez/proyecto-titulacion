@@ -1,25 +1,70 @@
-import React from 'react';
-import { Button, Divider, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import React, { useMemo } from 'react';
+import { Button, Divider, Heading, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import IconImg from 'components/layout/IconImg';
 import PropTypes from 'prop-types';
+import RateModal from './RateModal';
+import { getProm } from '../getProm';
+import { Rating } from 'react-simple-star-rating';
 
 
 
 const Body = ({ companyInfo }) => {
-   const { technologies } = useSelector(state => state.tech);
-   const auxTech = technologies[0];
-   
-   
+   const { isOpen, onOpen, onClose } = useDisclosure();
+
+   const { employees, qualifications, mostReqTechnology, averageYears } = companyInfo;
    
    // Revisa si el usuario que revisa el perfil es empleado para permitirle o no calificar a la empresa
-   const { employees } = companyInfo;
-   const { id } = useSelector(state => state.devInfo);
-   const imEmployee = employees.some(item => item.employee.id === id);
+   const { id: devId } = useSelector(state => state.devInfo);
+   const imEmployee = employees.some(item => item.employee.id === devId);
+   const alreadyRated = qualifications.some(item => item.ratedBy === devId);
 
-   const handleOpenRateModal = () => {
-      alert('Califica maricon');
-   };
+
+   const coRatings = useMemo(() => {
+      const initialValue = {
+         salario: [],
+         ambiente: [],
+         prestaciones: [],
+         proceso: [],
+      };
+
+      qualifications.forEach(element => {
+         const { ratings } = element;
+   
+         const keys = Object.keys(ratings);
+         
+         keys.forEach(key => {
+            initialValue[key].push(ratings[key]);
+         });
+      });
+      return initialValue;
+
+   }, [ qualifications ]);
+
+   const salario =
+      coRatings.salario.length === 0
+         ? 0
+         : getProm(coRatings.salario);
+
+   const ambiente = 
+      coRatings.ambiente.length === 0 
+         ? 0 
+         : getProm(coRatings.ambiente);
+
+   const prestaciones = 
+      coRatings.prestaciones.length === 0
+         ? 0
+         : getProm(coRatings.prestaciones);
+
+   const proceso =
+      coRatings.proceso.length === 0
+         ? 0
+         : getProm(coRatings.proceso);
+
+   const config = {
+      readonly: true,
+      size: 20
+   }
 
    return (
       <VStack
@@ -27,7 +72,7 @@ const Body = ({ companyInfo }) => {
          alignItems='flex-start'
          spacing={10}
       >
-         
+         <RateModal isOpen={isOpen} onClose={onClose} companyInfo={companyInfo}/>
          <Divider />
          <VStack
             w={{ base: 'full', xl: '50%' }}
@@ -35,11 +80,12 @@ const Body = ({ companyInfo }) => {
          >
             <HStack spacing={10}>
                <Heading fontSize='lg'>
-                  Calificaciones de { companyInfo.name }
+                  Calificaciones de { companyInfo.name } ({qualifications.length})
                </Heading>
 
                {
-                  imEmployee && <Button colorScheme='brandPrimaryPurple' onClick={handleOpenRateModal}> Calificar </Button>
+                  imEmployee && !alreadyRated &&
+                  <Button colorScheme='brandPrimaryPurple' onClick={onOpen}> Calificar </Button>
                }
             </HStack>
 
@@ -49,28 +95,44 @@ const Body = ({ companyInfo }) => {
                   w='full'
                   justifyContent='space-between'
                >
-                  <Text>Salario competitivo</Text> <Text fontWeight='black'>0.0 / 5</Text>
+                  <Text>Salario competitivo</Text>
+                  <Rating 
+                     {...config}
+                     initialValue={salario}
+                  />
                </HStack>
 
                <HStack
                   w='full'
                   justifyContent='space-between'
                >
-                  <Text>Ambiente laboral</Text> <Text fontWeight='black'>0.0 / 5</Text>
+                  <Text>Ambiente laboral</Text>
+                  <Rating 
+                     {...config}
+                     initialValue={ambiente}
+                  />
                </HStack>
 
                <HStack
                   w='full'
                   justifyContent='space-between'
                >
-                  <Text>Prestaciones</Text><Text fontWeight='black'>0.0 / 5</Text>
+                  <Text>Prestaciones</Text>
+                  <Rating 
+                     {...config}
+                     initialValue={prestaciones}
+                  />
                </HStack>
 
                <HStack
                   w='full'
                   justifyContent='space-between'
                >
-                  <Text>Proceso de contratación</Text><Text fontWeight='black'>0.0 / 5</Text>
+                  <Text>Proceso de contratación</Text>
+                  <Rating 
+                     {...config}
+                     initialValue={proceso}
+                  />
                </HStack>
             </VStack>
          </VStack>
@@ -80,45 +142,37 @@ const Body = ({ companyInfo }) => {
             <Heading fontSize='lg'>
                Tecnología más solicitada
             </Heading>
-
-
-            <HStack 
-               p={5} 
-               alignItems='center'
-               w='full'
-               spacing={8}
-            >
-
-               {/*AUXILIAR, CAMBIAR POR LA TECNOLOGIA QUE MAS PIDE LA EMPRESA*/}
-               {
-                  auxTech && 
-                  <>
-                     <IconImg
-                        src={ auxTech.img }
-                        boxSize={{ 
-                           base: '80px',
-                           lg: '100px'
-                        }}
-                        alt={ auxTech.name }
-                     />
-
-                     <VStack
-                        alignItems='flex-start'
-                        maxWidth='50%'
-                        
+            
+            {
+               !mostReqTechnology || !averageYears 
+                  ? <Text style={{ margin: '30px'}}> Sin registros. </Text>
+                  : (
+                     <HStack 
+                        p={5} 
+                        alignItems='center'
+                        w='full'
+                        spacing={8}
                      >
-                        <Heading  fontSize='md'> { auxTech.name } </Heading>
-                        <Text> usualmente requiere 5 años de experiencia</Text>
-                        
-                        
-                     </VStack>
-                  </>
+                        <IconImg
+                           src={ mostReqTechnology.img }
+                           boxSize={{ 
+                              base: '80px',
+                              lg: '100px'
+                           }}
+                           alt={ mostReqTechnology.name }
+                        />
 
-               }
-
-
-
-            </HStack>
+                        <VStack
+                           alignItems='flex-start'
+                           maxWidth='50%'
+                           
+                        >
+                           <Heading  fontSize='md'> { mostReqTechnology.name } </Heading>    
+                           <Text> usualmente requiere {averageYears.toFixed(0)} {averageYears === 1 ? 'año' : 'años'} de experiencia</Text>
+                        </VStack>
+                     </HStack>
+                  )
+            }
 
          </VStack>
       </VStack>

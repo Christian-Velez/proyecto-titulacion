@@ -50,6 +50,7 @@ const SearchForm = ({ setCompanies, setFirstSearch }) => {
          });
       }
 
+      console.log(formValues);
       setFirstSearch(true);
       dispatch(startLoading());
       const companies = await searchCompanies(formValues);

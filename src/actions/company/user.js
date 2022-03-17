@@ -20,7 +20,7 @@ export const startSettingCompanyInfo = (
 
          const { data } = await axios.get(URL);
          const { companyInfo } = data;
-
+         console.log(companyInfo)
          dispatch(setCompanyInfo(companyInfo));
 
       } catch (err) {
@@ -199,7 +199,7 @@ export const startRatingDev = (ratings, devId) => {
          };
 
          const config = getAxiosConfig();
-         const URL = `${API_URL}/api/rate/developer`;
+         const URL = `${API_URL}/api/rate`;
          await axios.post(URL, body, config);
 
       } catch(err) {

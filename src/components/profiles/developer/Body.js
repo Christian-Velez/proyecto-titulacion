@@ -18,7 +18,7 @@ import {
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import RateModal from './RateModal';
-import { getProm } from './getProm';
+import { getProm } from '../getProm';
 import { Rating } from 'react-simple-star-rating';
 import './styles.css'
 

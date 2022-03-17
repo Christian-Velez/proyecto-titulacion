@@ -109,3 +109,32 @@ export const addNewTechToDevStack = (newTech) => {
       payload: newTech
    };
 };
+
+
+export const startRatingCompany = (ratings, companyId) => {
+   return async(dispatch, getState) => {
+
+      try {
+         dispatch(startLoading());
+
+         const { id } = getState().devInfo;
+         const body = {
+            user: companyId,
+            ratings,
+            ratedBy: id
+         };
+
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/rate`;
+         const { data } = await axios.post(URL, body, config);
+         console.log(data);
+         
+      } catch(err) {
+         toastError('Ocurrió un error al tratar de realizar la operación');
+
+      } finally {
+         dispatch(finishLoading());
+      }
+   }
+
+}
