@@ -50,8 +50,8 @@ const SearchDeveloperScreen = () => {
                            ? <Text> Sin resultados </Text>
                            :
                            developers.map(developer => {
-                              const { id, name, img, location, lastSeen } = developer;
-
+                              const { id, name, img, location, lastSeen, age } = developer;
+                                 
                               return (
                                  <HStack 
                                     key={id}
@@ -69,7 +69,7 @@ const SearchDeveloperScreen = () => {
                                     />
 
                                     <VStack maxW='calc(100% - 150px)' alignItems='flex-start'>
-                                       <ChakraLink as={Link} to={ `/co/search/${id}` }> { name } </ChakraLink>
+                                       <ChakraLink as={Link} to={ `/co/search/${id}` }> { name }, {age} años </ChakraLink>
                                        <Text> última conexión: { format(lastSeen, 'es_ES')}</Text>
                                        <Text> Localización: {location} </Text>
                                     </VStack>

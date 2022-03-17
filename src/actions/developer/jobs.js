@@ -9,11 +9,18 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 // GET
 export const startLoadingJobs = () => {
-   return async(dispatch) => {
+   return async(dispatch, getState) => {
       try {
-         const URL = `${API_URL}/api/jobs`;
+
+         const { id } = getState().devInfo;
+         
+         const URL = `${API_URL}/api/jobs/${id}`;
+
+
          const { data } = await axios.get(URL);
-         dispatch(setAllJobs(data));
+         const { jobs, recommendedJobs } = data;
+         dispatch(setAllJobs(jobs));
+         dispatch(setRecommendedJobs(recommendedJobs));
       }
       catch(err) {
          console.log(err);
@@ -28,6 +35,12 @@ export const setAllJobs = (allJobs) => {
    };
 };
 
+export const setRecommendedJobs = (jobs) => {
+   return {
+      type: types.setRecommendedJobs,
+      payload: jobs
+   };
+};
 
 // UPDATE -> Aplicar
 export const startApplyingProcess = (jobId, alreadyApply) => {

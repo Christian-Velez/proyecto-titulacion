@@ -91,21 +91,21 @@ export const startAddingNewTechToDevStack = (newTech, yearsOfExperience) => {
             _id: Date.now(),
             technology: newTech,
             yearsOfExperience: parseInt(yearsOfExperience)
-         }
+         };
          dispatch(addNewTechToDevStack(auxTech));
-         toastSuccess("Tecnología añadida a tu stack")
+         toastSuccess('Tecnología añadida a tu stack');
 
 
       } catch(err) {
          console.log(err.message);
       }
-   }
-}
+   };
+};
 
 
 export const addNewTechToDevStack = (newTech) => {
    return {
       type: types.addNewTechToDevStack,
       payload: newTech
-   }
-}
+   };
+};

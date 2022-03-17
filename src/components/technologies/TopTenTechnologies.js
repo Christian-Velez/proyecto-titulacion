@@ -4,8 +4,10 @@ import TechItem from './TechItem';
 import { Badge, Flex, VStack } from '@chakra-ui/react';
 import { sortByPopularity } from 'helpers/searchTechs';
 import { useSelector } from 'react-redux';
+import useScrollToTop from 'hooks/useScrollToTop';
 
 const TopTenTechnologies = () => {
+   useScrollToTop();
    // Recupera las tecnologias 
    const { technologies: allTechsAvailable } = useSelector(state => state.tech);
    const orderedTechs = sortByPopularity([...allTechsAvailable]);

@@ -38,6 +38,7 @@ export const types = {
    setAllJobs: '[DevJobs] Set all jobs in stored data',
    updateJobInfo: '[DevJobs] Update one job info',
    setIsJobSelected: '[DevJobs] Set true or false job isselect',
+   setRecommendedJobs: '[DevJobs] Set recommended jobs from backend',
 
 
    // Company

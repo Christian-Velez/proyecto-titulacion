@@ -1,7 +1,6 @@
 // Hooks 
 import React, {
    useEffect,
-   useMemo,
    useState,
 } from 'react';
 import {
@@ -12,24 +11,24 @@ import {
 
 // Actions
 import { startLoadingJobs } from 'actions/developer/jobs';
-import { filterJobs } from 'helpers/developer/filterJobs';
 
 // Componentes
-import LoadingScreen from 'components/layout/LoadingScreen';
-import JobItem from './JobItem';
-import Filters from './Filters';
-import Search from './Search';
 import {
-   Divider,
    Flex,
    Heading,
    HStack,
-   Stack,
-   useDisclosure,
    VStack,
+   Tabs, 
+   TabList, 
+   TabPanels, 
+   Tab, 
+   TabPanel
 } from '@chakra-ui/react'
 ;
 import { Outlet } from 'react-router-dom';
+import AllJobs from './AllJobs';
+import RecommendedJobs from './RecommendedJobs';
+import LoadingScreen from 'components/layout/LoadingScreen';
 
 
 const SearchJobScreen = () => {
@@ -39,37 +38,13 @@ const SearchJobScreen = () => {
    // Todos los trabajos disponibles
    const { allJobs, isJobSelected } = useSelector(state => state.devJobs);
 
-   // Utilizado para abrir los filtros en dispositivos pequeños
-   // Lo controla un boton dentro del componente Search
-   const filtersModal = useDisclosure();
-
-
-
-   // Trabajos con los filtros aplicados
-   const [filters, setFilters] = useState({
-      title: '',
-      categories: [],
-      salary: [0, 5000],
-   });
-
-   const filteredJobs = useMemo(
-      () => filterJobs([...allJobs], filters),
-      [allJobs, filters]
-   );
-   
-
-   // Solo cuando recarga la aplicacion se vuelven a pedir todos los trabajos
    useEffect(() => {
-      if (allJobs.length === 0) {
-         Promise.all([
-            dispatch(startLoadingJobs()),
-         ]).then(() => {
-            setIsLoading(false);
-         });
-      } else {
+      Promise.all([
+         dispatch(startLoadingJobs()),
+      ]).then(() => {
          setIsLoading(false);
-      }
-   }, [dispatch, allJobs]);
+      });
+   }, [dispatch]);
 
 
    return (
@@ -80,7 +55,8 @@ const SearchJobScreen = () => {
          alignItems='flex-start' 
          style={{
             margin: 0
-         }}>
+         }}
+      >
 
          {/* Buscador, parte izq en dispositivos de escritorio */}
          <VStack
@@ -99,52 +75,29 @@ const SearchJobScreen = () => {
                Empleos 
             </Heading>
 
-            <Divider />
-
-            { (isLoading && filteredJobs.length === 0)? (
-               <LoadingScreen />
-            ) : (
-
-               <VStack
-                  alignItems='flex-start'
-                  spacing={20}
-                  w='full'
-               >
-                  
-                  {/*Buscador*/}
-                  <Search filters={filters} setFilters={setFilters} filtersModal={filtersModal}/>
-
-                  <Stack
-                     w='full'
-                     direction={{
-                        base: 'column',
-                        '2xl': 'row',
-                     }}
-                     justifyContent={{ '2xl': 'space-between'}}
-                  >
-                     <Filters
-                        filters={filters}
-                        setFilters={setFilters}
-                        filtersModal={filtersModal}
-                     />
-
-                     <VStack
-                        spacing={5}
-                        w={{
-                           base: '100%',
-                           '2xl': '75%',
-                        }}
-                     >
-                        {filteredJobs.map((job) => (
-                           <JobItem
-                              key={job.id}
-                              job={job}
-                           />
-                        ))}
-                     </VStack>
-                  </Stack>
-               </VStack>
-            )}
+            <Tabs width='full' colorScheme='brandPrimary'>
+               <TabList>
+                  <Tab>Recomendados</Tab>
+                  <Tab>Todos</Tab>
+               </TabList>
+            
+               <TabPanels>
+                  <TabPanel>
+                     {
+                        isLoading 
+                           ? <LoadingScreen />
+                           : <RecommendedJobs allJobs={allJobs}/>
+                     }
+                  </TabPanel>
+                  <TabPanel>
+                     {
+                        isLoading 
+                           ? <LoadingScreen />
+                           : <AllJobs allJobs={allJobs}/>
+                     }
+                  </TabPanel>
+               </TabPanels>
+            </Tabs>
          </VStack>
 
 

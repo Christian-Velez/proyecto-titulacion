@@ -11,38 +11,38 @@ const SoftskillsCards = ({ devInfo }) => {
   
    return (
       softskills.length === 0
-      ? <EmptySection />
-      : (
-         softskills.map(soft => {
-            const { img, name, id } = soft;
+         ? <EmptySection />
+         : (
+            softskills.map(soft => {
+               const { img, name, id, _id } = soft;
 
-            return (
-               <HStack 
-                  p={5} 
-                  alignItems='center'
-                  w='full'
-                  spacing={8}
-                  key={ id }
-               >
-                  <IconImg
-                     src={ img }
-                     boxSize={{ 
-                        base: '80px',
-                        lg: '100px'
-                     }}
-                     alt={ name }
-                  />
-
-                  <VStack
-                     alignItems='flex-start'
-                     maxWidth='50%'
+               return (
+                  <HStack 
+                     p={5} 
+                     alignItems='center'
+                     w='full'
+                     spacing={8}
+                     key={ id || _id }
                   >
-                     <Heading fontSize={{ base: 'md', '2xl': 'lg'}} fontWeight='semibold'>{ name }</Heading>
-                  </VStack>
-               </HStack>
-            );
-         })
-      )
+                     <IconImg
+                        src={ img }
+                        boxSize={{ 
+                           base: '80px',
+                           lg: '100px'
+                        }}
+                        alt={ name }
+                     />
+
+                     <VStack
+                        alignItems='flex-start'
+                        maxWidth='50%'
+                     >
+                        <Heading fontSize={{ base: 'md', '2xl': 'lg'}} fontWeight='semibold'>{ name }</Heading>
+                     </VStack>
+                  </HStack>
+               );
+            })
+         )
    );
 };
 

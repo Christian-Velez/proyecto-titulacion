@@ -4,6 +4,7 @@ import { startLoadingDevInfo } from 'helpers/company/startLoadingUserInfo';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const SearchDeveloperProfileScreen = () => {
@@ -11,8 +12,9 @@ const SearchDeveloperProfileScreen = () => {
    const [isLoading, setIsLoading] = useState(true);
    const [error, setError] = useState(false);
    const { id } = useParams();
-   
 
+   const { loading } = useSelector(state => state.ui);
+   
    useEffect(() => {
       startLoadingDevInfo(id)
          .then((devInf) => {
@@ -27,7 +29,7 @@ const SearchDeveloperProfileScreen = () => {
          .finally(() => {
             setIsLoading(false);
          });
-   }, [ id ]);
+   }, [ id, loading ]);
 
    return (
       isLoading

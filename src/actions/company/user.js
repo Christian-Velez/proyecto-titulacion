@@ -25,7 +25,7 @@ export const startSettingCompanyInfo = (
 
       } catch (err) {
          return errorAlert({ 
-            message: 'Ocurrio un error al tratar de cargar tu información :('
+            message: 'Ocurrió un error al tratar de cargar tu información :('
          });  
       } finally {
          dispatch(finishLoading());
@@ -77,7 +77,7 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
 
       } catch (err) {
          console.log(err);
-         toastError('Ocurrio un error al tratar de actualizar tu perfil');
+         toastError('Ocurrió un error al tratar de actualizar tu perfil');
       } finally {
          dispatch(finishLoading());
       }
@@ -107,7 +107,7 @@ export const startDiscartingApplicant = (relationId) => {
          dispatch(discardDev(relationId));
          toastSuccess('Programador descartado');
       } catch(err) {
-         toastError('Ocurrio un error al tratar de realizar la operación');
+         toastError('Ocurrió un error al tratar de realizar la operación');
       } finally {
          dispatch(finishLoading());
       }
@@ -141,7 +141,7 @@ export const startHiringDeveloper = (relationId, devId, jobTitle) => {
          dispatch(hireDev(relationId));
          toastSuccess('Programador contratado');
       } catch(err) {
-         toastError('Ocurrio un error al tratar de realizar la operación');
+         toastError('Ocurrió un error al tratar de realizar la operación');
       } finally {
          dispatch(finishLoading());
       }
@@ -170,7 +170,7 @@ export const startFiringDeveloper = (relationId) => {
          dispatch(fireDev(relationId));
          toastSuccess('Programador despedido');
       } catch(err) {
-         toastError('Ocurrio un error al tratar de realizar la operación');
+         toastError('Ocurrió un error al tratar de realizar la operación');
       } finally {
          dispatch(finishLoading());
       }
@@ -181,5 +181,32 @@ export const fireDev = (relationId) => {
    return {
       type: types.fireDeveloper,
       payload: relationId
+   };
+};
+
+
+
+export const startRatingDev = (ratings, devId) => {
+   return async(dispatch, getState) => {
+      try {
+         dispatch(startLoading());
+
+         const { id } = getState().companyInfo;
+         const body = {
+            user: devId,
+            ratings,
+            ratedBy: id
+         };
+
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/rate/developer`;
+         await axios.post(URL, body, config);
+
+      } catch(err) {
+         toastError('Ocurrió un error al tratar de realizar la operación');
+
+      } finally {
+         dispatch(finishLoading());
+      }
    };
 };
