@@ -49,6 +49,13 @@ const Carrousel = () => {
                      alt='iPhone 12 Mockup'
                   />
                </Box>
+
+               <Box className='item'>
+                  <Image
+                     src='/static/iphone12-3.png'
+                     alt='iPhone 12 Mockup'
+                  />
+               </Box>
             </Slider>
          </Box>
       </Flex>

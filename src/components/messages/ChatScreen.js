@@ -38,7 +38,7 @@ const ChatScreen = () => {
             margin: 0,
          }}
 
-         overflowY='unset'
+         overflowY='hidden'
       >
          {/* Barra lateral */}
          <VStack
@@ -52,11 +52,12 @@ const ChatScreen = () => {
             }}
             maxH={{ '2xl': '100vh' }}
             minH='100vh'
-            overflowY={{ '2xl': 'scroll' }}
+            overflowY='scroll'
             padding={0}
             spacing={5}
             w={{ base: 'full', '2xl': '30%' }}
             maxW={{ '2xl': '350px' }}
+            
          >
             <HStack
                w='full'

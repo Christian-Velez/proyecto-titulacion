@@ -1,6 +1,7 @@
 
+import React from 'react';
+import PropTypes from 'prop-types'
 
-import React, { useEffect, useState } from 'react';
 import {
    Button,
    Flex,
@@ -12,7 +13,6 @@ import {
    useDisclosure,
    VStack
 } from '@chakra-ui/react';
-import { getLastJobs } from 'helpers/getLastJobs';
 import JobItem from './JobItem';
 import './background.css';
 import ModalForm from './ModalForm';
@@ -25,18 +25,14 @@ import AnimatedText from './AnimatedText';
 import RegisterScreen from 'components/register/RegisterScreen';
 
 
-const Main = () => {
+const Main = ({ lastJobs }) => {
    const p = 4;
    const pPixels = p * 10 + 'px';
 
-   const [lastJobs, setLastJobs] = useState([]);
    const { isOpen: isOpenLogin, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure();
    const { isOpen: isOpenRegister, onOpen: onOpenRegister, onClose: onCloseRegister } = useDisclosure();
 
-   useEffect(() => {      
-      getLastJobs()
-         .then(jobs => setLastJobs(jobs));
-   }, []);
+   
 
 
    return (
@@ -60,12 +56,12 @@ const Main = () => {
             {/*Parte derecha */}
             <VStack
                w={{ base:'full', 'xl': '66%' }}
-               justifyContent='space-between'
+               justifyContent={ lastJobs.length > 0 && 'space-between'}
                alignItems='flex-start'
                minH={`calc(100vh - ${pPixels})`}
                padding={{ base: 0, 'xl': 10 , '2xl': '4rem'}}
 
-               spacing={{ base: 20, 'xl': 'unset'}}
+               spacing={{ base: 20, 'xl': lastJobs.length > 0 ? 'unset' : 60}}
             >
                {/* Navbar */}
                <Grid
@@ -83,7 +79,7 @@ const Main = () => {
                      
                   </HStack>
 
-                  <HStack justifyContent={{ base: 'space-between', 'xl': 'flex-end'}} spacing={5} w='full'>
+                  <HStack justifyContent='flex-end' spacing={5} w='full'>
                      <Button colorScheme='gray' variant='outline' onClick={ onOpenLogin }> Inicia sesión </Button>
                      <Button onClick={ onOpenRegister }> Regístrate </Button> 
                   </HStack>
@@ -136,6 +132,11 @@ const Main = () => {
       </>
    );
 };
+
+
+Main.propTypes = {
+   lastJobs: PropTypes.array
+}
 
 export default Main;
 
