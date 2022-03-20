@@ -32,7 +32,6 @@ const Body = ({ devInfo }) => {
    const isMyEmployee = employees.some(item => item.employee.id === devId);
    const alreadyRated = qualifications.some(item => item.ratedBy === companyId);
 
-
    const devRatings = useMemo(() => {
       const initialValue = {
          responsable: [],
@@ -43,17 +42,15 @@ const Body = ({ devInfo }) => {
 
       qualifications.forEach(element => {
          const { ratings } = element;
-   
          const keys = Object.keys(ratings);
          
          keys.forEach(key => {
-            initialValue[key].push(ratings[key]);
+            initialValue[key]?.push(ratings[key]);
          });
       });
       return initialValue;
 
    }, [ qualifications ]);
-
 
    const responsable = 
       devRatings.responsable.length === 0

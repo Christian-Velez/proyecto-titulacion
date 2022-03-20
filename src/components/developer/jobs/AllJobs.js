@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Stack, useDisclosure, VStack } from '@chakra-ui/react';
+import { Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import JobItem from './JobItem';
 import Filters from './Filters';
 import { filterJobs } from 'helpers/developer/filterJobs';
@@ -54,12 +54,18 @@ const AllJobs = ({ allJobs }) => {
                   '2xl': '75%',
                }}
             >
-               {filteredJobs.map((job) => (
-                  <JobItem
-                     key={job.id}
-                     job={job}
-                  />
-               ))}
+               {
+                  filteredJobs.length === 0
+                     ? <Text> Sin resultados </Text>
+                     :
+                        filteredJobs.map((job) => (
+                           <JobItem
+                              key={job.id}
+                              job={job}
+                           />
+                        ))
+               
+               }
             </VStack>
          </Stack>
       </VStack>

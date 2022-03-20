@@ -106,6 +106,7 @@ const SearchJobScreen = () => {
             maxH={{ '2xl': '100vh'}}
             overflowY={{ '2xl': 'scroll'}}  
             w={{ base:'full', '2xl': '25%'}}
+            minW='380px'
          >
             {
                /* Componente => JobScreen

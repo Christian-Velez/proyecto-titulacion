@@ -24,6 +24,8 @@ import { devJobsReducer } from 'reducers/developer/devJobsReducer';
 // Company
 import { companyReducer } from 'reducers/company/companyReducer';
 
+// Chats
+import { conversationReducer } from 'reducers/conversationReducer';
 
 
 
@@ -42,6 +44,8 @@ const appReducers = combineReducers({
 
    // Company
    companyInfo: companyReducer,
+
+   conversations: conversationReducer
 });
 
 

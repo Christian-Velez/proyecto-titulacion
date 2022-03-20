@@ -34,7 +34,7 @@ const Body = ({ companyInfo }) => {
          const keys = Object.keys(ratings);
          
          keys.forEach(key => {
-            initialValue[key].push(ratings[key]);
+            initialValue[key]?.push(ratings[key]);
          });
       });
       return initialValue;

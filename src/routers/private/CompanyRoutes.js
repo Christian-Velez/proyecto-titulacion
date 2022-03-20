@@ -33,6 +33,8 @@ import SearchDeveloperScreen from 'components/company/search/SearchDeveloperScre
 
 import { Stack } from '@chakra-ui/react';
 import TopTenTechnologies from 'components/technologies/TopTenTechnologies';
+import ChatScreen from 'components/messages/ChatScreen';
+import ConversationScreen from 'components/messages/ConversationScreen';
 
 const CompanyRoutes = () => {
    const dispatch = useDispatch();
@@ -84,7 +86,9 @@ const CompanyRoutes = () => {
 
                         <Route  path='developers' element={<DevelopersScreen /> }/>
 
-                        <Route path='messages' element={<p> aqui van los mensages </p> } />
+                        <Route path='messages/' element={ <ChatScreen /> }>
+                           <Route path='id/:id' element={<ConversationScreen />} />
+                        </Route>
 
                         <Route path='search' element={ <SearchDeveloperScreen />  } />
                         <Route path='search/:id' element={ <SearchDeveloperProfileScreen /> }/>

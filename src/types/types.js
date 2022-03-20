@@ -48,6 +48,14 @@ export const types = {
    removeApplicantFromJob: '[Company] Remove developer applicant from company jobs',
    discardDeveloper: '[Company] Discard developer from toHire list',
    hireDeveloper: '[Company] Hire developer',
-   fireDeveloper: '[Company] Fire developer'
-   
+   fireDeveloper: '[Company] Fire developer',
+
+
+   // Chat
+   setIsConversationSelected: '[Conversation] Set is conversation selected',
+   setConversations: '[Conversation] Set conversations',
+   setSelectedConversation: '[Conversation] Set selected conversation',
+   setConversationMessages: '[Conversation] Set conversation messages',
+   addMessage: '[Conversation] Add message, new message',
+   setLastMessage: '[Conversation] Set last message',
 };
