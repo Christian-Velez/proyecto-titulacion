@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import JobItem from './JobItem';
-import { Text, VStack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { startLoadingJobs } from 'actions/developer/jobs';
 import LoadingScreen from 'components/layout/LoadingScreen';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,27 +36,24 @@ const ApplicationsScreen = () => {
 
    return (
       <Layout 
-         title='Mis postulaciones'
+         title={ `Mis postulaciones (${filteredJobs.length})`}
          minH='100vh'
       >
-         <Text> 
-            Consulta las ofertas a las que has enviado solicitud. 
-            Algunas ofertas podrían no aparecer debido a que la empresa las ha desactivado
-         </Text> 
          
          {
             isLoading 
                ? <LoadingScreen />
                :  
-               <VStack 
+               <Flex
                   w='full' 
-                  alignItems='flex-start' 
                   spacing={5}
+                  flexWrap='wrap'
+                  gap={10}
                >
                   {
                      filteredJobs.map(job => <JobItem key={job.id} job={job} />)
                   }
-               </VStack>
+               </Flex>
          }
       </Layout>
    );

@@ -42,7 +42,7 @@ const TechnologyScreen = () => {
          paddingX={{ xl: 60 }}
       >
          <TechnologyMainInfo technology={technology} />
-         <Flex w='full' flexWrap='wrap' justifyContent='space-between' >
+         <Flex w='full' flexWrap='wrap' justifyContent='space-between'>
             <InfoSection icon={GoTerminal}>
                   <Heading fontSize={{ base: 'xl', lg: '2xl'}}> Popularidad </Heading>
                   <Text>
@@ -53,6 +53,7 @@ const TechnologyScreen = () => {
                         : ' veces '
                      }
                      en las ofertas de la plataforma.
+                     
                   </Text>
 
             </InfoSection>

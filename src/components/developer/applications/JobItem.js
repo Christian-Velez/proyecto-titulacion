@@ -2,104 +2,109 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-
 // Components
 import IconImg from 'components/layout/IconImg';
-import { AiFillClockCircle } from 'react-icons/ai';
-import { RiBuilding2Fill } from 'react-icons/ri';
 import {
    Button,
    Heading,
    HStack,
-   Stack,
    Text,
    VStack,
-   Link as ChakraLink,
-   Icon
+   Badge,
+   Flex,
 } from '@chakra-ui/react';
-
 
 import { startApplyingProcess } from 'actions/developer/jobs';
 
+
 // Cambiar el idioma de timeAgo a español
-import { format } from 'timeago.js';
 import 'helpers/timeAgoRegister';
+import { useNavigate } from 'react-router-dom';
 
 const JobItem = ({ job }) => {
-   const { title, company, description, id } = job;
-   const { img, name, lastSeen, id: companyId } = company;
+   const navigate = useNavigate();
+   const { title, company, description, id, category, salary } =
+      job;
+   const {
+      img,
+      name,
+      id: companyId,
+   } = company;
 
    const dispatch = useDispatch();
 
    const handleCancelApply = () => {
       const alreadyApply = true;
-      dispatch(startApplyingProcess(id, alreadyApply));
+      dispatch(
+         startApplyingProcess(id, alreadyApply)
+      );
    };
 
+   console.log(job)
+
    return (
-      <Stack
-         w='full'
-         direction={{ base: 'column', lg: 'row'}}
-         alignItems={{ base: 'center', lg: 'flex-start' }}
+      <VStack
+         w='23%'
+         minW='400px'
+         minH='500px'
+         alignItems='flex-start'
          border='1px solid'
          borderColor='gray.100'
          borderRadius='lg'
          spacing={10}
-         paddingY={10}
-         paddingX={{ base: 5, lg: 10}}
-
-         textAlign={{ base:'center', lg: 'initial'}}
-      >
-         <IconImg 
-            alt={name}
-            src={img}
-            boxSize={{ base: '130px'}}
-            isRounded
-         />
-
-         <VStack 
-            w={{ base: 'full', lg:'80%'}} 
-            alignItems={{ base: 'center', lg: 'flex-start'}}
-            spacing={{ base: 10, lg: 5}}
+         padding={10}
+         bgColor='gray.50'
+      >  
+         <Flex
+            onClick={ () => navigate(`/dev/search/${companyId}`) }
+            cursor='pointer'
          >
-            <Heading
-                  fontSize='2xl'
-               >
-                  {title}
+            <IconImg
+               alt={name}
+               src={img}
+               boxSize={{ base: '80px' }}
+               isRounded
+            />
+
+         </Flex>
+
+         <VStack
+            w={{ base: 'full', lg: '80%' }}
+            alignItems='flex-start'
+            spacing={5}
+         >
+            <Heading fontSize='2xl'>
+               {title}
             </Heading>
 
-            <Stack
-               justifyContent='center'
-               color='brandGray'
-               spacing={{ base: 3, lg: 5}}
-               direction={{ base: 'column', lg: 'row'}}
-            >
-               
-               <ChakraLink 
-                  href={`/dev/search/${companyId}`} 
-                  isExternal 
-               >
-                  <Icon as={RiBuilding2Fill} /> { name }  
-               </ChakraLink>
-               
-               <HStack>
-                  <AiFillClockCircle />
-                  <Text>activo { format(lastSeen, 'es_ES') } </Text>
-               </HStack>
-            </Stack>
-           
+            <HStack w='full'>
+               <Badge colorScheme='cyan'> {category} </Badge>
+               <Badge colorScheme='teal'> ${salary}/m  </Badge>
+            </HStack>
+
             <VStack
-               alignItems={{ base: 'center', lg: 'flex-start'}}
-               maxW={{ lg: '80%'}}
+               alignItems='flex-start'
             >
-               <Heading fontSize='md'>Descripción</Heading>
-               <Text> { description } </Text>
+               <Text
+                  isTruncated
+                  noOfLines={3}
+                  maxW='300px'
+                  whiteSpace='wrap'
+                  color='brandGray'
+
+               >
+                  {description}
+               </Text>
             </VStack>
 
-            <Button variant='outline' onClick={ handleCancelApply }>Cancelar postulación</Button>
+            <Button
+               colorScheme='brandPrimary'
+               onClick={handleCancelApply}
+            >
+               Cancelar postulación
+            </Button>
          </VStack>
-
-      </Stack>
+      </VStack>
    );
 };
 
