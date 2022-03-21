@@ -45,10 +45,10 @@ export const startUpdatingDevInfo = ( newDevInfo, navigate ) => {
          const config = getAxiosConfig();
 
          const URL = `${API_URL}/api/developer/${id}`;
-         const { data } = await axios.put(URL, newDevInfo, config);
+         await axios.put(URL, newDevInfo, config);
 
 
-         dispatch(updateDevInfo(data.newUser));
+         dispatch(startSettingDevInfo());
          navigate('/dev/profile');
          toastSuccess('Perfil actualizado');
       }

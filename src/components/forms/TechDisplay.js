@@ -4,6 +4,7 @@ import TagDisplay from 'components/forms/TagDisplay';
 
 const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => {
    const { name } = technology || {};
+
    
    const handleDelete = () => {
       setTechnologies(prevTech => prevTech.filter(tech => tech._id !== id));
@@ -19,7 +20,7 @@ const TechDisplay = ({ technology, yearsOfExperience, id, setTechnologies }) => 
 TechDisplay.propTypes = {
    technology: PropTypes.object,
    yearsOfExperience: PropTypes.number,
-   id: PropTypes.string,
+   id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number]),
    setTechnologies: PropTypes.func
 };
 

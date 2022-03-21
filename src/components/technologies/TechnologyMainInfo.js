@@ -70,12 +70,13 @@ const TechnologyMainInfo = ({ technology }) => {
    );
    const formatedTechs = devTechs.map(
       (devTech) => {
-         const { id } = devTech?.technology || {};
-         return id;
+         const { id, _id } = devTech?.technology || {};
+         return id || _id;
       }
    );
+
    const technologyAlreadyAdded =
-      formatedTechs.includes(technology.id);
+      formatedTechs.includes(technology.id || technology._id);
 
    return (
       <>

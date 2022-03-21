@@ -31,8 +31,8 @@ const EmployeesList = () => {
       );
    }
 
-   const handleFireDev = (relationId) => {
-      dispatch(startFiringDeveloper(relationId));
+   const handleFireDev = (relationId, devId) => {
+      dispatch(startFiringDeveloper(relationId, devId));
    };
 
    const getDate = (date) => {
@@ -111,7 +111,7 @@ const EmployeesList = () => {
                      <Button
                         variant='outline'
                         onClick={() =>
-                           handleFireDev(_id)
+                           handleFireDev(_id, devId)
                         }
                      >
                         Despedir

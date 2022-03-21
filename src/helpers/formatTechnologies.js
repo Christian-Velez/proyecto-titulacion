@@ -9,12 +9,11 @@ export const formatTechnologies = (technologies) => {
    let formatedTechs = [];
 
    technologies.forEach((techObj) => {
-
       const { technology, yearsOfExperience } = techObj;
 
       if(technology) {
          formatedTechs.push({
-            technology: technology.id,
+            technology: technology.id || technology._id,
             yearsOfExperience,
          });
 

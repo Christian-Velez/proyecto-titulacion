@@ -49,8 +49,6 @@ const Technologies = ({ technologies, setTechnologies }) => {
       }
    }, [ formatedTechs, setFormValues ]);
 
-
-
    // Muestra las tecnologias seleccionadas
    const techsDisplays = technologies.map(tech => {
       const { technology, yearsOfExperience, _id } = tech;

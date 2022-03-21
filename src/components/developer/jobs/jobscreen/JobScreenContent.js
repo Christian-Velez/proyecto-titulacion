@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import JobMainInfo from './JobMainInfo';
 import JobBody from './JobBody';
 import { useDispatch } from 'react-redux';
 import { setIsJobSelected } from 'actions/developer/jobs';
 import Layout from 'components/layout';
-
-
-
 
 const JobScreenContent = ({ job }) => {
    const dispatch = useDispatch();

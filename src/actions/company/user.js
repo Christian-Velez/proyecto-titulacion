@@ -69,8 +69,8 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
 
          const URL = `${API_URL}/api/company/${id}`;
          
-         const { data } = await axios.put(URL, updatedCompanyToDB, config);
-         dispatch(updateCompanyInfo(data.newUser));
+         await axios.put(URL, updatedCompanyToDB, config);
+         dispatch(startSettingCompanyInfo());
          navigate('/co/profile');
 
          toastSuccess('Perfil actualizado');
@@ -156,13 +156,14 @@ export const hireDev = (relationId) => {
 };
 
 // Despedir a un programador
-export const startFiringDeveloper = (relationId) => {
+export const startFiringDeveloper = (relationId, devId) => {
    return async(dispatch) => {
       try {
          dispatch(startLoading());
 
          const body = {
-            relationId
+            relationId,
+            devId
          };
          const config = getAxiosConfig();
          const URL = `${API_URL}/api/company/fireDeveloper`;
@@ -210,3 +211,31 @@ export const startRatingDev = (ratings, devId) => {
       }
    };
 };
+
+
+export const startSavingDefaultMessages = (params) => {
+   return async(dispatch, getState) => {
+      try {
+         dispatch(startLoading());
+
+         const body = {
+            defaultMessages: { ...params }
+         }
+
+         const { id } = getState().auth;
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/company/${id}`;
+
+         await axios.put(URL, body, config);
+         toastSuccess('Configuración guardada ⚙️');
+         dispatch(startSettingCompanyInfo());
+
+
+      } catch(err) {
+         toastError('Ocurrió un error al tratar de realizar la operación');
+
+      } finally {
+         dispatch(finishLoading());
+      }
+   }
+}

@@ -71,6 +71,7 @@ const EditDeveloperProfile = () => {
          selectedSofts
       };
       const formatedDevInfo = await processDevInfo(devInfo);
+      console.log(formatedDevInfo);
       dispatch(startUpdatingDevInfo(formatedDevInfo, navigate));
    };
 
