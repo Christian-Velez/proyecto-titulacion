@@ -6,10 +6,14 @@ import {
    HStack,
    Text,
    VStack,
-   Link as ChakraLink
+   Link as ChakraLink,
+   TagLeftIcon,
+   Tag
 } from '@chakra-ui/react';
 import IconImg from 'components/layout/IconImg';
 import { format } from 'timeago.js';
+import { RiMoneyDollarCircleFill } from  'react-icons/ri'
+import { AiFillTag } from 'react-icons/ai';
 
 
 // Cambiar el idioma de timeAgo a español
@@ -22,7 +26,7 @@ const JobMainInfo = ({jobInfo}) => {
 
    const dispatch = useDispatch();
    const { id: userId } = useSelector(state => state.auth);
-   const { id, title, company, created_at, salary, applicants } = jobInfo;
+   const { id, title, company, created_at, salary, applicants, category } = jobInfo;
    const { img, name, location, id: companyId } = company;
 
 
@@ -63,25 +67,25 @@ const JobMainInfo = ({jobInfo}) => {
                   isExternal
                   color='brandPrimary.500'
                >{ name }</ChakraLink>
-               
-               { ` > ${location}` }
             </Text>
+            <Text fontSize='sm' color='gray.500'> { location } </Text>
             <Text color='gray.500'>{ format(created_at, 'es_ES') } </Text> 
          </VStack>
 
          <HStack
             w='full'
-            justifyContent='space-around'
+            justifyContent='center'
+            spacing={5}
          >
-            <VStack>
-               <Heading fontSize='md'>Sueldo/m</Heading>
-               <Text>$ {salary}</Text>
-            </VStack>
+            <Tag borderRadius='full' colorScheme='green'>
+               <TagLeftIcon as={RiMoneyDollarCircleFill}/>
+               {salary}/m
+            </Tag>
 
-            <VStack>
-               <Heading fontSize='md'>Tipo</Heading>
-               <Text>Remoto</Text>
-            </VStack>
+            <Tag borderRadius='full' colorScheme='purple'>
+               <TagLeftIcon as={AiFillTag} />
+               {category}
+            </Tag>
          </HStack>
 
          <Button 

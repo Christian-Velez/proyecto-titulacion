@@ -23,13 +23,13 @@ const AnimatedText = () => {
                         fontSize='6xl'
                         className='process-step-title'
                      >
-                        Powerful News
+                        Encuentra el
                      </Heading>
                      <Heading
                         fontSize='6xl'
                         className='process-step-title-overlay'
                      >
-                        Powerful News
+                        Encuentra el
                      </Heading>
                   </div>
                </div>
@@ -39,13 +39,13 @@ const AnimatedText = () => {
                         fontSize='6xl'
                         className='process-step-title'
                      >
-                        Explored Feed
+                        Trabajo de tus sueños
                      </Heading>
                      <Heading
                         fontSize='6xl'
                         className='process-step-title-overlay'
                      >
-                        Explored Feed
+                        Trabajo de tus sueños
                      </Heading>
                   </div>
                </div>
@@ -54,8 +54,8 @@ const AnimatedText = () => {
       </section>
    ) : (
       <Heading fontSize='6xl'>
-         Powerful News <br />
-         Explored Feed
+         Encuentra el <br />
+         Trabajo de tus sueños
       </Heading>
    );
 };

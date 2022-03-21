@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import IconImg from 'components/layout/IconImg';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsConversationSelected, setSelectedConversation, startSendingMessage, startSettingConversationMessages, setLastMessage } from 'actions/conversations';
 import {
-   Flex,
    Heading,
    HStack,
-   IconButton,
-   Input,
    Text,
    Link as ChakraLink,
    VStack,
 } from '@chakra-ui/react';
-import { FiSend} from 'react-icons/fi';
 import MessageItem from './MessageItem';
 import { useParams } from 'react-router-dom';
 import LoadingScreen from 'components/layout/LoadingScreen';
 import { Link } from 'react-router-dom';
+import MessageInput from './MessageInput';
 
 
 const ConversationScreen = () => {
@@ -31,7 +28,11 @@ const ConversationScreen = () => {
    }
 
    useEffect(() => {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+         document.body.style.overflow = 'auto';
+      }
    }, []);
 
    useEffect(() => {
@@ -56,17 +57,10 @@ const ConversationScreen = () => {
       }
    }, [conversationMessages, dispatch])
 
-   
-   const [message, setMessage] = useState('');
-   const handleSendMessage = (e) => {
-      e.preventDefault();
-      
+   const handleSendMessage = (message) => {
       if(message.length === 0 || !message) {
          return;
       }
-
-      console.log(message);
-      setMessage('');
 
       dispatch(startSendingMessage({
          conversationId: convId,
@@ -76,24 +70,24 @@ const ConversationScreen = () => {
    }
 
    
-   const member = selectedConversation?.members?.find(memb => memb.id !== myId);
+   const member = 
+      useMemo(() => selectedConversation?.members?.find(memb => memb.id !== myId), [selectedConversation, myId]);
+   
 
    if(conversations.length === 0 || conversationMessages.length === 0 || !member) {
       return <LoadingScreen />
    }
-
-   console.log(member)
 
    return (
       <VStack
          w='full'
          h={{
             base: '95vh',
-            '2xl': '100vh',
+            'xl': '100vh',
          }}
          maxH={{
             base: '95vh',
-            '2xl': '100vh',
+            'xl': '100vh',
          }}
          overflowY='scroll'
       >
@@ -121,6 +115,7 @@ const ConversationScreen = () => {
                isRounded
             />
 
+
             <VStack alignItems='flex-start' spacing={0}>
                <ChakraLink as={Link} to={`${redirect}/search/${member.id}`} isExternal>
                   <Heading fontSize='2xl'>
@@ -140,32 +135,8 @@ const ConversationScreen = () => {
             <div id='lastMessage'></div>
          </VStack>
 
-         <Flex 
-            width='100%'
-            padding={5}
-            justifyContent='flex-start'
-            backgroundColor='white'
-
-            position='sticky'
-            left={0}
-            bottom={0}
-            zIndex={9}
-            style={{
-               marginTop: 'auto'
-            }}
-         >
-            <form style={{ width: '100%'}} onSubmit={handleSendMessage}>
-               <HStack w='full'>
-                  <Input 
-                     placeholder='Escribe un mensaje...'
-                     onChange={ (e) => setMessage(e.target.value) }
-                     value={message}
-                  />
-
-                  <IconButton aria-label='Send' icon={<FiSend />} type='submit'/>
-               </HStack>
-            </form>
-         </Flex>
+         <MessageInput sendMessage={handleSendMessage}/>
+         
       </VStack>
    );
 };

@@ -25,7 +25,9 @@ const DeveloperProfileContent = ({ devInfo }) => {
 
    return (
       <Layout
-         padding={{ base: 10, lg: 30, xl: 40 }}
+         padding={{ base: 10, lg: '120px', '2xl': 40 }}
+         paddingTop={'160px !important'}
+
       >
          {/* Header -> Información principal del desarrollador */}
          <MainInfo userInfo={devInfo} />

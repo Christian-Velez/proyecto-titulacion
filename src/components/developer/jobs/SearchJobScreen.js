@@ -62,12 +62,12 @@ const SearchJobScreen = () => {
          <VStack
             alignItems='flex-start'
             className='animate__animated animate__fadeIn animate__faster'
-            display={{ base: isJobSelected && 'none', '2xl': 'flex'}}
-            maxH={{ '2xl': '100vh' }}
-            overflowY={{ '2xl': 'scroll' }}    
-            padding={{ base: 7, lg: 20 }}
+            display={{ base: isJobSelected && 'none', 'xl': 'flex'}}
+            maxH={{ 'xl': '100vh' }}
+            overflowY={{ 'xl': 'scroll' }}    
+            padding={{ base: 7, lg: 10, '2xl': 20 }}
             spacing={20}
-            w={{ base: 'full', '2xl': '75%'}}
+            w={{ base: 'full', 'xl': '75%'}}
          >
             <Heading
                fontSize={{ base: '2xl', lg: '3xl' }}
@@ -102,10 +102,10 @@ const SearchJobScreen = () => {
 
 
          <Flex 
-            display={{ base: !isJobSelected && 'none', '2xl': 'flex' }}
-            maxH={{ '2xl': '100vh'}}
-            overflowY={{ '2xl': 'scroll'}}  
-            w={{ base:'full', '2xl': '25%'}}
+            display={{ base: !isJobSelected && 'none', 'xl': 'flex' }}
+            maxH={{ 'xl': '100vh'}}
+            overflowY={{ 'xl': 'scroll'}}  
+            w={{ base:'full', 'xl': '25%'}}
             minW='380px'
          >
             {

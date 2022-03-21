@@ -27,10 +27,6 @@ const JobScreenContent = ({ job }) => {
       window.scrollTo(0,0);
    }, [job]);
 
-
-   // Arreglar los estilos en distintos dispositivos
-   // el screen se ve como en dispositivos moviles en
-   // algunas laptops
    return (
       <>
          <div id='aux'></div>
@@ -38,8 +34,9 @@ const JobScreenContent = ({ job }) => {
             alignItems='center'
             h='max-content'
             padding={{}}
-            paddingX={{ base: 7 }}
             paddingY={{ base: 20 }}
+            paddingX={{ base: 7, lg: 20, xl: 5, '2xl': 7 }}
+            bgColor='gray.50'
          >  
             <JobMainInfo jobInfo={job}/>
             <JobBody jobInfo={job} />

@@ -10,10 +10,12 @@ import {
    HStack,
    Text,
    VStack,
-   Badge,
    Flex,
+   Tag,
+   TagLeftIcon,
 } from '@chakra-ui/react';
-
+import { RiMoneyDollarCircleFill } from  'react-icons/ri'
+import { AiFillTag } from 'react-icons/ai';
 import { startApplyingProcess } from 'actions/developer/jobs';
 
 
@@ -39,8 +41,6 @@ const JobItem = ({ job }) => {
          startApplyingProcess(id, alreadyApply)
       );
    };
-
-   console.log(job)
 
    return (
       <VStack
@@ -78,8 +78,14 @@ const JobItem = ({ job }) => {
             </Heading>
 
             <HStack w='full'>
-               <Badge colorScheme='cyan'> {category} </Badge>
-               <Badge colorScheme='teal'> ${salary}/m  </Badge>
+               <Tag borderRadius='full' colorScheme='purple'>
+                  <TagLeftIcon as={AiFillTag} />
+                  {category}
+               </Tag>
+               <Tag borderRadius='full' colorScheme='green'>
+                  <TagLeftIcon as={RiMoneyDollarCircleFill}/>
+                  {salary}/m
+               </Tag>
             </HStack>
 
             <VStack

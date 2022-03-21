@@ -12,7 +12,6 @@ import IconImg from 'components/layout/IconImg';
 const JobBody = ({ jobInfo }) => {
    const {
       description,
-      category,
       techsRequired,
       additional,
       softsRequired,
@@ -91,20 +90,7 @@ const JobBody = ({ jobInfo }) => {
 
    return (
       <VStack w='full' alignItems='flex-start' spacing={10}>
-         <VStack w='full' alignItems='flex-start'>
-            <Divider />
-
-            <Heading
-               fontSize={{
-                  base: 'lg',
-                  '2xl': 'xl',
-               }}
-            >
-               Categoría
-            </Heading>
-            <Text> {category} </Text>
-         </VStack>
-
+         <Divider />
          <VStack w='full' alignItems='flex-start'>
             <Heading
                fontSize={{

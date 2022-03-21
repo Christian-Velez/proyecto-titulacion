@@ -23,7 +23,8 @@ const CompanyProfileContent = ({
 
    return (
       <Layout
-         padding={{ base: 10, lg: 30, xl: 40 }}
+         padding={{ base: 10, lg: '120px', '2xl': 40 }}
+         paddingTop={'160px !important'}
       >
          <>
             {/*Header informacion principal*/}

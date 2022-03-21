@@ -53,9 +53,9 @@ const MainInfo = ({ userInfo }) => {
                   lg: '250px',
                   xl: '300px',
                }}
-               isRounded={true}
+               isRounded
                bgColor='brand.50'
-               border={true}
+               border
             />
          </Flex>
 
@@ -90,7 +90,7 @@ const MainInfo = ({ userInfo }) => {
 
             <VStack minH='80px' alignItems={{ base: 'center', xl: 'flex-start'}}
             
-               maxW={{ lg: '70%'}}
+               maxW={{ lg: '70%', xl: '100%', '2xl': '70%'}}
             >
                <Heading fontSize='md'>
                   {kind === 'Developer'

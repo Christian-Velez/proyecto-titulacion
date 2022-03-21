@@ -48,15 +48,15 @@ const ChatScreen = () => {
                base:
                   isConversationSelected &&
                   'none',
-               '2xl': 'flex',
+               'xl': 'flex',
             }}
-            maxH={{ '2xl': '100vh' }}
+            maxH={{ 'xl': '100vh' }}
             minH='100vh'
             overflowY='scroll'
             padding={0}
             spacing={5}
-            w={{ base: 'full', '2xl': '30%' }}
-            maxW={{ '2xl': '350px' }}
+            w={{ base: 'full', 'xl': '30%' }}
+            maxW={{ 'xl': '350px' }}
             
          >
             <HStack
@@ -89,10 +89,10 @@ const ChatScreen = () => {
                base:
                   !isConversationSelected &&
                   'none',
-               '2xl': 'flex',
+               'xl': 'flex',
             }}
-            maxH={{ '2xl': '100vh' }}
-            w={{ base: 'full', '2xl': ' 81%' }}
+            maxH={{ 'xl': '100vh' }}
+            w={{ base: 'full', 'xl': ' 81%' }}
             justifyContent='center'
          >
             {/* Componente => JobScreen
