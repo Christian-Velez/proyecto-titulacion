@@ -102,3 +102,12 @@ export const setLastMessage = () => {
       type: types.setLastMessage
    }
 }
+
+
+export const setSocket = (socket) => {
+   return {
+      type: types.setSocket,
+      payload: socket
+   }
+}
+

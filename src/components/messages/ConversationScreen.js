@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import IconImg from 'components/layout/IconImg';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsConversationSelected, setSelectedConversation, startSendingMessage, startSettingConversationMessages, setLastMessage } from 'actions/conversations';
+import { setIsConversationSelected, setSelectedConversation, startSendingMessage, startSettingConversationMessages, addMessage } from 'actions/conversations';
 import {
    Heading,
    HStack,
@@ -23,13 +23,16 @@ const ConversationScreen = () => {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const { id: convId } = useParams();
    const { id: myId, redirect } = useSelector(state => state.auth);
-   const { conversationMessages, selectedConversation, conversations } = useSelector(state => state.conversations);
+   const { conversationMessages, selectedConversation, conversations, socket } = useSelector(state => state.conversations);
    const [isLoading, setIsLoading] = useState(false);
-   
+
+
+
    const scrollToLastMessage = () => {
       const lastMessage = document.getElementById('lastMessage');
       lastMessage?.scrollIntoView({ behavior: 'smooth'});
    }
+
    useEffect(() => {
       document.body.style.overflow = 'hidden';
 
@@ -60,16 +63,25 @@ const ConversationScreen = () => {
    }, [dispatch, convId, conversations]);
 
    useEffect(() => {
-      if(conversationMessages.length > 0) {
+      if(!isLoading && conversationMessages.length > 0) {
          scrollToLastMessage();
-         dispatch(setLastMessage());
       }
-   }, [conversationMessages, dispatch])
+
+   }, [ isLoading, conversationMessages ]);
+   
+   const member = 
+      useMemo(() => selectedConversation?.members?.find(memb => memb.id !== myId), [selectedConversation, myId]);
 
    const handleSendMessage = (message) => {
       if(message.length === 0 || !message) {
          return;
       }
+
+      socket.emit("sendMessage", {
+         senderId: myId,
+         receiverId: member.id,
+         text: message
+      })
 
       dispatch(startSendingMessage({
          conversationId: convId,
@@ -77,12 +89,34 @@ const ConversationScreen = () => {
          text: message
       }));
    }
-
-   
-   const member = 
-      useMemo(() => selectedConversation?.members?.find(memb => memb.id !== myId), [selectedConversation, myId]);
    
    const { blocked } = selectedConversation;
+
+   const [ arrivalMessage, setArrivalMessage ] = useState(null);
+   useEffect(() => {
+      if(selectedConversation.members) {
+         socket?.on("getMessage", data => {
+            const sender = selectedConversation?.members.find(user => user.id === data.senderId);
+   
+            // Si no existe el sender, significa que no está dentro de la conversación que tiene
+            // seleccionada el usuario. Por lo tanto no hace el push del nuevo mensaje
+            if(sender) {
+               setArrivalMessage({
+                  sender,
+                  text: data.text,
+                  createdAt: Date.now
+               })
+            }
+         })
+      }
+   }, [ socket, selectedConversation ]);
+
+
+   useEffect(() => {
+      if(arrivalMessage) {
+         dispatch(addMessage(arrivalMessage));
+      }
+   }, [arrivalMessage, dispatch]);
 
    if(conversations.length === 0 || conversationMessages.length === 0 || !member) {
       return <LoadingScreen />;
@@ -138,10 +172,11 @@ const ConversationScreen = () => {
                isLoading
                   ? <LoadingScreen />
                   :
-                     <VStack w='full' spacing={5} paddingY={5}>
+                     <VStack w='full' spacing={5} paddingY={5} id='unodo'>
                         {
-                           conversationMessages.map(msg => <MessageItem key={msg.id} message={msg} />)
+                           conversationMessages.map(msg => <MessageItem key={msg.id} message={msg}/>)
                         }
+
                         <div id='lastMessage'></div>
 
                         {

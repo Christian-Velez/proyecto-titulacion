@@ -58,4 +58,5 @@ export const types = {
    setConversationMessages: '[Conversation] Set conversation messages',
    addMessage: '[Conversation] Add message, new message',
    setLastMessage: '[Conversation] Set last message',
+   setSocket: '[Conversation] Set socket',
 };

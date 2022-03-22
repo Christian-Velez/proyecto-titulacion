@@ -7,8 +7,9 @@ const initialState = {
    selectedConversation: {},
    conversationMessages: [],
    conversations: [],
-   lastMessage: {}
-   
+   lastMessage: {},
+
+   socket: null
 }
 
 
@@ -51,6 +52,12 @@ export const conversationReducer = (state = initialState, action) => {
          return {
             ...state,
             lastMessage: state.conversationMessages
+         }
+
+      case types.setSocket:
+         return {
+            ...state,
+            socket: action.payload
          }
 
       default:

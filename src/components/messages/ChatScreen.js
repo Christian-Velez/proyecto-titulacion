@@ -1,5 +1,5 @@
 import React, {
-   useEffect,
+   useEffect
 } from 'react';
 import {
    Divider,
@@ -18,20 +18,36 @@ import {
    useSelector,
 } from 'react-redux';
 import { SettingsIcon } from '@chakra-ui/icons';
-import { startLoadingConversations } from 'actions/conversations';
+import { setSocket, startLoadingConversations } from 'actions/conversations';
 import ConversationItem from './ConversationItem';
 import ChatConfigModal from './ChatConfigModal';
 import { toastInfo } from 'helpers/ToastAlert';
+import { io } from 'socket.io-client';
+
+
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
 
 const ChatScreen = () => {
    const dispatch = useDispatch();
    const { isOpen, onOpen, onClose } = useDisclosure();
-   const { isConversationSelected, conversations } = useSelector(state => state.conversations);
-   const { role } = useSelector(state => state.auth);
+   const { isConversationSelected, conversations, socket } = useSelector(state => state.conversations);
+   const { role, id } = useSelector(state => state.auth);
    const { defaultMessages = {} } = useSelector(state => state.companyInfo);
+
+
+   // SOCKET IO
+   useEffect(() => {
+      socket?.emit("addUser", id);
+      socket?.on("getUsers", users => {
+      })
+   }, [ id, socket ]);
+
 
    useEffect(() => {
       dispatch(startLoadingConversations());
+
+      dispatch(setSocket(io(SOCKET_URL)));
+
    }, [dispatch]);
 
    useEffect(() => {
@@ -42,8 +58,7 @@ const ChatScreen = () => {
       
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
-   
-  
+
    return (
       <>
          { role === 'Company' &&  <ChatConfigModal isOpen={isOpen} onClose={onClose}/> } 

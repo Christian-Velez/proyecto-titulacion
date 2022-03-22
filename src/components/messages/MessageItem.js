@@ -57,7 +57,7 @@ const MessageItem = ({ message }) => {
 
                </Flex>
                <Text fontSize='xs'>
-                  { format(createdAt, 'es_ES') }
+                  { format(createdAt.toString(), 'es_ES') }
                </Text>
             
             </VStack>
@@ -67,7 +67,7 @@ const MessageItem = ({ message }) => {
 };
 
 MessageItem.propTypes = {
-   message: PropTypes.object
+   message: PropTypes.object,
 }
 
 export default MessageItem
