@@ -48,7 +48,7 @@ const ChatScreen = () => {
       <>
          { role === 'Company' &&  <ChatConfigModal isOpen={isOpen} onClose={onClose}/> } 
          <HStack
-            //minH='100vh'
+            maxH='100vh'
             w='full'
             spacing={0}
             alignItems='flex-start'

@@ -21,8 +21,8 @@ const ToHireList = () => {
    const dispatch = useDispatch();
    const { toHire, employees } = useSelector((state) => state.companyInfo);
 
-   const handleDiscard = (relationId) => {
-      dispatch(startDiscartingApplicant(relationId));
+   const handleDiscard = (relationId, devId) => {
+      dispatch(startDiscartingApplicant(relationId, devId));
    };
 
    const handleHire = (relationId, devId, jobTitle) => {
@@ -102,7 +102,7 @@ const ToHireList = () => {
                   <HStack>
                      <Button
                         variant='outline'
-                        onClick={ () => handleDiscard(_id) }
+                        onClick={ () => handleDiscard(_id, devId) }
                      >
                         Descartar
                      </Button>

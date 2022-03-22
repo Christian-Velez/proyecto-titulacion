@@ -93,13 +93,14 @@ export const updateCompanyInfo = (data) => {
 
 
 // Descartar a programador de "por contratar"
-export const startDiscartingApplicant = (relationId) => {
+export const startDiscartingApplicant = (relationId, devId) => {
    return async(dispatch) => {
       try {
          dispatch(startLoading());
 
          const body = {
-            relationId
+            relationId,
+            devId
          };
          const config = getAxiosConfig();
          const URL = `${API_URL}/api/company/discardDeveloper`;
@@ -138,7 +139,7 @@ export const startHiringDeveloper = (relationId, devId, jobTitle) => {
    
          await axios.post(URL, body, config);
 
-         dispatch(hireDev(relationId));
+         dispatch(startSettingCompanyInfo());
          toastSuccess('Programador contratado');
       } catch(err) {
          toastError('Ocurrió un error al tratar de realizar la operación');

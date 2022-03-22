@@ -7,12 +7,21 @@ import {
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import IconImg from 'components/layout/IconImg';
+import { useLocation } from 'react-router-dom';
 
 const MobileNavBar = ({ setDisplayMenu }) => {
+   // Se oculta cuando entra a un chat
+   const location = useLocation();
+   const visible = !location.pathname.includes('/messages/id/');
+
    return (
       <HStack
          w='full'
-         display={{ base: 'flex', lg: 'none' }}
+         display={
+            visible 
+            ? { base: 'flex', lg: 'none' }
+            : 'none'
+         }
          justify='space-between'
          padding={1}
          paddingRight={5}
