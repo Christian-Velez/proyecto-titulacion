@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const imgUpload = async (file) => {
+export const fileUpload = async (file) => {
    // El try catch esta en las funciones superiores que utilizan esta func
    const cloudUrl = 'https://api.cloudinary.com/v1_1/dstwynawj/upload/';
    const formData = new FormData();
@@ -9,7 +9,6 @@ export const imgUpload = async (file) => {
 
    const resp = await axios.post(cloudUrl, formData);
    const { data } = resp;
-
       
    if( data ) {
       return data.secure_url;
@@ -18,5 +17,4 @@ export const imgUpload = async (file) => {
       return null;
    }
 };
-
 

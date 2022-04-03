@@ -1,6 +1,6 @@
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
-import { imgUpload } from 'helpers/imgUpload';
+import { fileUpload } from 'helpers/fileUpload';
 import { toastError, toastSuccess } from 'helpers/ToastAlert';
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
@@ -37,7 +37,7 @@ export const startSubmittingSoftSkill = ({ name, img }, navigate) => {
 
          dispatch(startLoading());
          
-         const imgURL = await imgUpload(img);
+         const imgURL = await fileUpload(img);
          if (!imgURL) {
             return toastError('Ocurrio un error con la subida de la imagen');
          }
@@ -81,7 +81,7 @@ export const startUpdatingSoft = ({ id, name, img }, navigate) => {
          dispatch(startLoading());
 
 
-         const imgURL = (typeof img === 'string') ? img : await imgUpload(img);
+         const imgURL = (typeof img === 'string') ? img : await fileUpload(img);
    
          if (!imgURL) {
             return toastError('Ocurrio un error con la subida de la imagen');

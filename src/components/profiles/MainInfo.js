@@ -17,6 +17,7 @@ import { HiLocationMarker} from 'react-icons/hi';
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
+import { toastInfo } from 'helpers/ToastAlert';
 
 const MainInfo = ({ userInfo }) => {
    const {
@@ -26,8 +27,17 @@ const MainInfo = ({ userInfo }) => {
       img,
       kind,
       line,
-      lastSeen
+      lastSeen,
+      curriculum
    } = userInfo;
+
+   const handleDownloadCV = () => {
+      if(!curriculum) {
+         return toastInfo('El usuario no ha adjuntado ningún CV!');
+      }
+
+      window.open(curriculum, '_blank');
+   }
 
    return (
       <Stack
@@ -106,6 +116,7 @@ const MainInfo = ({ userInfo }) => {
                   leftIcon={<AiOutlineDownload />}
                   variant='outline'
                   colorScheme='brandPrimary'
+                  onClick={handleDownloadCV}
                >
                   Currículum
                </Button>

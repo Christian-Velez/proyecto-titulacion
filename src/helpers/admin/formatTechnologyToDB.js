@@ -1,4 +1,4 @@
-import { imgUpload } from 'helpers/imgUpload';
+import { fileUpload } from 'helpers/fileUpload';
 import Swal from 'sweetalert2';
 
 
@@ -9,7 +9,7 @@ export const formatTechnologyToDB = async ({ img, categories, relatedTechs, ...r
       imgURL = img;
    } else {
       // Se sube la nueva imagen a cloudinary
-      imgURL = await imgUpload(img);
+      imgURL = await fileUpload(img);
 
       if (!imgURL) {
          return Swal.fire({

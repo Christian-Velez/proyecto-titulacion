@@ -1,15 +1,23 @@
 import { formatTechnologies } from 'helpers/formatTechnologies';
-import { imgUpload } from '../imgUpload';
+import { fileUpload } from '../fileUpload';
 
 
 // Si elige una pp nueva, la sube a cloudinary
 export const formatProfilePhoto = async (profilePhoto) => {
    if (typeof profilePhoto !== 'string') {
-      return await imgUpload(profilePhoto);
+      return await fileUpload(profilePhoto);
    }
 
    return profilePhoto;
 };
+
+export const formatCurriculum = async(curriculum) => {
+   if (typeof curriculum !== 'string') {
+      return await fileUpload(curriculum);
+   }
+
+   return curriculum;
+}
 
 // Formatear proyectos -> sube la foto y retorna el link
 export const formatProjects = async(projects) => {
@@ -18,7 +26,7 @@ export const formatProjects = async(projects) => {
          let { img, linkDemo, linkGH, title } = project;
 
          if (typeof img !== 'string') {
-            img = await imgUpload(img);
+            img = await fileUpload(img);
          }
 
          return {
@@ -39,7 +47,7 @@ export const formatCertifications = async (certifications) => {
          let { img, ...rest } = cert;
          
          if (typeof img !== 'string') {
-            img = await imgUpload(img);
+            img = await fileUpload(img);
          }
 
          return {
@@ -69,6 +77,7 @@ export const processDevInfo = async (devInfo) => {
       education,
       certifications,
       selectedSofts,
+      curriculum
    } = devInfo;
 
    profilePhoto = await formatProfilePhoto(profilePhoto);
@@ -76,6 +85,7 @@ export const processDevInfo = async (devInfo) => {
    projects = await formatProjects(projects);
    certifications = await formatCertifications(certifications);
    selectedSofts = formatSoftSkills(selectedSofts);
+   curriculum = await formatCurriculum(curriculum);
 
    return {
       img: profilePhoto,
@@ -87,5 +97,6 @@ export const processDevInfo = async (devInfo) => {
       education,
       certifications,
       softskills: selectedSofts,
+      curriculum
    };
 };

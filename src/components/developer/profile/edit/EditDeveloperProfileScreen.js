@@ -6,10 +6,7 @@ import { formatSoftskills } from 'helpers/formatSoftskills';
 import { startUpdatingDevInfo } from 'actions/developer/user';
 import { isEmpty } from 'validator';
 import { 
-   Badge,
-   Button,
    FormControl, 
-   FormHelperText, 
    FormLabel, 
    Heading, 
    Text, 
@@ -30,8 +27,7 @@ import Education from './editForm/Education';
 import Certifications from './editForm/Certifications';
 import Layout from 'components/layout';
 import Softskills from './editForm/Softskills';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import Curriculum from 'components/developer/pdf/Curriculum';
+import CurriculumSection from './editForm/CurriculumSection';
 
 const EditDeveloperProfile = () => {
    useScrollToTop();
@@ -55,8 +51,7 @@ const EditDeveloperProfile = () => {
    const [education, setEducation] = useState(devInfo.education);
    const [certifications, setCertifications] = useState(devInfo.certifications);
    const [profilePhoto, setProfilePhoto] = useState(devInfo.img);
-
-   //const [curriculum, setCurriculum] = useState();
+   const [curriculum, setCurriculum] = useState(devInfo.curriculum);
 
    const handleEditDevProfile = async (e) => {
       e.preventDefault();
@@ -75,13 +70,13 @@ const EditDeveloperProfile = () => {
          projects,
          education,
          certifications,
-         selectedSofts
+         selectedSofts,
+         curriculum
       };
       const formatedDevInfo = await processDevInfo(devInfo);
       dispatch(startUpdatingDevInfo(formatedDevInfo, navigate));
    };
 
- 
    return (
       <Layout
          padding={{ base: 10, lg: 30, xl: 40 }}
@@ -109,24 +104,7 @@ const EditDeveloperProfile = () => {
                      maxLength={280} placeholder='Tienes un "tweet" para contarle a las empresas más acerca de ti  (280 caracteres).'
                   />
                </FormControl>
-               <FormControl>
-                  <FormLabel fontSize='lg'>Currículum</FormLabel>
-                  <Button>Adjuntar</Button>
-
-                  <FormHelperText marginTop={5}>
-                     ¿No tienes uno? 
-
-                     <PDFDownloadLink document={<Curriculum devInfo={devInfo}/>} fileName='CV.pdf'>
-
-                     {({ blob, url, loading, error }) =>
-                        loading 
-                           ? <Badge colorScheme='red' marginLeft={3}>Cargando...</Badge> 
-                           : <Badge colorScheme='cyan' marginLeft={3}>Descargar!</Badge>
-                     }
-                     </PDFDownloadLink>
-                  
-                  </FormHelperText>
-               </FormControl>
+               <CurriculumSection devInfo={devInfo} curriculum={curriculum} setCurriculum={setCurriculum}/>
                <Technologies technologies={technologies} setTechnologies={setTechnologies}/>
                <Projects projects={projects} setProjects={setProjects} />
                <Education education={education} setEducation={setEducation}/>

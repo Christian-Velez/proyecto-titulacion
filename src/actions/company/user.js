@@ -1,6 +1,6 @@
 import { finishLoading, startLoading } from 'actions/ui';
 import axios from 'axios';
-import { imgUpload } from 'helpers/imgUpload';
+import { fileUpload } from 'helpers/fileUpload';
 import { errorAlert } from 'helpers/SwalAlerts';
 import { toastError, toastSuccess } from 'helpers/ToastAlert';
 import { types } from 'types/types';
@@ -55,7 +55,7 @@ export const startUpdatingCompanyInfo = (allCompanyInfo, navigate ) => {
          const { profilePhoto } = allCompanyInfo;
          const imgUrl = typeof profilePhoto === 'string'
             ? profilePhoto
-            : await imgUpload(profilePhoto);
+            : await fileUpload(profilePhoto);
             
          const updatedCompanyToDB = {
             ...allCompanyInfo,
