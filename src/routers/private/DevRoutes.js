@@ -94,7 +94,7 @@ const DevRoutes = () => {
 
                         <Route path='search' element={ <SearchCompanyScreen /> } />
                         <Route path='search/:id' element={ <SearchCompanyProfileScreen />} />
-
+                        
                         <Route path='*' element={ <Navigate to='/dev/welcome' /> }  />
                
                      </Routes>

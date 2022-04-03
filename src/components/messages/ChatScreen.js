@@ -34,8 +34,6 @@ const ChatScreen = () => {
    const { role, id } = useSelector(state => state.auth);
    const { defaultMessages = {} } = useSelector(state => state.companyInfo);
 
-
-   // SOCKET IO
    useEffect(() => {
       socket?.emit("addUser", id);
       socket?.on("getUsers", users => {
@@ -45,9 +43,7 @@ const ChatScreen = () => {
 
    useEffect(() => {
       dispatch(startLoadingConversations());
-
       dispatch(setSocket(io(SOCKET_URL)));
-
    }, [dispatch]);
 
    useEffect(() => {
