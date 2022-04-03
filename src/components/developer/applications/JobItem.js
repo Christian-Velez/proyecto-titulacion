@@ -13,6 +13,7 @@ import {
    Flex,
    Tag,
    TagLeftIcon,
+   Link as ChakraLink
 } from '@chakra-ui/react';
 import { RiMoneyDollarCircleFill } from  'react-icons/ri'
 import { AiFillTag } from 'react-icons/ai';
@@ -21,7 +22,7 @@ import { startApplyingProcess } from 'actions/developer/jobs';
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const JobItem = ({ job }) => {
    const navigate = useNavigate();
@@ -73,9 +74,12 @@ const JobItem = ({ job }) => {
             alignItems='flex-start'
             spacing={5}
          >
-            <Heading fontSize='2xl'>
-               {title}
-            </Heading>
+            <ChakraLink as={Link} to={`/dev/jobs/id/${id}`}>
+               <Heading fontSize='2xl'>
+                  {title}
+               </Heading>
+
+            </ChakraLink>
 
             <HStack w='full'>
                <Tag borderRadius='full' colorScheme='purple'>

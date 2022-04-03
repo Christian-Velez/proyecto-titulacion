@@ -56,12 +56,12 @@ const Main = ({ lastJobs }) => {
             {/*Parte derecha */}
             <VStack
                w={{ base:'full', 'xl': '66%' }}
-               justifyContent={ lastJobs.length > 0 && 'space-between'}
+               justifyContent={ lastJobs?.length > 0 && 'space-between'}
                alignItems='flex-start'
                minH={`calc(100vh - ${pPixels})`}
                padding={{ base: 0, 'xl': 10 , '2xl': '4rem'}}
 
-               spacing={{ base: 20, 'xl': lastJobs.length > 0 ? 'unset' : 60}}
+               spacing={{ base: 20, 'xl': lastJobs?.length > 0 ? 'unset' : 60}}
             >
                {/* Navbar */}
                <Grid
@@ -106,7 +106,7 @@ const Main = ({ lastJobs }) => {
 
 
                {
-                  lastJobs.length > 0 && 
+                  lastJobs?.length > 0 && 
                   <VStack 
                      spacing={10} 
                      alignItems='flex-start' 
