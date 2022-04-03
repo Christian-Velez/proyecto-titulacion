@@ -7,6 +7,7 @@ import {
    Heading,
    HStack,
    IconButton,
+   Text,
    useDisclosure,
    VStack,
 } from '@chakra-ui/react';
@@ -113,7 +114,9 @@ const ChatScreen = () => {
 
                <VStack w='full' spacing={0}>
                   {
-                     conversations.map((conv) => <ConversationItem key={conv.id} conversation={conv} />)
+                     conversations.length === 0
+                        ? <Text>Aún no has iniciado ninguna conversación</Text>
+                        : conversations.map((conv) => <ConversationItem key={conv.id} conversation={conv} />)
                   }
                </VStack>
             </VStack>

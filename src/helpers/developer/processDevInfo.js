@@ -12,7 +12,7 @@ export const formatProfilePhoto = async (profilePhoto) => {
 };
 
 export const formatCurriculum = async(curriculum) => {
-   if (typeof curriculum !== 'string') {
+   if (typeof curriculum === 'object') {
       return await fileUpload(curriculum);
    }
 
