@@ -6,6 +6,7 @@ import { store } from './store/store';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+   console.log('API URL: ', process.env.REACT_APP_API_URL);
    return (
       <div>
          <Provider store={store}>
