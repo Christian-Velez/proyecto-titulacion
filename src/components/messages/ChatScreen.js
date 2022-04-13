@@ -26,7 +26,7 @@ import { toastInfo } from 'helpers/ToastAlert';
 import { io } from 'socket.io-client';
 
 
-const SOCKET_URL = process.env.REACT_APP_SOCKET_URL;
+const SOCKET_URL = 'https://devconnect-socket.herokuapp.com/';
 
 const ChatScreen = () => {
    const dispatch = useDispatch();
@@ -36,16 +36,17 @@ const ChatScreen = () => {
    const { defaultMessages = {} } = useSelector(state => state.companyInfo);
 
    useEffect(() => {
-      socket?.emit("addUser", id);
+      socket?.emit('addUser', id);
       socket?.on("getUsers", users => {
       })
-   }, [ id, socket ]);
 
+   }, [ id, socket, dispatch ]);
 
    useEffect(() => {
       dispatch(startLoadingConversations());
       dispatch(setSocket(io(SOCKET_URL)));
-   }, [dispatch]);
+      
+   }, [ dispatch ]);
 
    useEffect(() => {
       const isEmpty = Object.keys(defaultMessages).length === 0;
@@ -53,8 +54,7 @@ const ChatScreen = () => {
          toastInfo('No te olvides de configurar tus mensajes predeterminados! ⚙️');
       }
       
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+   }, [ defaultMessages, role ]);
 
    return (
       <>

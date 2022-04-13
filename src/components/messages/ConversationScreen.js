@@ -76,8 +76,8 @@ const ConversationScreen = () => {
       if(message.length === 0 || !message) {
          return;
       }
-
-      socket.emit("sendMessage", {
+      
+      socket?.emit("sendMessage", {
          senderId: myId,
          receiverId: member.id,
          text: message
@@ -174,7 +174,7 @@ const ConversationScreen = () => {
                   :
                      <VStack w='full' spacing={5} paddingY={5} id='unodo'>
                         {
-                           conversationMessages.map(msg => <MessageItem key={msg.id} message={msg}/>)
+                           conversationMessages.map((msg, i) => <MessageItem key={msg.id || i} message={msg}/>)
                         }
 
                         <div id='lastMessage'></div>
