@@ -1,5 +1,5 @@
 
 
 export const findJobById = (allJobs, id) => {
-   return allJobs.find(tech => tech.id === id);
+   return allJobs.find(job => job.id === id);
 };

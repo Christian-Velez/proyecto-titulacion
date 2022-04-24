@@ -54,7 +54,8 @@ const ChatScreen = () => {
          toastInfo('No te olvides de configurar tus mensajes predeterminados! ⚙️');
       }
       
-   }, [ defaultMessages, role ]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
    return (
       <>

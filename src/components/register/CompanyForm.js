@@ -141,7 +141,7 @@ const CompanyForm = () => {
                <InputGroup>
                   <Input
                      type={
-                        showPass1 ? 'text' : 'password'
+                        showPass2 ? 'text' : 'password'
                      }
                      size='lg'
                      name='confirmPassword'
