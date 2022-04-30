@@ -86,7 +86,9 @@ const DevRoutes = () => {
 
                         <Route path='technologies/:name' element={ <TechnologyScreen/>} />
 
-                        <Route path='applications' element={ <ApplicationsScreen /> } />
+                        <Route path='applications/' element={ <ApplicationsScreen /> }>
+                           <Route path='id/:id' element={<JobScreen />} />
+                        </Route>
 
                         <Route path='messages/' element={ <ChatScreen /> }>
                            <Route path='id/:id' element={<ConversationScreen />} />

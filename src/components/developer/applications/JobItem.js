@@ -74,7 +74,7 @@ const JobItem = ({ job }) => {
             alignItems='flex-start'
             spacing={5}
          >
-            <ChakraLink as={Link} to={`/dev/jobs/id/${id}`}>
+            <ChakraLink as={Link} to={`/dev/applications/id/${id}`}>
                <Heading fontSize='2xl'>
                   {title}
                </Heading>

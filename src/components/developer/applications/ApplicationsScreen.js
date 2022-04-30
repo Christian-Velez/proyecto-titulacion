@@ -1,27 +1,46 @@
-
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+   useEffect,
+   useMemo,
+   useState,
+} from 'react';
 
 import JobItem from './JobItem';
-import { Flex } from '@chakra-ui/react';
+import {
+   Flex,
+   Heading,
+   HStack,
+   VStack,
+} from '@chakra-ui/react';
 import { startLoadingJobs } from 'actions/developer/jobs';
 import LoadingScreen from 'components/layout/LoadingScreen';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+   useDispatch,
+   useSelector,
+} from 'react-redux';
 import Layout from 'components/layout';
+import { Outlet } from 'react-router-dom';
 
 const ApplicationsScreen = () => {
    const dispatch = useDispatch();
-   
-   const { allJobs } = useSelector(state => state.devJobs);
-   const { id: devId } = useSelector(state => state.auth);
 
+   const { allJobs, isJobSelected } = useSelector(
+      (state) => state.devJobs
+   );
+   const { id: devId } = useSelector(
+      (state) => state.auth
+   );
 
    const filteredJobs = useMemo(
-      () => allJobs.filter(job => job.applicants.includes(devId)),
+      () =>
+         allJobs.filter((job) =>
+            job.applicants.includes(devId)
+         ),
       [allJobs, devId]
    );
 
    // Solo cuando recarga la aplicacion se vuelven a pedir todos los trabajos
-   const [isLoading, setIsLoading] = useState(true);
+   const [isLoading, setIsLoading] =
+      useState(true);
    useEffect(() => {
       if (allJobs.length === 0) {
          Promise.all([
@@ -32,29 +51,67 @@ const ApplicationsScreen = () => {
       } else {
          setIsLoading(false);
       }
-   }, [ allJobs, dispatch ]);
+   }, [allJobs, dispatch]);
 
    return (
-      <Layout 
-         title={ `Mis postulaciones (${filteredJobs.length})`}
-         minH='100vh'
-      >
-         
-         {
-            isLoading 
-               ? <LoadingScreen />
-               :  
-               <Flex
-                  w='full' 
-                  spacing={5}
-                  flexWrap='wrap'
-                  gap={10}
+      <Layout padding={{ base: 0 }} minH='100vh'>
+         {isLoading ? (
+            <LoadingScreen />
+         ) : (
+            
+            
+            <HStack
+               w='full'
+               alignItems='flex-start'
+               justifyContent='flex-start'
+            >
+               <VStack
+                  spacing={10}
+                  justifyContent='flex-start'
+                  alignItems='flex-start'
+                  className='animate__animated animate__fadeIn animate__faster'
+                  maxH={{ 'xl': '100vh' }}
+                  overflowY={{ 'xl': 'scroll' }}    
+                  padding={{ base: 7, lg: 10, '2xl': 20 }}
+                  w={{ base: 'full', 'xl': '75%'}}
+                  display={{ base: isJobSelected && 'none', 'xl': 'flex'}}
                >
-                  {
-                     filteredJobs.map(job => <JobItem key={job.id} job={job} />)
-                  }
+                  <Heading
+                     fontSize={{
+                        base: '2xl',
+                        lg: '3xl',
+                     }}
+                  >
+                     Mis postulaciones (
+                     {filteredJobs.length})
+                  </Heading>
+
+                  <Flex
+                     w='full'
+                     spacing={5}
+                     flexWrap='wrap'
+                     gap={10}
+                  >
+                     {filteredJobs.map((job) => (
+                        <JobItem
+                           key={job.id}
+                           job={job}
+                        />
+                     ))}
+                  </Flex>
+               </VStack>
+
+               <Flex
+                  display={{ base: !isJobSelected && 'none', 'xl': 'flex' }}
+                  maxH={{ 'xl': '100vh'}}
+                  overflowY={{ 'xl': 'scroll'}}  
+                  w={{ base:'full', 'xl': '25%'}}
+                  minW='380px'
+               >
+                  <Outlet />
                </Flex>
-         }
+            </HStack>
+         )}
       </Layout>
    );
 };
