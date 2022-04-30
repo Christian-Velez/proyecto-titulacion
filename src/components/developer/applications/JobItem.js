@@ -13,26 +13,30 @@ import {
    Flex,
    Tag,
    TagLeftIcon,
-   Link as ChakraLink
+   Link as ChakraLink,
 } from '@chakra-ui/react';
-import { RiMoneyDollarCircleFill } from  'react-icons/ri'
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { AiFillTag } from 'react-icons/ai';
 import { startApplyingProcess } from 'actions/developer/jobs';
 
-
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+   Link,
+   useNavigate,
+} from 'react-router-dom';
 
 const JobItem = ({ job }) => {
    const navigate = useNavigate();
-   const { title, company, description, id, category, salary } =
-      job;
    const {
-      img,
-      name,
-      id: companyId,
-   } = company;
+      title,
+      company,
+      description,
+      id,
+      category,
+      salary,
+   } = job;
+   const { img, name, id: companyId } = company;
 
    const dispatch = useDispatch();
 
@@ -55,9 +59,13 @@ const JobItem = ({ job }) => {
          spacing={10}
          padding={10}
          bgColor='gray.50'
-      >  
+      >
          <Flex
-            onClick={ () => navigate(`/dev/search/${companyId}`) }
+            onClick={() =>
+               navigate(
+                  `/dev/search/${companyId}`
+               )
+            }
             cursor='pointer'
          >
             <IconImg
@@ -66,7 +74,6 @@ const JobItem = ({ job }) => {
                boxSize={{ base: '80px' }}
                isRounded
             />
-
          </Flex>
 
          <VStack
@@ -74,34 +81,41 @@ const JobItem = ({ job }) => {
             alignItems='flex-start'
             spacing={5}
          >
-            <ChakraLink as={Link} to={`/dev/applications/id/${id}`}>
+            <ChakraLink
+               as={Link}
+               to={`/dev/applications/id/${id}`}
+            >
                <Heading fontSize='2xl'>
                   {title}
                </Heading>
-
             </ChakraLink>
 
             <HStack w='full'>
-               <Tag borderRadius='full' colorScheme='purple'>
+               <Tag
+                  borderRadius='full'
+                  colorScheme='purple'
+               >
                   <TagLeftIcon as={AiFillTag} />
                   {category}
                </Tag>
-               <Tag borderRadius='full' colorScheme='green'>
-                  <TagLeftIcon as={RiMoneyDollarCircleFill}/>
+               <Tag
+                  borderRadius='full'
+                  colorScheme='green'
+               >
+                  <TagLeftIcon
+                     as={RiMoneyDollarCircleFill}
+                  />
                   {salary}/m
                </Tag>
             </HStack>
 
-            <VStack
-               alignItems='flex-start'
-            >
+            <VStack alignItems='flex-start'>
                <Text
                   isTruncated
                   noOfLines={3}
                   maxW='300px'
                   whiteSpace='wrap'
                   color='brandGray'
-
                >
                   {description}
                </Text>
