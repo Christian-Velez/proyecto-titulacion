@@ -71,8 +71,7 @@ const PodiumTechItem = ({
                      <Text
                         fontSize={{ base: 'xs', xl: 'sm' }}
                      >
-                        {technology.timesRequested} veces
-                        solicitada
+                        {technology.timesRequested} {technology.timesRequested === 1 ? 'vez' : 'veces'} solicitada
                      </Text>
                   </VStack>
                </>
