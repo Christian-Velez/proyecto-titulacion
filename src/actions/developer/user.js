@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { finishLoading, startLoading } from 'actions/ui';
-import { toastSuccess, toastError } from 'helpers/ToastAlert';
+import { toastSuccess, toastError, toastInfo } from 'helpers/ToastAlert';
 import { types } from 'types/types';
 import { getAxiosConfig } from 'utils/getAxiosConfig';
+import { startLoadingConversations } from 'actions/conversations';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -137,4 +138,32 @@ export const startRatingCompany = (ratings, companyId) => {
       }
    }
 
+}
+
+
+
+export const startBlockingCompany = (company) => {
+   return async (dispatch) => {
+      try {
+         
+         dispatch(startLoading());
+         const config = getAxiosConfig();
+         const URL = `${API_URL}/api/developer/blockCompany`;
+         const body = {
+            companyId: company.id
+         }
+
+         const { data } = await axios.post(URL, body, config);
+         console.log(data);
+         await dispatch(startLoadingConversations());
+
+         toastInfo('Conversación bloqueada');
+
+
+      } catch(err) {
+         toastError('Ocurrió un error al tratar de bloquear a la empresa');
+      } finally {
+         dispatch(finishLoading());
+      }
+   }
 }

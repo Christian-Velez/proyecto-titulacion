@@ -2246,7 +2246,7 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.0.tgz#6734f8ebc106a0860dff7f92bf90df193f0935d7"
   integrity sha512-zrsUxjLOKAzdewIDRWy9nsV1GQsKBCWaGwsZQlCgr6/q+vjyZhFgqedLfFBuI9anTPEUT4APq9Mu0SZBTzIcGQ==
 
-"@progress/kendo-drawing@^1.16.3":
+"@progress/kendo-drawing@1.16.3":
   version "1.16.3"
   resolved "https://registry.yarnpkg.com/@progress/kendo-drawing/-/kendo-drawing-1.16.3.tgz#cd01378f69ba98e94995315157dbf0287a576eee"
   integrity sha512-zUh0EjffezxJy4osPVeHflbosdlMk971hYj3zJ8mAHiswUei5UTIn7aAxfHDXu3Fpw2d9WyRi/LkI0xKWNmDRA==
@@ -2258,14 +2258,14 @@
   resolved "https://registry.yarnpkg.com/@progress/kendo-file-saver/-/kendo-file-saver-1.1.1.tgz#4225affb7064fe9e12d3a89f36e00ab6c92deef0"
   integrity sha512-mo0Cw3MLoLcx2bA+Ma/VAxkM9vHSJ4Sg0vgh6U1ZIvPXmnfO8Dgsdiv/475lafyju0kG8KOhl3bcVagCF71glQ==
 
-"@progress/kendo-licensing@^1.2.2":
+"@progress/kendo-licensing@1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@progress/kendo-licensing/-/kendo-licensing-1.2.2.tgz#25df2ac4eac7940f7ed64c6c44940285a40bedb6"
   integrity sha512-DUGwVHmaIFrGkKdO2NjajfNBrLc0Jo0o11WTmo9AkqWzMT+zAOu0D5aghnWGPkPg3e8+T5m9dEZvWPw4eJP4Sw==
   dependencies:
     jsonwebtoken "^8.5.1"
 
-"@progress/kendo-react-pdf@^5.1.0":
+"@progress/kendo-react-pdf@5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-react-pdf/-/kendo-react-pdf-5.1.0.tgz#62edf4f8099d81b71419df07856fb24b15e74477"
   integrity sha512-gx75ekw2oxEGrWKPH4xm2m0FiJEMjbauJC+r0Z4IFUf7GvrwIjU2tNghX4UmtNoumdbAyOherCNTE7ZUYRVTOA==

@@ -8,6 +8,7 @@ import {
    Text,
    Link as ChakraLink,
    VStack,
+   Button,
    useDisclosure,
 } from '@chakra-ui/react';
 import MessageItem from './MessageItem';
@@ -16,13 +17,16 @@ import LoadingScreen from 'components/layout/LoadingScreen';
 import { Link } from 'react-router-dom';
 import MessageInput from './MessageInput';
 import BlockedModal from './BlockedModal';
+import BlockDialog from './BlockDialog';
 
 
 const ConversationScreen = () => {
    const dispatch = useDispatch();
-   const { isOpen, onOpen, onClose } = useDisclosure()
+   const { isOpen, onOpen, onClose } = useDisclosure();
+   const { isOpen: isOpenBlock, onOpen: onOpenBlock, onClose: onCloseBlock } = useDisclosure();
+
    const { id: convId } = useParams();
-   const { id: myId, redirect } = useSelector(state => state.auth);
+   const { id: myId, redirect, role: myRole } = useSelector(state => state.auth);
    const { conversationMessages, selectedConversation, conversations, socket } = useSelector(state => state.conversations);
    const [isLoading, setIsLoading] = useState(false);
 
@@ -111,7 +115,6 @@ const ConversationScreen = () => {
       }
    }, [ socket, selectedConversation ]);
 
-
    useEffect(() => {
       if(arrivalMessage) {
          dispatch(addMessage(arrivalMessage));
@@ -122,9 +125,11 @@ const ConversationScreen = () => {
       return <LoadingScreen />;
    }
 
+   
    return (
       <>
          { blocked && <BlockedModal isOpen={isOpen} onClose={onClose} /> }
+         { <BlockDialog isOpen={isOpenBlock} onClose={onCloseBlock} user={member}/> }
          <VStack
             w='full'
             h='100vh'
@@ -165,6 +170,13 @@ const ConversationScreen = () => {
 
                   <Text>{member.line || member.location }</Text>
                </VStack>
+
+               {
+                  myRole === 'Developer' && !blocked &&
+                  <Button onClick={onOpenBlock}>
+                     Bloquear
+                  </Button>
+               }
             </HStack>
 
 
