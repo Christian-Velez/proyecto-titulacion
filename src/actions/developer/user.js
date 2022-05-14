@@ -153,8 +153,7 @@ export const startBlockingCompany = (company) => {
             companyId: company.id
          }
 
-         const { data } = await axios.post(URL, body, config);
-         console.log(data);
+         await axios.post(URL, body, config);
          await dispatch(startLoadingConversations());
 
          toastInfo('Conversación bloqueada');

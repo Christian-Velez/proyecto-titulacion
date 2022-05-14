@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toastWarning } from "helpers/ToastAlert";
 import { types } from "types/types"
 import { getAxiosConfig } from "utils/getAxiosConfig";
 
@@ -86,6 +87,13 @@ export const startSendingMessage = (params) => {
 
       } catch(err) {
          console.log(err);
+
+         if(err.message === 'Request failed with status code 403') {
+            dispatch(startLoadingConversations())
+               .then(() => {
+                  toastWarning('Parece que la conversación fue bloqueada');
+               })
+         }
       }
    }
 }
