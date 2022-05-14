@@ -158,6 +158,7 @@ export const startBlockingCompany = (company) => {
 
          toastInfo('Conversación bloqueada');
 
+         
 
       } catch(err) {
          toastError('Ocurrió un error al tratar de bloquear a la empresa');
