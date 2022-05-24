@@ -218,16 +218,15 @@ export const startSavingDefaultMessages = (params) => {
    return async(dispatch, getState) => {
       try {
          dispatch(startLoading());
-
          const body = {
             defaultMessages: { ...params }
          }
 
          const { id } = getState().auth;
          const config = getAxiosConfig();
-         const URL = `${API_URL}/api/company/${id}`;
+         const URL = `${API_URL}/api/company/defaultMessages/${id}`;
 
-         await axios.put(URL, body, config);
+         await axios.post(URL, body, config);
          toastSuccess('Configuración guardada ⚙️');
          dispatch(startSettingCompanyInfo());
 

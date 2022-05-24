@@ -34,9 +34,9 @@ const ConfigurationScreen = () => {
       formValues;
 
    const handleSave = () => {
-      if (!acceptPost || !hireDev || !fireDev) {
+      if (!acceptPost && !hireDev && !fireDev) {
          return setError(
-            'Completa todos los campos requeridos.'
+            'Completa al menos un campo'
          );
       }
 
@@ -61,6 +61,7 @@ const ConfigurationScreen = () => {
                w={{ base: 'full', '2xl': '30%' }}
             >
                <BasicInput
+                  isRequired={false}
                   text='Al aceptar una postulación'
                   name='acceptPost'
                   placeholder='e. g: Hola, hemos aceptado tu postulación...!'
@@ -69,6 +70,7 @@ const ConfigurationScreen = () => {
                />
 
                <BasicInput
+                  isRequired={false}
                   text='Al contratar a un programador'
                   name='hireDev'
                   placeholder='e. g: Hola, bienvenido a...!'
@@ -77,6 +79,7 @@ const ConfigurationScreen = () => {
                />
 
                <BasicInput
+                  isRequired={false}
                   text='Al despedir a un programador'
                   name='fireDev'
                   placeholder='e. g: Lo sentimos...!'
