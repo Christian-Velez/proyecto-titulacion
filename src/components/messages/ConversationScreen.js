@@ -29,6 +29,7 @@ const ConversationScreen = () => {
    const { id: myId, redirect, role: myRole } = useSelector(state => state.auth);
    const { conversationMessages, selectedConversation, conversations, socket } = useSelector(state => state.conversations);
    const [isLoading, setIsLoading] = useState(false);
+   const { employees } = useSelector(state => state.companyInfo);
 
 
 
@@ -125,6 +126,7 @@ const ConversationScreen = () => {
       return <LoadingScreen />;
    }
 
+   const isMyEmployee = employees.some(item => item.employee.id === member.id);
    
    return (
       <>
@@ -175,6 +177,13 @@ const ConversationScreen = () => {
                   myRole === 'Developer' && !blocked &&
                   <Button onClick={onOpenBlock}>
                      Bloquear
+                  </Button>
+               }
+
+               {
+                  myRole === 'Company' && isMyEmployee && !blocked &&
+                  <Button onClick={onOpenBlock}>
+                     Despedir
                   </Button>
                }
             </HStack>

@@ -1,12 +1,12 @@
 
 
 import PropTypes from 'prop-types';
-import { Search2Icon } from '@chakra-ui/icons';
+import { Search2Icon, SearchIcon } from '@chakra-ui/icons';
 import {
-   Button,
    FormControl,
    FormLabel,
    HStack,
+   IconButton,
    Input,
    InputGroup,
    InputLeftElement,
@@ -134,7 +134,11 @@ const SearchForm = ({ setCompanies, setFirstSearch }) => {
                </FormControl>
 
 
-               <Button type='submit' display='none'></Button>
+               <IconButton 
+                  aria-label='Search developers'
+                  icon={<SearchIcon />} 
+                  type='submit'
+               />
             </HStack>
          </form>
       </VStack>

@@ -22,6 +22,7 @@ import { MdCheckCircle, MdOutlineDescription } from 'react-icons/md';
 import TechnologyMainInfo from './TechnologyMainInfo';
 import InfoSection from './InfoSection';
 import { GiComputing } from 'react-icons/gi';
+import { VscRepoForked } from 'react-icons/vsc'
 import { GoTerminal } from 'react-icons/go';
 import Layout from 'components/layout';
 
@@ -79,7 +80,7 @@ const TechnologyScreen = () => {
                   </List>
             </InfoSection>
 
-            <InfoSection icon={GiComputing}>
+            <InfoSection icon={VscRepoForked}>
                   <Heading fontSize={{ base: 'xl', lg: '2xl'}}>Relacionadas</Heading>
                   <VStack spacing={{ base: 3}} alignItems='flex-start'>
                      {

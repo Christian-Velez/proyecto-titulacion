@@ -6,9 +6,7 @@ import {
    Flex,
    Heading,
    HStack,
-   IconButton,
    Text,
-   useDisclosure,
    VStack,
 } from '@chakra-ui/react';
 import {
@@ -18,11 +16,8 @@ import {
    useDispatch,
    useSelector,
 } from 'react-redux';
-import { SettingsIcon } from '@chakra-ui/icons';
 import { setSocket, startLoadingConversations } from 'actions/conversations';
 import ConversationItem from './ConversationItem';
-import ChatConfigModal from './ChatConfigModal';
-import { toastInfo } from 'helpers/ToastAlert';
 import { io } from 'socket.io-client';
 
 
@@ -30,10 +25,8 @@ const SOCKET_URL = 'https://devconnect-socket.herokuapp.com/';
 
 const ChatScreen = () => {
    const dispatch = useDispatch();
-   const { isOpen, onOpen, onClose } = useDisclosure();
    const { isConversationSelected, conversations, socket } = useSelector(state => state.conversations);
-   const { role, id } = useSelector(state => state.auth);
-   const { defaultMessages = {} } = useSelector(state => state.companyInfo);
+   const { id } = useSelector(state => state.auth);
 
    useEffect(() => {
       socket?.emit('addUser', id);
@@ -48,18 +41,8 @@ const ChatScreen = () => {
       
    }, [ dispatch ]);
 
-   useEffect(() => {
-      const isEmpty = Object.keys(defaultMessages).length === 0;
-      if(role === 'Company' && isEmpty) {
-         toastInfo('No te olvides de configurar tus mensajes predeterminados! ⚙️');
-      }
-      
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
-
    return (
       <>
-         { role === 'Company' &&  <ChatConfigModal isOpen={isOpen} onClose={onClose}/> } 
          <HStack
             maxH='100vh'
             w='full'
@@ -98,17 +81,6 @@ const ChatScreen = () => {
                   <Heading fontSize='3xl'>
                      Mensajes
                   </Heading>
-
-                  {
-                     role === 'Company' && 
-                     <IconButton
-                        aria-label='Configuracion'
-                        icon={<SettingsIcon />}
-                        onClick={ onOpen }
-                        variant='ghost'
-                     />
-
-                  }
                </HStack>
 
                <Divider />

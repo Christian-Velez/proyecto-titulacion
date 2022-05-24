@@ -20,8 +20,12 @@ export const toastSuccess = (text) => {
    toast.success(text, toastProps);
 };
 
-export const toastInfo = (text) => {
-   toast.info(text, toastProps);
+export const toastInfo = (text, toastP) => {
+   if(toastP) {
+      toast.info(text, toastP);
+   } else {
+      toast.info(text, toastProps);
+   }
 };
 
 export const toastWarning = (text) => {

@@ -18,6 +18,7 @@ import {
    FaGitAlt,
    FaUsers,
 } from 'react-icons/fa';
+import { BsFillGearFill } from 'react-icons/bs';
 
 
 const manageLinks = {
@@ -148,6 +149,12 @@ const manageLinks = {
          name: 'Buscador',
          icon: <Icon as={BiSearch} h={5} w={5} />,
       },
+      {
+         index: 9,
+         path: '/co/config',
+         name: 'Configuración',
+         icon: <Icon as={BsFillGearFill} h={5} w={5} />,
+      }
    ],
 };
 

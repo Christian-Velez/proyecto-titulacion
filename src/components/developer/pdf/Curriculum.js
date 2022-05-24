@@ -11,7 +11,6 @@ import {
 } from '@react-pdf/renderer';
 import Roboto from './roboto.ttf';
 
-
 Font.register({
    family: 'Roboto',
    src: Roboto,
@@ -73,22 +72,129 @@ const Curriculum = ({ devInfo }) => {
                   }}
                />
 
-               <Text style={{ margin: '5px 0px' }}>
+               <Text
+                  style={{ margin: '5px 0px' }}
+               >
                   {devInfo.name}
                </Text>
 
-               <Text style={{ ...fonts.description, margin: '5px auto' }}>
+               <Text
+                  style={{
+                     ...fonts.description,
+                     margin: '5px auto',
+                  }}
+               >
                   {devInfo.location}
                </Text>
 
-               <Text style={{ marginTop: '15px', marginBottom: '5px' , fontSize: 14 }}>Acerca de mí </Text>
+               <Text
+                  style={{
+                     marginTop: '15px',
+                     marginBottom: '5px',
+                     fontSize: 14,
+                  }}
+               >
+                  Acerca de mí{' '}
+               </Text>
                <Text style={fonts.description}>
                   {devInfo.description}
                </Text>
             </View>
 
             <View style={styles.right}>
-               <Text style={{ fontSize: 15 }}>Tecnologías</Text>
+               {devInfo.education.length > 0 && (
+                  <View
+                     style={{ marginTop: '20px' }}
+                  >
+                     <Text
+                        style={{
+                           fontSize: 15,
+                           marginBottom: '10px',
+                        }}
+                     >
+                        Educación
+                     </Text>
+
+                     <View>
+                        {devInfo.education.map(
+                           (education) => {
+                              const {
+                                 title,
+                                 institution,
+                                 year,
+                                 _id,
+                              } = education;
+
+                              return (
+                                 <View key={_id}>
+                                    <Text
+                                       style={
+                                          fonts.description
+                                       }
+                                    >
+                                       - {title}.{' '}
+                                       {
+                                          institution
+                                       }{' '}
+                                       ({year}).
+                                    </Text>
+                                 </View>
+                              );
+                           }
+                        )}
+                     </View>
+                  </View>
+               )}
+
+               {devInfo.certifications.length >
+                  0 && (
+                  <View
+                     style={{ marginTop: '20px' }}
+                  >
+                     <Text
+                        style={{
+                           fontSize: 15,
+                           marginBottom: '10px',
+                        }}
+                     >
+                        Licencias y
+                        certificaciones
+                     </Text>
+
+                     <View>
+                        {devInfo.certifications.map(
+                           (certification) => {
+                              const {
+                                 title,
+                                 institution,
+                                 year,
+                                 _id,
+                              } = certification;
+
+                              return (
+                                 <View key={_id}>
+                                    <Text
+                                       style={
+                                          fonts.description
+                                       }
+                                    >
+                                       - {title}.{' '}
+                                       {
+                                          institution
+                                       }{' '}
+                                       ({year}).
+                                    </Text>
+                                 </View>
+                              );
+                           }
+                        )}
+                     </View>
+                  </View>
+               )}
+
+               <Text style={{ fontSize: 15, marginTop: '20px' }}>
+                  Tecnologías
+               </Text>
                {devInfo.technologies.map(
                   (item) => {
                      const {
@@ -124,7 +230,13 @@ const Curriculum = ({ devInfo }) => {
                                  }}
                               />
                            )}
-                           <Text style={{ ...fonts.description, marginLeft: '5px' }}>
+                           <Text
+                              style={{
+                                 ...fonts.description,
+                                 marginLeft:
+                                    '5px',
+                              }}
+                           >
                               {name}{' '}
                               {yearsOfExperience}{' '}
                               {yearsOfExperience ===
@@ -139,7 +251,10 @@ const Curriculum = ({ devInfo }) => {
                )}
 
                <Text
-                  style={{ marginTop: '20px', fontSize: 15}}
+                  style={{
+                     marginTop: '20px',
+                     fontSize: 15,
+                  }}
                >
                   Proyectos
                </Text>
@@ -153,21 +268,37 @@ const Curriculum = ({ devInfo }) => {
                      } = project;
 
                      return (
-                        <View key={_id} style={{ marginTop: '10px'}} >
-                           <Text style={fonts.description}> - {title} </Text>
-                           <Text style={{
-                              ...fonts.description,
-                              marginLeft: '10px'
-                           }}>
+                        <View
+                           key={_id}
+                           style={{
+                              marginTop: '10px',
+                           }}
+                        >
+                           <Text
+                              style={
+                                 fonts.description
+                              }
+                           >
+                              {' '}
+                              - {title}{' '}
+                           </Text>
+                           <Text
+                              style={{
+                                 ...fonts.description,
+                                 marginLeft:
+                                    '10px',
+                              }}
+                           >
                               {linkGH
                                  ? `Repositorio: ${linkGH}`
                                  : ''}
                            </Text>
-                           <Text style={{
-                              ...fonts.description,
-                              marginLeft: '10px'
-                           }}
-                           
+                           <Text
+                              style={{
+                                 ...fonts.description,
+                                 marginLeft:
+                                    '10px',
+                              }}
                            >
                               {linkDemo
                                  ? `Demo/descarga: ${linkDemo}`
@@ -176,74 +307,6 @@ const Curriculum = ({ devInfo }) => {
                         </View>
                      );
                   }
-               )}
-
-               {devInfo.education.length > 0 && (
-                  <View
-                     style={{ marginTop: '20px' }}
-                  >
-                     <Text style={{ fontSize: 15, marginBottom: '10px' }}
-                     
-                     >Educación</Text>
-
-                     <View>
-                        {devInfo.education.map(
-                           (education) => {
-                              const {
-                                 title,
-                                 institution,
-                                 year,
-                                 _id,
-                              } = education;
-
-                              return (
-                                 <View key={_id}>
-                                    <Text style={fonts.description}>
-                                       - {title}.{' '}
-                                       {
-                                          institution
-                                       }{' '}
-                                       ({year}).
-                                    </Text>
-                                 </View>
-                              );
-                           }
-                        )}
-                     </View>
-                  </View>
-               )}
-
-               {devInfo.certifications.length > 0 && (
-                  <View
-                     style={{ marginTop: '20px' }}
-                  >
-                     <Text style={{ fontSize: 15, marginBottom: '10px' }}>Licencias y certificaciones</Text>
-
-                     <View>
-                        {devInfo.certifications.map(
-                           (certification) => {
-                              const {
-                                 title,
-                                 institution,
-                                 year,
-                                 _id,
-                              } = certification;
-
-                              return (
-                                 <View key={_id}>
-                                    <Text style={fonts.description}>
-                                       - {title}.{' '}
-                                       {
-                                          institution
-                                       }{' '}
-                                       ({year}).
-                                    </Text>
-                                 </View>
-                              );
-                           }
-                        )}
-                     </View>
-                  </View>
                )}
             </View>
          </Page>
