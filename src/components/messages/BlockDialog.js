@@ -11,8 +11,8 @@ import {
    Button,
    ModalCloseButton,
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { startBlockingCompany } from 'actions/developer/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { startBlockingUser } from 'actions/developer/user';
 
 const BlockDialog = ({
    isOpen,
@@ -21,9 +21,15 @@ const BlockDialog = ({
 }) => {
    const dispatch = useDispatch();
    const handleBlock = () => {
-      dispatch(startBlockingCompany(user));
+      dispatch(startBlockingUser(user));
       onClose();
    };
+   const { role } = useSelector(state => state.auth);
+
+   const msg = 
+      (role === 'Company') 
+      ? "Hacerlo terminará completamente con la comunicación, impidiendo que puedas seguir hablando con el usuario por este medio."
+      : "Hacerlo ocasionará que te elimines de su lista de candidatos/contratados y que el chat quede inhabilitado."
 
    return (
       <Modal
@@ -38,7 +44,7 @@ const BlockDialog = ({
             <ModalBody>
                <Text fontSize='lg'>
                   ¿Estas seguro de que quieres
-                  bloquear a la empresa{' '}
+                  bloquear a {' '}
                   <span
                      style={{ color: '#38B2AC' }}
                   >
@@ -48,10 +54,7 @@ const BlockDialog = ({
                </Text>
 
                <Text fontSize='lg' marginY={5}>
-                  Hacerlo ocasionará que te
-                  elimines de su lista de
-                  candidatos/contratados y que el chat quede
-                  inhabilitado.
+                  { msg }
                </Text>
             </ModalBody>
             <ModalFooter>

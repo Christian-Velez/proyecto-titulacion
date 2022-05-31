@@ -26,11 +26,9 @@ const ConversationScreen = () => {
    const { isOpen: isOpenBlock, onOpen: onOpenBlock, onClose: onCloseBlock } = useDisclosure();
 
    const { id: convId } = useParams();
-   const { id: myId, redirect, role: myRole } = useSelector(state => state.auth);
+   const { id: myId, redirect } = useSelector(state => state.auth);
    const { conversationMessages, selectedConversation, conversations, socket } = useSelector(state => state.conversations);
    const [isLoading, setIsLoading] = useState(false);
-   const { employees } = useSelector(state => state.companyInfo);
-
 
 
    const scrollToLastMessage = () => {
@@ -126,7 +124,6 @@ const ConversationScreen = () => {
       return <LoadingScreen />;
    }
 
-   const isMyEmployee = employees.some(item => item.employee.id === member.id);
    
    return (
       <>
@@ -174,16 +171,9 @@ const ConversationScreen = () => {
                </VStack>
 
                {
-                  myRole === 'Developer' && !blocked &&
+                  !blocked &&
                   <Button onClick={onOpenBlock}>
                      Bloquear
-                  </Button>
-               }
-
-               {
-                  myRole === 'Company' && isMyEmployee && !blocked &&
-                  <Button onClick={onOpenBlock}>
-                     Despedir
                   </Button>
                }
             </HStack>

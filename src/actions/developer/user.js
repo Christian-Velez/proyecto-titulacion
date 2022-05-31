@@ -166,15 +166,21 @@ export const startRatingCompany = (ratings, companyId) => {
 
 
 
-export const startBlockingCompany = (company) => {
-   return async (dispatch) => {
+export const startBlockingUser = (user) => {
+   return async (dispatch, getState) => {
       try {
-         
          dispatch(startLoading());
+
+         const conversationId 
+            = getState().conversations.selectedConversation.id;
+
          const config = getAxiosConfig();
-         const URL = `${API_URL}/api/developer/blockCompany`;
+
+         const URL = `${API_URL}/api/conversation/blockConversation`;
          const body = {
-            companyId: company.id
+            userId: user.id,
+            kindToBlock: user.kind,
+            conversationId
          }
 
          await axios.post(URL, body, config);

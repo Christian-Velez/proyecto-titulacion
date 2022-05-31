@@ -10,15 +10,24 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
+import { startSettingCompanyInfo } from 'actions/company/user';
 import Layout from 'components/layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CompanyJob from './CompanyJob';
 
 const CompanyOffersScreen = () => {
+   const dispatch = useDispatch();
    const navigate = useNavigate();
+
+   useEffect(() => {
+      dispatch(
+         startSettingCompanyInfo()
+      )
+   }, [dispatch]);
+
    const { jobs } = useSelector(state => state.companyInfo);
 
    return (

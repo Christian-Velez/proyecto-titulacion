@@ -33,6 +33,7 @@ const JobScreenContent = ({ job }) => {
             paddingY={{ base: 20 }}
             paddingX={{ base: 7, lg: 20, xl: 5, '2xl': 7 }}
             bgColor='gray.50'
+            minH='100vh'
          >  
             <JobMainInfo jobInfo={job}/>
             <JobBody jobInfo={job} />
