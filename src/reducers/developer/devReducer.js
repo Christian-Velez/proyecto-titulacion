@@ -17,7 +17,8 @@ const initialDevInfo = {
    qualifications: [],
    softskills: [],
    technologies: [],
-   img: ''
+   img: '',
+   companies: [],
 };
 
 
@@ -38,6 +39,12 @@ export const devReducer = (state = initialDevInfo, action) => {
                ...state.technologies,
                action.payload
             ]
+         }
+
+      case types.setDevCompanies:
+         return {
+            ...state,
+            companies: [ ...action.payload ]
          }
    
       default:

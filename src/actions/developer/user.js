@@ -32,6 +32,30 @@ export const setDevInfo = (data) => {
    };
 };
 
+export const startGettingDevCompanies = (devId) => {
+   return async(dispatch, getState) => {
+      try {
+         const { id } = getState().auth;
+         const URL = `${API_URL}/api/developer/getDevCompanies/${id}`;
+         const config = getAxiosConfig();
+         
+         const { data } = await axios.get(URL, config);
+         const { companies } = data || {};
+         dispatch(setDevCompanies(companies));
+
+      } catch(err) {
+         console.log('error, ', err);
+      }
+   }
+}
+
+export const setDevCompanies = (data) => {
+   return {
+      type: types.setDevCompanies,
+      payload: data
+   }
+}
+
 
 // UPDATE
 export const startUpdatingDevInfo = ( newDevInfo, navigate ) => {

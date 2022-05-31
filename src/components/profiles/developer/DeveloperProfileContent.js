@@ -41,7 +41,7 @@ const DeveloperProfileContent = ({ devInfo }) => {
          )}
 
          {/* Body -> Información extra: calificaciones, proyectos, etc*/}
-         <Body devInfo={devInfo} />
+         <Body devInfo={devInfo} isMyProfile={isMyProfile}/>
       </Layout>
    );
 };

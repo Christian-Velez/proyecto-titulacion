@@ -35,6 +35,8 @@ export const types = {
    // Developer
    addNewTechToDevStack: '[Dev] Add new tech to dev stack',
    setDevInfo: '[Dev] Set developer user info: name, id, etc.',
+   setDevCompanies: '[Dev] Set companies',
+
    setAllJobs: '[DevJobs] Set all jobs in stored data',
    updateJobInfo: '[DevJobs] Update one job info',
    setIsJobSelected: '[DevJobs] Set true or false job isselect',

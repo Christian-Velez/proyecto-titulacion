@@ -1,5 +1,4 @@
-
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import TechnologiesCards from './TechnologiesCards';
 import ProjectsCards from './ProjectsCards';
 import CertificationsCards from './CertificationsCards';
@@ -16,21 +15,36 @@ import {
 } from '@chakra-ui/react';
 
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RateModal from './RateModal';
 import { getProm } from '../getProm';
 import { Rating } from 'react-simple-star-rating';
-import './styles.css'
+import './styles.css';
+import { startGettingDevCompanies } from 'actions/developer/user';
+import DevCompanies from './DevCompanies';
 
-
-const Body = ({ devInfo }) => {
+const Body = ({ devInfo, isMyProfile }) => {
+   const dispatch = useDispatch();
    const { id: devId, qualifications } = devInfo;
    const { id: companyId } = useSelector(state => state.companyInfo);
    const { employees } = useSelector(state => state.companyInfo);
-   const { isOpen, onOpen, onClose } = useDisclosure();
+   const { isOpen, onOpen, onClose } =
+      useDisclosure();
 
-   const isMyEmployee = employees.some(item => item.employee.id === devId);
-   const alreadyRated = qualifications.some(item => item.ratedBy === companyId);
+   const { companies } = useSelector(state => state.devInfo);
+   useEffect(() => {
+      if(isMyProfile) {
+         dispatch(startGettingDevCompanies(devId));
+      }
+
+   }, [isMyProfile, devId, dispatch])
+
+   const isMyEmployee = employees.some(
+      (item) => item.employee.id === devId
+   );
+   const alreadyRated = qualifications.some(
+      (item) => item.ratedBy === companyId
+   );
 
    const devRatings = useMemo(() => {
       const initialValue = {
@@ -40,29 +54,28 @@ const Body = ({ devInfo }) => {
          conflictos: [],
       };
 
-      qualifications.forEach(element => {
+      qualifications.forEach((element) => {
          const { ratings } = element;
          const keys = Object.keys(ratings);
-         
-         keys.forEach(key => {
+
+         keys.forEach((key) => {
             initialValue[key]?.push(ratings[key]);
          });
       });
       return initialValue;
+   }, [qualifications]);
 
-   }, [ qualifications ]);
-
-   const responsable = 
+   const responsable =
       devRatings.responsable.length === 0
          ? 0
          : getProm(devRatings.responsable);
 
-   const comprometido = 
-      devRatings.comprometido.length === 0 
-         ? 0 
+   const comprometido =
+      devRatings.comprometido.length === 0
+         ? 0
          : getProm(devRatings.comprometido);
 
-   const cooperativo = 
+   const cooperativo =
       devRatings.cooperativo.length === 0
          ? 0
          : getProm(devRatings.cooperativo);
@@ -74,14 +87,45 @@ const Body = ({ devInfo }) => {
 
    const config = {
       readonly: true,
-      size: 20
-   }
+      size: 20,
+   };
 
    return (
       <>
          {
-            isMyEmployee && <RateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} devInfo={devInfo}/>
+            isMyProfile && companies?.length > 0 &&
+            <>
+               <Divider />
+               <VStack w='full' alignItems='flex-start'>
+                  <Heading
+                     fontSize={{
+                        base: 'lg',
+                        '2xl': 'xl',
+                     }}
+                  >
+                     Empresas con las que trabajas ({companies.length})
+                  </Heading>
+                  <Text
+                     color='gray.600'
+                     fontSize={{ base: 'sm', xl: 'md' }}
+                  >
+                     (Solo tú puedes ver esta
+                     información)
+                  </Text>
+                  <DevCompanies companies={companies} />
+               </VStack>
+            </>
          }
+
+
+         {isMyEmployee && (
+            <RateModal
+               isOpen={isOpen}
+               onOpen={onOpen}
+               onClose={onClose}
+               devInfo={devInfo}
+            />
+         )}
          <VStack
             w='full'
             alignItems='flex-start'
@@ -89,17 +133,32 @@ const Body = ({ devInfo }) => {
          >
             <Divider />
             <VStack
-               w={{ base: 'full', xl: '50%', '2xl': '40%' }}
+               w={{
+                  base: 'full',
+                  xl: '50%',
+                  '2xl': '40%',
+               }}
                alignItems='flex-start'
-            >  
+            >
                <HStack spacing={5}>
-                  <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
-                     Calificaciones ({qualifications.length})
+                  <Heading
+                     fontSize={{
+                        base: 'lg',
+                        '2xl': 'xl',
+                     }}
+                  >
+                     Calificaciones (
+                     {qualifications.length})
                   </Heading>
-                  { 
-                     isMyEmployee && !alreadyRated &&
-                     (<Button colorScheme='brandPrimaryPurple' onClick={onOpen}> Calificar </Button>)
-                  }
+                  {isMyEmployee && !alreadyRated && (
+                     <Button
+                        colorScheme='brandPrimaryPurple'
+                        onClick={onOpen}
+                     >
+                        {' '}
+                        Calificar{' '}
+                     </Button>
+                  )}
                </HStack>
 
                <VStack w='full' p={5}>
@@ -107,8 +166,8 @@ const Body = ({ devInfo }) => {
                      w='full'
                      justifyContent='space-between'
                   >
-                     <Text> Responsable </Text> 
-                     <Rating 
+                     <Text> Responsable </Text>
+                     <Rating
                         {...config}
                         initialValue={responsable}
                      />
@@ -119,9 +178,11 @@ const Body = ({ devInfo }) => {
                      justifyContent='space-between'
                   >
                      <Text> Comprometido </Text>
-                     <Rating 
+                     <Rating
                         {...config}
-                        initialValue={comprometido}
+                        initialValue={
+                           comprometido
+                        }
                      />
                   </HStack>
 
@@ -130,7 +191,7 @@ const Body = ({ devInfo }) => {
                      justifyContent='space-between'
                   >
                      <Text> Cooperativo </Text>
-                     <Rating 
+                     <Rating
                         {...config}
                         initialValue={cooperativo}
                      />
@@ -140,8 +201,10 @@ const Body = ({ devInfo }) => {
                      w='full'
                      justifyContent='space-between'
                   >
-                     <Text>Manejo de conflictos</Text>
-                     <Rating 
+                     <Text>
+                        Manejo de conflictos
+                     </Text>
+                     <Rating
                         {...config}
                         initialValue={conflictos}
                      />
@@ -150,59 +213,119 @@ const Body = ({ devInfo }) => {
             </VStack>
 
             <Divider />
-            <VStack w='full' alignItems='flex-start'>
-               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+            <VStack
+               w='full'
+               alignItems='flex-start'
+            >
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
                   Tecnologías
                </Heading>
 
-               <TechnologiesCards devInfo={devInfo}/>
+               <TechnologiesCards
+                  devInfo={devInfo}
+               />
             </VStack>
 
             <Divider />
-            <VStack w='full' alignItems='flex-start'>
-               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+            <VStack
+               w='full'
+               alignItems='flex-start'
+            >
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
                   Proyectos
                </Heading>
-               <Text color='gray.600' fontSize={{ base: 'sm', xl:'md'}}> Los links proporcionados son externos a la plataforma y responsabilidad del desarrollador que los registra en su perfil. No se garantiza la seguridad al hacer click.</Text>
+               <Text
+                  color='gray.600'
+                  fontSize={{
+                     base: 'sm',
+                     xl: 'md',
+                  }}
+               >
+                  {' '}
+                  Los links proporcionados son
+                  externos a la plataforma y
+                  responsabilidad del
+                  desarrollador que los registra
+                  en su perfil. No se garantiza la
+                  seguridad al hacer click.
+               </Text>
 
-               <ProjectsCards devInfo={devInfo}/>
+               <ProjectsCards devInfo={devInfo} />
             </VStack>
 
             <Divider />
-            <VStack w='full' alignItems='flex-start'>
-               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+            <VStack
+               w='full'
+               alignItems='flex-start'
+            >
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
                   Educación
                </Heading>
-               
-               <EducationCards devInfo={devInfo}/>
+
+               <EducationCards
+                  devInfo={devInfo}
+               />
             </VStack>
 
             <Divider />
-            <VStack w='full' alignItems='flex-start'>
-               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+            <VStack
+               w='full'
+               alignItems='flex-start'
+            >
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
                   Licencias y certificaciones
                </Heading>
-               
-               <CertificationsCards devInfo={devInfo}/>
+
+               <CertificationsCards
+                  devInfo={devInfo}
+               />
             </VStack>
 
             <Divider />
-            <VStack w='full' alignItems='flex-start'>
-               <Heading fontSize={{ base: 'lg', '2xl': 'xl' }}>
+            <VStack
+               w='full'
+               alignItems='flex-start'
+            >
+               <Heading
+                  fontSize={{
+                     base: 'lg',
+                     '2xl': 'xl',
+                  }}
+               >
                   Mis soft skills
                </Heading>
-            
-               <SoftskillsCards devInfo={devInfo}/>
+
+               <SoftskillsCards
+                  devInfo={devInfo}
+               />
             </VStack>
          </VStack>
       </>
-
    );
 };
 
-
 Body.propTypes = {
-   devInfo: PropTypes.object
+   devInfo: PropTypes.object,
 };
 
 export default Body;
