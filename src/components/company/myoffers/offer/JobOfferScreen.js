@@ -13,7 +13,6 @@ import Layout from 'components/layout';
 import { getDevReqPercentage } from 'helpers/company/getDevReqPercentage';
 import { findJobById } from 'helpers/findJobById';
 import {
-   useDispatch,
    useSelector,
 } from 'react-redux';
 import {
@@ -21,15 +20,11 @@ import {
    useParams,
 } from 'react-router-dom';
 import ApplicantItem from './ApplicantItem';
-import { startSettingCompanyInfo } from 'actions/company/user';
 import IconImg from 'components/layout/IconImg';
 
 const JobOfferScreen = () => {
-   const dispatch = useDispatch();
    useScrollToTop();
-   const { loading } = useSelector(
-      (state) => state.ui
-   );
+   
    const { jobs: allJobs } = useSelector(
       (state) => state.companyInfo
    );
@@ -45,6 +40,7 @@ const JobOfferScreen = () => {
       active,
       applicants,
       techsRequired,
+      rejectedUsers,
    } = job;
 
    // Ordena a los postulados por el porcentaje de requerimientos cumplidos
@@ -77,8 +73,8 @@ const JobOfferScreen = () => {
          <VStack alignItems='flex-start' spacing={5}>
             <Heading
                fontSize={{
-                  base: '2xl',
-                  lg: '3xl',
+                  base: '3xl',
+                  lg: '4xl',
                }}
             >
                {title}
@@ -121,19 +117,8 @@ const JobOfferScreen = () => {
                   lg: '2xl',
                }}
             >
-               {' '}
-               Postulados{' '}
+               Postulados
             </Heading>
-            <Button
-               onClick={() =>
-                  dispatch(
-                     startSettingCompanyInfo()
-                  )
-               }
-               isLoading={loading}
-            >
-               Actualizar
-            </Button>
          </HStack>
 
          <Flex
@@ -155,6 +140,41 @@ const JobOfferScreen = () => {
                   <ApplicantItem
                      key={app.id}
                      applicant={app}
+                  />
+               ))
+            )}
+         </Flex>
+
+         <HStack>
+            <Heading
+               fontSize={{
+                  base: 'xl',
+                  lg: '2xl',
+               }}
+            >
+               Rechazados
+            </Heading>
+         </HStack>
+
+         <Flex
+            w='full'
+            flexWrap='wrap'
+            gap={10}
+            justifyContent={{
+               base: 'center',
+               md: 'flex-start',
+            }}
+         >
+            {rejectedUsers.length === 0 ? (
+               <Text margin={10}>
+                  Sin entradas.
+               </Text>
+            ) : (
+               rejectedUsers.map((user) => (
+                  <ApplicantItem
+                     key={user.id}
+                     applicant={user}
+                     rejected
                   />
                ))
             )}

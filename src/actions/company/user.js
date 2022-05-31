@@ -93,15 +93,17 @@ export const updateCompanyInfo = (data) => {
 
 
 // Descartar a programador de "por contratar"
-export const startDiscartingApplicant = (relationId, devId) => {
+export const startDiscartingApplicant = (relationId, devId, jobId) => {
    return async(dispatch) => {
       try {
          dispatch(startLoading());
 
          const body = {
             relationId,
-            devId
+            devId,
+            jobId
          };
+         
          const config = getAxiosConfig();
          const URL = `${API_URL}/api/company/discardDeveloper`;
          await axios.post(URL, body, config);

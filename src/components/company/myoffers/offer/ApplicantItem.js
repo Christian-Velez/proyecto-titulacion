@@ -23,7 +23,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 
 
-const ApplicantItem = ({ applicant }) => {
+const ApplicantItem = ({ applicant, rejected }) => {
    const dispatch = useDispatch();
    const { id: jobId } = useParams();
 
@@ -75,24 +75,31 @@ const ApplicantItem = ({ applicant }) => {
             </HStack>
          </VStack>
 
-         <VStack w='full'>
-            <Text> Requerimientos ({percentage || 0} %)</Text>
-            <Progress value={percentage} w='80%' size='xs' colorScheme={colorScheme} />
-         </VStack>
+         
 
 
          
+         {
+            !rejected && 
+            <>
+               <VStack w='full'>
+                  <Text> Requerimientos ({percentage || 0} %)</Text>
+                  <Progress value={percentage} w='80%' size='xs' colorScheme={colorScheme} />
+               </VStack>
 
-         <HStack>
-            <Button variant='outline' onClick={ handleDiscard }>Descartar</Button>
-            <Button colorScheme='brandPrimaryPurple' onClick={ handleAccept }>Aceptar</Button>
-         </HStack>
+               <HStack>
+                  <Button variant='outline' onClick={ handleDiscard }>Descartar</Button>
+                  <Button colorScheme='brandPrimaryPurple' onClick={ handleAccept }>Aceptar</Button>
+               </HStack>
+            </>
+         }
       </VStack>
    );
 };
 
 ApplicantItem.propTypes = {
    applicant: PropTypes.object,
+   rejected: PropTypes.bool
 };
 
 export default ApplicantItem;

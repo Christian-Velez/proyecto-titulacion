@@ -21,8 +21,8 @@ const ToHireList = () => {
    const dispatch = useDispatch();
    const { toHire, employees } = useSelector((state) => state.companyInfo);
 
-   const handleDiscard = (relationId, devId) => {
-      dispatch(startDiscartingApplicant(relationId, devId));
+   const handleDiscard = (relationId, devId, jobId) => {
+      dispatch(startDiscartingApplicant(relationId, devId, jobId));
    };
 
    const handleHire = (relationId, devId, jobTitle) => {
@@ -53,7 +53,7 @@ const ToHireList = () => {
          spacing={5}
       >
          {toHire.map((item) => {
-            const { candidate, job, _id } = item;
+            const { candidate, job, jobId, _id } = item;
             const { img, name, id: devId } = candidate;
 
             const alreadyHired = employees.some(item => item.employee.id === devId);
@@ -102,7 +102,7 @@ const ToHireList = () => {
                   <HStack>
                      <Button
                         variant='outline'
-                        onClick={ () => handleDiscard(_id, devId) }
+                        onClick={ () => handleDiscard(_id, devId, jobId) }
                      >
                         Descartar
                      </Button>

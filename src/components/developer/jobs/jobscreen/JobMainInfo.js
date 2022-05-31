@@ -8,33 +8,59 @@ import {
    VStack,
    Link as ChakraLink,
    TagLeftIcon,
-   Tag
+   Tag,
+   Alert,
+   AlertIcon,
+   AlertDescription,
 } from '@chakra-ui/react';
 import IconImg from 'components/layout/IconImg';
 import { format } from 'timeago.js';
-import { RiMoneyDollarCircleFill } from  'react-icons/ri'
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { AiFillTag } from 'react-icons/ai';
-
 
 // Cambiar el idioma de timeAgo a español
 import 'helpers/timeAgoRegister';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+   useDispatch,
+   useSelector,
+} from 'react-redux';
 import { startApplyingProcess } from 'actions/developer/jobs';
 
-const JobMainInfo = ({jobInfo}) => {
-   const { loading } = useSelector(state => state.ui);
+const JobMainInfo = ({ jobInfo }) => {
+   const { loading } = useSelector(
+      (state) => state.ui
+   );
 
    const dispatch = useDispatch();
-   const { id: userId } = useSelector(state => state.auth);
-   const { id, title, company, created_at, salary, applicants, category } = jobInfo;
-   const { img, name, location, id: companyId } = company;
+   const { id: userId } = useSelector(
+      (state) => state.auth
+   );
+   const {
+      id,
+      title,
+      company,
+      created_at,
+      salary,
+      applicants,
+      category,
+      rejectedUsers,
+   } = jobInfo;
+   const {
+      img,
+      name,
+      location,
+      id: companyId,
+   } = company;
 
-
-
-   const alreadyApply = applicants.includes(userId);
+   const alreadyRejected =
+      rejectedUsers.includes(userId);
+   const alreadyApply =
+      applicants.includes(userId);
 
    const handleApply = async () => {
-      dispatch(startApplyingProcess(id, alreadyApply));
+      dispatch(
+         startApplyingProcess(id, alreadyApply)
+      );
    };
 
    return (
@@ -47,7 +73,7 @@ const JobMainInfo = ({jobInfo}) => {
          <IconImg
             src={img}
             alt={name}
-            boxSize={{ base: '200px'}}
+            boxSize={{ base: '200px' }}
             isRounded
          />
 
@@ -62,14 +88,21 @@ const JobMainInfo = ({jobInfo}) => {
                {title}
             </Heading>
             <Text>
-               <ChakraLink 
-                  href={ `/dev/search/${companyId}` }
+               <ChakraLink
+                  href={`/dev/search/${companyId}`}
                   isExternal
                   color='brandPrimary.500'
-               >{ name }</ChakraLink>
+               >
+                  {name}
+               </ChakraLink>
             </Text>
-            <Text fontSize='sm' color='gray.500'> { location } </Text>
-            <Text color='gray.500'>{ format(created_at, 'es_ES') } </Text> 
+            <Text fontSize='sm' color='gray.500'>
+               {' '}
+               {location}{' '}
+            </Text>
+            <Text color='gray.500'>
+               {format(created_at, 'es_ES')}{' '}
+            </Text>
          </VStack>
 
          <HStack
@@ -77,29 +110,49 @@ const JobMainInfo = ({jobInfo}) => {
             justifyContent='center'
             spacing={5}
          >
-            <Tag borderRadius='full' colorScheme='green'>
-               <TagLeftIcon as={RiMoneyDollarCircleFill}/>
+            <Tag
+               borderRadius='full'
+               colorScheme='green'
+            >
+               <TagLeftIcon
+                  as={RiMoneyDollarCircleFill}
+               />
                {salary}/m
             </Tag>
 
-            <Tag borderRadius='full' colorScheme='purple'>
+            <Tag
+               borderRadius='full'
+               colorScheme='purple'
+            >
                <TagLeftIcon as={AiFillTag} />
                {category}
             </Tag>
          </HStack>
 
-         <Button 
-            w={{ base: 'full' }}
-            isLoading={ loading }
-            onClick={ handleApply }
-            variant={ alreadyApply ? 'outline' : 'solid'}
-         >
-            {
-               alreadyApply
+         {alreadyRejected ? (
+            <Alert status='error'>
+               <AlertIcon />
+               <AlertDescription>
+                  Lo sentimos. La empresa <b>{name}</b> te ha rechazado de esta oferta.
+               </AlertDescription>
+            </Alert>
+         ) : (
+            <Button
+               w={{ base: 'full' }}
+               isLoading={loading}
+               onClick={handleApply}
+               variant={
+                  alreadyApply
+                     ? 'outline'
+                     : 'solid'
+               }
+               disabled={alreadyRejected}
+            >
+               {alreadyApply
                   ? 'Cancelar postulación'
-                  : 'Postularse'
-            }
-         </Button>
+                  : 'Postularse'}
+            </Button>
+         )}
       </VStack>
    );
 };
