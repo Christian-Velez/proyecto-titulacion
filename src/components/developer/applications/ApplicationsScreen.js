@@ -19,10 +19,13 @@ import {
 } from 'react-redux';
 import Layout from 'components/layout';
 import { Outlet } from 'react-router-dom';
+import { getRejectedJobs } from 'helpers/getJobs';
 
 const ApplicationsScreen = () => {
    const dispatch = useDispatch();
 
+   const [rejectedJobs, setRejectedJobs] =
+      useState([]);
    const { allJobs, isJobSelected } = useSelector(
       (state) => state.devJobs
    );
@@ -43,38 +46,52 @@ const ApplicationsScreen = () => {
       useState(true);
    useEffect(() => {
       if (allJobs.length === 0) {
+         const startSettingRejectedJobs =
+            async () => {
+               const rejJobs =
+                  await getRejectedJobs(devId);
+               setRejectedJobs(rejJobs);
+            };
+
          Promise.all([
             dispatch(startLoadingJobs()),
+            startSettingRejectedJobs(),
          ]).then(() => {
             setIsLoading(false);
          });
       } else {
          setIsLoading(false);
       }
-   }, [allJobs, dispatch]);
+   }, [allJobs, dispatch, devId]);
 
    return (
       <Layout padding={{ base: 0 }} minH='100vh'>
          {isLoading ? (
             <LoadingScreen />
          ) : (
-            
-            
             <HStack
                w='full'
                alignItems='flex-start'
                justifyContent='flex-start'
             >
                <VStack
-                  spacing={10}
+                  spacing={40}
                   justifyContent='flex-start'
                   alignItems='flex-start'
                   className='animate__animated animate__fadeIn animate__faster'
-                  maxH={{ 'xl': '100vh' }}
-                  overflowY={{ 'xl': 'scroll' }}    
-                  padding={{ base: 7, lg: 10, '2xl': 20 }}
-                  w={{ base: 'full', 'xl': '75%'}}
-                  display={{ base: isJobSelected && 'none', 'xl': 'flex'}}
+                  maxH={{ xl: '100vh' }}
+                  overflowY={{ xl: 'scroll' }}
+                  padding={{
+                     base: 7,
+                     lg: 10,
+                     '2xl': 20,
+                  }}
+                  w={{ base: 'full', xl: '75%' }}
+                  display={{
+                     base:
+                        isJobSelected && 'none',
+                     xl: 'flex',
+                  }}
                >
                   <Heading
                      fontSize={{
@@ -99,13 +116,55 @@ const ApplicationsScreen = () => {
                         />
                      ))}
                   </Flex>
+
+                  {rejectedJobs?.length > 0 && (
+                     <VStack
+                        w='full'
+                        alignItems='flex-start'
+                        spacing={10}
+                     >
+                        <Heading
+                           fontSize={{
+                              base: 'xl',
+                              lg: '2xl',
+                           }}
+                        >
+                           Te han rechazado de...
+                        </Heading>
+
+                        <Flex
+                           w='full'
+                           spacing={5}
+                           flexWrap='wrap'
+                           gap={10}
+                        >
+                           {rejectedJobs.map(
+                              (job) => {
+                                 return (
+                                    <JobItem
+                                       key={
+                                          job.id
+                                       }
+                                       job={job}
+                                       status='rejected'
+                                    />
+                                 );
+                              }
+                           )}
+                        </Flex>
+                     </VStack>
+                  )}
                </VStack>
 
                <Flex
-                  display={{ base: !isJobSelected && 'none', 'xl': 'flex' }}
-                  maxH={{ 'xl': '100vh'}}
-                  overflowY={{ 'xl': 'scroll'}}  
-                  w={{ base:'full', 'xl': '25%'}}
+                  display={{
+                     base:
+                        !isJobSelected && 'none',
+                     xl: 'flex',
+                  }}
+                  maxH={{ xl: '100vh' }}
+                  overflowY={{ xl: 'scroll' }}
+                  w={{ base: 'full', xl: '25%' }}
                   minW='380px'
                >
                   <Outlet />

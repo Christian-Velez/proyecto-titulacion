@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Main from './Main';
 import { VStack } from '@chakra-ui/react';
 import LoadingScreen from 'components/layout/LoadingScreen';
-import { getLastJobs } from 'helpers/getLastJobs';
+import { getLastJobs } from 'helpers/getJobs';
 
 
 const LandingPageScreen = () => {

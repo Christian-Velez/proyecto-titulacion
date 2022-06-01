@@ -26,7 +26,7 @@ import {
    useNavigate,
 } from 'react-router-dom';
 
-const JobItem = ({ job }) => {
+const JobItem = ({ job, status }) => {
    const navigate = useNavigate();
    const {
       title,
@@ -121,12 +121,14 @@ const JobItem = ({ job }) => {
                </Text>
             </VStack>
 
-            <Button
-               colorScheme='brandPrimary'
-               onClick={handleCancelApply}
-            >
-               Cancelar postulación
-            </Button>
+            {status !== 'rejected' && (
+               <Button
+                  colorScheme='brandPrimary'
+                  onClick={handleCancelApply}
+               >
+                  Cancelar postulación
+               </Button>
+            )}
          </VStack>
       </VStack>
    );
