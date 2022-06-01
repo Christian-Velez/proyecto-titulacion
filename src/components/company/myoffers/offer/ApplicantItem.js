@@ -20,6 +20,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { startAcceptingApplicant, startDiscartingApplicant } from 'actions/company/job';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { startSettingCompanyInfo } from 'actions/company/user';
 
 
 
@@ -39,7 +40,8 @@ const ApplicantItem = ({ applicant, rejected }) => {
                            
 
    const handleDiscard = () => {
-      dispatch(startDiscartingApplicant(jobId, devId));
+      dispatch(startDiscartingApplicant(jobId, devId))
+         .then(dispatch(startSettingCompanyInfo()));
    };
 
    const handleAccept = () => {

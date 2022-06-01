@@ -25,8 +25,8 @@ const ToHireList = () => {
       dispatch(startDiscartingApplicant(relationId, devId, jobId));
    };
 
-   const handleHire = (relationId, devId, jobTitle) => {
-      dispatch(startHiringDeveloper(relationId, devId, jobTitle));
+   const handleHire = (relationId, devId, jobTitle, jobId) => {
+      dispatch(startHiringDeveloper(relationId, devId, jobTitle, jobId));
    };
 
 
@@ -107,7 +107,7 @@ const ToHireList = () => {
                         Descartar
                      </Button>
                      <Button 
-                        onClick={ () => handleHire(_id, devId, job)}
+                        onClick={ () => handleHire(_id, devId, job, jobId)}
                      >
                         Contratar
                      </Button>

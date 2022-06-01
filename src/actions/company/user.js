@@ -126,7 +126,7 @@ export const discardDev = (relationId) => {
 
 
 // Contratar a un programador
-export const startHiringDeveloper = (relationId, devId, jobTitle) => {
+export const startHiringDeveloper = (relationId, devId, jobTitle, jobId) => {
    return async(dispatch) => {
       try {
          dispatch(startLoading());
@@ -134,8 +134,10 @@ export const startHiringDeveloper = (relationId, devId, jobTitle) => {
          const body = {
             relationId,
             devId,
-            jobTitle
+            jobTitle,
+            jobId
          };
+
          const config = getAxiosConfig();
          const URL = `${API_URL}/api/company/hireDeveloper`;
    
@@ -159,15 +161,17 @@ export const hireDev = (relationId) => {
 };
 
 // Despedir a un programador
-export const startFiringDeveloper = (relationId, devId) => {
+export const startFiringDeveloper = (relationId, devId, jobId) => {
    return async(dispatch) => {
       try {
          dispatch(startLoading());
 
          const body = {
             relationId,
-            devId
+            devId,
+            jobId
          };
+         
          const config = getAxiosConfig();
          const URL = `${API_URL}/api/company/fireDeveloper`;
          await axios.post(URL, body, config);

@@ -2,7 +2,6 @@ import React from 'react';
 import useScrollToTop from 'hooks/useScrollToTop';
 import {
    Badge,
-   Button,
    Flex,
    Heading,
    HStack,
