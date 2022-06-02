@@ -159,7 +159,7 @@ const EmployeesList = () => {
             )}
          </VStack>
 
-         {firedDevelopers && (
+         {firedDevelopers?.length > 0 && (
             <VStack
                w='full'
                alignItems='flex-start'
