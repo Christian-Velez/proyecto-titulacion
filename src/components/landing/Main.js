@@ -90,7 +90,7 @@ const Main = ({ lastJobs }) => {
                <VStack 
                   w='full'
                   alignItems='flex-start'
-                  spacing={10}
+                  spacing={{ base: 40, 'md': 10 }}
                >  
                   <AnimatedText/>
 
@@ -119,6 +119,7 @@ const Main = ({ lastJobs }) => {
                         direction={{ base: 'column', 'md': 'row'}}
                         spacing={20}
                         justifyContent={{ '2xl': 'flex-start' }}
+
                      >
                         {
                            lastJobs.map(job =>  <JobItem key={job.id} job={job}/>)
