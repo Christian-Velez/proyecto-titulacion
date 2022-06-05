@@ -218,7 +218,7 @@ const Body = ({ companyInfo }) => {
 
                {
                   averageYears 
-                  ? <Text fontSize='lg'>{averageYears} {averageYears === 1 ? 'año.' : 'años.' }</Text>
+                  ? <Text fontSize='lg'>{ parseFloat(averageYears)?.toFixed(2) } {averageYears === 1 ? 'año.' : 'años.' }</Text>
                   : <Text>Sin registros.</Text>
                }
             </VStack>
